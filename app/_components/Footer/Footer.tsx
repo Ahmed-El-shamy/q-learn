@@ -5,7 +5,7 @@ import NewsLetter from "../NewsLetter/NewLetter";
 
 const Footer = () => {
     return (
-        <footer className="bg-white">
+        <footer className="bg-white border-t border-t-black">
             <div className="max-w-[1700px] mx-auto text-black py-20 px-4 flex flex-col gap-8">
                 <Image src="/logo-placeholder.jpg" alt="logo" width={200} height={200} />
                 <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-2">
