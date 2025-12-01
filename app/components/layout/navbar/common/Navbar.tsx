@@ -1,0 +1,63 @@
+"use client";
+import Link from "next/link";
+import { HiOutlineMenu } from "react-icons/hi";
+import { NavbarProps } from "../types/navbar";
+import { useNavbar } from "../hooks/useNavbar";
+import { NavLinks } from "../data/navbarLinks";
+
+const Navbar: React.FC<NavbarProps> = ({
+  links = [],
+  logoText = "Logo",
+  logoImg = "https://placehold.co/80x80",
+}) => {
+  const { isOpen, toggleMenu } = useNavbar();
+  const navLinks = NavLinks;
+  return (
+    <>
+      <nav className="w-full p-4 bg-white shadow-md">
+        <div className="w-[90%] mx-auto flex justify-between items-center">
+          <div className="flex justify-center items-center gap-8">
+            <div className="flex items-center gap-3">
+              <div className="w-16 h-16 rounded-full overflow-hidden">
+                <img
+                  src={logoImg}
+                  alt="Logo Image"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <p className="font-bold text-xl">{logoText}</p>
+            </div>
+
+            <ul className="hidden lg:flex items-center justify-center gap-5">
+              {links.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="capitalize">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <HiOutlineMenu
+            onClick={toggleMenu}
+            className="lg:hidden text-xl cursor-pointer"
+          />
+
+          <div className="hidden lg:flex items-center gap-5">
+            <button className="px-6 py-2 bg-gray-400 text-white rounded-lg">
+              Login
+            </button>
+            <button className="px-6 py-2 bg-gray-400 text-white rounded-lg">
+              Sign up
+            </button>
+          </div>
+        </div>
+      </nav>
+      {isOpen && <aside></aside>}
+    </>
+  );
+};
+
+export default Navbar;
