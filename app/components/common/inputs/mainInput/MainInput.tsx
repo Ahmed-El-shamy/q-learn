@@ -81,11 +81,11 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
     return (
       <div className={`w-full ${className}`}>
         {label && (
-          <label htmlFor={inputId} className="block mb-1 font-medium">
+          <label htmlFor={inputId} className="flex mb-1 font-medium">
             {label}{" "}
             {required && (
               <span>
-                <Asterisk className="text-red-500 ml-1" />
+                <Asterisk className="text-red-500 ml-1" size={15} />
               </span>
             )}
           </label>
