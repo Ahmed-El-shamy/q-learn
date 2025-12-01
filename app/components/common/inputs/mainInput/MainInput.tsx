@@ -93,7 +93,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
 
         <div
           className={`
-            relative flex items-center gap-2 rounded-lg w-full px-3 py-2 bg-gray-50
+            relative flex items-center gap-2 rounded-lg w-full p-3 bg-gray-50
             ${disabled || readOnly ? "opacity-50 cursor-not-allowed" : ""}
             ${
               error
