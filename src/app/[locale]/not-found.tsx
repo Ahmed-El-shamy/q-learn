@@ -1,7 +1,7 @@
-import { Link } from "@/i18n/navigation";
 import { useTranslations, useLocale } from "next-intl";
-import AppStatusFooter from "@/_components/app-status/AppFooter";
-import AnimatedTitle from "@/_components/titles/AnimatedTitle";
+// import AppStatusFooter from "@/_components/app-status/AppFooter";
+// import AnimatedTitle from "@/_components/titles/AnimatedTitle";
+import { Link } from "@/i18n/navigation";
 const NotFound = () => {
   const t = useTranslations("NotFound");
   const locale = useLocale();
@@ -41,7 +41,7 @@ const NotFound = () => {
           </svg>
         </div>
 
-        <AnimatedTitle title="NotFound.404" />
+        {/* <AnimatedTitle title="NotFound.404" /> */}
 
         <p className="mt-3 text-lg text-gray-600 leading-relaxed">
           {t("Oops")}
@@ -55,7 +55,7 @@ const NotFound = () => {
         </Link>
       </div>
 
-      <AppStatusFooter />
+      {/* <AppStatusFooter /> */}
     </div>
   );
 };
