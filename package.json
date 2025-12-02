@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "e-learning",
+=======
+  "name": "e-commerce-next",
+>>>>>>> 93910d1 (create custom component for seo optmization)
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +13,20 @@
     "lint": "eslint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "lucide-react": "^0.555.0",
     "next": "16.0.5",
     "react": "19.2.0",
     "react-dom": "19.2.0"
+=======
+    "@tanstack/react-query": "^5.90.7",
+    "@tanstack/react-query-devtools": "^5.90.2",
+    "next": "16.0.1",
+    "next-intl": "^4.5.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-icons": "^5.5.0"
+>>>>>>> 93910d1 (create custom component for seo optmization)
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -20,7 +34,11 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
+<<<<<<< HEAD
     "eslint-config-next": "16.0.5",
+=======
+    "eslint-config-next": "16.0.1",
+>>>>>>> 93910d1 (create custom component for seo optmization)
     "tailwindcss": "^4",
     "typescript": "^5"
   }

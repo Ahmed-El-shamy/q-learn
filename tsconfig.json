@@ -13,13 +13,23 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 93910d1 (create custom component for seo optmization)
     "plugins": [
       {
         "name": "next"
       }
     ],
+<<<<<<< HEAD
     "paths": {
       "@/*": ["./*"]
+=======
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+>>>>>>> 93910d1 (create custom component for seo optmization)
     }
   },
   "include": [
