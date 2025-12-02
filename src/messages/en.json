@@ -1,8 +1,8 @@
 {
   "SEO": {
-    "defaultTitle": "abazeer - The best site for your products",
-    "defaultDescription": "Discover our unique products at the best prices. Shop now and have a unique experience.",
-    "company": "qutell technology expert"
+    "defaultTitle": "Qutell - The best site for your courses",
+    "defaultDescription": "Discover our unique courses at the best prices. Shop now and have a unique experience.",
+    "company": "Qutell technology expert"
   },
   "PageMetaData": {
     "About": {
@@ -20,7 +20,7 @@
     "en": "english"
   },
   "Footer": {
-    "abazeer": "abazeer"
+    "abazeer": "Qutell"
   },
   "NotFound": {
     "Oops": "Oops! The page you are looking for doesn’t exist.",
