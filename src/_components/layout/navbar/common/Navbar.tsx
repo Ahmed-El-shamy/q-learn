@@ -1,17 +1,13 @@
-"use client";
 import Link from "next/link";
 import { NavbarProps } from "../types/navbar";
-import { useNavbar } from "../hooks/useNavbar";
 import { NavLinks } from "../data/navbarLinks";
-import { Menu } from "lucide-react";
+import MobileSidebar from "./MobileSidebar";
 
 const Navbar: React.FC<NavbarProps> = ({
   links = [],
   logoText = "Logo",
   logoImg = "https://placehold.co/80x80",
 }) => {
-  const { isOpen, toggleMenu } = useNavbar();
-  const navLinks = NavLinks;
   return (
     <>
       <nav className="w-full p-4 bg-white shadow-md">
@@ -30,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             <ul className="hidden lg:flex items-center justify-center gap-5">
-              {links.map((link) => (
+              {NavLinks.concat(links).map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="capitalize">
                     {link.label}
@@ -40,10 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({
             </ul>
           </div>
 
-          <Menu
-            onClick={toggleMenu}
-            className="lg:hidden text-xl cursor-pointer"
-          />
+          <MobileSidebar logoText={logoText} links={links} />
 
           <div className="hidden lg:flex items-center gap-5">
             <button className="px-6 py-2 bg-gray-400 text-white rounded-lg">
@@ -55,7 +48,6 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
       </nav>
-      {isOpen && <aside></aside>}
     </>
   );
 };
