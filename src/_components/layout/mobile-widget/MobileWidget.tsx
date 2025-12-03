@@ -48,7 +48,7 @@ const MobileWidget = () => {
       >
         <div className="containerr">
           <ul className="flex justify-between flex-nowrap text-nowrap items-center gap-3 overflow-x-auto">
-            {actions.map(({ Icon, title, onClick, type }) => (
+            {actions.map(({ Icon, title, onClick }) => (
               <li key={title} className="relative">
                 <IconBadge Icon={Icon} title={title} onClick={onClick} />
                 {/* {type && type === "cart" && (
