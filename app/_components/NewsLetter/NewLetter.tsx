@@ -11,6 +11,7 @@ const NewsLetter = () => {
                     className="appearance-none flex-1 outline-none font-bold px-2 w-full"
                     type="email"
                     name="email"
+                    required
                 />
                 <button className="flex bg-black justify-center cursor-pointer hover:bg-black/90 duration-100 items-center p-2">
                     <Send color="white" />
