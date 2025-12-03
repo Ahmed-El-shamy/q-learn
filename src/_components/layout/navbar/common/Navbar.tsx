@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import { HiOutlineMenu } from "react-icons/hi";
 import { NavbarProps } from "../types/navbar";
 import { useNavbar } from "../hooks/useNavbar";
 import { NavLinks } from "../data/navbarLinks";
+import { Menu } from "lucide-react";
 
 const Navbar: React.FC<NavbarProps> = ({
   links = [],
@@ -40,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({
             </ul>
           </div>
 
-          <HiOutlineMenu
+          <Menu
             onClick={toggleMenu}
             className="lg:hidden text-xl cursor-pointer"
           />

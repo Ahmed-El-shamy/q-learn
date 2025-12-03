@@ -1,0 +1,30 @@
+{
+  "SEO": {
+    "defaultTitle": "Qutell - The best site for your courses",
+    "defaultDescription": "Discover our unique courses at the best prices. Shop now and have a unique experience.",
+    "company": "Qutell technology expert"
+  },
+  "PageMetaData": {
+    "About": {
+      "title": "about us"
+    }
+  },
+  "Home": {
+    "title": "test"
+  },
+  "Login": {
+    "title": "welcome"
+  },
+  "Locale": {
+    "ar": "arabic",
+    "en": "english"
+  },
+  "Footer": {
+    "abazeer": "Qutell"
+  },
+  "NotFound": {
+    "Oops": "Oops! The page you are looking for doesn’t exist.",
+    "back": "back to home page",
+    "404": "404"
+  }
+}
