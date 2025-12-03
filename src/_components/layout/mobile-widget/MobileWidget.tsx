@@ -40,7 +40,7 @@ const MobileWidget = () => {
   );
 
   return (
-    <>
+    <div className="lg:hidden">
       <nav
         className="fixed bottom-0 z-50 left-0 right-0 w-full bg-white shadow-2xl px-2 py-4"
         role="navigation"
@@ -70,7 +70,7 @@ const MobileWidget = () => {
           onClose={closeCategoriesSidebar}
         />
       )} */}
-    </>
+    </div>
   );
 };
 
