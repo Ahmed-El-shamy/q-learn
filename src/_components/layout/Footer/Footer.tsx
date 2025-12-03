@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { socialMediaLinks, footerSections } from "./data";
-import NewsLetter from "../NewsLetter/NewLetter";
+import NewsLetter from "../../NewsLetter/NewLetter";
 
 const Footer = () => {
   return (

@@ -3,7 +3,8 @@ import { hasLocale } from "next-intl";
 import { routing } from "../../i18n/routing";
 import LocaleProviders from "@/_components/local-providers/LocaleProviders";
 import { getDefaultSiteMeta, buildMetadata } from "@/_lib/meta";
-import "../globals.css";
+import "@/styles/globals.css";
+import MobileWidget from "@/_components/layout/mobile-widget/MobileWidget";
 
 type Props = {
   children: React.ReactNode;
@@ -32,7 +33,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body>
         <LocaleProviders locale={locale} messages={messages}>
-          {children}
+          <main>{children}</main>
         </LocaleProviders>
       </body>
     </html>

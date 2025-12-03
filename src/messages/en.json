@@ -26,5 +26,9 @@
     "Oops": "Oops! The page you are looking for doesn’t exist.",
     "back": "back to home page",
     "404": "404"
+  },
+  "Icons": {
+    "home": "home",
+    "my account": "my account"
   }
 }
