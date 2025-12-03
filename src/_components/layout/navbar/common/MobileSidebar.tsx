@@ -44,7 +44,7 @@ const MobileSidebar: FC<Omit<NavbarProps, "logoImg">> = ({ links=[], logoText })
                 <div className="flex flex-col px-6 py-4">
                     {
                         NavLinks.concat(links).map(link => (
-                            <Link href={link.href} className="py-4 px-2 hover:bg-gray-100 capitalize rounded-lg duration-100 cursor-pointer" prefetch={false}>
+                            <Link href={link.href} key={link.href} className="py-4 px-2 hover:bg-gray-100 capitalize rounded-lg duration-100 cursor-pointer" prefetch={false}>
                                {link.label} 
                             </Link>
                         ))
