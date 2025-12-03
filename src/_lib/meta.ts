@@ -138,6 +138,9 @@ export function buildMetadata(
 
   const description = input.description || siteMeta?.defaultDescription;
   const canonical = cleanCanonicalUrl(input.url);
+  console.log(
+    siteMeta?.siteUrl || siteUrl
+  )
 
   const metadata: Metadata = {
     title,
