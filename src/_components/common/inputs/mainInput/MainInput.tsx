@@ -1,5 +1,5 @@
 "use client";
-import { Asterisk, Eye, EyeOff, LucideIcon } from "lucide-react";
+import { Asterisk, Eye, EyeOff } from "lucide-react";
 import React, { useEffect, useId, useState } from "react";
 
 interface MainInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -21,7 +21,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
       name,
       label,
       type = "text",
-      value,
+      value: controlledValue,
       placeholder,
       error,
       Icon,
@@ -46,13 +46,13 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
     const isPassword = type === "password";
     const [showPassword, setShowPassword] = useState(false);
 
-    const [localValue, setLocalValue] = useState(value ?? "");
+    // Use internal state only for uncontrolled mode (when value prop is not provided)
+    const isControlled = controlledValue !== undefined;
+    const [uncontrolledValue, setUncontrolledValue] = useState("");
     const [suggestions, setSuggestions] = useState<string[]>([]);
 
-    // Sunc localValue if parent controlled
-    useEffect(() => {
-      if (value !== undefined) setLocalValue(value);
-    }, [value]);
+    // Get the current value based on controlled/uncontrolled mode
+    const currentValue = isControlled ? controlledValue : uncontrolledValue;
 
     // Load autocomplete suggestions from localStorage
     useEffect(() => {
@@ -63,18 +63,23 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
     }, [enableAutoComplete, storageKey]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setLocalValue(e.target.value);
+      // Only update internal state if uncontrolled
+      if (!isControlled) {
+        setUncontrolledValue(e.target.value);
+      }
+      // Always call the provided onChange (from react-hook-form or parent)
       onChange?.(e);
     };
 
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-      if (enableAutoComplete && storageKey && localValue) {
+      if (enableAutoComplete && storageKey && e.target.value) {
         const updated = Array.from(
-          new Set([localValue as string, ...suggestions])
+          new Set([e.target.value, ...suggestions])
         ).slice(0, 10);
         setSuggestions(updated);
         localStorage.setItem(storageKey, JSON.stringify(updated));
       }
+      // Always call the provided onBlur (from react-hook-form or parent)
       onBlur?.(e);
     };
 
@@ -112,8 +117,9 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
           <input
             id={inputId}
             ref={ref}
+            name={name}
             type={isPassword && showPassword ? "text" : type}
-            value={localValue}
+            {...(isControlled ? { value: currentValue } : { defaultValue: currentValue })}
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder={placeholder}
@@ -125,14 +131,14 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
               error
                 ? `${inputId}-error`
                 : hint
-                ? `{${inputId}-hent}`
+                ? `${inputId}-hint`
                 : undefined
             }
             list={enableAutoComplete ? `${inputId}-list` : undefined}
             className={`
-                flex-1 bg-transparent outline-none border-none placeholder-gray-400 ${className} ${
+                flex-1 bg-transparent outline-none border-none placeholder-gray-400 ${
               Icon ? "pl-8" : ""
-            }
+            } ${className || ""}
             `}
             {...rest}
           />

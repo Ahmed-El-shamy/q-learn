@@ -8,7 +8,7 @@ const handler = NextAuth({
             id: "credentials",
             type: "credentials",
             authorize: async (credentials, req) => {
-                if(credentials?.email === "test@email.com" && credentials?.password === "password") {
+                if(credentials?.email === "test@email.com" && credentials?.password === "P@ssword123") {
                     return {
                         id: "1",
                         email: "test@email.com",

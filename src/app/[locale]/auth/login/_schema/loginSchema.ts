@@ -2,7 +2,7 @@ import z, {email} from "zod";
 import { passwordSchema } from "../../_schema/passwordSchema";
 
 export const loginSchema = z.object({
-    email: email("email").min(1, "validation.email-required"),
+    email: email("validation.email"),
     password: passwordSchema,
 });
 

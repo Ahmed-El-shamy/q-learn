@@ -6,41 +6,25 @@ import AuthBtn from "@/_components/common/buttons/AuthBtn";
 import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 import Link from "next/link";
 import { useLocale } from "next-intl";
+import useLogin from "../_hooks/useLogin";
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState<LoginPayload>({
     email: "",
     password: "",
   });
+
+  const {
+    methods: {
+      register,
+      formState: {
+        errors,
+      },
+      watch
+    },
+    handleSubmit
+  } = useLogin();
   const local = useLocale();
-
-  function onChange(key: keyof LoginPayload, value: LoginPayload[typeof key]) {
-    setCredentials((old) => ({
-      ...old,
-      [key]: value,
-    }));
-  }
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const credentials = formData.entries().reduce((curr, next) => {
-      curr[next[0] as keyof LoginPayload] =
-        next[1] as LoginPayload[keyof LoginPayload];
-      return curr;
-    }, {} as LoginPayload);
-
-    const result = await signIn("credentials", {
-      redirect: false,
-      ...credentials,
-    });
-
-    if (result?.ok) {
-      console.log("OK!!!");
-    } else {
-      console.log("NOt OK!!!");
-    }
-  }
 
   return (
     <form
@@ -48,19 +32,17 @@ const LoginForm = () => {
       onSubmit={handleSubmit}
     >
       <MainInput
-        name="email"
         placeholder="Enter Your Email"
         type="email"
-        value={credentials.email}
-        onChange={(e) => onChange("email", e.target.value)}
+        error={errors.email?.message}
+        {...register("email")}
       />
 
       <MainInput
-        name="password"
         placeholder="Enter Your Password"
         type="password"
-        value={credentials.password}
-        onChange={(e) => onChange("password", e.target.value)}
+        error={errors.password?.message}
+        {...register("password")}
       />
 
       <AuthBtn text="Login" />
