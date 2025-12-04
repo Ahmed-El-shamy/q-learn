@@ -6,16 +6,17 @@ import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import AuthBtn from "@/_components/common/buttons/AuthBtn";
+import PhoneInput from "@/_components/common/inputs/PhoneInput/PhoneInput";
 
 const RegisterForm = () => {
   const [form, setForm] = useState<RegisterPayload>({
     firstName: "",
     lastName: "",
     email: "",
+    phoneNumber: "",
     password: "",
     confirmPassword: "",
   });
-
   const local = useLocale();
 
   function onChange(
@@ -84,6 +85,14 @@ const RegisterForm = () => {
         placeholder="Enter Your Email"
         value={form.email}
         onChange={(e) => onChange("email", e.target.value)}
+      />
+
+      <PhoneInput
+        type="text"
+        name="phoneNumber"
+        value={form.phoneNumber}
+        onChange={(e) => onChange("phoneNumber", e.target.value)}
+        placeholder="Enter Your Phone Number"
       />
 
       <MainInput
