@@ -44,7 +44,7 @@ const LoginForm = () => {
 
   return (
     <form
-      className="flex flex-col gap-4 border p-2 border-black rounded-lg max-w-lg w-full py-10 px-6"
+      className="flex flex-col gap-4 border p-2 border-black rounded-lg w-full py-10 px-6"
       onSubmit={handleSubmit}
     >
       <MainInput

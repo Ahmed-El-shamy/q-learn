@@ -1,7 +1,6 @@
-import React from "react";
 import ResetPasswordForm from "./_components/ResetPasswordForm";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="w-full p-4 flex justify-center items-center">
       <ResetPasswordForm />
@@ -9,4 +8,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
