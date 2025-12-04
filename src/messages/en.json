@@ -30,5 +30,14 @@
   "Icons": {
     "home": "home",
     "my account": "my account"
+  },
+  "validation": {
+    "password": {
+      "minLength": "Password must be at least 8 characters long",
+      "lowercase": "Password must contain at least one lowercase letter",
+      "uppercase": "Password must contain at least one uppercase letter",
+      "digit": "Password must contain at least one digit",
+      "symbol": "Password must contain at least one symbol"
+    }
   }
 }
