@@ -6,7 +6,7 @@ interface PhoneInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   required?: boolean;
   placeholder?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 }
 
 interface CountryOption {
@@ -23,36 +23,8 @@ const options: CountryOption[] = [
 ];
 
 const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
-  ({ label, placeholder, required = false, onChange, ...rest }, ref) => {
-    const [phone, setPhone] = useState("");
+  ({ label, placeholder, required = false, error, ...rest }, ref) => {
     const [selectValue, setSelectValue] = useState<CountryOption | null>(null);
-    const [error, setError] = useState("");
-
-    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      let val = e.target.value;
-
-      if (/\D/.test(val)) {
-        setError("This field accepts numbers only");
-        return;
-      }
-
-      if (val.length > 11) {
-        setError("Phone number cannot exceed 11 digits");
-        setPhone(val.slice(0, 11));
-        return;
-      } else {
-        setError("");
-      }
-
-      setPhone(val);
-      onChange?.(e);
-    };
-
-    const handleBlur = () => {
-      if (required && phone.length < 11) {
-        setError("Phone number must be 11 digits");
-      }
-    };
 
     return (
       <>
@@ -74,12 +46,10 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
             label={label}
             placeholder={placeholder}
             required={required}
-            value={phone}
-            onChange={handlePhoneChange}
-            onBlur={handleBlur}
-            inputMode="numeric"
-            pattern="\d*"
-            error={error || undefined}
+            value={rest.value || ""}
+            onChange={rest.onChange}
+            onBlur={rest.onBlur}
+            error={error}
           />
         </div>
       </>

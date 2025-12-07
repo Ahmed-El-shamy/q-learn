@@ -32,12 +32,21 @@
     "my account": "my account"
   },
   "validation": {
+    "firstName": "FirstName must be characters only",
+    "lastName": "LastName must be characters only",
+    "email": "Invalid Email",
+    "phoneNumber": {
+      "numbers": "Phone number must be numbers only",
+      "minLength": "Phone number must be at least 11 digits",
+      "maxLength": "Phone number must not exceed 11 digits"
+    },
     "password": {
       "minLength": "Password must be at least 8 characters long",
       "lowercase": "Password must contain at least one lowercase letter",
       "uppercase": "Password must contain at least one uppercase letter",
       "digit": "Password must contain at least one digit",
-      "symbol": "Password must contain at least one symbol"
+      "symbol": "Password must contain at least one symbol",
+      "notMatch": "Passwords do not match"
     }
   }
 }
