@@ -1,0 +1,51 @@
+import { Link } from "@/i18n/navigation";
+import { GraduationCap, User } from "lucide-react";
+import { useTranslations } from "next-intl";
+
+const CourseHero = () => {
+  const t = useTranslations("courses");
+
+  return (
+    <div className="w-full bg-[url('/images/courses/course-hero.jpg')] relative py-22 text-white">
+      <div className="absolute top-0 left-0 h-full w-full bg-black/60" />
+      <div className="max-w-[1300px] mx-auto relative z-10">
+        <div className="w-2/3 flex flex-col gap-2">
+          <p className="text-lg">Course / Course Details</p>
+          <p className="text-5xl font-bold">
+            This is the Title of the course and it is too long of the single
+            container to handle this much text because it is too large.
+          </p>
+          <div className="py-8 flex items-center gap-4">
+            <Link
+              href={"/courses/?filter-tag=software"}
+              className="underline text-white"
+            >
+              software
+            </Link>
+            <Link
+              href={"/courses/?filter-tag=security"}
+              className="underline text-white"
+            >
+              Security
+            </Link>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="bg-primary p-2 flex items-center gap-2 rounded">
+              <div className="flex justify-center items-center rounded-full bg-gray-100 p-2">
+                <User className="text-gray-700" size={20} />
+              </div>
+              <p>Ahmed Elshamy</p>
+            </div>
+            <div className="bg-primary p-2 flex items-center gap-2 rounded">
+              <GraduationCap />
+              <p>1</p>
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CourseHero;
