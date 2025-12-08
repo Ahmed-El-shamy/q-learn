@@ -1,6 +1,5 @@
 import { useTranslations, useLocale } from "next-intl";
-// import AppStatusFooter from "@/_components/app-status/AppFooter";
-// import AnimatedTitle from "@/_components/titles/AnimatedTitle";
+
 import { Link } from "@/i18n/navigation";
 const NotFound = () => {
   const t = useTranslations("NotFound");

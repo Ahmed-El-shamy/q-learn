@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { NavbarProps } from "../types/navbar";
 import { NavLinks } from "../data/navbarLinks";
 import MobileSidebar from "./MobileSidebar";
-
+import { Link } from "@/i18n/navigation";
 const Navbar: React.FC<NavbarProps> = ({
   links = [],
   logoText = "Logo",
