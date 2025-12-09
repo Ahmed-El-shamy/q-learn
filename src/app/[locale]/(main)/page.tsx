@@ -4,6 +4,8 @@ import { CircleCheckBig, LaptopMinimal, Play, Star } from "lucide-react";
 import { useTranslations } from "next-intl";
 import StatisticsSection from "./home/_components/statistics/StatisticsSection";
 import Link from "next/link";
+import BlogCard from "./home/_components/blogs/BlogCard";
+import BlogSection from "./home/_components/blogs/BlogSection";
 const HomePage = () => {
   const t = useTranslations("Home");
 
@@ -180,6 +182,23 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Blogs Section */}
+      <section className="xl:bg-[#cee8ff] py-15 md:py-28 mt-10 lg:bg-teal-500 md:bg-purple-500 sm:bg-red-500 bg-green-500">
+        <Container>
+          <div className="text-center text-[#1f2b40]">
+            <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl xl:text-5xl">
+              Articles & News
+            </h2>
+            <p className="text-lg mt-5 mx-auto w-full sm:w-[90%] md:w-[62%]">
+              The world's largest selection of courses choose from 130,000
+              online video courses with new additions published every month
+            </p>
+
+            <BlogSection />
           </div>
         </Container>
       </section>
