@@ -1,5 +1,6 @@
 import React from "react";
 import BlogCard from "./BlogCard";
+import HorizontalCarousel from "@/_components/common/carousels/HorizontalCarousel";
 
 const blogsData = [
   {
@@ -70,14 +71,26 @@ const blogsData = [
   },
 ];
 
-const BlogSection = () => {
+const BlogsSection = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
-      {blogsData.map((blog) => (
-        <BlogCard key={blog.id} {...blog} />
-      ))}
-    </div>
+    <>
+      <div className="text-center text-[#1f2b40]">
+        <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl xl:text-5xl">
+          Articles & News
+        </h2>
+        <p className="text-lg mt-5 mx-auto w-full sm:w-[90%] md:w-[62%]">
+          The world's largest selection of courses choose from 130,000 online
+          video courses with new additions published every month
+        </p>
+
+        <HorizontalCarousel className="mt-10">
+          {blogsData.map((blog) => (
+            <BlogCard key={blog.id} {...blog} />
+          ))}
+        </HorizontalCarousel>
+      </div>
+    </>
   );
 };
 
-export default BlogSection;
+export default BlogsSection;

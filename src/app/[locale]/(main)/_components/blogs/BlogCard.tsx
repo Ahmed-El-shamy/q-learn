@@ -24,7 +24,10 @@ const BlogCard = ({
   blogContent,
 }: BlogCardProps) => {
   return (
-    <div className="bg-white max-h-[550px] rounded-xl pb-5 relative text-[#38485c]">
+    <div
+      className=" 
+        w-[350px] sm:w-[420px] bg-white max-h-[550px] rounded-xl pb-5 relative text-[#38485c]"
+    >
       <div className="relative h-[250px]">
         <div className="absolute right-3 top-3 py-2 px-3 text-xs font-semibold text-white bg-black/50 rounded-full">
           {course}
@@ -38,7 +41,7 @@ const BlogCard = ({
         </Link>
       </div>
 
-      <div className="p-2 w-[90%] rounded-full bg-[#cee8ff] absolute top-[45%] sm:top-[43%] left-5 sm:left-3 md:left-5">
+      <div className="p-2 w-[90%] rounded-full bg-[#cee8ff] absolute top-[43%] left-5 sm:left-3 md:left-5">
         <div className="flex-between">
           <div className="flex-center gap-2">
             <div className="w-8 h-8 rounded-full">
