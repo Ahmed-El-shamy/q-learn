@@ -7,6 +7,7 @@ import TestimonialsSection from "./_components/testimonials/TestimonialsSection"
 import TeachersSection from "./_components/teachers/TeachersSection";
 import StatisticsSection from "./home/_components/statistics/StatisticsSection";
 import Link from "next/link";
+import HorizontalCarousel from "@/_components/common/carousels/HorizontalCarousel";
 const HomePage = () => {
   const t = useTranslations("Home");
 
@@ -162,8 +163,8 @@ const HomePage = () => {
             </div>
 
             <div className="partner mt-28">
-              <h3 className="text-3xl">Our Partner</h3>
-              <div className="slider grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-12">
+              <h3 className="text-3xl mb-8">Our Partner</h3>
+              <HorizontalCarousel>
                 <div className="h-28 rounded-xl bg-white">
                   <img
                     src="/images/homepage/logo (1).jpg"
@@ -195,7 +196,7 @@ const HomePage = () => {
                     className="w-full h-full object-contain"
                   />
                 </div>
-              </div>
+              </HorizontalCarousel>
             </div>
           </div>
         </Container>
