@@ -48,7 +48,7 @@ const HomePage = () => {
       </section>
 
       {/* Blogs Section */}
-      <section className="bg-[#cee8ff] py-15 md:py-28">
+      <section className="bg-[#cee8ff] py-15 md:py-28 md:pb-96 pb-96">
         <Container>
           <BlogsSection />
         </Container>
