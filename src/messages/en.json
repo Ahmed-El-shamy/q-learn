@@ -40,7 +40,9 @@
     "preview": "Preview",
     "course-full-rating": "Course Rating",
     "course-rating": "Rating",
-    "as-a-student": "as a student"
+    "reviews": "Reviews",
+    "courses": "Courses",
+    "as-a-student": "as a student to leave a review"
   },
   "auth": {
     "login": "Login",

@@ -40,7 +40,9 @@
     "preview": "معاينة",
     "course-full-rating": "تقييم الدورة",
     "course-rating": "التقييم",
-    "as-a-student": "كطالب"
+    "reviews": "المراجعات",
+    "courses": "الدورات",
+    "as-a-student": "كطالب لترك مراجعة"
   },
   "auth": {
     "login": "تسجيل الدخول",

@@ -1,8 +1,32 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { Star, MessageSquare, Users, BookOpen, Facebook, Twitter, Youtube } from "lucide-react";
 
 const CourseInstructor = () => {
     const t = useTranslations("courses");
+
+    const stats = [
+        {
+            label: t("course-rating"),
+            value: 0,
+            icon: <Star className="h-5 w-5 text-primary" />,
+        },
+        {
+            label: t("reviews"),
+            value: 0,
+            icon: <MessageSquare className="h-5 w-5 text-primary" />,
+        },
+        {
+            label: t("students"),
+            value: 6,
+            icon: <Users className="h-5 w-5 text-primary" />,
+        },
+        {
+            label: t("courses"),
+            value: 6,
+            icon: <BookOpen className="h-5 w-5 text-primary" />,
+        },
+    ];
 
     return (
         <div>
@@ -25,13 +49,30 @@ const CourseInstructor = () => {
                         <p className="line-clamp-3 text-sm text-gray-600">
                             Instructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor NameInstructor Name
                         </p>
-                        <div className="flex gap-1">
-                            Social media links
+                        <div className="flex gap-1 mt-2">
+                                <div className="bg-primary rounded-full p-2">
+                                    <Facebook className="h-5 w-5 text-white" />
+                                </div>
+                                <div className="bg-primary rounded-full p-2">
+                                    <Twitter className="h-5 w-5 text-white" />
+                                </div>
+                                <div className="bg-primary rounded-full p-2">
+                                    <Youtube className="h-5 w-5 text-white" />
+                                </div>
                         </div>
                     </div>
                 </div>
-                <div className="w-1/3 flex flex-col gap-2 ps-4">
-                    Instructor Statistics
+                <div className="w-1/3 flex flex-col gap-4 ps-4">
+                    {stats.map((stat) => (
+                        <div key={stat.label} className="flex items-center gap-3 text-gray-800">
+                            <span className="rounded-lg p-2 text-white bg-linear-to-br flex items-center justify-center">
+                                {stat.icon}
+                            </span>
+                            <p className="text-lg font-semibold">
+                                {stat.value} {stat.label}
+                            </p>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
