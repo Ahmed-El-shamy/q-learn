@@ -1,0 +1,87 @@
+import Container from "@/_components/common/container/Container";
+import { Link } from "@/i18n/navigation";
+import React from "react";
+import { infoLinks, serviceLinks, supportLinks } from "./data";
+
+const FooterLinks = () => {
+  return (
+    <Container>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 md:gap-5 mt-20">
+        <div className="about space-y-5 col-span-2">
+          <h3 className="font-bold text-xl xl:text-2xl">About</h3>
+          <h4 className="font-bold text-xl xl:text-2xl">Never Miss A Post!</h4>
+          <p className="text-sm">
+            Choose the most powerful courses and always be on demand
+          </p>
+          <div className="flex gap-2">
+            <input
+              placeholder="Enter e-mail Address"
+              className="border-0 outline-0 bg-white px-8 py-3 text-sm text-[#373737]"
+            />
+            <Link
+              href={"/subscribe"}
+              className="text-sm leading-8 px-5 py-2 bg-linear-to-r from-[#660afb] to-[#b633ff] rounded uppercase font-bold"
+            >
+              subscribe
+            </Link>
+          </div>
+        </div>
+
+        <div className="support">
+          <h3 className="font-bold text-xl xl:text-2xl mb-5">Support Zone</h3>
+          <ul className="space-y-3">
+            {supportLinks.map((support, i) => (
+              <li key={i}>
+                <Link
+                  href={support.link}
+                  className="text-sm hover:underline"
+                  target="_blank"
+                >
+                  {support.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="info">
+          <h3 className="font-bold text-xl xl:text-2xl mb-5">Company Info</h3>
+          <ul className="space-y-3">
+            {infoLinks.map((info, i) => (
+              <li key={i}>
+                <Link
+                  href={info.link}
+                  className="text-sm  hover:underline"
+                  target="_blank"
+                >
+                  {info.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="service">
+          <h3 className="font-bold text-xl xl:text-2xl mb-5">
+            Explore Services
+          </h3>
+          <ul className="space-y-3">
+            {serviceLinks.map((service, i) => (
+              <li key={i}>
+                <Link
+                  href={service.link}
+                  className="text-sm  hover:underline"
+                  target="_blank"
+                >
+                  {service.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </Container>
+  );
+};
+
+export default FooterLinks;

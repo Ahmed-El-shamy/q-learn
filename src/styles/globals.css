@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "./font.css";
-@import "./text.css";
 @import "./layout.css";
+@import "./text.css";
 
 :root {
   --background: #ffffff;
@@ -30,6 +30,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden !important;
 }
 
 /* Reset class to opt out of Tailwind and restore browser defaults */
@@ -112,4 +113,16 @@ body {
 
 .reset button {
   cursor: revert;
+}
+
+/* hide scroll bar */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
