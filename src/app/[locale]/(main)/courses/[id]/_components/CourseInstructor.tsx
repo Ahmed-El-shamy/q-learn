@@ -1,6 +1,6 @@
+import { BookOpen, MessageSquare, Star, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { Star, MessageSquare, Users, BookOpen, Facebook, Twitter, Youtube } from "lucide-react";
 
 const CourseInstructor = () => {
     const t = useTranslations("courses");
@@ -51,13 +51,13 @@ const CourseInstructor = () => {
                         </p>
                         <div className="flex gap-1 mt-2">
                                 <div className="bg-primary rounded-full p-2">
-                                    <Facebook className="h-5 w-5 text-white" />
+                                    <Image height={20} width={20} src="/images/footer/facebook.svg" alt="facebook" />
                                 </div>
                                 <div className="bg-primary rounded-full p-2">
-                                    <Twitter className="h-5 w-5 text-white" />
+                                    <Image height={20} width={20} src="/images/footer/twitter.svg" alt="facebook" />
                                 </div>
                                 <div className="bg-primary rounded-full p-2">
-                                    <Youtube className="h-5 w-5 text-white" />
+                                    <Image height={20} width={20} src="/images/footer/youtube.svg" alt="facebook" />
                                 </div>
                         </div>
                     </div>
