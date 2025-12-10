@@ -53,6 +53,8 @@
     "firstName": "FirstName must be characters only",
     "lastName": "LastName must be characters only",
     "email": "Invalid Email",
+    "required": "This field is required",
+    "role": "You must choose one role",
     "phoneNumber": {
       "numbers": "Phone number must be numbers only",
       "minLength": "Phone number must be at least 11 digits",
