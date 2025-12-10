@@ -31,6 +31,22 @@
     "home": "home",
     "my account": "my account"
   },
+  "courses": {
+    "students": "students",
+    "duration": "Duration",
+    "lectures": "lectures",
+    "course-content": "Course content",
+    "toggle-all-chapters": "Toggle all chapters",
+    "preview": "Preview",
+    "course-full-rating": "Course Rating",
+    "course-rating": "Rating",
+    "as-a-student": "as a student"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up"
+  },
+  "or": "or",
   "validation": {
     "firstName": "FirstName must be characters only",
     "lastName": "LastName must be characters only",

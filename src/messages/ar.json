@@ -31,6 +31,22 @@
     "home": "الرئيسية",
     "my account": "حسابي"
   },
+  "courses": {
+    "students": "طلاب",
+    "duration": "المدة",
+    "lectures": "محاضرات",
+    "course-content": "محتوى الدورة",
+    "toggle-all-chapters": "تبديل كل الفصول",
+    "preview": "معاينة",
+    "course-full-rating": "تقييم الدورة",
+    "course-rating": "التقييم",
+    "as-a-student": "كطالب"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب"
+  },
+  "or": "أو",
   "validation": {
     "firstName": "الإسم الأول يجب أن يكون حروفا فقط",
     "lastName": "الإسم الأخير يجب أن يكون حروفا فقط",
