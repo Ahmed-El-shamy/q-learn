@@ -70,7 +70,7 @@ const LoginForm = () => {
           </Link>
         </div>
 
-        <AuthBtn text="Login" />
+        <AuthBtn text="Login" classname="mt-4" />
 
         <p className="text-center">
           Don't have account?{" "}

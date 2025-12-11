@@ -2,6 +2,7 @@
 import AuthBtn from "@/_components/common/buttons/AuthBtn";
 import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 import useForgetPassword from "../_hook/useForgetPassword";
+import { Mail } from "lucide-react";
 
 export interface ForgetPasswordPayload {
   email: string;
@@ -21,7 +22,9 @@ const ForgetPasswordForm = () => {
       </h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-10">
         <MainInput
+          required
           type="email"
+          Icon={Mail}
           {...register("email")}
           placeholder="Enter Your Email"
           error={errors.email?.message}
