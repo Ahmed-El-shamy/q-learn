@@ -276,13 +276,9 @@ const MainSelectInner = <T extends OptionType>(props: MainSelectProps<T>) => {
           onBlur={() => {
             // note: actual blur handling to forms will be called on select or explicitly if needed
           }}
-          className={`transition text-text-gray duration-150 rounded-lg w-full py-3 px-4 flex-between gap-3 bg-background-gray
-            ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
-            ${
-              error
-                ? "ring-2 ring-red-500"
-                : "focus-within:ring-2 focus-within:ring-orangeColor"
-            }`}
+          className={`transition text-text-gray duration-150 w-full py-3 px-4 flex-between gap-3 bg-background-gray border-b
+            ${disabled && "opacity-50 cursor-not-allowed"}
+              ${error ? " border-b-red-500" : "border-b-[#d1d1d1]"}`}
           onClick={handleToggle}
         >
           {/* leading placeholder / selected text */}
@@ -302,9 +298,8 @@ const MainSelectInner = <T extends OptionType>(props: MainSelectProps<T>) => {
             role="listbox"
             aria-labelledby={inputId}
             ref={listRef}
-            className={`absolute top-full  w-full max-h-48 overflow-y-auto bg-white border border-slate-400 rounded-lg shadow-lg z-30 ${
-              locale === "ar" ? "right-0" : "left-0"
-            }`}
+            className={`absolute top-full w-full max-h-48 overflow-y-auto bg-white border border-slate-400 rounded-lg shadow-lg z-30 
+                ${locale === "ar" ? "right-0" : "left-0"}`}
           >
             {loading ? (
               <div className="w-full flex justify-center py-3">loading</div>

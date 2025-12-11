@@ -33,6 +33,88 @@ body {
   overflow-x: hidden !important;
 }
 
+/* Reset class to opt out of Tailwind and restore browser defaults */
+.reset {
+  all: initial;
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  color: inherit;
+}
+
+.reset * {
+  all: unset;
+  display: revert;
+  box-sizing: border-box;
+}
+
+.reset h1,
+.reset h2,
+.reset h3,
+.reset h4,
+.reset h5,
+.reset h6 {
+  font-size: revert;
+  font-weight: revert;
+  margin: revert;
+}
+
+.reset p {
+  margin: revert;
+}
+
+.reset ul,
+.reset ol {
+  list-style: revert;
+  margin: revert;
+  padding: revert;
+}
+
+.reset a {
+  color: revert;
+  text-decoration: revert;
+}
+
+.reset img {
+  max-width: revert;
+  height: revert;
+  display: revert;
+}
+
+.reset table {
+  border-collapse: revert;
+  border-spacing: revert;
+}
+
+.reset th,
+.reset td {
+  padding: revert;
+  text-align: revert;
+}
+
+.reset blockquote {
+  margin: revert;
+  padding: revert;
+}
+
+.reset pre,
+.reset code {
+  font-family: revert;
+  white-space: revert;
+}
+
+.reset button,
+.reset input,
+.reset select,
+.reset textarea {
+  font-family: revert;
+  font-size: revert;
+  margin: revert;
+}
+
+.reset button {
+  cursor: revert;
+}
+
 /* hide scroll bar */
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;

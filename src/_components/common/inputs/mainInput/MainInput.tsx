@@ -96,30 +96,16 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
           </label>
         )}
 
-        <div
-          className={`
-            relative flex items-center gap-2 rounded-lg w-full p-3 bg-gray-50
-            ${disabled || readOnly ? "opacity-50 cursor-not-allowed" : ""}
-            ${
-              error
-                ? "ring-2 ring-red-500"
-                : "focus-within:ring-2 ring-gray-400"
-            }
-        `}
-        >
-          {Icon && (
-            <Icon
-              className="absolute left-2 text-gray-400"
-              width={20}
-              hanging={20}
-            />
-          )}
+        <div className="relative flex items-center w-full">
+          {Icon && <Icon className="absolute left-0" width={18} height={18} />}
           <input
             id={inputId}
             ref={ref}
             name={name}
             type={isPassword && showPassword ? "text" : type}
-            {...(isControlled ? { value: currentValue } : { defaultValue: currentValue })}
+            {...(isControlled
+              ? { value: currentValue }
+              : { defaultValue: currentValue })}
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder={placeholder}
@@ -128,17 +114,16 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
             readOnly={readOnly}
             aria-invalid={!!error}
             aria-describedby={
-              error
-                ? `${inputId}-error`
-                : hint
-                ? `${inputId}-hint`
-                : undefined
+              error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined
             }
             list={enableAutoComplete ? `${inputId}-list` : undefined}
             className={`
-                flex-1 bg-transparent outline-none border-none placeholder-gray-400 ${
-              Icon ? "pl-8" : ""
-            } ${className || ""}
+              flex-1 text-sm mt-1 outline-none border-b border-b-[#d1d1d1]  placeholder:text-[#373737] py-3
+              ${disabled || readOnly ? "opacity-50 cursor-not-allowed" : ""}
+              ${error ? " border-b-red-500" : "border-b-[#d1d1d1]"}
+              ${Icon ? "pl-8" : ""} 
+              ${isPassword && showPasswordToggle ? "pr-8" : ""}
+              ${className || ""}
             `}
             {...rest}
           />
@@ -147,7 +132,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
           {isPassword && showPasswordToggle && (
             <span
               onClick={() => setShowPassword((prev) => !prev)}
-              className="text-gray-500 hover:text-gray-700 cursor-pointer"
+              className="absolute right-2 cursor-pointer"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -186,7 +171,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
             </p>
           )}
           {!error && hint && (
-            <p id={`${inputId}-hint`} className="text-gray-500 text-xs mt-1">
+            <p id={`${inputId}-hint`} className="text-[#d1d1d1] text-xs mt-1">
               {hint}
             </p>
           )}

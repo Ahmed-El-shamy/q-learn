@@ -31,10 +31,34 @@
     "home": "home",
     "my account": "my account"
   },
+  "courses": {
+    "students": "students",
+    "duration": "Duration",
+    "lectures": "lectures",
+    "course-content": "Course content",
+    "toggle-all-chapters": "Toggle all chapters",
+    "preview": "Preview",
+    "course-full-rating": "Course Rating",
+    "course-rating": "Rating",
+    "reviews": "Reviews",
+    "courses": "Courses",
+    "as-a-student": "as a student to leave a review",
+    "qa": {
+      "title": "Questions & Answers",
+      "titles": "Questions & Answers"
+    }
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up"
+  },
+  "or": "or",
   "validation": {
     "firstName": "FirstName must be characters only",
     "lastName": "LastName must be characters only",
     "email": "Invalid Email",
+    "required": "This field is required",
+    "role": "You must choose one role",
     "phoneNumber": {
       "numbers": "Phone number must be numbers only",
       "minLength": "Phone number must be at least 11 digits",

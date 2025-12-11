@@ -1,56 +1,85 @@
 "use client";
-import { signIn } from "next-auth/react";
 import { FormEvent, useState } from "react";
-import { LoginPayload } from "../login.types";
 import AuthBtn from "@/_components/common/buttons/AuthBtn";
 import MainInput from "@/_components/common/inputs/mainInput/MainInput";
-import Link from "next/link";
+
 import { useLocale } from "next-intl";
 import useLogin from "../_hooks/useLogin";
+import { Lock, Mail } from "lucide-react";
+import MainSelect from "@/_components/common/inputs/main-select-input/MainSelect";
+import { Link } from "@/i18n/navigation";
+
+const roleOptions = [
+  { id: 1, name: "Instructor" },
+  { id: 2, name: "User" },
+];
 
 const LoginForm = () => {
-  const [credentials, setCredentials] = useState<LoginPayload>({
-    email: "",
-    password: "",
-  });
+  const [checked, setChecked] = useState(false);
 
   const {
     methods: {
       register,
-      formState: {
-        errors,
-      },
-      watch
+      formState: { errors },
+      watch,
     },
-    handleSubmit
+    handleSubmit,
   } = useLogin();
   const local = useLocale();
 
   return (
-    <form
-      className="flex flex-col gap-4 border p-2 border-black rounded-lg w-full py-10 px-6"
-      onSubmit={handleSubmit}
-    >
-      <MainInput
-        placeholder="Enter Your Email"
-        type="email"
-        error={errors.email?.message}
-        {...register("email")}
-      />
+    <>
+      <h2 className="text-2xl md:text-xl lg:text-3xl font-bold">
+        Welcome back. Please login to your account
+      </h2>
 
-      <MainInput
-        placeholder="Enter Your Password"
-        type="password"
-        error={errors.password?.message}
-        {...register("password")}
-      />
+      <form className="flex flex-col gap-4 w-full mt-5" onSubmit={handleSubmit}>
+        <MainInput
+          placeholder="Enter Your Email"
+          type="email"
+          Icon={Mail}
+          error={errors.email?.message}
+          {...register("email")}
+        />
 
-      <AuthBtn text="Login" />
+        <MainInput
+          placeholder="Enter Your Password"
+          type="password"
+          Icon={Lock}
+          error={errors.password?.message}
+          {...register("password")}
+        />
 
-      <Link href={`/${local}/auth/register`} className="ml-auto">
-        Don't have account?
-      </Link>
-    </form>
+        <MainSelect placeholder="Choose Role" options={roleOptions} />
+
+        <div className="flex-between text-sm mt-5">
+          <div className="flex items-center gap-2">
+            <input
+              type="radio"
+              checked={checked}
+              onClick={() => {
+                setChecked(!checked);
+              }}
+              className="cursor-pointer w-4 h-4 accent-[#660afb] border-[#b633ff] border-2"
+            />
+            <span>Remember Me</span>
+          </div>
+
+          <Link href="/auth/forget-password" className="text-[#77c8fe] ">
+            Forget Password?
+          </Link>
+        </div>
+
+        <AuthBtn text="Login" />
+
+        <p className="text-center">
+          Don't have account?{" "}
+          <Link href={`/auth/register`} className="text-[#77c8fe]">
+            Register
+          </Link>
+        </p>
+      </form>
+    </>
   );
 };
 
