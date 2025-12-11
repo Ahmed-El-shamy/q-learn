@@ -42,7 +42,11 @@
     "course-rating": "Rating",
     "reviews": "Reviews",
     "courses": "Courses",
-    "as-a-student": "as a student to leave a review"
+    "as-a-student": "as a student to leave a review",
+    "qa": {
+      "title": "Questions & Answers",
+      "titles": "Questions & Answers"
+    }
   },
   "auth": {
     "login": "Login",

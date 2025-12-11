@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import CourseContent from "./CourseContent";
 import CourseInstructor from "./CourseInstructor";
 import CourseRating from "./CourseRating";
+import CourseQA from "./CourseQA";
 
 const panels = [
     {
@@ -66,6 +67,10 @@ const CoursePanels = () => {
             case "reviews":
                 return (
                     <CourseRating />
+                )
+            case "QA":
+                return (
+                    <CourseQA />
                 )
         }
     }
