@@ -86,11 +86,11 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
     return (
       <div className={`w-full ${className}`}>
         {label && (
-          <label htmlFor={inputId} className="flex mb-1 font-medium">
+          <label htmlFor={inputId} className="flex font-medium mb-1">
             {label}{" "}
             {required && (
               <span>
-                <Asterisk className="text-red-500 ml-1" size={15} />
+                <Asterisk className="text-red-500 ml-1" size={12} />
               </span>
             )}
           </label>
@@ -109,7 +109,9 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
               : { defaultValue: currentValue })}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder={required ? `${placeholder || ""} *` : placeholder}
+            placeholder={
+              placeholder && required ? `${placeholder || ""} *` : placeholder
+            }
             required={required}
             disabled={disabled}
             readOnly={readOnly}
@@ -119,7 +121,8 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
             }
             list={enableAutoComplete ? `${inputId}-list` : undefined}
             className={`
-              flex-1 text-sm mt-1 outline-none border-b border-b-[#d1d1d1]  placeholder:text-[#373737] py-3
+              flex-1 text-sm mt-1 outline-none border-b border-b-[#d1d1d1]  placeholder:text-[#373737] 
+              ${label ? "py-0" : "py-3"}
               ${disabled || readOnly ? "opacity-50 cursor-not-allowed" : ""}
               ${error ? " border-b-red-500" : "border-b-[#d1d1d1]"}
               ${Icon ? "pl-8" : ""} 
