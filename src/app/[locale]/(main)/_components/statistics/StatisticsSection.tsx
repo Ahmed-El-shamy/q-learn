@@ -34,7 +34,7 @@ const statisticsData = [
 const StatisticsSection = () => {
   return (
     <Container>
-      <div className="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8 mb-20 lg:-mt-32 mt-20 relative z-10 duration-300">
+      <div className="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8 mb-20 lg:-mt-32 mt-20 relative z-1 duration-300">
         {statisticsData.map((item, i) => (
           <StatisticsCard
             key={i}
