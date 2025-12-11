@@ -28,8 +28,9 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
 
     return (
       <>
-        <div className="flex gap-2">
+        <div className="flex gap-5">
           <MainSelect
+            className="flex-1"
             placeholder="Select a country"
             options={options.map((o) => ({
               id: o.id,
@@ -43,6 +44,7 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
           />
 
           <MainInput
+            className="flex-2"
             label={label}
             placeholder={placeholder}
             required={required}

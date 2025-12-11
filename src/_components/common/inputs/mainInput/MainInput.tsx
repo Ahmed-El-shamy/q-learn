@@ -98,6 +98,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
 
         <div className="relative flex items-center w-full">
           {Icon && <Icon className="absolute left-0" width={18} height={18} />}
+
           <input
             id={inputId}
             ref={ref}
@@ -108,7 +109,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
               : { defaultValue: currentValue })}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder={placeholder}
+            placeholder={required ? `${placeholder || ""} *` : placeholder}
             required={required}
             disabled={disabled}
             readOnly={readOnly}
