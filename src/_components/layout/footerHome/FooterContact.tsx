@@ -9,7 +9,7 @@ const FooterContact = () => {
     <Container>
       <div className="mt-20 py-10 w-full bg-linear-to-r from-[#660afb] via-[#b633ff] to-[#660afb]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-5 items-center px-5">
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-0">
             <div className="flex gap-5">
               <Headset className="size-10 xl:size-15" />
               <div className="font-bold text-[16px] xl:text-xl">
@@ -29,7 +29,7 @@ const FooterContact = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 xl:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 xl:gap-5">
             <div>
               <h5 className="text-xl xl:text-2xl font-bold uppercase">
                 Follow Us
