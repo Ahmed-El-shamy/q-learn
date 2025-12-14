@@ -18,7 +18,7 @@ const ProfilePassword = () => {
   return (
     <div className="w-full mt-10 pb-8 rounded-xl border border-gray-300 shadow">
       <div className="flex gap-3 p-8 border-b border-b-gray-300 bg-gray-100/50">
-        <div className="flex justify-center items-center w-14 h-14 rounded-full bg-[#b633ff] text-white">
+        <div className="flex justify-center items-center shrink-0 w-14 h-14 rounded-full bg-[#b633ff] text-white">
           <Lock size={30} />
         </div>
         <div>
