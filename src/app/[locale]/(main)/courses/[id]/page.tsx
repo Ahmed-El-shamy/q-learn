@@ -7,15 +7,12 @@ const Page = () => {
     <div>
       <div className="relative">
         <CourseHero />
-        <CoursePanels />
-        <div className="absolute h-full w-1/3 top-0 start-2/3 pt-20">
-          <div className="sticky w-fit z-50 top-0 start-2/3 rounded border border-primary bg-white shadow-lg">
+        <div className="lg:absolute h-full sm:max-w-[600px] md:max-w-[800px] mx-auto lg:max-w-none w-full lg:w-1/3 top-0 start-2/3 pt-4 px-2 md:px-8 lg:px-0 lg:pt-20">
+          <div className="lg:sticky w-full lg:w-fit z-50 top-0 start-2/3 rounded border border-primary bg-white shadow-lg">
             <CourseStickyContent />  
           </div>
         </div>
-      </div>
-      <div className="h-screen">
-
+        <CoursePanels />
       </div>
     </div>
   );

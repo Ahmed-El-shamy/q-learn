@@ -45,6 +45,9 @@
     "as-a-student": "كطالب لترك مراجعة",
     "instructor": "المدرب",
     "share": "مشاركة",
+    "apply": "تطبيق",
+    "enter-your-coupon": "أدخل كود الخصم",
+    "be-the-first-reviewer": "كن أول من يكتب مراجعة",
     "qa": {
       "title": "الأسئلة والأجوبة",
       "titles": "الأسئلة والأجوبة"
@@ -52,7 +55,8 @@
   },
   "auth": {
     "login": "تسجيل الدخول",
-    "signup": "إنشاء حساب"
+    "signup": "إنشاء حساب",
+    "choose role": "اختر الدور"
   },
   "or": "أو",
   "validation": {

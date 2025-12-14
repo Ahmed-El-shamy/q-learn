@@ -48,7 +48,7 @@ function useClickOutside<T extends HTMLElement>(
   }, [ref, handler]);
 }
 
-const MainSelectInner = <T extends OptionType>(props: MainSelectProps<T>) => {
+const MainSelect = <T extends OptionType>(props: MainSelectProps<T>) => {
   const {
     id,
     options = [],
@@ -234,7 +234,7 @@ const MainSelectInner = <T extends OptionType>(props: MainSelectProps<T>) => {
   }, [focusedIndex]);
 
   const showLabel = selectedLabel
-    ? t(selectedLabel)
+    ? selectedLabel
     : placeholder
     ? t(placeholder)
     : "";
@@ -327,7 +327,7 @@ const MainSelectInner = <T extends OptionType>(props: MainSelectProps<T>) => {
                       isFocused ? "bg-gray-100" : ""
                     }`}
                   >
-                    {t(item.name)}
+                    {item.name}
                   </div>
                 );
               })
@@ -353,9 +353,5 @@ const MainSelectInner = <T extends OptionType>(props: MainSelectProps<T>) => {
     </div>
   );
 };
-
-const MainSelect = React.forwardRef(MainSelectInner) as <T extends OptionType>(
-  p: MainSelectProps<T> & { ref?: React.Ref<HTMLInputElement> }
-) => React.ReactElement;
 
 export default MainSelect;

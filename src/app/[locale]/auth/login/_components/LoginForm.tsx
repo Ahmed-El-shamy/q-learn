@@ -3,11 +3,13 @@ import { FormEvent, useState } from "react";
 import AuthBtn from "@/_components/common/buttons/AuthBtn";
 import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import useLogin from "../_hooks/useLogin";
 import { Lock, Mail } from "lucide-react";
 import MainSelect from "@/_components/common/inputs/main-select-input/MainSelect";
 import { Link } from "@/i18n/navigation";
+import { Controller } from "react-hook-form";
+import MainBtn from "@/_components/common/buttons/MainBtn";
 
 const roleOptions = [
   { id: 1, name: "Instructor" },
@@ -18,12 +20,11 @@ const LoginForm = () => {
   const {
     methods: {
       register,
+      control,
       formState: { errors },
-      watch,
     },
     handleSubmit,
   } = useLogin();
-  const local = useLocale();
 
   return (
     <>
@@ -48,7 +49,20 @@ const LoginForm = () => {
           {...register("password")}
         />
 
-        <MainSelect placeholder="Choose Role" options={roleOptions} />
+        <Controller
+          name="role"
+          control={control}
+          render={({ field, fieldState }) => (
+            <MainSelect
+              placeholder={"auth.choose role"}
+              options={roleOptions}
+              value={field.value ?? null}
+              onChange={(value) => field.onChange(value)}
+              onBlur={field.onBlur}
+              error={fieldState.error?.message ?? null}
+            />
+          )}
+        />
 
         <div className="flex-between text-sm mt-5">
           <div className="flex items-center gap-2">
@@ -64,7 +78,9 @@ const LoginForm = () => {
           </Link>
         </div>
 
-        <AuthBtn text="Login" classname="mt-4" />
+        <MainBtn type="submit" className="mt-4">
+          Login
+        </MainBtn>
 
         <p className="text-center">
           Don't have account?{" "}

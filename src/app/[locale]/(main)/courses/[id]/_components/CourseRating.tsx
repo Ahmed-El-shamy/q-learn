@@ -11,27 +11,27 @@ const CourseRating = () => {
 
     return (
         <div>
-            <p className="text-3xl font-bold mb-6">
+            <p className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">
                 {t("course-full-rating")}
             </p>
-            <div className="rounded border-gray-300 border p-6 flex gap-6 justify-between">
+            <div className="rounded border-gray-300 border p-3 sm:p-4 md:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-between">
                 <div className="flex flex-col gap-2 justify-center items-center">
-                    <p className="text-5xl font-bold">
+                    <p className="text-3xl sm:text-4xl md:text-5xl font-bold">
                         0
                     </p>
                     <Rate rate={0} />
-                    <p className="text-lg font-bold text-gray-500">
+                    <p className="text-sm sm:text-base md:text-lg font-bold text-gray-500">
                         {t("course-rating")}
                     </p>
                 </div>
-                <div className="flex-1 flex flex-col gap-4">
+                <div className="flex-1 flex flex-col gap-2 sm:gap-3 md:gap-4">
                     {
                         Array(5).fill(1).map((num, i) => num + i).map(rate => (
-                            <div className="w-full flex items-center gap-3">
+                            <div key={rate} className="w-full flex items-center gap-2 sm:gap-3">
                                 <div className="flex-1 rounded-full bg-gray-200 h-full">
                                 </div>
-                                <Rate rate={rate} size={20} />
-                                <p>
+                                <Rate rate={rate} size={16} />
+                                <p className="text-xs sm:text-sm md:text-base">
                                     (0)
                                 </p>
                             </div>
@@ -42,11 +42,11 @@ const CourseRating = () => {
             <div>
                 {
                     !isAuthenticated ?
-                    <div className="flex justify-between text-nowrap items-center gap-1 mt-4">
-                        <div>
+                    <div className="flex flex-col sm:flex-row justify-between text-nowrap items-start sm:items-center gap-2 sm:gap-1 mt-4">
+                        <div className="text-xs sm:text-sm md:text-base">
                             There are currently no reviews
                         </div>
-                        <div className="flex gap-2 [&>a]:hover:underline [&>a]:cursor-pointer [&>a]:text-blue-500">
+                        <div className="flex flex-wrap gap-1 sm:gap-2 [&>a]:hover:underline [&>a]:cursor-pointer [&>a]:text-blue-500 text-xs sm:text-sm md:text-base">
                             <Link href="/auth/login">
                                 {baseT("auth.login")} 
                             </Link> 
@@ -62,8 +62,13 @@ const CourseRating = () => {
                         </div>
                     </div>
                     :
-                    <div>
-                        The user is signed in
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mt-4">
+                        <p className="text-xs sm:text-sm md:text-base">
+                            {t("be-the-first-reviewer")}
+                        </p>
+                        <div className="text-xs sm:text-sm md:text-base">
+                            This will be the review input
+                            </div>
                     </div>
                 }
             </div>

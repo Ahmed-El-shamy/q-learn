@@ -16,7 +16,7 @@ export default function MainLayout({
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <div className="grow">{children}</div>
+      <div className="grow pb-96">{children}</div>
       <MobileWidget />
       <Footer />
     </div>

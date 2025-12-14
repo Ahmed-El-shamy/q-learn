@@ -43,54 +43,54 @@ const CourseQA = () => {
   const t = useTranslations("courses");
   return (
     <div>
-        <p className="pb-4 text-3xl font-bold">
+        <p className="pb-3 sm:pb-4 text-xl sm:text-2xl md:text-3xl font-bold">
             {t("qa.title")}
         </p>
         <div>
             {
-                mockQA.map(question => (
-                    <>
-                        <div className="flex gap-4 py-6 border-b border-b-gray-300">
+                mockQA.map((question, qIndex) => (
+                    <div key={qIndex}>
+                        <div className="flex gap-2 sm:gap-3 md:gap-4 py-4 sm:py-5 md:py-6 border-b border-b-gray-300">
                             <Image 
                                 height={50}
                                 width={50}
                                 src={question.picture}
                                 alt="question-writer"
-                                className="rounded-full w-fit h-fit"
+                                className="rounded-full w-10 h-10 sm:w-12 sm:h-12 md:w-[50px] md:h-[50px] flex-shrink-0"
                             />
                             <div className="flex flex-col gap-1">
-                                <p className="text-lg">
+                                <p className="text-sm sm:text-base md:text-lg font-semibold">
                                     {question.username}
                                 </p>
-                                <p className="text-gray-500">
+                                <p className="text-xs sm:text-sm text-gray-500">
                                     {question.date}
                                 </p>
-                                <p>
+                                <p className="text-xs sm:text-sm md:text-base">
                                     {question.text}
                                 </p>
                             </div>
                         </div>
                         {
-                            question.replies.length && (
-                                <div className="px-10">
+                            question.replies.length > 0 && (
+                                <div className="px-4 sm:px-6 md:px-8 lg:px-10">
                                     {
-                                        question.replies.map(reply => (
-                                            <div className="flex gap-4 py-8 border-b border-b-gray-300">
+                                        question.replies.map((reply, rIndex) => (
+                                            <div key={rIndex} className="flex gap-2 sm:gap-3 md:gap-4 py-4 sm:py-6 md:py-8 border-b border-b-gray-300">
                                                 <Image 
                                                     height={50}
                                                     width={50}
                                                     src={reply.picture}
                                                     alt="reply-writer"
-                                                    className="rounded-full w-fit h-fit"
+                                                    className="rounded-full w-10 h-10 sm:w-12 sm:h-12 md:w-[50px] md:h-[50px] flex-shrink-0"
                                                 />
                                                 <div className="flex flex-col gap-1">
-                                                    <p className="text-lg">
+                                                    <p className="text-sm sm:text-base md:text-lg font-semibold">
                                                         {reply.username}
                                                     </p>
-                                                    <p className="text-gray-500">
+                                                    <p className="text-xs sm:text-sm text-gray-500">
                                                         {reply.date}
                                                     </p>
-                                                    <p>
+                                                    <p className="text-xs sm:text-sm md:text-base">
                                                         {reply.text}
                                                     </p>
                                                 </div>
@@ -100,7 +100,7 @@ const CourseQA = () => {
                                 </div>
                             )
                         }
-                    </>
+                    </div>
                 ))
             }
         </div>

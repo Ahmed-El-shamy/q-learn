@@ -6,7 +6,8 @@ import { signIn } from "next-auth/react";
 const useLogin = () => {
     const methods = useForm<LoginPayload>({
         resolver: zodResolver(loginSchema),
-        mode: "onBlur",
+        mode: "onSubmit",
+        reValidateMode: "onChange"
     });
 
     async function handleSubmit(payload: LoginPayload) {

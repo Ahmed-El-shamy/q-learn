@@ -8,6 +8,7 @@ import CourseInstructor from "./CourseInstructor";
 import CourseRating from "./CourseRating";
 import CourseQA from "./CourseQA";
 import MainBtn from "@/_components/common/buttons/MainBtn";
+import StudentsAlsoBought from "./StudentsAlsoBought";
 
 const panels = [
     {
@@ -28,18 +29,18 @@ const panels = [
 ] as const;
 
 const overview = `<div>
-    <h2 style="font-size:28px; font-weight:700; margin:0 0 8px;">Course Requirements</h2>
-    <p style="margin:0 0 24px; font-size:16px; line-height:1.6;">
+    <h2 class="text-lg sm:text-xl md:text-2xl lg:text-[28px] font-bold mb-2">Course Requirements</h2>
+    <p class="mb-4 sm:mb-6 text-xs sm:text-sm md:text-base leading-relaxed">
         Basic understanding of PHP programming language. Familiarity with web development concepts like HTML, CSS, and JavaScript.
     </p>
 
-    <h2 style="font-size:28px; font-weight:700; margin:0 0 8px;">Course Description</h2>
-    <p style="margin:0 0 24px; font-size:16px; line-height:1.6;">
+    <h2 class="text-lg sm:text-xl md:text-2xl lg:text-[28px] font-bold mb-2">Course Description</h2>
+    <p class="mb-4 sm:mb-6 text-xs sm:text-sm md:text-base leading-relaxed">
         Learn Laravel PHP framework from basics to advanced through practical projects. Master database integration, authentication, and complex application development with Laravel.
     </p>
 
-    <h2 style="font-size:28px; font-weight:700; margin:0 0 8px;">Course Outcomes</h2>
-    <p style="margin:0; font-size:16px; line-height:1.6;">
+    <h2 class="text-lg sm:text-xl md:text-2xl lg:text-[28px] font-bold mb-2">Course Outcomes</h2>
+    <p class="text-xs sm:text-sm md:text-base leading-relaxed">
         By the end of the course, you will be proficient in Laravel framework, capable of building scalable web applications, implementing RESTful APIs, and integrating third-party services.
     </p>
 </div>
@@ -82,8 +83,8 @@ const CoursePanels = () => {
     }
 
     return (
-        <div className="rounded-lg mx-auto max-w-[1400px] px-10 pt-6">
-            <div className="w-2/3 bg-white border shadow-md rounded py-2 px-4">
+        <div className="rounded-lg mx-auto max-w-[600px] md:max-w-[800px] lg:max-w-[1400px] px-2 md:px-8 pt-6">
+            <div className="w-full lg:w-2/3 bg-white border shadow-md rounded py-2 px-4">
                 <div className="h-0" ref={panelsRef} />
                 <div className="flex items-center gap-2 w-full py-1 overflow-x-auto sticky top-0 bg-white z-40">
                     {panels.map(panel => (
@@ -95,6 +96,7 @@ const CoursePanels = () => {
                 <div className="py-10">
                     {renderActivePanel()}
                 </div>
+                <StudentsAlsoBought />
             </div>
         </div>
     )

@@ -67,10 +67,10 @@ const CourseContent = () => {
     }
 
     return (
-        <div className="flex flex-col gap-4">
-            <p className="text-3xl font-bold">{t("course-content")}</p>
-            <div className="flex justify-between items-center">
-                <div className="flex items-center gap-2 flex-wrap text-xl">
+        <div className="flex flex-col gap-3 sm:gap-4">
+            <p className="text-xl sm:text-2xl md:text-3xl font-bold">{t("course-content")}</p>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap text-sm sm:text-base xl:text-xl">
                     <span>3 chapters</span>
                     <span className="text-gray-600">•</span>
                     <span>7 lectures</span>
@@ -79,7 +79,7 @@ const CourseContent = () => {
                     <span className="text-gray-600">•</span>
                     <span>20 Min total length</span>
                 </div>
-                <button className="text-primary text-xl cursor-pointer" onClick={toggleAllChapters}>
+                <button className="text-primary text-sm sm:text-base xl:text-xl cursor-pointer" onClick={toggleAllChapters}>
                    {t("toggle-all-chapters")} 
                 </button>
             </div>

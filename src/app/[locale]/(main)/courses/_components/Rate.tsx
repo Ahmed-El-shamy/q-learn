@@ -21,12 +21,12 @@ const Rate = ({ rate, size=20 }: Props) => {
                       className="relative inline-flex w-5 h-5"
                       aria-label="rating-star"
                     >
-                      <Star size={size} className="absolute inset-0 text-primary/70" />
+                      <Star size={size} fill="var(--color-purple-200)" className="absolute inset-0 text-purple-300" />
                       <span
                         className="absolute inset-0 overflow-hidden"
                         style={{ width: `${fillAmount * 100}%` }}
                       >
-                        <Star className="text-primary" fill="var(--color-primary)" size={size} />
+                        <Star className="text-purple-500" fill="var(--color-purple-500)" size={size} />
                       </span>
                     </span>
                   );

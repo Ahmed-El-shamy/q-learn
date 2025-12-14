@@ -45,6 +45,9 @@
     "as-a-student": "as a student to leave a review",
     "instructor": "Instructor",
     "share": "Share",
+    "apply": "Apply",
+    "enter-your-coupon": "Enter your coupon",
+    "be-the-first-reviewer": "Be the first reviewer",
     "qa": {
       "title": "Questions & Answers",
       "titles": "Questions & Answers"
@@ -52,7 +55,8 @@
   },
   "auth": {
     "login": "Login",
-    "signup": "Sign Up"
+    "signup": "Sign Up",
+    "choose role": "Choose Role"
   },
   "or": "or",
   "validation": {
