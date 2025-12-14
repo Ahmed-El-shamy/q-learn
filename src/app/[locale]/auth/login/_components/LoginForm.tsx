@@ -70,6 +70,7 @@ const LoginForm = () => {
               type="checkbox"
               className="cursor-pointer w-4 h-4 -mt-1 accent-[#660afb] border-[#b633ff] border-2"
             />
+
             <span>Remember Me</span>
           </div>
 

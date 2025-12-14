@@ -3,6 +3,7 @@ import AuthBtn from "@/_components/common/buttons/AuthBtn";
 import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 import useForgetPassword from "../_hook/useForgetPassword";
 import { Mail } from "lucide-react";
+import MainBtn from "@/_components/common/buttons/MainBtn";
 
 export interface ForgetPasswordPayload {
   email: string;
@@ -30,7 +31,8 @@ const ForgetPasswordForm = () => {
           error={errors.email?.message}
         />
 
-        <AuthBtn text="Send OTP" />
+        {/* <AuthBtn text="Send OTP" /> */}
+        <MainBtn title="Send OTP" className="mt-4" size={"large"} />
       </form>
     </div>
   );

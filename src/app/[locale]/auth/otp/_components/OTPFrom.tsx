@@ -1,6 +1,7 @@
 "use client";
 
 import AuthBtn from "@/_components/common/buttons/AuthBtn";
+import MainBtn from "@/_components/common/buttons/MainBtn";
 import { Link } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -90,7 +91,8 @@ const OTPFrom = () => {
           ))}
         </div>
 
-        <AuthBtn text="Verify OTP" classname="mt-4" />
+        {/* <AuthBtn text="Verify OTP" classname="mt-4" /> */}
+        <MainBtn title="Verify OTP" className="mt-4" size={"large"} />
 
         <p className="text-center">
           Didn't receive code?{" "}

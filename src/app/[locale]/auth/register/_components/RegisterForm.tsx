@@ -7,6 +7,7 @@ import PhoneInput from "@/_components/common/inputs/PhoneInput/PhoneInput";
 import useRegister from "../_hooks/UseRegister";
 import { Controller } from "react-hook-form";
 import { Link } from "@/i18n/navigation";
+import MainBtn from "@/_components/common/buttons/MainBtn";
 
 const RegisterForm = () => {
   const {
@@ -76,7 +77,8 @@ const RegisterForm = () => {
           {...register("confirmPassword")}
         />
 
-        <AuthBtn text="Register" classname="mt-4" />
+        {/* <AuthBtn text="Register" classname="mt-4" /> */}
+        <MainBtn title="Register" className="mt-4" size={"large"} />
 
         <p className="text-center">
           You have already an account?{" "}

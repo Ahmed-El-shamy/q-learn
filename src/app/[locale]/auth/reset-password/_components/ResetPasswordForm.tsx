@@ -3,6 +3,7 @@
 import AuthBtn from "@/_components/common/buttons/AuthBtn";
 import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 import useResetPassword from "../_hook/useResetPassword";
+import MainBtn from "@/_components/common/buttons/MainBtn";
 const ResetPasswordForm = () => {
   const {
     methods: {
@@ -35,7 +36,8 @@ const ResetPasswordForm = () => {
           error={errors.confirmPassword?.message}
         />
 
-        <AuthBtn text="Reset Password" classname="mt-4" />
+        {/* <AuthBtn text="Reset Password" classname="mt-4" /> */}
+        <MainBtn title="Reset Password" className="mt-4" size={"large"} />
       </form>
     </>
   );
