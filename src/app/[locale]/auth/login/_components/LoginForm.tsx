@@ -55,13 +55,12 @@ const LoginForm = () => {
         <div className="flex-between text-sm mt-5">
           <div className="flex items-center gap-2">
             <input
-              type="radio"
+              type="checkbox"
               checked={checked}
-              onClick={() => {
-                setChecked(!checked);
-              }}
+              onChange={() => setChecked((prev) => !prev)}
               className="cursor-pointer w-4 h-4 accent-[#660afb] border-[#b633ff] border-2"
             />
+
             <span>Remember Me</span>
           </div>
 

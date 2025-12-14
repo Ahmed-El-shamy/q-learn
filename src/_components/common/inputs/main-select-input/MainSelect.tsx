@@ -354,8 +354,8 @@ const MainSelectInner = <T extends OptionType>(props: MainSelectProps<T>) => {
   );
 };
 
-const MainSelect = React.forwardRef(MainSelectInner) as <T extends OptionType>(
-  p: MainSelectProps<T> & { ref?: React.Ref<HTMLInputElement> }
-) => React.ReactElement;
+const MainSelect = <T extends OptionType>(p: MainSelectProps<T>) => {
+  return <MainSelectInner {...p} />;
+};
 
 export default MainSelect;
