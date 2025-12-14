@@ -15,8 +15,6 @@ const roleOptions = [
 ];
 
 const LoginForm = () => {
-  const [checked, setChecked] = useState(false);
-
   const {
     methods: {
       register,
@@ -56,9 +54,7 @@ const LoginForm = () => {
           <div className="flex items-center gap-2">
             <input
               type="checkbox"
-              checked={checked}
-              onChange={() => setChecked((prev) => !prev)}
-              className="cursor-pointer w-4 h-4 accent-[#660afb] border-[#b633ff] border-2"
+              className="cursor-pointer w-4 h-4 -mt-1 accent-[#660afb] border-[#b633ff] border-2"
             />
 
             <span>Remember Me</span>
@@ -69,7 +65,7 @@ const LoginForm = () => {
           </Link>
         </div>
 
-        <AuthBtn text="Login" />
+        <AuthBtn text="Login" classname="mt-4" />
 
         <p className="text-center">
           Don't have account?{" "}

@@ -14,8 +14,8 @@ const CourseHero = () => {
       <div className="absolute top-0 left-0 h-full w-full bg-black/60" />
       <div className="max-w-[1400px] px-8 mx-auto relative z-10">
         <div className="w-2/3 flex flex-col gap-2">
-          <p className="text-lg">Course / Course Details</p>
-          <p className="text-5xl font-bold">
+          <p className="text-base">Course / Course Details</p>
+          <p className="text-3xl font-bold">
             This is the Title of the course and it is too long of the single
             container to handle this much text because it is too large.
           </p>

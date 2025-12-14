@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col md:flex-row h-screen px-10">
+    <div className="flex flex-col md:flex-row min-h-screen px-10">
       <div className="flex-1 bg-white flex flex-col text-[#373737]">
         <Link prefetch={false} href="/">
           <Image
@@ -18,8 +18,8 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </div>
 
-      <div className="flex-1 hidden md:flex flex-col justify-center items-center">
-        <h2 className="md:text-2xl lg:text-3xl xl:text-4xl font-extrabold text-[#202e3b] text-center mt-10">
+      <div className="flex-1 hidden md:flex flex-col justify-center items-center mt-10">
+        <h2 className="md:text-2xl lg:text-3xl xl:text-4xl font-extrabold text-[#202e3b] text-center ">
           Welcome to Qutell Learning Management System
         </h2>
         <Image

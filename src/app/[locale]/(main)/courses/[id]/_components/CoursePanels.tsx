@@ -7,6 +7,7 @@ import CourseContent from "./CourseContent";
 import CourseInstructor from "./CourseInstructor";
 import CourseRating from "./CourseRating";
 import CourseQA from "./CourseQA";
+import MainBtn from "@/_components/common/buttons/MainBtn";
 
 const panels = [
     {
@@ -76,19 +77,19 @@ const CoursePanels = () => {
     }
 
     function changeActivePanel(title: typeof panels[number]["title"]) {
-        setCurrentPanel(title);
         panelsRef.current?.scrollIntoView({behavior: "smooth"});
+        setCurrentPanel(title);
     }
 
     return (
         <div className="rounded-lg mx-auto max-w-[1400px] px-10 pt-6">
             <div className="w-2/3 bg-white border shadow-md rounded py-2 px-4">
                 <div className="h-0" ref={panelsRef} />
-                <div className="flex items-center gap-2 w-full overflow-x-auto sticky top-0 bg-white">
+                <div className="flex items-center gap-2 w-full py-1 overflow-x-auto sticky top-0 bg-white z-40">
                     {panels.map(panel => (
-                        <div onClick={() => changeActivePanel(panel.title)} className={`p-3 select-none text-xl fort-bold rounded duration-100 ${currentPanel === panel.title ? "bg-primary text-white pointer-events-none" : "cursor-pointer bg-white text-black hover:bg-gray-100"}`} key={panel.title}>
+                        <MainBtn variant={currentPanel === panel.title ? "main" : "secondary"} className={currentPanel === panel.title ? "pointer-events-none" : ""}  onClick={() => changeActivePanel(panel.title)} key={panel.title}>
                             {panel.title}
-                        </div>
+                        </MainBtn>
                     ))}
                 </div>
                 <div className="py-10">

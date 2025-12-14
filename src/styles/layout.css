@@ -46,3 +46,7 @@
 .space-between-sections {
   @apply my-4 md:my-6 lg:my-8 xl:my-10 2xl:my-12;
 }
+
+.main-background {
+  @apply bg-linear-to-r from-[#660afb] via-[#b633ff] to-[#660afb];
+}
