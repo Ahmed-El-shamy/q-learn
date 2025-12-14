@@ -8,6 +8,7 @@ import useLogin from "../_hooks/useLogin";
 import { Lock, Mail } from "lucide-react";
 import MainSelect from "@/_components/common/inputs/main-select-input/MainSelect";
 import { Link } from "@/i18n/navigation";
+import MainBtn from "@/_components/common/buttons/MainBtn";
 
 const roleOptions = [
   { id: 1, name: "Instructor" },
@@ -65,7 +66,8 @@ const LoginForm = () => {
           </Link>
         </div>
 
-        <AuthBtn text="Login" classname="mt-4" />
+        {/* <AuthBtn text="Login" classname="mt-4" /> */}
+        <MainBtn title="Login" className="mt-4" size={"large"} />
 
         <p className="text-center">
           Don't have account?{" "}

@@ -2,6 +2,7 @@ import Container from "@/_components/common/container/Container";
 import { Link } from "@/i18n/navigation";
 import React from "react";
 import { infoLinks, serviceLinks, supportLinks } from "./data";
+import MainBtn from "@/_components/common/buttons/MainBtn";
 
 const FooterLinks = () => {
   return (
@@ -18,12 +19,7 @@ const FooterLinks = () => {
               placeholder="Enter e-mail Address"
               className="border-0 outline-0 bg-white px-8 py-3 text-sm text-[#373737]"
             />
-            <Link
-              href={"/subscribe"}
-              className="text-sm leading-8 px-5 py-2 bg-linear-to-r from-[#660afb] to-[#b633ff] rounded uppercase font-bold"
-            >
-              subscribe
-            </Link>
+            <MainBtn title="subscribe" className="uppercase border-0" />
           </div>
         </div>
 
