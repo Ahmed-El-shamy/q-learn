@@ -72,6 +72,7 @@
   "validation": {
     "firstName": "FirstName must be characters only",
     "lastName": "LastName must be characters only",
+    "name": "Name must be characters only",
     "email": "Invalid Email",
     "required": "This field is required",
     "role": "You must choose one role",
