@@ -48,6 +48,9 @@
     "apply": "تطبيق",
     "enter-your-coupon": "أدخل كود الخصم",
     "be-the-first-reviewer": "كن أول من يكتب مراجعة",
+    "rate-dialog-title": "قيم هذه الدورة",
+    "rate-dialog-description": "شارك تجربتك من خلال تقييم هذه الدورة",
+    "rate-dialog-review-placeholder": "اكتب مراجعتك...",
     "qa": {
       "title": "الأسئلة والأجوبة",
       "titles": "الأسئلة والأجوبة"
@@ -79,5 +82,7 @@
       "notMatch": "كلمتا المرور غير متطابقتين"
     },
     "Choose Role": "اختر الدور"
-  }
+  },
+  "ok": "موافق",
+  "cancel": "إلغاء"
 }

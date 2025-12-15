@@ -4,11 +4,12 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogOverlay, D
 import { useTranslations } from "next-intl";
 import React, { useState, forwardRef, useImperativeHandle, useCallback } from "react";
 import { X } from "lucide-react";
-import "./dialog.css";
+import clsx from "clsx";
 import MainBtn from "../buttons/MainBtn";
+import "./dialog.css";
 
 interface ActionType {
-    action: () => Promise<void>;
+    action: () => Promise<void> | void;
     isPending?: boolean;
     text?: string;
 }
@@ -26,6 +27,7 @@ interface Props {
     cancel?: ActionType;
     content: React.ReactNode;
     onSuccess?: () => void;
+    asChild?: boolean;
 }
 
 const defaultOkText = "ok";
@@ -39,9 +41,10 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
     cancel,
     content,
     onSuccess,
+    asChild=true,
 }, ref) => {
     const t = useTranslations();
-    const [open, setOpen] = useState<boolean>(true);
+    const [open, setOpen] = useState<boolean>(false);
 
     const closeDialog = useCallback(() => {
         setOpen(false);
@@ -69,7 +72,7 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
                 setOpen(e);
             }}
         >
-            <DialogTrigger asChild >
+            <DialogTrigger asChild={asChild}>
                 {children}
             </DialogTrigger>
             <DialogPortal>
@@ -77,7 +80,9 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
                 <DialogContent
                     className="max-w-xl w-[80%] rounded z-70 outline-none scale-100 fixed top-1/2 left-1/2 bg-white content"
                 >
-                    <div className="w-full border-b border-b-purple-500 py-2 relative">
+                    <div className={clsx("w-full  py-2 relative", {
+                        "border-b border-b-purple-500": title || description
+                    })}>
                         {
                             (title || description) && (
                             <div className="px-4 text-start">
@@ -94,11 +99,11 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
                             <X className="text-purple-500/50 cursor-pointer duration-100 hover:text-purple-500 top-2 end-4 absolute" />
                         </DialogClose>
                     </div>
-                    <div className="px-4 py-2 max-h-[500px] overflow-y-auto">
+                    <div className="px-4 py-2 min-h-[100px] max-h-[500px] overflow-y-auto">
                         {content}
                     </div>
                     <div className="flex flex-col w-full md:flex-row-reverse px-4 py-2 md:gap-4 gap-2">
-                        <MainBtn>
+                        <MainBtn onClick={handleAction}>
                             {t(action?.text || defaultOkText)}
                         </MainBtn>
                         <DialogClose asChild>
@@ -113,4 +118,4 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
     )
 })
 
-export default DialogComponent;
+export default React.memo(DialogComponent);

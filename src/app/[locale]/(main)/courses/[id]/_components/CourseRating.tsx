@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import Rate from "../../_components/Rate";
 import { useSession } from "next-auth/react";
 import { Link } from "@/i18n/navigation";
+import CourseRatingInput from "./CourseRatingInput";
 
 const CourseRating = () => {
     const t = useTranslations("courses");
@@ -42,34 +43,34 @@ const CourseRating = () => {
             <div>
                 {
                     !isAuthenticated ?
-                    <div className="flex flex-col sm:flex-row justify-between text-nowrap items-start sm:items-center gap-2 sm:gap-1 mt-4">
-                        <div className="text-xs sm:text-sm md:text-base">
-                            There are currently no reviews
-                        </div>
-                        <div className="flex flex-wrap gap-1 sm:gap-2 [&>a]:hover:underline [&>a]:cursor-pointer [&>a]:text-blue-500 text-xs sm:text-sm md:text-base">
-                            <Link href="/auth/login">
-                                {baseT("auth.login")} 
-                            </Link> 
-                            <p>
-                                {baseT("or")}
-                            </p>
-                            <Link href={"/auth/register"}>
-                                {baseT("auth.signup")}
-                            </Link>
-                            <p>
-                                {t("as-a-student")}
-                            </p>
-                        </div>
-                    </div>
-                    :
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mt-4">
-                        <p className="text-xs sm:text-sm md:text-base">
-                            {t("be-the-first-reviewer")}
-                        </p>
-                        <div className="text-xs sm:text-sm md:text-base">
-                            This will be the review input
+                        <div className="flex flex-col sm:flex-row justify-between text-nowrap items-start sm:items-center gap-2 sm:gap-1 mt-4">
+                            <div className="text-xs sm:text-sm md:text-base">
+                                There are currently no reviews
                             </div>
-                    </div>
+                            <div className="flex flex-wrap gap-1 sm:gap-2 [&>a]:hover:underline [&>a]:cursor-pointer [&>a]:text-blue-500 text-xs sm:text-sm md:text-base">
+                                <Link href="/auth/login">
+                                    {baseT("auth.login")}
+                                </Link>
+                                <p>
+                                    {baseT("or")}
+                                </p>
+                                <Link href={"/auth/register"}>
+                                    {baseT("auth.signup")}
+                                </Link>
+                                <p>
+                                    {t("as-a-student")}
+                                </p>
+                            </div>
+                        </div>
+                        :
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mt-4">
+                            <p className="text-xs sm:text-sm md:text-base">
+                                {t("be-the-first-reviewer")}
+                            </p>
+                            <div className="text-xs sm:text-sm md:text-base">
+                                <CourseRatingInput />
+                            </div>
+                        </div>
                 }
             </div>
         </div>

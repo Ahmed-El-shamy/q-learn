@@ -48,6 +48,9 @@
     "apply": "Apply",
     "enter-your-coupon": "Enter your coupon",
     "be-the-first-reviewer": "Be the first reviewer",
+    "rate-dialog-title": "Rate This Course",
+    "rate-dialog-description": "Share your experience by rating this course",
+    "rate-dialog-review-placeholder": "Write your review...",
     "qa": {
       "title": "Questions & Answers",
       "titles": "Questions & Answers"
@@ -79,5 +82,7 @@
       "notMatch": "Passwords do not match"
     },
     "Choose Role": "Choose Role"
-  }
+  },
+  "ok": "Ok",
+  "cancel": "Cancel"
 }
