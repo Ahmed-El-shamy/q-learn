@@ -1,0 +1,31 @@
+.fade-in {
+    animation: fadeIn 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.content {
+	border-radius: 6px;
+	position: fixed;
+    transform: translate(-50%, -50%);
+	animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIN {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes contentShow {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -38%) scale(0.96);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}

@@ -152,12 +152,12 @@ const StudentsAlsoBought = () => {
                                 <div className="flex flex-row sm:flex-col w-full sm:w-[25%] [&>div]:py-1 [&>div]:px-2 sm:[&>div]:px-4 md:[&>div]:px-8 [&>div]:flex-1 [&>div]:gap-1.5 sm:[&>div]:gap-2 [&>div]:flex [&>div]:justify-center [&>div]:items-center sm:border-e sm:border-e-gray-200 border-t sm:border-t-0 border-t-gray-200">
                                     <div className="border-r sm:border-r-0 sm:border-b sm:border-b-gray-200 border-r-gray-200">
                                         <div className="flex items-center gap-1 text-xs sm:text-sm">
-                                            <Star size={12} className="sm:w-4 sm:h-4" fill="rgba(182,51,255, 0.4)" /> {course.rating} <p>ratings</p>
+                                            <Star size={12} className="sm:w-4 sm:h-4 text-purple-500" fill="rgba(182,51,255, 0.4)" /> {course.rating} <p>ratings</p>
                                         </div>
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-1 text-xs sm:text-sm">
-                                            <User size={12} className="sm:w-4 sm:h-4" fill="rgba(182,51,255, 0.4)" /> {course.students} <p>students</p>
+                                            <User size={12} className="sm:w-4 sm:h-4 text-purple-500" fill="rgba(182,51,255, 0.4)" /> {course.students} <p>students</p>
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@ const StudentsAlsoBought = () => {
                                     </p>
                                 </div>
                                 <div className="w-full sm:w-[10%] flex justify-center items-center py-2 sm:py-0 border-t sm:border-t-0 border-t-gray-200">
-                                    <ShoppingCart size={20} className="sm:w-6 sm:h-6" fill="var(--color-purple-500)" />
+                                    <ShoppingCart size={20} className="sm:w-6 sm:h-6 text-purple-500 cursor-pointer" fill="var(--color-purple-500)" />
                                 </div>
                             </div>
                         ))}

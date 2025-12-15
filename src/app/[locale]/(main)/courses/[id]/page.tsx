@@ -1,3 +1,4 @@
+import DialogComponent from "@/_components/common/dialog/Dialog";
 import CourseHero from "./_components/CourseHero";
 import CoursePanels from "./_components/CoursePanels";
 import CourseStickyContent from "./_components/CourseStickyContent";
