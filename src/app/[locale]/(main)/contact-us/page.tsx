@@ -1,3 +1,4 @@
+"use client";
 import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 import { Clock, MapPin, PhoneCall } from "lucide-react";
 import React from "react";
@@ -98,8 +99,11 @@ const Page = () => {
           Send us Message
         </h2>
         <form
-          action=""
-          className="w-100 md:w-180 lg:w-240 mx-auto mt-10 space-y-8"
+          onSubmit={(e) => {
+            e.preventDefault();
+            console.log("submitted");
+          }}
+          className="w-full md:w-[85%] lg:w-[75%] mx-auto space-y-8 mt-10"
         >
           <div className="flex flex-col md:flex-row gap-8">
             <ContactInput type="text" label="Name" />
@@ -112,6 +116,7 @@ const Page = () => {
             title="Send Message"
             size="large"
             className="block w-full py-5 mt-10 md:mt-20"
+            type="submit"
           />
         </form>
       </section>

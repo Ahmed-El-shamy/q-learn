@@ -1,5 +1,3 @@
-import React from "react";
-
 interface ContactInputProps {
   type?: string;
   label: string;
