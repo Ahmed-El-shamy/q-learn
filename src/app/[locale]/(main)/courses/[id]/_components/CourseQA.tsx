@@ -1,6 +1,9 @@
 import { useTranslations } from "next-intl";
 import type { CourseQA } from "../course-details.types";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { Link } from "@/i18n/navigation";
+import CourseQAInput from "./CourseQAInput";
 
 const mockQA: CourseQA[] = [
   {
@@ -41,6 +44,10 @@ const mockQA: CourseQA[] = [
 
 const CourseQA = () => {
   const t = useTranslations("courses");
+  const baseT = useTranslations();
+  const session = useSession();
+  const isAuthenticated = session.status === "authenticated";
+
   return (
     <div>
         <p className="pb-3 sm:pb-4 text-xl sm:text-2xl md:text-3xl font-bold">
@@ -103,6 +110,40 @@ const CourseQA = () => {
                     </div>
                 ))
             }
+        </div>
+        <div className="mt-4">
+          {
+            !isAuthenticated ? (
+              <div className="flex flex-col sm:flex-row justify-between text-nowrap items-start sm:items-center gap-2 sm:gap-1 mt-4">
+                <div className="text-xs sm:text-sm md:text-base">
+                  {t("qa.login-to-ask")}
+                </div>
+                <div className="flex flex-wrap gap-1 sm:gap-2 [&>a]:hover:underline [&>a]:cursor-pointer [&>a]:text-blue-500 text-xs sm:text-sm md:text-base">
+                  <Link href="/auth/login">
+                    {baseT("auth.login")}
+                  </Link>
+                  <p>
+                    {baseT("or")}
+                  </p>
+                  <Link href="/auth/register">
+                    {baseT("auth.signup")}
+                  </Link>
+                  <p>
+                    {t("as-a-student")}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-4 mt-4">
+                <p className="text-xs sm:text-sm md:text-base">
+                  {t("qa.ask-question")}
+                </p>
+                <div className="text-xs sm:text-sm md:text-base w-full sm:w-auto">
+                  <CourseQAInput />
+                </div>
+              </div>
+            )
+          }
         </div>
     </div>
   );
