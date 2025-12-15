@@ -61,7 +61,7 @@ const ProfileLayout = ({ children, tabs }: ProfileLayoutProps) => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col md:flex-row containerr py-10 pb-96 gap-10 text-[#373737]">
+    <div className="flex flex-col md:flex-row containerr py-10 gap-10 text-[#373737]">
       <div className="flex-1 h-fit bg-gray-100 rounded-xl">
         <div className="flex-column py-10 px-5">
           <ul className="flex-column gap-2">

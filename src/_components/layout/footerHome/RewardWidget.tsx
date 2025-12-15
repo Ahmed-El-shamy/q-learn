@@ -5,7 +5,7 @@ const RewardWidget = () => {
   return (
     <Container>
       <div className="w-full sm:w-[80%] md:w-[90%] mx-auto lg:w-full bg-white rounded-4xl p-10 relative -mt-72 md:-mt-60 lg:-mt-48 xl:-mt-60">
-        <div className="absolute -top-20 sm:-top-24 md:-top-40 -right-16 sm:-right-24 md:-right-32 w-48 sm:w-60 md:w-72 lg:w-80 xl:w-92">
+        <div className="hidden sm:block absolute -top-20 sm:-top-24 md:-top-40 -right-16 sm:-right-24 md:-right-32 w-48 sm:w-60 md:w-72 lg:w-80 xl:w-92">
           <img
             src="/images/footer/medal.webp"
             alt="medal"

@@ -14,7 +14,7 @@ const FooterLinks = () => {
           <p className="text-sm">
             Choose the most powerful courses and always be on demand
           </p>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <input
               placeholder="Enter e-mail Address"
               className="border-0 outline-0 bg-white px-8 py-3 text-sm text-[#373737]"

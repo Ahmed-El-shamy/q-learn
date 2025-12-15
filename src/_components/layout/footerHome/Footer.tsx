@@ -17,7 +17,7 @@ import CopyRights from "./CopyRights";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1e2147] text-white pb-16">
+    <footer className="bg-[#1e2147] text-white pb-16 mt-52 md:mt-96">
       <RewardWidget />
 
       <FooterLinks />
