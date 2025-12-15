@@ -38,58 +38,7 @@ const Page = () => {
 
   return (
     <>
-      <section className="containerr text-center my-20">
-        <h2 className="text-2xl md:text-4xl text-[#1f2b40] font-bold">
-          Send us Message
-        </h2>
-        <form
-          onSubmit={handleSubmit}
-          className="w-full md:w-[85%] lg:w-[75%] mx-auto space-y-8 mt-10"
-        >
-          <div className="flex flex-col md:flex-row gap-8">
-            <ContactInput
-              type="text"
-              label="Name"
-              error={errors.name?.message}
-              {...register("name")}
-            />
-            <ContactInput
-              type="email"
-              label="Email Address"
-              error={errors.email?.message}
-              {...register("email")}
-            />
-          </div>
-          <ContactInput
-            type="text"
-            label="Subject"
-            error={errors.subject?.message}
-            {...register("subject")}
-          />
-          <ContactTextarea
-            label="Message"
-            error={errors.message?.message}
-            {...register("message")}
-          />
-
-          <MainBtn
-            title="Send Message"
-            size="large"
-            className="block w-full py-5 mt-10 md:mt-20"
-            type="submit"
-          />
-        </form>
-      </section>
-    </>
-  );
-};
-
-export default Page;
-
-{
-  /* 
-  
-   <svg width="0" height="0">
+      <svg width="0" height="0">
         <defs>
           <linearGradient id="icon-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#660afb" />
@@ -160,6 +109,51 @@ export default Page;
           <div className="absolute top-0 left-0 w-full h-full bg-black/50 pointer-events-none rounded-4xl"></div>
         </div>
       </section>
-  
-  */
-}
+
+      <section className="containerr text-center my-20">
+        <h2 className="text-2xl md:text-4xl text-[#1f2b40] font-bold">
+          Send us Message
+        </h2>
+        <form
+          onSubmit={handleSubmit}
+          className="w-full md:w-[85%] lg:w-[75%] mx-auto space-y-8 mt-10"
+        >
+          <div className="flex flex-col md:flex-row gap-8">
+            <ContactInput
+              type="text"
+              label="Name"
+              error={errors.name?.message}
+              {...register("name")}
+            />
+            <ContactInput
+              type="email"
+              label="Email Address"
+              error={errors.email?.message}
+              {...register("email")}
+            />
+          </div>
+          <ContactInput
+            type="text"
+            label="Subject"
+            error={errors.subject?.message}
+            {...register("subject")}
+          />
+          <ContactTextarea
+            label="Message"
+            error={errors.message?.message}
+            {...register("message")}
+          />
+
+          <MainBtn
+            title="Send Message"
+            size="large"
+            className="block w-full py-5 mt-10 md:mt-20"
+            type="submit"
+          />
+        </form>
+      </section>
+    </>
+  );
+};
+
+export default Page;
