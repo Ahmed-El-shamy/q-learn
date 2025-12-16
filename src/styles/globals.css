@@ -155,3 +155,36 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #b633ff transparent;
 }
+
+.custom-checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.custom-checkmark {
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+  background-color: #efe6ff;
+  border: 1px solid #a772fd;
+  border-radius: 50%;
+}
+
+.custom-checkmark:after {
+  content: "";
+  position: relative;
+  display: none;
+  left: 3px;
+  top: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #5a09e8, #a52ef0);
+}
+
+.custom-checkbox-container input:checked ~ .custom-checkmark:after {
+  display: block;
+}
