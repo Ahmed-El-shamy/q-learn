@@ -10,7 +10,6 @@ const Navbar: React.FC<NavbarProps> = ({
   logoText = "Logo",
   logoImg = "https://placehold.co/80x80",
 }) => {
-
   const t = useTranslations("auth");
 
   return (
@@ -44,12 +43,16 @@ const Navbar: React.FC<NavbarProps> = ({
           <MobileSidebar logoText={logoText} links={links} />
 
           <div className="hidden lg:flex items-center gap-5">
-            <MainBtn>
-              {t("login")}
-            </MainBtn>
-            <button className="px-6 py-2 bg-gray-400 text-white rounded-lg">
-              {t("signup")} 
-            </button>
+            <Link href="/auth/login">
+              <MainBtn>
+                {t("login")}
+              </MainBtn>
+            </Link>
+            <Link href="/auth/signup">
+              <MainBtn variant="outlined">
+                {t("signup")} 
+              </MainBtn>
+            </Link>
           </div>
         </div>
       </nav>
