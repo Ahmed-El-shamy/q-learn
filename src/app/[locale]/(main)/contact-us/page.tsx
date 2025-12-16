@@ -1,16 +1,17 @@
 "use client";
-import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 import { Clock, MapPin, PhoneCall } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import ContactInput from "./_components/ContactInput";
 import ContactTextarea from "./_components/ContactTextarea";
 import MainBtn from "@/_components/common/buttons/MainBtn";
+import useContact from "./_hook/useContact";
 
 const contactInfo = [
   {
     icon: PhoneCall,
     title: "Contact Us",
-    info: "Mobile: +0212121212 Email: Qutell@qutell.com",
+    info: "Mobile: +0212121212",
+    email: "Email: Qutell@qutell.com",
   },
   {
     icon: Clock,
@@ -25,6 +26,16 @@ const contactInfo = [
 ];
 
 const Page = () => {
+  const {
+    methods: {
+      control,
+      register,
+      formState: { errors },
+      watch,
+    },
+    handleSubmit,
+  } = useContact();
+
   return (
     <>
       <svg width="0" height="0">
@@ -52,8 +63,8 @@ const Page = () => {
           className="
             m-auto
             main-background
-            max-w-120 md:max-w-180 lg:max-w-250 xl:max-w-220
-            max-h-150 md:max-h-110 lg:max-h-72
+            w-full sm:w-[80%] md:w-[80%] lg:w-[88%] xl:w-[75%]
+            h-full md:h-[90%] lg:h-[80%]
             rounded-[5rem] lg:rounded-[4rem] xl:rounded-4xl
             py-1
         "
@@ -72,6 +83,11 @@ const Page = () => {
                 <p className="text-lg text-[#676c7d] w-full lg:w-52">
                   {contact.info}
                 </p>
+                {contact.email && (
+                  <p className="text-lg text-[#676c7d] w-full lg:w-52">
+                    {contact.email}
+                  </p>
+                )}
               </div>
             ))}
           </div>
@@ -79,7 +95,7 @@ const Page = () => {
       </section>
 
       <section className="containerr mt-10 xl:-mt-20">
-        <div className="relative mx-auto max-w-120 md:max-w-180 lg:max-w-250 h-100">
+        <div className="relative mx-auto w-full sm:w-[80%] md:w-[75%] lg:w-[80%] h-100">
           <iframe
             className="rounded-4xl"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3628.150556019484!2d39.173908915099!3d21.536750184469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3cfde6b3fef2b%3A0xa53910df801b48b5!2sSaleh%20Al%20Tounesi%2C%20Al-Hamra'a%2C%20Jeddah%2023324%2C%20Saudi%20Arabia!5e0!3m2!1sen!2sus!4v1733078400000"
@@ -99,18 +115,34 @@ const Page = () => {
           Send us Message
         </h2>
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            console.log("submitted");
-          }}
+          onSubmit={handleSubmit}
           className="w-full md:w-[85%] lg:w-[75%] mx-auto space-y-8 mt-10"
         >
           <div className="flex flex-col md:flex-row gap-8">
-            <ContactInput type="text" label="Name" />
-            <ContactInput type="email" label="Email Address" />
+            <ContactInput
+              type="text"
+              label="Name"
+              error={errors.name?.message}
+              {...register("name")}
+            />
+            <ContactInput
+              type="email"
+              label="Email Address"
+              error={errors.email?.message}
+              {...register("email")}
+            />
           </div>
-          <ContactInput type="text" label="Subject" />
-          <ContactTextarea label="Message" />
+          <ContactInput
+            type="text"
+            label="Subject"
+            error={errors.subject?.message}
+            {...register("subject")}
+          />
+          <ContactTextarea
+            label="Message"
+            error={errors.message?.message}
+            {...register("message")}
+          />
 
           <MainBtn
             title="Send Message"

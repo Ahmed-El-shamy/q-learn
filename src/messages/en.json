@@ -38,20 +38,30 @@
     "course-content": "Course content",
     "toggle-all-chapters": "Toggle all chapters",
     "preview": "Preview",
-    "course-full-rating": "Course Rating",
-    "course-rating": "Rating",
-    "reviews": "Reviews",
-    "courses": "Courses",
-    "as-a-student": "as a student to leave a review",
-    "instructor": "Instructor",
-    "share": "Share",
-    "apply": "Apply",
-    "enter-your-coupon": "Enter your coupon",
-    "be-the-first-reviewer": "Be the first reviewer",
-    "qa": {
-      "title": "Questions & Answers",
-      "titles": "Questions & Answers"
-    }
+      "course-full-rating": "Course Rating",
+      "course-rating": "Rating",
+      "reviews": "Reviews",
+      "courses": "Courses",
+      "as-a-student": "as a student to leave a review",
+      "instructor": "Instructor",
+      "share": "Share",
+      "apply": "Apply",
+      "enter-your-coupon": "Enter your coupon",
+      "be-the-first-reviewer": "Be the first reviewer",
+      "rate-dialog-title": "Rate This Course",
+      "rate-dialog-description": "Share your experience by rating this course",
+      "rate-dialog-review-placeholder": "Write your review...",
+      "qa-dialog-title": "Ask a Question",
+      "qa-dialog-description": "Ask the instructor or other students a question about this course",
+      "qa-dialog-label": "Your question",
+      "qa-dialog-placeholder": "Type your question here...",
+      "qa-dialog-submit": "Submit question",
+      "qa": {
+        "title": "Questions & Answers",
+        "titles": "Questions & Answers",
+        "login-to-ask": "Log in or sign up to ask a question about this course",
+        "ask-question": "Have a question about this course? Ask it here."
+      }
   },
   "auth": {
     "login": "Login",
@@ -62,6 +72,7 @@
   "validation": {
     "firstName": "FirstName must be characters only",
     "lastName": "LastName must be characters only",
+    "name": "Name must be characters only",
     "email": "Invalid Email",
     "required": "This field is required",
     "role": "You must choose one role",
@@ -79,5 +90,7 @@
       "notMatch": "Passwords do not match"
     },
     "Choose Role": "Choose Role"
-  }
+  },
+  "ok": "Ok",
+  "cancel": "Cancel"
 }
