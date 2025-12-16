@@ -1,25 +1,48 @@
-interface ContactInputProps {
+import { InputHTMLAttributes } from "react";
+
+interface ContactInputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: string;
   label: string;
+  error?: string;
 }
 
-const ContactInput = ({ type, label }: ContactInputProps) => {
+const ContactInput = ({
+  type = "text",
+  label,
+  error,
+  ...rest
+}: ContactInputProps) => {
   return (
     <div className="relative w-full">
       <input
         type={type}
-        id="name"
         placeholder=" "
-        className="peer block w-full rounded-md border border-gray-300 px-8 py-5 focus:border-[#373737] outline-none"
+        autoComplete="on"
+        className={`
+          peer block w-full rounded-md border px-8 py-5 focus:border-[#373737] outline-none
+          ${error ? "border-red-500" : "border-gray-300"}
+          `}
+        {...rest}
       />
+
       <label
-        htmlFor="name"
-        className="absolute px-2 left-6 top-3 text-[#373737] transition-all duration-500 ease-in-out 
-               peer-placeholder-shown:top-4 peer-placeholder-shown:text-[#373737] peer-placeholder-shown:text-lg 
-               peer-focus:-top-2 bg-white peer-focus:text-[#660afb] peer-focus:text-sm"
+        className="
+          absolute px-2 left-6 top-4 text-lg text-[#373737] bg-white
+          transition-all duration-500
+
+          peer-focus:-top-2
+          peer-focus:text-sm
+          peer-focus:text-[#660afb]
+
+          peer-not-placeholder-shown:-top-2
+          peer-not-placeholder-shown:text-sm
+          peer-not-placeholder-shown:text-[#660afb]
+        "
       >
         {label}
       </label>
+
+      {error && <p className="mt-1 text-sm text-red-500 text-left">{error}</p>}
     </div>
   );
 };

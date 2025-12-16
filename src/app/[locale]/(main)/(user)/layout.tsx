@@ -26,6 +26,11 @@ export interface ProfileLayoutProps {
 
 const tapsData = [
   {
+    title: "dashboard",
+    link: "dashboard",
+    icon: Star,
+  },
+  {
     title: "Profile",
     link: "profile",
     icon: UserRoundPen,
@@ -33,6 +38,16 @@ const tapsData = [
   {
     title: "Courses",
     link: "courses",
+    icon: BookOpenText,
+  },
+  {
+    title: "assignments",
+    link: "assignments",
+    icon: BookOpenText,
+  },
+  {
+    title: "certificates",
+    link: "certificates",
     icon: BookOpenText,
   },
   {
@@ -50,6 +65,7 @@ const tapsData = [
     link: "payment-methods",
     icon: BadgeDollarSign,
   },
+
   {
     title: "Logout",
     link: "logout",
@@ -62,7 +78,7 @@ const ProfileLayout = ({ children, tabs }: ProfileLayoutProps) => {
 
   return (
     <div className="flex flex-col md:flex-row containerr py-10 gap-10 text-[#373737]">
-      <div className="flex-1 h-fit bg-gray-100 rounded-xl">
+      <div className="flex-1 h-fit bg-gray-100 rounded-xl border shadow-lg">
         <div className="flex-column py-10 px-5">
           <ul className="flex-column gap-2">
             {tapsData.map((tab, i) => {
