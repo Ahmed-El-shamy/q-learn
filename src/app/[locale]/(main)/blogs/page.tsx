@@ -1,7 +1,7 @@
 import React from "react";
 import BlogCard from "./_components/BlogCard";
 
-const blogsData = [
+export const blogsData = [
   {
     id: "1",
     title: "Advanced Laravel Techniques",
