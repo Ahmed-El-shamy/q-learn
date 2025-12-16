@@ -1,9 +1,6 @@
 "use client";
-import { FormEvent, useState } from "react";
-import AuthBtn from "@/_components/common/buttons/AuthBtn";
-import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 
-import { useLocale, useTranslations } from "next-intl";
+import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 import useLogin from "../_hooks/useLogin";
 import { Lock, Mail } from "lucide-react";
 import MainSelect from "@/_components/common/inputs/main-select-input/MainSelect";

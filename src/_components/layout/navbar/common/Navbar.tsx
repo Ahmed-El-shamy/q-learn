@@ -3,14 +3,17 @@ import { NavLinks } from "../data/navbarLinks";
 import MobileSidebar from "./MobileSidebar";
 import { Link } from "@/i18n/navigation";
 import MainBtn from "@/_components/common/buttons/MainBtn";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
-const Navbar: React.FC<NavbarProps> = ({
+async function Navbar({
   links = [],
   logoText = "Logo",
   logoImg = "https://placehold.co/80x80",
-}) => {
-  const t = useTranslations("auth");
+}: NavbarProps) {
+  const t = await getTranslations("auth");
+  const session = await getServerSession(authOptions);
 
   return (
     <>
@@ -43,16 +46,24 @@ const Navbar: React.FC<NavbarProps> = ({
           <MobileSidebar logoText={logoText} links={links} />
 
           <div className="hidden lg:flex items-center gap-5">
-            <Link href="/auth/login">
-              <MainBtn>
-                {t("login")}
-              </MainBtn>
-            </Link>
-            <Link href="/auth/signup">
-              <MainBtn variant="outlined">
-                {t("signup")} 
-              </MainBtn>
-            </Link>
+            {session ? (
+              <span className="text-sm text-gray-600">
+                User is signed in
+              </span>
+            ) : (
+              <>
+                <Link href="/auth/login">
+                  <MainBtn>
+                    {t("login")}
+                  </MainBtn>
+                </Link>
+                <Link href="/auth/signup">
+                  <MainBtn variant="outlined">
+                    {t("signup")} 
+                  </MainBtn>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
