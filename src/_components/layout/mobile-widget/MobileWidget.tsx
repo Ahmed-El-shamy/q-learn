@@ -42,7 +42,7 @@ const MobileWidget = () => {
   return (
     <div className="lg:hidden">
       <nav
-        className="fixed bottom-0 z-50 left-0 right-0 w-full main-background shadow-2xl px-2 py-4"
+        className="fixed bottom-0 z-30 left-0 right-0 w-full main-background shadow-2xl px-2 py-4"
         role="navigation"
         aria-label="Mobile bottom navigation"
       >
