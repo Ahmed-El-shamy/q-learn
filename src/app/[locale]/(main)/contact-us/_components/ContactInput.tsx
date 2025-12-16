@@ -27,7 +27,7 @@ const ContactInput = ({
 
       <label
         className="
-          absolute px-2 left-6 top-4 text-lg text-[#373737] bg-white
+          absolute px-2 left-6 top-4 text-lg text-[#373737] bg-[#faf5ff]
           transition-all duration-500
 
           peer-focus:-top-2

@@ -115,7 +115,11 @@ export default async function AssignmentsPage() {
 
       <Card title="History" description="Submitted and graded work">
         {rest.length ? (
-          <div className="overflow-x-auto">
+          <div
+            className="overflow-x-auto  snap-x snap-mandatory
+              [-webkit-overflow-scrolling:touch]
+              no-scrollbar truncate"
+          >
             <table className="w-full text-sm">
               <thead className="text-left text-neutral-600">
                 <tr className="border-b border-neutral-200">

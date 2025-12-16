@@ -62,14 +62,12 @@ const LoginForm = () => {
         />
 
         <div className="flex-between text-sm mt-5">
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              className="cursor-pointer w-4 h-4 -mt-1 accent-[#660afb] border-[#b633ff] border-2"
-            />
+          <label className="custom-checkbox-container flex items-center gap-2">
+            <input type="checkbox" name="skill-web-dev" />
 
+            <span className="custom-checkmark cursor-pointer"></span>
             <span>Remember Me</span>
-          </div>
+          </label>
 
           <Link href="/auth/forget-password" className="text-[#77c8fe] ">
             Forget Password?
