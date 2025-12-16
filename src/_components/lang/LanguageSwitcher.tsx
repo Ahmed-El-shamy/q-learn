@@ -3,7 +3,14 @@ import Image from "next/image";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 import { useQueryClient } from "@tanstack/react-query";
-const LanguageSwitcher = () => {
+import { twMerge } from "tailwind-merge";
+import MainBtn from "../common/buttons/MainBtn";
+
+const LanguageSwitcher = ({
+  className
+}: {
+  className?: string
+}) => {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -18,6 +25,7 @@ const LanguageSwitcher = () => {
     queryClient.resetQueries();
     queryClient.invalidateQueries();
   };
+  
   return (
     <>
       {isLoginPages ? (
@@ -33,7 +41,17 @@ const LanguageSwitcher = () => {
           />
         </button>
       ) : (
-        <div>lang</div>
+        <MainBtn
+          onClick={switchLanguage}
+          className={twMerge("fixed cursor-pointer rounded-full main-background bottom-6 start-6 z-50 flex-center gap-2 p-2 shadow-md border border-purple-600 transition-all", className)}
+        >
+          <Image
+            alt="language-flag"
+            src={locale === "ar" ? "/images/us.png" : "/images/ksa.png"}
+            width={20}
+            height={20}
+          />
+        </MainBtn>
       )}
     </>
   );

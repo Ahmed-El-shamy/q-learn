@@ -2,11 +2,17 @@ import { NavbarProps } from "../types/navbar";
 import { NavLinks } from "../data/navbarLinks";
 import MobileSidebar from "./MobileSidebar";
 import { Link } from "@/i18n/navigation";
+import MainBtn from "@/_components/common/buttons/MainBtn";
+import { useTranslations } from "next-intl";
+
 const Navbar: React.FC<NavbarProps> = ({
   links = [],
   logoText = "Logo",
   logoImg = "https://placehold.co/80x80",
 }) => {
+
+  const t = useTranslations("auth");
+
   return (
     <>
       <nav className="w-full p-4 bg-white shadow-md">
@@ -38,11 +44,11 @@ const Navbar: React.FC<NavbarProps> = ({
           <MobileSidebar logoText={logoText} links={links} />
 
           <div className="hidden lg:flex items-center gap-5">
+            <MainBtn>
+              {t("login")}
+            </MainBtn>
             <button className="px-6 py-2 bg-gray-400 text-white rounded-lg">
-              Login
-            </button>
-            <button className="px-6 py-2 bg-gray-400 text-white rounded-lg">
-              Sign up
+              {t("signup")} 
             </button>
           </div>
         </div>
