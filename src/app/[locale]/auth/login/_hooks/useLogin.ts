@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginPayload } from "../_schema/loginSchema";
 import { signIn } from "next-auth/react";
+import { useMutation } from "@tanstack/react-query";
 
 const useLogin = () => {
     const methods = useForm<LoginPayload>({
@@ -9,6 +10,20 @@ const useLogin = () => {
         mode: "onSubmit",
         reValidateMode: "onChange"
     });
+
+    const mutation = useMutation({
+        mutationFn: async (LoginPayload: LoginPayload) => {
+            return (await signIn("credentials", {
+                redirect: false,
+                ...LoginPayload,
+            }))
+        },
+        onSuccess: (response) => {
+            if(response?.ok) {
+            }
+
+        } 
+    })
 
     async function handleSubmit(payload: LoginPayload) {
         const result = await signIn("credentials", {

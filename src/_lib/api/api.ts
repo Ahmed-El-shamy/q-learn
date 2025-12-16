@@ -1,6 +1,5 @@
 import { Response } from "@/_types/response.types";
 
-let api;
 
 // Request interceptor type: receives and returns request config
 type RequestConfig = Parameters<typeof fetch>["1"] & { url?: string };
@@ -28,7 +27,7 @@ class Interceptor<T> {
     }
 }
 
-class Api {
+export class Api {
     baseRoute: string;
     requestInterceptor: Interceptor<RequestConfig>;
     responseInterceptor: Interceptor<ResponseData<any>>;
@@ -37,6 +36,15 @@ class Api {
         this.baseRoute = "https://q-learn.dev.qutell.net/api";
         this.requestInterceptor = new Interceptor<RequestConfig>();
         this.responseInterceptor = new Interceptor<ResponseData<any>>();
+    }
+
+    static routes = {
+        site: {
+            sliders: "/site/sliders"
+        },
+        auth: {
+            login: "/login"
+        }
     }
 
     async request<T>(route: string, options?: Parameters<typeof fetch>["1"]): Promise<ResponseData<T> | undefined> {
@@ -141,8 +149,6 @@ class Api {
     }
 }
 
-if(!api) {
-    api = new Api();
-}
+const api = new Api();
 
 export default api;
