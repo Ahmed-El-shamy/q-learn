@@ -1,4 +1,5 @@
 import { Response } from "@/_types/response.types";
+import { getServerSession } from "next-auth";
 
 
 // Request interceptor type: receives and returns request config
@@ -40,10 +41,11 @@ export class Api {
 
     static routes = {
         site: {
-            sliders: "/site/sliders"
+            sliders: "/site/sliders",
         },
         auth: {
-            login: "/login"
+            login: "/login",
+            register: "/register",
         }
     }
 

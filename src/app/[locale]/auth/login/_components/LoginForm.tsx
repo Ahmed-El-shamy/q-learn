@@ -31,6 +31,7 @@ const LoginForm = () => {
 
       <form className="flex flex-col gap-4 w-full mt-5" onSubmit={handleSubmit}>
         <MainInput
+          label="email"
           placeholder="Enter Your Email"
           type="email"
           Icon={Mail}
@@ -39,6 +40,7 @@ const LoginForm = () => {
         />
 
         <MainInput
+          label="password"
           placeholder="Enter Your Password"
           type="password"
           Icon={Lock}

@@ -97,7 +97,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
         )}
 
         <div className="relative flex items-center w-full">
-          {Icon && <Icon className="absolute left-0" width={18} height={18} />}
+          {Icon && <Icon className="absolute start-0" width={18} height={18} />}
 
           <input
             id={inputId}

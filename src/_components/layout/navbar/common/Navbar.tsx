@@ -57,7 +57,7 @@ async function Navbar({
                     {t("login")}
                   </MainBtn>
                 </Link>
-                <Link href="/auth/signup">
+                <Link href="/auth/register">
                   <MainBtn variant="outlined">
                     {t("signup")} 
                   </MainBtn>

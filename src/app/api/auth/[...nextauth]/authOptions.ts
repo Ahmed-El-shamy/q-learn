@@ -1,5 +1,14 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import api, { Api } from "@/_lib/api/api";
+
+interface LoginResponseData {
+    id: string;
+    email: string;
+    name?: string;
+    role?: string | number;
+    [key: string]: unknown;
+}
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -14,18 +23,44 @@ export const authOptions: NextAuthOptions = {
             id: "credentials",
             type: "credentials",
             authorize: async (credentials, req) => {
-                if(credentials?.email === "test@email.com" && credentials?.password === "P@ssword123") {
-                    return {
-                        id: "1",
-                        email: "test@email.com",
-                        name: "test account"
-                    }
+                if (!credentials?.email || !credentials?.password) {
+                    return null;
                 }
-                return null;
+
+                try {
+                    const response = await api.post<LoginResponseData>(
+                        Api.routes.auth.login,
+                        {
+                            email: credentials.email,
+                            password: credentials.password,
+                            role: credentials.role || 1, // Default to user role if not provided
+                        },
+                        {
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }
+                    );
+
+                    if (response?.status && response.data) {
+                        return {
+                            id: response.data.id || String(response.data.id),
+                            email: response.data.email,
+                            name: response.data.name || response.data.email,
+                            role: response.data.role,
+                        };
+                    }
+
+                    return null;
+                } catch (error) {
+                    console.error("Login error:", error);
+                    return null;
+                }
             },
             credentials: {
                 email: {type: "email"},
-                password: {type: "password"}
+                password: {type: "password"},
+                role: {type: "text", optional: true}
             },
         }),
     ],
