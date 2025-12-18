@@ -1,6 +1,8 @@
+"use client";
 import { ShieldUser, ShoppingCart, Star } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import React from "react";
+import { useCart } from "@/store/CartProvider";
 
 interface CourseCardProps {
   id: string;
@@ -27,6 +29,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   rating,
   students,
 }) => {
+  const { addToCart } = useCart();
   return (
     <div className="border border-gray-400 h-[500px] group overflow-hidden">
       <Link href={`/courses/${id}`}>
@@ -73,6 +76,17 @@ const CourseCard: React.FC<CourseCardProps> = ({
             <p className="text-sm line-through">${oldPrice}</p>
           </div>
           <ShoppingCart
+            onClick={() =>
+              addToCart({
+                id,
+                course_id: id,
+                title,
+                image,
+                price,
+                sale_price: oldPrice,
+                has_discount: !!oldPrice,
+              })
+            }
             fill="text-primary"
             size={25}
             className="cursor-pointer"

@@ -5,6 +5,8 @@ import LocaleProviders from "@/_components/local-providers/LocaleProviders";
 import { getDefaultSiteMeta, buildMetadata } from "@/_lib/meta";
 import AppSessionProvider from "@/_components/common/SessionProvider";
 import "@/styles/globals.css";
+import { CartProvider } from "@/store/CartProvider";
+import { Toaster } from "sonner";
 
 type Props = {
   children: React.ReactNode;
@@ -34,7 +36,10 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body>
         <AppSessionProvider>
           <LocaleProviders locale={locale} messages={messages}>
-            <main>{children}</main>
+            <CartProvider>
+              <main>{children}</main>
+              <Toaster position="top-center" />
+            </CartProvider>
           </LocaleProviders>
         </AppSessionProvider>
       </body>
