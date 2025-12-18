@@ -7,21 +7,6 @@ import { Menu, X } from "lucide-react";
 const BlogsLayout = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
-  // function handleDisableScroll() {
-  //   if (isOpen && window.innerWidth < 768) {
-  //     console.log("hello there");
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   handleDisableScroll();
-  // }, [isOpen]);
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleDisableScroll);
-
-  //   return () => window.removeEventListener("resize", handleDisableScroll);
-  // }, []);
   return (
     <>
       <div
