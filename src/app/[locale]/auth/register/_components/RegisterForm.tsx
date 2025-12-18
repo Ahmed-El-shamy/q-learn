@@ -8,6 +8,13 @@ import useRegister from "../_hooks/UseRegister";
 import { Controller } from "react-hook-form";
 import { Link } from "@/i18n/navigation";
 import MainBtn from "@/_components/common/buttons/MainBtn";
+import MainSelect from "@/_components/common/inputs/main-select-input/MainSelect";
+import DateInput from "@/_components/common/inputs/date-input/DateInputs";
+
+const roleOptions = [
+  { id: 1, name: "Instructor" },
+  { id: 2, name: "User" },
+];
 
 const RegisterForm = () => {
   const {
@@ -57,6 +64,35 @@ const RegisterForm = () => {
               placeholder="Enter Your Phone Number"
               {...field}
               error={fieldState.error?.message}
+            />
+          )}
+        />
+
+        <Controller 
+          name="birthDate"
+          control={control}
+          render={({ field }) => (
+            <DateInput
+              label="birth-date"
+              name={field.name}
+              onChange={val => field.onChange(val)}
+              currentValue={field.value}
+              error={errors?.[field.name]?.message}
+            />
+          )}
+        />
+
+        <Controller
+          name="role"
+          control={control}
+          render={({ field, fieldState }) => (
+            <MainSelect
+              placeholder={"auth.choose role"}
+              options={roleOptions}
+              value={field.value ?? null}
+              onChange={(value) => field.onChange(value)}
+              onBlur={field.onBlur}
+              error={fieldState.error?.message ?? null}
             />
           )}
         />
