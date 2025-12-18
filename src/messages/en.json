@@ -64,18 +64,72 @@
       }
   },
   "auth": {
-    "login": "Login",
     "signup": "Sign Up",
-    "choose role": "Choose Role"
+    "choose role": "Choose Role",
+    "register": {
+      "title": "Create Account",
+      "already-have-an-account": "Already have an account?",
+      "button": "Register"
+    },
+    "login": {
+      "title": "Welcome back. Please login to your account",
+      "button": "Login",
+      "dontHaveAccount": "Don't have account?",
+      "rememberMe": "Remember Me",
+      "forgetPassword": "Forget Password?",
+      "register": "Register"
+    },
+    "roles": {
+      "instructor": "Instructor",
+      "user": "User"
+    }
+  },
+  "placeholder": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "birthdate": "Birth Date",
+    "userType": "User Type",
+    "password": "Password",
+    "passwordConfirmation": "Confirm Password",
+    "enter-email": "Enter Your Email",
+    "enter-password": "Enter Your Password"
+  },
+  "label": {
+    "email": "Email",
+    "password": "Password",
+    "birth-date": "Birth Date"
+  },
+  "countries": {
+    "egypt": "Egypt",
+    "saudi-arabia": "Saudi Arabia",
+    "uae": "UAE",
+    "united-states": "United States",
+    "select-country": "Select a country"
+  },
+  "common": {
+    "loading": "Loading...",
+    "no-data": "No data available",
+    "show-password": "Show password",
+    "hide-password": "Hide password"
   },
   "or": "or",
+  "birth-date": "Birth Date",
+  "messages": {
+    "authentication_success": "Login successful! Welcome back.",
+    "authentication_fail": "Login failed. Please check your credentials and try again."
+  },
   "validation": {
     "firstName": "FirstName must be characters only",
     "lastName": "LastName must be characters only",
     "name": "Name must be characters only",
     "email": "Invalid Email",
+    "email-password-incorrect": "Email or password is incorrect",
     "required": "This field is required",
     "role": "You must choose one role",
+    "user-type": "You must choose a user type",
+    "birthdate": "Invalid birth date",
     "phoneNumber": {
       "numbers": "Phone number must be numbers only",
       "minLength": "Phone number must be at least 11 digits",

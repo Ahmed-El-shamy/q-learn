@@ -1,5 +1,7 @@
 import { Response } from "@/_types/response.types";
 import { getServerSession } from "next-auth";
+import { useLocale } from "next-intl";
+import { getLocale } from "next-intl/server";
 
 
 // Request interceptor type: receives and returns request config
@@ -65,10 +67,15 @@ export class Api {
 
             // Extract url from config (interceptors might have modified it)
             const { url: finalUrl, ...fetchOptions } = requestConfig;
+            const headers = new Headers(fetchOptions.headers);
+            headers.append("Accept", "application/json, text/*, */*")
             const finalFetchUrl = finalUrl || url;
 
             // Make the actual request
-            const response = await fetch(finalFetchUrl, fetchOptions);
+            const response = await fetch(finalFetchUrl, {
+                ...fetchOptions,
+                headers: headers 
+            });
 
             // Parse response
             let responseData: ResponseData<T>;
@@ -94,6 +101,9 @@ export class Api {
 
             // Run response interceptors
             responseData = await this.responseInterceptor.run(responseData);
+            if(!response.ok) throw {
+                response: responseData
+            } 
 
             // If response was not ok, throw or return based on your error handling strategy
             if (!response.ok && responseData && !responseData.status) {
@@ -102,6 +112,7 @@ export class Api {
 
             return responseData;
         } catch (error) {
+            if(error && typeof error === "object" && "response" in error && error.response) throw error;
             // Handle network errors or interceptor errors
             const errorResponse: ResponseData<T> = {
                 data: {} as T,
@@ -111,7 +122,8 @@ export class Api {
             };
             
             // Run response interceptors even for errors
-            return await this.responseInterceptor.run(errorResponse);
+            const finalError = await this.responseInterceptor.run(errorResponse);
+            throw finalError;
         }
     }
 
@@ -122,28 +134,28 @@ export class Api {
     async post<T>(route: string, body: object = {}, options?: Parameters<typeof fetch>["1"]) {
         const headers = new Headers(options?.headers);
 
-        if(headers.get("Content-Type") === "application/json") {
-            return this.request<T>(route, {
-                ...options, 
-                method: "POST", 
-                body: JSON.stringify(body),
-                headers: {
-                    "Content-Type": "application/json",
-                    ...(options?.headers || {})
-                }
-            });
-        } else {
+        if(headers.get("Content-Type") === "multipart/form-data") {
             const formData = new FormData();
             Object.keys(body).forEach(key => {
                 formData.append(key, body[key as keyof typeof body]);
             });
+            return this.request<T>(route, {
+                ...options, 
+                method: "POST", 
+                body: formData,
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    ...(options?.headers || {})
+                }
+            });
+        } else {
 
             return this.request<T>(route, {
                 ...options,
                 method: "POST",
-                body: formData,
+                body: JSON.stringify(body),
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    "Content-Type": "application/json",
                     ...(options?.headers || {})
                 }
             })
@@ -152,5 +164,31 @@ export class Api {
 }
 
 const api = new Api();
+
+api.requestInterceptor.use((requestOptions) => {
+    // Read locale from cookie dynamically on each request
+    let language = "en";
+    if(typeof window !== "undefined") {
+        const cookies = document.cookie.split(";");
+        for (const entry of cookies) {
+            const trimmed = entry.trim();
+            const [key, value] = trimmed.split("=");
+            if(key === "NEXT_LOCALE" && value) {
+                language = value.trim();
+                break;
+            }
+        }
+    }
+    
+    // Create new headers object to avoid mutating the original
+    const headers = new Headers(requestOptions.headers);
+    
+    // Use set instead of append to avoid duplicates and ensure fresh value
+    headers.set("Accept-Language", language);
+    headers.set("Lang", language);
+    
+    requestOptions.headers = headers;
+    return requestOptions;
+})
 
 export default api;

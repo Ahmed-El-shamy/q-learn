@@ -1,10 +1,6 @@
 import z from "zod";
 import { passwordSchema } from "../../_schema/passwordSchema";
-
-const roles = {
-  user: 1,
-  instructor: 2
-} as const;
+import { userTypeSchema } from "../../_schema/userType";
 
 export const RegisterSchema = z
   .object({
@@ -17,13 +13,13 @@ export const RegisterSchema = z
       .min(11, "validation.phoneNumber.minLength")
       .max(11, "validation.phoneNumber.maxLength"),
     password: passwordSchema,
-    confirmPassword: z.string(),
-    role: z.enum(roles).refine(arg => Boolean(arg), {
-      message: "validation.role",
-    }),
-    birthDate: z.date({error: "validation.birthdate"})
+    password_confirmation: z.string(),
+    type: userTypeSchema,
+    birthDate: z
+      .date({ error: "validation.birthdate" })
+      .max(new Date(), "validation.birthdate.future")
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.password_confirmation, {
     message: "validation.password.notMatch",
     path: ["confirmPassword"],
   });

@@ -1,19 +1,18 @@
 "use client";
 
 import MainInput from "@/_components/common/inputs/mainInput/MainInput";
-import { useLocale } from "next-intl";
-import AuthBtn from "@/_components/common/buttons/AuthBtn";
 import PhoneInput from "@/_components/common/inputs/PhoneInput/PhoneInput";
 import useRegister from "../_hooks/UseRegister";
 import { Controller } from "react-hook-form";
 import { Link } from "@/i18n/navigation";
 import MainBtn from "@/_components/common/buttons/MainBtn";
 import MainSelect from "@/_components/common/inputs/main-select-input/MainSelect";
-import DateInput from "@/_components/common/inputs/date-input/DateInputs";
+import DateInput from "@/_components/common/inputs/date-input/DateInput";
+import { useTranslations } from "next-intl";
 
 const roleOptions = [
-  { id: 1, name: "Instructor" },
-  { id: 2, name: "User" },
+  { id: "instructor", name: "Instructor" },
+  { id: "user", name: "User" },
 ];
 
 const RegisterForm = () => {
@@ -22,27 +21,29 @@ const RegisterForm = () => {
       control,
       register,
       formState: { errors },
-      watch,
     },
     handleSubmit,
+    registerMutation,
   } = useRegister();
+
+  const t = useTranslations();
 
   return (
     <>
       <h2 className="text-2xl md:text-xl lg:text-3xl font-bold">
-        Welcome! Please create your account
+        {t("auth.register.title")}
       </h2>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full mt-5">
         <MainInput
-          placeholder="Enter Your First Name"
+          placeholder="placeholder.firstName"
           required
           error={errors.firstName?.message}
           {...register("firstName")}
         />
 
         <MainInput
-          placeholder="Enter Your Last Name"
+          placeholder="placeholder.lastName"
           required
           error={errors.lastName?.message}
           {...register("lastName")}
@@ -50,7 +51,7 @@ const RegisterForm = () => {
 
         <MainInput
           type="email"
-          placeholder="Enter Your Email"
+          placeholder="placeholder.email"
           required
           error={errors.email?.message}
           {...register("email")}
@@ -61,7 +62,7 @@ const RegisterForm = () => {
           control={control}
           render={({ field, fieldState }) => (
             <PhoneInput
-              placeholder="Enter Your Phone Number"
+              placeholder="placeholder.phone"
               {...field}
               error={fieldState.error?.message}
             />
@@ -73,21 +74,22 @@ const RegisterForm = () => {
           control={control}
           render={({ field }) => (
             <DateInput
-              label="birth-date"
               name={field.name}
+              placeholder="placeholder.birthdate"
               onChange={val => field.onChange(val)}
               currentValue={field.value}
               error={errors?.[field.name]?.message}
+              required
             />
           )}
         />
 
         <Controller
-          name="role"
+          name="type"
           control={control}
           render={({ field, fieldState }) => (
             <MainSelect
-              placeholder={"auth.choose role"}
+              placeholder={"placeholder.userType"}
               options={roleOptions}
               value={field.value ?? null}
               onChange={(value) => field.onChange(value)}
@@ -99,7 +101,7 @@ const RegisterForm = () => {
 
         <MainInput
           type="password"
-          placeholder="Enter Your Password"
+          placeholder="placeholder.password"
           required
           error={errors.password?.message}
           {...register("password")}
@@ -107,17 +109,17 @@ const RegisterForm = () => {
 
         <MainInput
           type="password"
-          placeholder="Enter Your Confirm Password"
+          placeholder="placeholder.passwordConfirmation"
           required
-          error={errors.confirmPassword?.message}
-          {...register("confirmPassword")}
+          error={errors.password_confirmation?.message}
+          {...register("password_confirmation")}
         />
 
         {/* <AuthBtn text="Register" classname="mt-4" /> */}
-        <MainBtn title="Register" className="mt-4" size={"large"} />
+        <MainBtn title="Register" isLoading={registerMutation.isPending} className="mt-4" size={"large"} />
 
         <p className="text-center">
-          You have already an account?{" "}
+          {t("auth.register.already-have-an-account")}{" "}
           <Link href={`/auth/login`} className="text-[#77c8fe]">
             Login
           </Link>

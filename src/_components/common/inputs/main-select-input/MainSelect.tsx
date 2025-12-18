@@ -11,7 +11,7 @@ import type { IconType } from "react-icons";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 interface OptionType {
-  id: number;
+  id: number | string;
   name: string;
 }
 
@@ -20,13 +20,13 @@ interface MainSelectProps<T extends OptionType> {
   name?: string; // optional for forms
   options?: T[];
   onSelect?: (option: T) => void; // full option callback
-  onChange?: (value: number | null) => void; // controlled value callback (id)
+  onChange?: (value: number | string | null) => void; // controlled value callback (id)
   onBlur?: (e?: any) => void;
   disabled?: boolean;
   loading?: boolean;
   placeholder?: string;
   fetchApi?: () => Promise<T[]>;
-  value?: number | null; // controlled value is option.id or null
+  value?: number | string | null; // controlled value is option.id or null
   error?: string | null;
   required?: boolean;
   ariaLabel?: string;
@@ -76,7 +76,7 @@ const MainSelect = <T extends OptionType>(props: MainSelectProps<T>) => {
 
   const [showOptions, setShowOptions] = useState(false);
   const [fetchedOptions, setFetchedOptions] = useState<T[]>([]);
-  const [selectedLabel, setSelectedLabel] = useState<string | null>("");
+  const [selectedLabel, setSelectedLabel] = useState<string | null>(value ? options?.find(option => option.id === value)?.name || null : null);
   const [search, setSearch] = useState("");
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
   const containerRef = useRef<HTMLDivElement | null>(null);
