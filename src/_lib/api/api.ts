@@ -1,4 +1,4 @@
-import { Response } from "@/_types/response.types";
+import { Response } from "@/types/response.types";
 import { getServerSession } from "next-auth";
 import { useLocale } from "next-intl";
 import { getLocale } from "next-intl/server";
@@ -68,125 +68,84 @@ export class Api {
       // Run request interceptors
       requestConfig = await this.requestInterceptor.run(requestConfig);
 
-      // Extract url from config (interceptors might have modified it)
-      const { url: finalUrl, ...fetchOptions } = requestConfig;
-      const finalFetchUrl = finalUrl || url;
+      try {
+        const normalizedRoute = route.startsWith("/") ? route : `/${route}`;
+        const url = this.baseRoute.concat(normalizedRoute);
 
-      // Make the actual request
-      const response = await fetch(finalFetchUrl, fetchOptions);
+        // Build initial request config
+        let requestConfig: RequestConfig = {
+          ...options,
+          url,
+        };
 
-      // Parse response
-      let responseData: ResponseData<T>;
-      if (response.ok) {
-        const jsonData = (await response.json()) as Response<T>;
-        responseData = jsonData;
-      } else {
-        // Handle error responses
-        let errorData: Response<T>;
-        try {
-          const normalizedRoute = route.startsWith("/") ? route : `/${route}`;
-          const url = this.baseRoute.concat(normalizedRoute);
+        // Run request interceptors
+        requestConfig = await this.requestInterceptor.run(requestConfig);
 
-          // Build initial request config
-          let requestConfig: RequestConfig = {
-            ...options,
-            url,
-          };
+        // Extract url from config (interceptors might have modified it)
+        const { url: finalUrl, ...fetchOptions } = requestConfig;
+        const headers = new Headers(fetchOptions.headers);
+        headers.append("Accept", "application/json, text/*, */*");
+        const finalFetchUrl = finalUrl || url;
 
-          // Run request interceptors
-          requestConfig = await this.requestInterceptor.run(requestConfig);
+        // Make the actual request
+        const response = await fetch(finalFetchUrl, {
+          ...fetchOptions,
+          headers: headers,
+        });
 
-          // Extract url from config (interceptors might have modified it)
-          const { url: finalUrl, ...fetchOptions } = requestConfig;
-          const headers = new Headers(fetchOptions.headers);
-          headers.append("Accept", "application/json");
-          const finalFetchUrl = finalUrl || url;
-
-          // Make the actual request
-          const response = await fetch(finalFetchUrl, {
-            ...fetchOptions,
-            headers: headers,
-          });
-
-          // Parse response
-          let responseData: ResponseData<T>;
-          if (response.ok) {
-            const jsonData = (await response.json()) as Response<T>;
-            responseData = jsonData;
-          } else {
-            // Handle error responses
-            let errorData: Response<T>;
-            try {
-              errorData = (await response.json()) as Response<T>;
-            } catch {
-              // If response is not JSON, create a default error response
-              errorData = {
-                data: {} as T,
-                errors: { message: response.statusText },
-                message: `Request failed with status ${response.status}`,
-                status: false,
-              };
-            }
-            responseData = errorData;
-          }
-
-          // Run response interceptors
-          responseData = await this.responseInterceptor.run(responseData);
-          if (!response.ok)
-            throw {
-              response: responseData,
+        // Parse response
+        let responseData: ResponseData<T>;
+        if (response.ok) {
+          const jsonData = (await response.json()) as Response<T>;
+          responseData = jsonData;
+        } else {
+          // Handle error responses
+          let errorData: Response<T>;
+          try {
+            errorData = (await response.json()) as Response<T>;
+          } catch {
+            errorData = {
+              data: {} as T,
+              errors: { message: response.statusText },
+              message: `Request failed with status ${response.status}`,
+              status: false,
             };
-
-          // If response was not ok, throw or return based on your error handling strategy
-          if (!response.ok && responseData && !responseData.status) {
-            return responseData;
           }
+          responseData = errorData;
+        }
 
-          return responseData;
-        } catch (error) {
-          if (
-            error &&
-            typeof error === "object" &&
-            "response" in error &&
-            error.response
-          )
-            throw error;
-          // Handle network errors or interceptor errors
-          const errorResponse: ResponseData<T> = {
-            data: {} as T,
-            errors: error,
-            message:
-              error instanceof Error ? error.message : "Network error occurred",
-            status: false,
+        // run the response interceptors in both ways, success and fail
+        responseData = await this.responseInterceptor.run(responseData);
+        if (!response.ok)
+          throw {
+            response: responseData,
           };
 
-          // Run response interceptors even for errors
-          const finalError = await this.responseInterceptor.run(errorResponse);
-          throw finalError;
-        }
-      }
-
-      // Run response interceptors
-      responseData = await this.responseInterceptor.run(responseData);
-
-      // If response was not ok, throw or return based on your error handling strategy
-      if (!response.ok && responseData && !responseData.status) {
         return responseData;
+      } catch (error) {
+        console.log(error);
+        if (
+          error &&
+          typeof error === "object" &&
+          "response" in error &&
+          error.response
+        )
+          throw error;
+        // Handle network errors or interceptor errors
+        const errorResponse: ResponseData<T> = {
+          data: {} as T,
+          errors: error,
+          message:
+            error instanceof Error ? error.message : "Network error occurred",
+          status: false,
+        };
+
+        // Run response interceptors even for errors
+        const finalError = await this.responseInterceptor.run(errorResponse);
+        throw finalError;
       }
-
-      return responseData;
     } catch (error) {
-      // Handle network errors or interceptor errors
-      const errorResponse: ResponseData<T> = {
-        data: {} as T,
-        errors: error,
-        message:
-          error instanceof Error ? error.message : "Network error occurred",
-        status: false,
-      };
-
-      // Run response interceptors even for errors
-      return await this.responseInterceptor.run(errorResponse);
+      throw error;
     }
   }
 
@@ -201,18 +160,9 @@ export class Api {
   ) {
     const headers = new Headers(options?.headers);
 
-    if (headers.get("Content-Type") === "application/json") {
-      return this.request<T>(route, {
-        ...options,
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-          ...(options?.headers || {}),
-        },
-      });
-    } else {
+    if (headers.get("Content-Type") === "multipart/form-data") {
       const formData = new FormData();
+
       Object.keys(body).forEach((key) => {
         formData.append(key, body[key as keyof typeof body]);
       });
@@ -222,7 +172,17 @@ export class Api {
         method: "POST",
         body: formData,
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
+          ...(options?.headers || {}),
+        },
+      });
+    } else {
+      return this.request<T>(route, {
+        ...options,
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
           ...(options?.headers || {}),
         },
       });

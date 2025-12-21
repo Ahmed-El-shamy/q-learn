@@ -1,5 +1,5 @@
 import api from "@/_lib/api/api";
-import { CartResponse } from "@/_types/cart.types";
+import { CartResponse } from "@/types/cart.types";
 
 export const useCartApi = () => {
   // Get Cart
