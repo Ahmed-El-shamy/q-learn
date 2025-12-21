@@ -18,20 +18,32 @@ import {
 type Tab = { title: string; link: string; icon: LucideIcon };
 
 const tabsData: Tab[] = [
-  { title: "Dashboard", link: "dashboard", icon: LayoutDashboard },
-  { title: "Profile", link: "profile", icon: UserRoundPen },
-  { title: "Courses", link: "courses", icon: BookOpenText },
-  { title: "Assignments", link: "assignments", icon: BookCheck },
-  { title: "Certificates", link: "certificates", icon: ShieldCheck },
-  { title: "Favourite", link: "favourite", icon: Heart },
-  { title: "Reviews", link: "reviews", icon: Star },
-  { title: "Payment Methods", link: "payment-methods", icon: BadgeDollarSign },
+  { title: "Dashboard", link: "user", icon: LayoutDashboard },
+  { title: "Profile", link: "user/profile", icon: UserRoundPen },
+  { title: "Courses", link: "user/courses", icon: BookOpenText },
+  { title: "Assignments", link: "user/assignments", icon: BookCheck },
+  { title: "Certificates", link: "user/certificates", icon: ShieldCheck },
+  { title: "Favourite", link: "user/favourite", icon: Heart },
+  { title: "Reviews", link: "user/reviews", icon: Star },
+  {
+    title: "Payment Methods",
+    link: "user/payment-methods",
+    icon: BadgeDollarSign,
+  },
   { title: "Logout", link: "logout", icon: LogOut },
 ];
 
+const normalize = (s: string) => (s === "/" ? "/" : s.replace(/\/$/, ""));
+
 const isActiveTab = (pathname: string, link: string) => {
-  const p = pathname.replace(/\/$/, "");
-  return p === `/${link}` || p.startsWith(`/${link}/`);
+  const p = normalize(pathname);
+  const href = normalize(`/${link}`);
+
+  // ✅ Dashboard لازم يكون exact فقط
+  if (link === "user") return p === href;
+
+  // ✅ باقي التابات exact أو sub-routes
+  return p === href || p.startsWith(`${href}/`);
 };
 
 export default function ProfileLayout({ children }: { children: ReactNode }) {

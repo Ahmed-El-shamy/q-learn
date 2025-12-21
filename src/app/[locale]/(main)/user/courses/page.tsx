@@ -1,8 +1,8 @@
 import Link from "next/link";
-import SectionHeader from "../_components/SectionHeader";
-import Card from "../_components/Card";
-import ProgressBar from "../_components/ProgressBar";
-import EmptyState from "../_components/EmptyState";
+import SectionHeader from "../../user/_components/SectionHeader";
+import Card from "../../user/_components/Card";
+import ProgressBar from "../../user/_components/ProgressBar";
+import EmptyState from "../../user/_components/EmptyState";
 import CourseCard from "@/_components/common/courses/CourseCard";
 
 type Course = {

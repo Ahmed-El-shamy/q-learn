@@ -48,8 +48,9 @@ async function Navbar({
 
           <div className="hidden lg:flex items-center gap-5">
             {session ? (
-              <span className="text-sm text-gray-600">User is signed in</span>
+              <Link href="/user">my account</Link>
             ) : (
+              // <span className="text-sm text-gray-600">User is signed in</span>
               <>
                 <Link href="/auth/login">
                   <MainBtn>{t("login.button")}</MainBtn>

@@ -1,5 +1,5 @@
-import SectionHeader from "../_components/SectionHeader";
-import Card from "../_components/Card";
+import SectionHeader from "../../user/_components/SectionHeader";
+import Card from "../../user/_components/Card";
 import PaymentMethodsClient from "./PaymentMethodsClient";
 
 type PaymentMethod = {

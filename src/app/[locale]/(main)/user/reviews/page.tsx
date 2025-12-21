@@ -1,7 +1,7 @@
 import Link from "next/link";
-import SectionHeader from "../_components/SectionHeader";
-import Card from "../_components/Card";
-import EmptyState from "../_components/EmptyState";
+import SectionHeader from "../../user/_components/SectionHeader";
+import Card from "../../user/_components/Card";
+import EmptyState from "../../user/_components/EmptyState";
 
 type ReviewStatus = "pending" | "published";
 

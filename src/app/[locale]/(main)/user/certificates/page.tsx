@@ -1,8 +1,8 @@
 import Link from "next/link";
-import SectionHeader from "../_components/SectionHeader";
-import Card from "../_components/Card";
-import EmptyState from "../_components/EmptyState";
-import ProgressBar from "../_components/ProgressBar";
+import SectionHeader from "../../user/_components/SectionHeader";
+import Card from "../../user/_components/Card";
+import EmptyState from "../../user/_components/EmptyState";
+import ProgressBar from "../../user/_components/ProgressBar";
 
 type CertificateStatus = "issued" | "locked";
 

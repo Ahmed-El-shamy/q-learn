@@ -8,7 +8,6 @@ const Page = () => {
   return (
     <>
       <ProfileInfo />
-
       <ProfilePassword />
     </>
   );
