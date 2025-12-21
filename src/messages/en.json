@@ -82,7 +82,8 @@
     "roles": {
       "instructor": "Instructor",
       "user": "User"
-    }
+    },
+    "logout": "Logout"
   },
   "placeholder": {
     "firstName": "First Name",
@@ -112,7 +113,8 @@
     "loading": "Loading...",
     "no-data": "No data available",
     "show-password": "Show password",
-    "hide-password": "Hide password"
+    "hide-password": "Hide password",
+    "my-profile": "My Profile"
   },
   "or": "or",
   "birth-date": "Birth Date",

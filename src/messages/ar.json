@@ -75,7 +75,8 @@
     "roles": {
       "instructor": "مدرب",
       "user": "مستخدم"
-    }
+    },
+    "logout": "تسجيل الخروج"
   },
   "placeholder": {
     "firstName": "الاسم الأول",
@@ -105,7 +106,8 @@
     "loading": "جاري التحميل...",
     "no-data": "لا توجد بيانات متاحة",
     "show-password": "إظهار كلمة المرور",
-    "hide-password": "إخفاء كلمة المرور"
+    "hide-password": "إخفاء كلمة المرور",
+    "my-profile": "الملف الشخصي"
   },
   "or": "أو",
   "birth-date": "تاريخ الميلاد",
