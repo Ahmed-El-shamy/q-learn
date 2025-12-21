@@ -4,6 +4,7 @@ import { Asterisk, Calendar } from "lucide-react";
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
 import clsx from "clsx";
 import "react-day-picker/style.css";
+import { useTranslations } from "next-intl";
 
 const classNames = getDefaultClassNames();
 const tenYears = new Date((new Date().getFullYear() + 10).toString());
@@ -11,7 +12,7 @@ const tenYears = new Date((new Date().getFullYear() + 10).toString());
 interface Props {
     currentValue?: Date | string;
     onChange: (newDate: Date) => void;
-    label: string;
+    label?: string;
     error?: string;
     className?: string;
     name: string;
@@ -20,6 +21,7 @@ interface Props {
     disabled?: boolean;
     placeholder?: string;
     closeOnSelect?: boolean;
+    hint?: string;
 }
 
 const DateInput = ({
@@ -34,7 +36,9 @@ const DateInput = ({
     disabled,
     placeholder,
     closeOnSelect = true,
+    hint,
 }: Props) => {
+    const t = useTranslations();
 
     const [isOpened, setIsOpened] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
@@ -73,7 +77,7 @@ const DateInput = ({
         >
             {label && (
                 <label htmlFor={name} className="flex font-medium mb-1">
-                    {label}{" "}
+                    {t(label)}{" "}
                     {required && (
                     <span>
                         <Asterisk className="text-red-500 ml-1" size={12} />
@@ -83,7 +87,9 @@ const DateInput = ({
             )}
             <div className="cursor-pointer w-full">
                 <div className="relative flex items-center w-full">
-                    <Calendar className="absolute end-4 top-0" />
+                    <Calendar className={twMerge(clsx("absolute end-4 top-0", {
+                        "top-1/2 -translate-y-1/2": !label
+                    }))} />
                     <div
                         className={clsx("flex-1 text-sm min-h-7 mt-1 outline-none border-b border-b-[#d1d1d1]  placeholder:text-[#373737]", {
                             "py-0": label,
@@ -95,16 +101,42 @@ const DateInput = ({
                         onClick={() => setIsOpened(true)}
                     >
                         <p
-                            className={twMerge(clsx("text-lg", {
+                            className={twMerge(clsx("", {
                                 "text-gray-700": currentValue,
                                 "text-gray-500": !currentValue || disabled || readonly
                             }))}
                         >
                             {
-                                currentValue ? typeof currentValue === "string" ? currentValue : currentValue.toLocaleDateString("en-UK") : placeholder
+                                currentValue ? typeof currentValue === "string" ? currentValue : currentValue.toLocaleDateString("en-UK") : t(placeholder || "").concat(required ? "*" : "")
                             }
                         </p>
                     </div>
+                </div>
+                <div
+                    className={`
+                        transition-all duration-300 ease-in-out overflow-hidden ${
+                        error
+                            ? "max-h-10 opacity-100 mt-1"
+                            : hint
+                            ? "max-h-10 opacity-100"
+                            : "max-h-0"
+                        }    
+                    `}
+                >
+                {error && (
+                    <p
+                    id={`${name}-error`}
+                    role="alert"
+                    className="text-red-500 text-xs"
+                    >
+                    {t(error)}
+                    </p>
+                )}
+                {!error && hint && (
+                    <p id={`${name}-hint`} className="text-[#d1d1d1] text-xs mt-1">
+                    {hint}
+                    </p>
+                )}
                 </div>
             </div>
             <Activity
@@ -117,6 +149,7 @@ const DateInput = ({
                         onSelect={handleChange}
                         pagedNavigation
                         animate
+                        defaultMonth={selected}
                         showOutsideDays
                         fixedWeeks
                         endMonth={tenYears}

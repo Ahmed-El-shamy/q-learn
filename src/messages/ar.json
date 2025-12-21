@@ -57,18 +57,72 @@
     }
   },
   "auth": {
-    "login": "تسجيل الدخول",
     "signup": "إنشاء حساب",
-    "choose role": "اختر الدور"
+    "choose role": "اختر الدور",
+    "register": {
+      "title": "إنشاء حساب",
+      "already-have-an-account": "هل لديك حساب بالفعل؟",
+      "button": "تسجيل"
+    },
+    "login": {
+      "title": "مرحباً بعودتك. يرجى تسجيل الدخول إلى حسابك",
+      "button": "تسجيل الدخول",
+      "dontHaveAccount": "ليس لديك حساب؟",
+      "rememberMe": "تذكرني",
+      "forgetPassword": "نسيت كلمة المرور؟",
+      "register": "تسجيل"
+    },
+    "roles": {
+      "instructor": "مدرب",
+      "user": "مستخدم"
+    }
+  },
+  "placeholder": {
+    "firstName": "الاسم الأول",
+    "lastName": "الاسم الأخير",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "birthdate": "تاريخ الميلاد",
+    "userType": "نوع المستخدم",
+    "password": "كلمة المرور",
+    "passwordConfirmation": "تأكيد كلمة المرور",
+    "enter-email": "أدخل بريدك الإلكتروني",
+    "enter-password": "أدخل كلمة المرور"
+  },
+  "label": {
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "birth-date": "تاريخ الميلاد"
+  },
+  "countries": {
+    "egypt": "مصر",
+    "saudi-arabia": "المملكة العربية السعودية",
+    "uae": "الإمارات العربية المتحدة",
+    "united-states": "الولايات المتحدة",
+    "select-country": "اختر دولة"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "no-data": "لا توجد بيانات متاحة",
+    "show-password": "إظهار كلمة المرور",
+    "hide-password": "إخفاء كلمة المرور"
   },
   "or": "أو",
+  "birth-date": "تاريخ الميلاد",
+  "messages": {
+    "authentication_success": "تم تسجيل الدخول بنجاح! مرحباً بعودتك.",
+    "authentication_fail": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد والمحاولة مرة أخرى."
+  },
   "validation": {
     "firstName": "الإسم الأول يجب أن يكون حروفا فقط",
     "lastName": "الإسم الأخير يجب أن يكون حروفا فقط",
     "name": "الإسم يجب أن يكون حروفا فقط",
     "email": "بريد إلكتروني غير صالح",
+    "email-password-incorrect": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
     "required": "هذا الحقل مطلوب",
     "role": "يجب اختيار دور واحد ",
+    "user-type": "يجب اختيار نوع المستخدم",
+    "birthdate": "تاريخ الميلاد غير صالح",
     "phoneNumber": {
       "numbers": "رقم الهاتف يجب أن يحتوي علي أرقام فقط",
       "minLength": "رقم الهاتف يجب أن يكون 11 رقما علي الأقل",

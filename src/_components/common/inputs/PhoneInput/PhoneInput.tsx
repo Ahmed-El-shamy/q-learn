@@ -24,7 +24,7 @@ const options: CountryOption[] = [
 
 const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
   ({ label, placeholder, required = false, error, ...rest }, ref) => {
-    const [selectValue, setSelectValue] = useState<CountryOption | null>(null);
+    const [selectValue, setSelectValue] = useState<CountryOption | null>(options[0]);
 
     return (
       <>

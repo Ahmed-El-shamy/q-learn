@@ -1,5 +1,6 @@
 "use client";
 import { Asterisk, Eye, EyeOff } from "lucide-react";
+import { useTranslations } from "next-intl";
 import React, { useEffect, useId, useState } from "react";
 
 interface MainInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -42,6 +43,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
   ) => {
     const autoId = useId();
     const inputId = id || autoId;
+    const t = useTranslations();
 
     const isPassword = type === "password";
     const [showPassword, setShowPassword] = useState(false);
@@ -87,7 +89,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
       <div className={`w-full ${className}`}>
         {label && (
           <label htmlFor={inputId} className="flex font-medium mb-1">
-            {label}{" "}
+            {t(label)}{" "}
             {required && (
               <span>
                 <Asterisk className="text-red-500 ml-1" size={12} />
@@ -110,7 +112,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder={
-              placeholder && required ? `${placeholder || ""} *` : placeholder
+              placeholder && required ? `${t(placeholder) || ""} *` : t(placeholder || "")
             }
             required={required}
             disabled={disabled}
@@ -171,7 +173,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
               role="alert"
               className="text-red-500 text-xs"
             >
-              {error}
+              {t(error)}
             </p>
           )}
           {!error && hint && (

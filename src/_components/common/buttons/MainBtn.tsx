@@ -1,17 +1,21 @@
 import React, { ComponentProps, ReactNode } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import cn from "@/utils/cn";
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
+import { LoaderCircle } from "lucide-react";
 
 interface MainBtnProps
   extends Omit<ComponentProps<"button">, "disabled">,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   className?: string;
   title?: string;
   children?: ReactNode;
+  isLoading?: boolean;
 }
 
 const buttonVariants = cva(
-  "px-6 py-4 capitalize duration-500 font-bold rounded border cursor-pointer",
+  "px-6 py-4 capitalize duration-500 font-bold rounded border cursor-pointer grid grid-cols-1 grid-rows-1",
   {
     variants: {
       variant: {
@@ -44,16 +48,35 @@ const MainBtn = ({
   variant = "main",
   size = "medium",
   disabled = false,
+  isLoading = false,
   ...props
 }: MainBtnProps) => {
   return (
     <button
-      className={cn(buttonVariants({ variant, size, disabled, className }))}
+      className={cn(buttonVariants({ variant, size, disabled, className }), {
+        "pointer-events-none": isLoading
+      })}
       disabled={disabled as boolean}
       {...props}
     >
-      {title}
-      {children}
+      <div className="grid grid-rows-1 grid-cols-1">
+        {
+          isLoading && (
+            <span className="row-start-1 col-start-1 flex justify-center items-center">
+              <LoaderCircle size={25} className="text-white animate-spin" />
+            </span>
+          )
+        }
+        <div
+          className={clsx("col-start-1 select-none col-end-1 row-start-1 row-end-1 col-span-1 row-span-1", {
+            "invisible": isLoading
+          })}
+        >
+          {
+            title ? title : children
+          }
+        </div>
+      </div>
     </button>
   );
 };

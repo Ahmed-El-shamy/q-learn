@@ -1,5 +1,7 @@
 import { Response } from "@/_types/response.types";
 import { getServerSession } from "next-auth";
+import { useLocale } from "next-intl";
+import { getLocale } from "next-intl/server";
 
 // Request interceptor type: receives and returns request config
 type RequestConfig = Parameters<typeof fetch>["1"] & { url?: string };
@@ -82,17 +84,78 @@ export class Api {
         // Handle error responses
         let errorData: Response<T>;
         try {
-          errorData = (await response.json()) as Response<T>;
-        } catch {
-          // If response is not JSON, create a default error response
-          errorData = {
-            data: {} as T,
-            errors: { message: response.statusText },
-            message: `Request failed with status ${response.status}`,
-            status: false,
-          };
+            const normalizedRoute = route.startsWith('/') ? route : `/${route}`;
+            const url = this.baseRoute.concat(normalizedRoute);
+            
+            // Build initial request config
+            let requestConfig: RequestConfig = {
+                ...options,
+                url
+            };
+
+            // Run request interceptors
+            requestConfig = await this.requestInterceptor.run(requestConfig);
+
+            // Extract url from config (interceptors might have modified it)
+            const { url: finalUrl, ...fetchOptions } = requestConfig;
+            const headers = new Headers(fetchOptions.headers);
+            headers.append("Accept", "application/json, text/*, */*")
+            const finalFetchUrl = finalUrl || url;
+
+            // Make the actual request
+            const response = await fetch(finalFetchUrl, {
+                ...fetchOptions,
+                headers: headers 
+            });
+
+            // Parse response
+            let responseData: ResponseData<T>;
+            if (response.ok) {
+                const jsonData = await response.json() as Response<T>;
+                responseData = jsonData;
+            } else {
+                // Handle error responses
+                let errorData: Response<T>;
+                try {
+                    errorData = await response.json() as Response<T>;
+                } catch {
+                    // If response is not JSON, create a default error response
+                    errorData = {
+                        data: {} as T,
+                        errors: { message: response.statusText },
+                        message: `Request failed with status ${response.status}`,
+                        status: false
+                    };
+                }
+                responseData = errorData;
+            }
+
+            // Run response interceptors
+            responseData = await this.responseInterceptor.run(responseData);
+            if(!response.ok) throw {
+                response: responseData
+            } 
+
+            // If response was not ok, throw or return based on your error handling strategy
+            if (!response.ok && responseData && !responseData.status) {
+                return responseData;
+            }
+
+            return responseData;
+        } catch (error) {
+            if(error && typeof error === "object" && "response" in error && error.response) throw error;
+            // Handle network errors or interceptor errors
+            const errorResponse: ResponseData<T> = {
+                data: {} as T,
+                errors: error,
+                message: error instanceof Error ? error.message : 'Network error occurred',
+                status: false
+            };
+            
+            // Run response interceptors even for errors
+            const finalError = await this.responseInterceptor.run(errorResponse);
+            throw finalError;
         }
-        responseData = errorData;
       }
 
       // Run response interceptors
@@ -164,5 +227,31 @@ export class Api {
 }
 
 const api = new Api();
+
+api.requestInterceptor.use((requestOptions) => {
+    // Read locale from cookie dynamically on each request
+    let language = "en";
+    if(typeof window !== "undefined") {
+        const cookies = document.cookie.split(";");
+        for (const entry of cookies) {
+            const trimmed = entry.trim();
+            const [key, value] = trimmed.split("=");
+            if(key === "NEXT_LOCALE" && value) {
+                language = value.trim();
+                break;
+            }
+        }
+    }
+    
+    // Create new headers object to avoid mutating the original
+    const headers = new Headers(requestOptions.headers);
+    
+    // Use set instead of append to avoid duplicates and ensure fresh value
+    headers.set("Accept-Language", language);
+    headers.set("Lang", language);
+    
+    requestOptions.headers = headers;
+    return requestOptions;
+});
 
 export default api;
