@@ -3,8 +3,7 @@ import { ReactNode } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { NextIntlClientProvider } from "next-intl";
 import queryClient from "@/_lib/react-qyery";
-import { Toaster } from "sonner";
-
+import { CartProvider } from "@/store/CartProvider";
 type Props = {
   children: ReactNode;
   locale: string;
@@ -15,11 +14,7 @@ export default function LocaleProviders({ children, locale, messages }: Props) {
   return (
     <QueryClientProvider client={queryClient}>
       <NextIntlClientProvider locale={locale} messages={messages}>
-        <Toaster 
-          position={locale === "ar" ? "top-left" : "top-right"}
-          richColors
-        />
-        {children}
+        <CartProvider>{children}</CartProvider>
       </NextIntlClientProvider>
     </QueryClientProvider>
   );
