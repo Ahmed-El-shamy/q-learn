@@ -1,6 +1,6 @@
 "use client";
 
-import { CartItem } from "@/_types/cart.types";
+import { CartItem } from "@/types/cart.types";
 import {
   createContext,
   useCallback,

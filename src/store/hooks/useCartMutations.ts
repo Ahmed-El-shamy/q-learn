@@ -1,4 +1,4 @@
-import { CartItem } from "@/_types/cart.types";
+import { CartItem } from "@/types/cart.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useRef } from "react";
 import { useCartApi } from "./useCartApi";
