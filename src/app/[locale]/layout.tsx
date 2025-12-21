@@ -5,7 +5,6 @@ import LocaleProviders from "@/_components/local-providers/LocaleProviders";
 import { getDefaultSiteMeta, buildMetadata } from "@/_lib/meta";
 import AppSessionProvider from "@/_components/common/SessionProvider";
 import "@/styles/globals.css";
-import { CartProvider } from "@/store/CartProvider";
 import { Toaster } from "sonner";
 
 type Props = {
@@ -36,10 +35,8 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body>
         <AppSessionProvider>
           <LocaleProviders locale={locale} messages={messages}>
-            <CartProvider>
-              <main>{children}</main>
-              <Toaster position="top-center" />
-            </CartProvider>
+            <main>{children}</main>
+            <Toaster position="top-center" />
           </LocaleProviders>
         </AppSessionProvider>
       </body>
