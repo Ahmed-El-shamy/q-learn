@@ -1,14 +1,9 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, type DefaultSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import api, { Api } from "@/_lib/api/api";
+import type { LoginResponse } from "@/app/[locale]/auth/_types/auth.types";
+import { string } from "zod";
 
-interface LoginResponseData {
-    id: string;
-    email: string;
-    name?: string;
-    role?: string | number;
-    [key: string]: unknown;
-}
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -28,12 +23,11 @@ export const authOptions: NextAuthOptions = {
                 }
 
                 try {
-                    const response = await api.post<LoginResponseData>(
+                    const response = await api.post<LoginResponse>(
                         Api.routes.auth.login,
                         {
                             email: credentials.email,
                             password: credentials.password,
-                            role: credentials.role || 1, // Default to user role if not provided
                         },
                         {
                             headers: {
@@ -44,10 +38,10 @@ export const authOptions: NextAuthOptions = {
 
                     if (response?.status && response.data) {
                         return {
-                            id: response.data.id || String(response.data.id),
-                            email: response.data.email,
-                            name: response.data.name || response.data.email,
-                            role: response.data.role,
+                           email: response.data.email,
+                           id: response.data.id,
+                           token: response.data.token,
+                           name: response.data.name 
                         };
                     }
 
@@ -65,6 +59,25 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
     callbacks: {
+        jwt: ({token, user}) => {
+            if(user) {
+                token.token = user.token;
+                token.email = user.email;
+                token.id = user.id;
+            }
+            return token;
+        },
+        session: ({ session, token }) => {
+            if(token && token.email) {
+                session.user = {
+                    email: token.email,
+                    id: token.id,
+                    name: token.name as string,
+                    token: token.token, 
+                }
+            }
+            return session;
+        }
     }
 };
 

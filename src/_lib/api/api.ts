@@ -1,5 +1,6 @@
 import { Response } from "@/types/response.types";
 import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 import { useLocale } from "next-intl";
 import { getLocale } from "next-intl/server";
 
@@ -221,5 +222,17 @@ api.requestInterceptor.use((requestOptions) => {
   requestOptions.headers = headers;
   return requestOptions;
 });
+
+api.requestInterceptor.use(async (requestOptions) => {
+  if (typeof window !== undefined) {
+    const session = await getSession();
+    if (session) {
+      const headers = new Headers(requestOptions.headers);
+      headers.append("Authorization", `Bearer ${session.user.token}`);
+      requestOptions.headers = headers;
+    }
+  }
+  return requestOptions;
+})
 
 export default api;
