@@ -3,9 +3,7 @@
 import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 import useLogin from "../_hooks/useLogin";
 import { Lock, Mail } from "lucide-react";
-import MainSelect from "@/_components/common/inputs/main-select-input/MainSelect";
 import { Link } from "@/i18n/navigation";
-import { Controller } from "react-hook-form";
 import MainBtn from "@/_components/common/buttons/MainBtn";
 import { useTranslations } from "next-intl";
 
