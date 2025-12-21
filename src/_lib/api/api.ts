@@ -44,6 +44,7 @@ export class Api {
   static routes = {
     site: {
       sliders: "/site/sliders",
+      courses: "/site/courses"
     },
     auth: {
       login: "/login",
@@ -55,7 +56,7 @@ export class Api {
   async request<T>(
     route: string,
     options?: Parameters<typeof fetch>["1"]
-  ): Promise<ResponseData<T> | undefined> {
+  ): Promise<ResponseData<T>> {
     try {
       const normalizedRoute = route.startsWith("/") ? route : `/${route}`;
       const url = this.baseRoute.concat(normalizedRoute);

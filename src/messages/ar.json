@@ -33,7 +33,11 @@
   },
   "courses": {
     "students": "طلاب",
-    "duration": "المدة",
+    "duration": {
+      "duration": "المدة",
+      "h": "{hours}h"
+    },
+    "hours": "{hours} ساعة",
     "lectures": "محاضرات",
     "course-content": "محتوى الدورة",
     "toggle-all-chapters": "تبديل كل الفصول",

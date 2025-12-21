@@ -33,7 +33,11 @@
   },
   "courses": {
     "students": "students",
-    "duration": "Duration",
+    "duration": {
+      "duration": "Duration",
+      "h": "{hours}h"
+    },
+    "hours": "{hours} hours",
     "lectures": "lectures",
     "course-content": "Course content",
     "toggle-all-chapters": "Toggle all chapters",
