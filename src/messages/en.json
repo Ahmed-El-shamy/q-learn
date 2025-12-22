@@ -76,6 +76,7 @@
       "button": "Register"
     },
     "login": {
+      "login": "Login",
       "title": "Welcome back. Please login to your account",
       "button": "Login",
       "dontHaveAccount": "Don't have account?",

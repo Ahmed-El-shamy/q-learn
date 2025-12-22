@@ -5,19 +5,18 @@ import CouponInput from "./CouponInput";
 import { useTranslations } from "next-intl";
 import type { IconType } from "react-icons";
 import {
-  FaAward,
-  FaBookOpen,
   FaCertificate,
-  FaGlobeAmericas,
-  FaInfinity,
-  FaQuestionCircle,
   FaRegClock,
   FaSignal,
   FaTags,
   FaUserFriends,
 } from "react-icons/fa";
-import { useEffect, useRef } from "react";
-import { Facebook, Twitter, Linkedin, MessageCircle, Send, Share2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Facebook, Twitter, Linkedin, MessageCircle, Send, Share2, ImageIcon, Play } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+import CourseDetailsQuery from "../_data/CourseDetailsQuery";
+import VideoDialog from "./VideoDialog";
 
 const socialMediaLinksConfig = [
     {
@@ -58,29 +57,71 @@ const socialMediaLinksConfig = [
     },
 ];
 
-const courseProperties: { icon: IconType; label: string; value: string }[] = [
-  { icon: FaRegClock, label: "Duration", value: "23 Min" },
-  { icon: FaBookOpen, label: "Lectures", value: "7 lessons" },
-  { icon: FaUserFriends, label: "Enrolled", value: "1 students" },
-  { icon: FaTags, label: "Category", value: "Business" },
-  { icon: FaQuestionCircle, label: "Quizzes", value: "1 Quizzes" },
-  { icon: FaGlobeAmericas, label: "Language", value: "English" },
-  { icon: FaSignal, label: "Skill Level", value: "Beginner" },
-  { icon: FaCertificate, label: "Certificate", value: "Certificate of Completion" },
-  { icon: FaInfinity, label: "Access", value: "Full lifetime access" },
-  { icon: FaAward, label: "Extras", value: "Course perks included" },
-];
+// Course properties will be dynamically generated from course data
 
 const CourseStickyContent = () => {
     const t = useTranslations("courses");
     const imageContainer = useRef<HTMLDivElement>(null);
     const isCollapsed = useRef(false);
+    const [isImageError, setIsImageError] = useState(false);
+    const params: {id: string} = useParams();
+    const query = useQuery({...CourseDetailsQuery(params.id), refetchOnMount: false});
+    const course = query.data;
 
     const currentUrl = typeof window !== "undefined" ? window.location.href : "";
     const socialMediaLinks = socialMediaLinksConfig.map((link) => ({
         ...link,
         href: link.getHref(currentUrl),
     }));
+
+    // Reset image error state when course changes
+    useEffect(() => {
+        setIsImageError(false);
+    }, [course?.id]);
+
+    // Build course properties dynamically from course data
+    const courseProperties: { icon: IconType; label: string; value: string }[] = [];
+    
+    if (course) {
+        if (course.total_hours) {
+            courseProperties.push({
+                icon: FaRegClock,
+                label: "Duration",
+                value: `${course.total_hours} ${course.total_hours === 1 ? 'Hour' : 'Hours'}`
+            });
+        }
+        
+        if (course.total_enrollments !== undefined) {
+            courseProperties.push({
+                icon: FaUserFriends,
+                label: "Enrolled",
+                value: `${course.total_enrollments} ${course.total_enrollments === 1 ? 'student' : 'students'}`
+            });
+        }
+        
+        if (course.category?.name) {
+            courseProperties.push({
+                icon: FaTags,
+                label: "Category",
+                value: course.category.name
+            });
+        }
+        
+        if (course.level) {
+            courseProperties.push({
+                icon: FaSignal,
+                label: "Skill Level",
+                value: course.level
+            });
+        }
+        
+        // Show certificate status (whether course includes a certificate)
+        courseProperties.push({
+            icon: FaCertificate,
+            label: "Certificate",
+            value: course.accrediting_organization ? "Certificate included" : "No certificate"
+        });
+    }
 
     useEffect(() => {
         const container = imageContainer.current;
@@ -152,23 +193,49 @@ const CourseStickyContent = () => {
     return (
         <div className="lg:w-fit w-full">
             <div className="max-h-[1000px] overflow-hidden" ref={imageContainer} >
-                <div className="h-[300px] w-full md:h-[500px] lg:h-[200px] min-w-[280px] xl:min-w-none xl:h-[270px] xl:w-[380px] relative overflow-hidden">
-                    <Image
-                        fill
-                        src="/images/600x600.jpg"
-                        alt="course-preview-image"
-                    />
+                <div className="h-[300px] w-full md:h-[500px] lg:h-[200px] min-w-[280px] xl:min-w-none xl:h-[270px] xl:w-[380px] relative overflow-hidden bg-gray-300">
+                    {isImageError || !course?.thumbnail ? (
+                        <div className="w-full h-full flex items-center justify-center bg-gray-300">
+                            <ImageIcon className="text-gray-600 w-16 h-16" />
+                        </div>
+                    ) : (
+                        <Image
+                            fill
+                            src={course.thumbnail}
+                            alt={course.title || "course-preview-image"}
+                            className="object-cover"
+                            onError={() => setIsImageError(true)}
+                        />
+                    )}
+                    {course?.preview_video && (
+                        <VideoDialog videoUrl={course.preview_video}>
+                            <MainBtn
+                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-16 h-16 md:w-20 md:h-20 p-0 flex items-center justify-center bg-white/90 hover:bg-white border-none shadow-lg"
+                            >
+                                <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" fill="currentColor" />
+                            </MainBtn>
+                        </VideoDialog>
+                    )}
                 </div>
             </div>
+
             <div className="px-2 xl:px-8">
-                <div className="flex items-end gap-2 sm:gap-4 py-2 xl:py-6">
-                    <p className="text-xl sm:text-2xl md:text-3xl font-bold">
-                        6$
-                    </p>
-                    <p className="line-through text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl">
-                        500$
-                    </p>
-                </div>
+                {course && (
+                    <div className="flex items-end gap-2 sm:gap-4 py-2 xl:py-6">
+                        {course.is_free ? (
+                            <p className="text-xl sm:text-2xl md:text-3xl font-bold">
+                                Free
+                            </p>
+                        ) : (
+                            <>
+                                <p className="text-xl sm:text-2xl md:text-3xl font-bold">
+                                    {course.price?.usd ? `$${course.price.usd}` : course.price?.egp ? `${course.price.egp} EGP` : course.price?.sar ? `${course.price.sar} SAR` : 'N/A'}
+                                </p>
+                                {/* Add original price display if discount exists */}
+                            </>
+                        )}
+                    </div>
+                )}
 
                 <div className="flex flex-col gap-2">
                     <MainBtn>

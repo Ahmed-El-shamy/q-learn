@@ -1,14 +1,17 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import CourseOverview from "./CourseOverview";
-import { useTranslations } from "next-intl";
 import CourseContent from "./CourseContent";
 import CourseInstructor from "./CourseInstructor";
 import CourseRating from "./CourseRating";
 import CourseQA from "./CourseQA";
 import MainBtn from "@/_components/common/buttons/MainBtn";
 import StudentsAlsoBought from "./StudentsAlsoBought";
+import { Course } from "../../_types/course.types";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+import CourseDetailsQuery, { courseInstructorQuery } from "../_data/CourseDetailsQuery";
 
 const panels = [
     {
@@ -28,34 +31,26 @@ const panels = [
     },
 ] as const;
 
-const overview = `<div>
-    <h2 class="text-lg sm:text-xl md:text-2xl lg:text-[28px] font-bold mb-2">Course Requirements</h2>
-    <p class="mb-4 sm:mb-6 text-xs sm:text-sm md:text-base leading-relaxed">
-        Basic understanding of PHP programming language. Familiarity with web development concepts like HTML, CSS, and JavaScript.
-    </p>
-
-    <h2 class="text-lg sm:text-xl md:text-2xl lg:text-[28px] font-bold mb-2">Course Description</h2>
-    <p class="mb-4 sm:mb-6 text-xs sm:text-sm md:text-base leading-relaxed">
-        Learn Laravel PHP framework from basics to advanced through practical projects. Master database integration, authentication, and complex application development with Laravel.
-    </p>
-
-    <h2 class="text-lg sm:text-xl md:text-2xl lg:text-[28px] font-bold mb-2">Course Outcomes</h2>
-    <p class="text-xs sm:text-sm md:text-base leading-relaxed">
-        By the end of the course, you will be proficient in Laravel framework, capable of building scalable web applications, implementing RESTful APIs, and integrating third-party services.
-    </p>
-</div>
-`
-
 const CoursePanels = () => {
     const [currentPanel, setCurrentPanel] = useState<typeof panels[number]["title"]>(panels[0].title);
     const panelsRef = useRef<HTMLDivElement>(null);
+    const queryClient = useQueryClient();
+    const params: {id: string} = useParams();
+    const query = useQuery({...CourseDetailsQuery(params.id), refetchOnMount: false})
+    const course = query.data!
+
+    // prefetching the rest of the panels for later consumption when the panels are opened.
+    queryClient.prefetchQuery({
+        ...courseInstructorQuery(params.id),
+        staleTime: 10000000000000000
+    });
 
     function renderActivePanel() {
         switch(currentPanel) {
             case "overview":
                 return (
                     <CourseOverview
-                        overview={overview}
+                        overview={course.description}
                     />
                 )
             case "content":

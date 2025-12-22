@@ -45,6 +45,7 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
 }, ref) => {
     const t = useTranslations();
     const [open, setOpen] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const closeDialog = useCallback(() => {
         setOpen(false);
@@ -59,9 +60,15 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
     });
 
     const handleAction = useCallback(async () => {
-        await action?.action();
-        setOpen(false);
-        onSuccess?.();
+        try {
+            setIsLoading(true);
+            await action?.action();
+            onSuccess?.();
+            setIsLoading(false);
+            setOpen(false);
+        } catch {
+            setIsLoading(false);
+        }
     }, [action]);
 
     return (
@@ -103,7 +110,7 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
                         {content}
                     </div>
                     <div className="flex flex-col w-full md:flex-row-reverse px-4 py-2 md:gap-4 gap-2">
-                        <MainBtn onClick={handleAction}>
+                        <MainBtn onClick={handleAction} isLoading={isLoading} >
                             {t(action?.text || defaultOkText)}
                         </MainBtn>
                         <DialogClose asChild>

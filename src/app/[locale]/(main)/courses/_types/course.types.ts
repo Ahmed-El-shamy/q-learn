@@ -38,3 +38,29 @@ export type Course = {
   added_by: string | null;
 };
 
+export type InstructorUser = {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  account_type: string;
+  type: number;
+  auth_method: string;
+  preferred_language: string;
+  birthdate: string | null;
+  nationality: string;
+  residency: string;
+  is_active: boolean;
+  is_banned: boolean;
+};
+
+export type Instructor = {
+  user: InstructorUser;
+  avatar: string;
+  description?: string;
+  ratings_count: number;
+  reviews_count: number;
+  students_count: number;
+  courses_count: number;
+};
+

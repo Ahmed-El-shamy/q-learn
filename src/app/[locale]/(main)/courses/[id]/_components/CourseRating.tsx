@@ -49,7 +49,7 @@ const CourseRating = () => {
                             </div>
                             <div className="flex flex-wrap gap-1 sm:gap-2 [&>a]:hover:underline [&>a]:cursor-pointer [&>a]:text-blue-500 text-xs sm:text-sm md:text-base">
                                 <Link href="/auth/login">
-                                    {baseT("auth.login")}
+                                    {baseT("auth.login.login")}
                                 </Link>
                                 <p>
                                     {baseT("or")}

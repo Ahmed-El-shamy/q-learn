@@ -1,7 +1,7 @@
 "use client";
 
-import { FileDiff, Star } from "lucide-react";
-import { useMemo, useState } from "react";
+import { Star } from "lucide-react";
+import { useCallback, useMemo, useState } from "react";
 import clsx from "clsx";
 import DialogComponent from "@/_components/common/dialog/Dialog";
 import useRating from "../_hooks/useRating";
@@ -18,15 +18,19 @@ const CourseRatingInput = () => {
             },
             register,
             control,
-            reset,
-            watch
+            watch,
+            setValue,
         },
-        submit
+        submit,
     } = useRating();
     const [hoveredRate, setHoveredRate] = useState(0);
 
     const rateStars = useMemo(() => {
         return Array(5).fill(1).map((num, index) => num + index);
+    }, []);
+
+    const handleCancel = useCallback(() => {
+        setValue("review", "");
     }, []);
 
     return (
@@ -37,27 +41,27 @@ const CourseRatingInput = () => {
                 <form onSubmit={submit}>
                     <div className="space-y-4">
                         <MainTextArea
-                            {...register("text")}
+                            {...register("review")}
                             label="Review"
                             placeholder={t("courses.rate-dialog-review-placeholder")}
-                            error={errors.text?.message}
+                            error={errors.review?.message}
                             rows={6}
-                            value={watch("text")}
+                            value={watch("review")}
                         />
                     </div>
                 </form>
             )}
             asChild={false}
             cancel={{
-                action: reset 
+                action: handleCancel 
             }}
             action={{
                 action: submit 
             }}
-            onSuccess={reset}
+            onSuccess={handleCancel}
         >
             <Controller
-                name="rate"
+                name="rating"
                 control={control}
                 render={({ field }) => (
                     <div
@@ -90,7 +94,6 @@ const CourseRatingInput = () => {
 
                 )}
             />
-
         </DialogComponent>
     );
 }

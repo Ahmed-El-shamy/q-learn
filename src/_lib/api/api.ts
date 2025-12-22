@@ -1,8 +1,5 @@
 import { Response } from "@/types/response.types";
-import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
-import { useLocale } from "next-intl";
-import { getLocale } from "next-intl/server";
 
 // Request interceptor type: receives and returns request config
 type RequestConfig = Parameters<typeof fetch>["1"] & { url?: string };
@@ -44,7 +41,8 @@ export class Api {
   static routes = {
     site: {
       sliders: "/site/sliders",
-      courses: "/site/courses"
+      courses: "/site/courses",
+      courseReview: "/site/courses/review",
     },
     auth: {
       login: "/login",
