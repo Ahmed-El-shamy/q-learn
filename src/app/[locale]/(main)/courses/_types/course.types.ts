@@ -80,3 +80,49 @@ export type Review = {
   status: string;
 };
 
+export type CourseReference = {
+  id: number;
+  name: string;
+};
+
+export type Lesson = {
+  id: number;
+  course: CourseReference;
+  title: string;
+  description: string;
+  content_text: string;
+  type: string;
+  is_free_preview: boolean;
+  image: string | null;
+  video: string | null;
+  quiz: unknown | null;
+};
+
+export type Chapter = {
+  id: number;
+  course: CourseReference;
+  title: string;
+  description: string;
+  content_text: string;
+  type: string;
+  is_free_preview: boolean;
+  is_active: boolean;
+  sort_order: number;
+  lessons: Lesson[];
+  quizzes: unknown[];
+  lessons_count: number;
+  quizzes_count: number;
+};
+
+export type CourseContent = {
+  chapters: Chapter[];
+  total_chapters: number;
+  lectures: number;
+  quizzes: number;
+  total_length_minutes: number;
+};
+
+export type CourseDetails = Course & {
+  content: CourseContent;
+};
+

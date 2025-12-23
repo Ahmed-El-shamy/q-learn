@@ -1,14 +1,6 @@
-export type CourseLesson = {
-  name: string;
-  description: string;
-  duration: string;
-  isLocked: boolean;
-};
+import { Chapter } from "../../_types/course.types";
 
-export type CourseChapter = {
-  title: string;
-  duration: string;
-  lessons: CourseLesson[];
+export type CourseChapter = Chapter & {
   expanded: boolean;
 };
 

@@ -1,12 +1,12 @@
 import api, { Api } from "@/_lib/api/api";
 import { queryOptions } from "@tanstack/react-query";
-import { Course, Instructor, Review } from "../../_types/course.types";
+import { CourseDetails, Instructor, Review } from "../../_types/course.types";
 
 const CourseDetailsQuery = (id: number | string) => queryOptions({
     queryKey: [Api.routes.site.courses, id],
     enabled: Boolean(id),
     queryFn: async () => {
-        const response = await api.get<Course>(`${Api.routes.site.courses}/${id}`);
+        const response = await api.get<CourseDetails>(`${Api.routes.site.courses}/${id}`);
         return response?.data;
     }, 
 });
