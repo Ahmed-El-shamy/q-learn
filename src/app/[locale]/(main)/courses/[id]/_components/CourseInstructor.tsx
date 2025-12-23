@@ -1,10 +1,9 @@
-import api, { Api } from "@/_lib/api/api";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { BookOpen, MessageSquare, Star, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import CourseDetailsQuery, { courseInstructorQuery } from "../_data/CourseDetailsQuery";
+import CourseDetailsQuery from "../_data/CourseDetailsQuery";
 import CustomSkeleton from "@/_components/common/loaders/skeltons/CustomSkeleton";
 import Avatar from "@/_components/common/avatar/Avatar";
 
@@ -12,10 +11,12 @@ const CourseInstructor = () => {
     const t = useTranslations("courses");
     const params: {id: string} = useParams();
 
-    const {data, isLoading} = useQuery({
-        ...courseInstructorQuery(params.id),
+    const {data: course, isLoading} = useQuery({
+        ...CourseDetailsQuery(params.id),
         refetchOnMount: false
     });
+
+    const data = course?.instructor;
 
     const stats = [
         {

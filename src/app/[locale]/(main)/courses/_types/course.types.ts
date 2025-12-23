@@ -36,6 +36,7 @@ export type Course = {
   preview_video: string;
   tags: unknown[];
   added_by: string | null;
+  instructor: Instructor;
 };
 
 export type InstructorUser = {
@@ -62,5 +63,20 @@ export type Instructor = {
   reviews_count: number;
   students_count: number;
   courses_count: number;
+};
+
+export type ReviewUser = {
+  id: number;
+  name: string;
+};
+
+export type Review = {
+  id: number;
+  rating: number;
+  review: string;
+  is_approved: boolean;
+  is_active: number;
+  user: ReviewUser;
+  status: string;
 };
 

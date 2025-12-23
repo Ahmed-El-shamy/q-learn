@@ -43,6 +43,7 @@ export class Api {
       sliders: "/site/sliders",
       courses: "/site/courses",
       courseReview: "/site/courses/review",
+      reviews: "/site/reviews",
     },
     auth: {
       login: "/login",

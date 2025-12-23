@@ -31,7 +31,7 @@ const CourseRatingInput = () => {
 
     const handleCancel = useCallback(() => {
         setValue("review", "");
-    }, []);
+    }, [setValue]);
 
     return (
         <DialogComponent
