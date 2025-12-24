@@ -44,6 +44,7 @@ export class Api {
       courses: "/site/courses",
       courseReview: "/site/courses/review",
       reviews: "/site/reviews",
+      courses_qa: "/site/courses_qa",
     },
     auth: {
       login: "/login",

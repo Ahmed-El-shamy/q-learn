@@ -34,10 +34,10 @@ const CourseQAInput = () => {
         <MainBtn
           type="submit"
           size="small"
-          className="flex items-center gap-2 text-xs sm:text-sm md:text-base"
+          className="flex items-center flex-row gap-2 text-xs sm:text-sm md:text-base"
         >
           <MessageCircle size={16} />
-          <span>{t("courses.qa-dialog-submit")}</span>
+          <div>{t("courses.qa-dialog-submit")}</div>
         </MainBtn>
       </div>
     </form>

@@ -11,7 +11,7 @@ import StudentsAlsoBought from "./StudentsAlsoBought";
 import { Course } from "../../_types/course.types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-import CourseDetailsQuery, { courseReviewsQuery } from "../_data/CourseDetailsQuery";
+import CourseDetailsQuery, { courseReviewsQuery, courseQAQuery } from "../_data/CourseDetailsQuery";
 
 const panels = [
     {
@@ -42,6 +42,11 @@ const CoursePanels = () => {
     // prefetching the reviews for later consumption when the reviews panel is opened.
     queryClient.prefetchQuery({
         ...courseReviewsQuery(params.id),
+    });
+
+    // prefetching the QA for later consumption when the QA panel is opened.
+    queryClient.prefetchQuery({
+        ...courseQAQuery(params.id),
     });
 
     function renderActivePanel() {

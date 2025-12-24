@@ -53,7 +53,7 @@ const MainBtn = ({
 }: MainBtnProps) => {
   return (
     <button
-      className={cn(buttonVariants({ variant, size, disabled, className }), {
+      className={cn(buttonVariants({ variant, size, disabled }), {
         "pointer-events-none": isLoading
       })}
       disabled={disabled as boolean}
@@ -68,9 +68,9 @@ const MainBtn = ({
           )
         }
         <div
-          className={clsx("col-start-1 select-none col-end-1 row-start-1 row-end-1 col-span-1 row-span-1", {
+          className={twMerge(clsx("col-start-1 select-none col-end-1 row-start-1 row-end-1 col-span-1 row-span-1", className, {
             "invisible": isLoading
-          })}
+          }))}
         >
           {
             title ? title : children
