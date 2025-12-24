@@ -1,7 +1,7 @@
 import CategorySkelton from "./CategorySkelton";
 import ProductSkelton from "./ProductSkelton";
 import SliderSkeleton from "./SliderSkelton";
-import { SkeletonType } from "../../../../types/SkeltonType";
+import type { SkeletonType } from "@/types/SkeltonType";
 import BlogSkelton from "./BlogSkelton";
 import FeatureSkeltion from "./FeatureSkeltion";
 import HeroSkeleton from "./HeroSkeltion";

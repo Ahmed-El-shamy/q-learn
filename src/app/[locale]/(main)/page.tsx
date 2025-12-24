@@ -18,7 +18,6 @@ const HomePage = () => {
           <HeroSection />
         </Container>
       </section>
-
       {/* Statistics Section */}
       <StatisticsSection />
 

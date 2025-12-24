@@ -54,6 +54,7 @@ async function Navbar({
                 <CartIcon />
               </>
             ) : (
+              // <span className="text-sm text-gray-600">User is signed in</span>
               <>
                 <Link href="/auth/login">
                   <MainBtn>{t("login.button")}</MainBtn>
@@ -63,7 +64,6 @@ async function Navbar({
                 </Link>
               </>
             )}
-
           </div>
         </div>
       </nav>
