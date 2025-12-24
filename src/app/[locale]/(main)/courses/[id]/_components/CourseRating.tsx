@@ -125,6 +125,9 @@ const CourseRating = () => {
                                 <p>
                                     {t("as-a-student")}
                                 </p>
+                                <p>
+                                    {t("to-leave-a-review")}
+                                </p>
                             </div>
                         </div>
                         :

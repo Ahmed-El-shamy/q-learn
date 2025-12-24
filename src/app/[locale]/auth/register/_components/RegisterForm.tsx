@@ -116,7 +116,7 @@ const RegisterForm = () => {
         />
 
         {/* <AuthBtn text="Register" classname="mt-4" /> */}
-        <MainBtn title="Register" isLoading={registerMutation.isPending} className="mt-4" size={"large"} />
+        <MainBtn title="Register" isLoading={registerMutation.isPending} containerClassName="mt-4" size={"large"} />
 
         <p className="text-center">
           {t("auth.register.already-have-an-account")}{" "}

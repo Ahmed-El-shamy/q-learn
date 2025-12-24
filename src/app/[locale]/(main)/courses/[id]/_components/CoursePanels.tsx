@@ -87,7 +87,7 @@ const CoursePanels = () => {
                 <div className="h-0" ref={panelsRef} />
                 <div className="flex items-center gap-2 w-full py-1 overflow-x-auto sticky top-0 bg-white z-40">
                     {panels.map(panel => (
-                        <MainBtn variant={currentPanel === panel.title ? "main" : "secondary"} className={currentPanel === panel.title ? "pointer-events-none" : ""}  onClick={() => changeActivePanel(panel.title)} key={panel.title}>
+                        <MainBtn variant={currentPanel === panel.title ? "main" : "secondary"} containerClassName="min-w-fit" className={currentPanel === panel.title ? "pointer-events-none" : ""}  onClick={() => changeActivePanel(panel.title)} key={panel.title}>
                             {panel.title}
                         </MainBtn>
                     ))}

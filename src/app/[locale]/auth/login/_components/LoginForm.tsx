@@ -56,7 +56,7 @@ const LoginForm = () => {
           </Link>
         </div>
 
-        <MainBtn isLoading={isPending} type="submit" className="mt-4">
+        <MainBtn isLoading={isPending} type="submit" containerClassName="mt-4">
           {t("button")}
         </MainBtn>
 

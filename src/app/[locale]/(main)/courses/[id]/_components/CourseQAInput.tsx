@@ -15,6 +15,9 @@ const CourseQAInput = () => {
       watch,
     },
     submit,
+    QAMutation: {
+      isPending
+    }
   } = useQA();
 
   return (
@@ -23,18 +26,19 @@ const CourseQAInput = () => {
       className="w-full flex flex-col gap-3 sm:gap-4"
     >
       <MainTextArea
-        {...register("text")}
+        {...register("body")}
         label={t("courses.qa-dialog-label")}
         placeholder={t("courses.qa-dialog-placeholder")}
-        error={errors.text?.message}
+        error={errors.body?.message}
         rows={4}
-        value={watch("text")}
+        value={watch("body")}
       />
       <div className="flex justify-end">
         <MainBtn
           type="submit"
           size="small"
           className="flex items-center flex-row gap-2 text-xs sm:text-sm md:text-base"
+          isLoading={isPending}
         >
           <MessageCircle size={16} />
           <div>{t("courses.qa-dialog-submit")}</div>

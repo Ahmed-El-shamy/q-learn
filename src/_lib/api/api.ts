@@ -49,8 +49,8 @@ export class Api {
       courses_qa: "/site/courses_qa",
     },
     auth: {
-      login: "/login",
-      register: "/register",
+      login: "/site/login",
+      register: "/site/register",
     },
     cart: "/cart",
     user: {

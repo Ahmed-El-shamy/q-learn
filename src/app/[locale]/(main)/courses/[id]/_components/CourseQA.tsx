@@ -32,7 +32,7 @@ const CourseQA = () => {
         <p className="pb-3 sm:pb-4 text-xl sm:text-2xl md:text-3xl font-bold">
             {t("qa.title")}
         </p>
-        <div className="space-y-4 sm:space-y-5">
+        <div>
             {
                 qaList.length > 0 ? (
                     qaList.map((question) => (
@@ -48,13 +48,13 @@ const CourseQA = () => {
         <div className="mt-4">
           {
             !isAuthenticated ? (
-              <div className="flex flex-col sm:flex-row justify-between text-nowrap items-start sm:items-center gap-2 sm:gap-1 mt-4">
+              <div className="flex flex-col xl:flex-row xl:justify-between text-nowrap items-start xl:items-center gap-2 sm:gap-1 mt-4">
                 <div className="text-xs sm:text-sm md:text-base">
                   {t("qa.login-to-ask")}
                 </div>
                 <div className="flex flex-wrap gap-1 sm:gap-2 [&>a]:hover:underline [&>a]:cursor-pointer [&>a]:text-blue-500 text-xs sm:text-sm md:text-base">
                   <Link href="/auth/login">
-                    {baseT("auth.login")}
+                    {baseT("auth.login.login")}
                   </Link>
                   <p>
                     {baseT("or")}
@@ -64,6 +64,9 @@ const CourseQA = () => {
                   </Link>
                   <p>
                     {t("as-a-student")}
+                  </p>
+                  <p>
+                    {t("to-ask-a-question")}
                   </p>
                 </div>
               </div>

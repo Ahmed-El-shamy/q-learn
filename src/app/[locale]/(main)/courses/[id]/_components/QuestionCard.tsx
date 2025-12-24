@@ -8,7 +8,7 @@ interface QuestionCardProps {
 
 const QuestionCard = ({ question }: QuestionCardProps) => {
   return (
-    <div className="p-4 sm:p-5 md:p-6 bg-white">
+    <div className="py-4 bg-white">
       <div className="flex flex-col gap-3 sm:gap-4">
         {/* Question Header */}
         <div className="flex items-start gap-3 sm:gap-4">

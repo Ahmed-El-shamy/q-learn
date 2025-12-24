@@ -12,6 +12,7 @@ interface MainBtnProps
   title?: string;
   children?: ReactNode;
   isLoading?: boolean;
+  containerClassName?: string;
 }
 
 const buttonVariants = cva(
@@ -43,6 +44,7 @@ const buttonVariants = cva(
 
 const MainBtn = ({
   className,
+  containerClassName,
   title,
   children,
   variant = "main",
@@ -53,7 +55,7 @@ const MainBtn = ({
 }: MainBtnProps) => {
   return (
     <button
-      className={cn(buttonVariants({ variant, size, disabled }), {
+      className={cn(buttonVariants({ variant, size, disabled, className: containerClassName }), {
         "pointer-events-none": isLoading
       })}
       disabled={disabled as boolean}
