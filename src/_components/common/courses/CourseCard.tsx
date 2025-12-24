@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import React from "react";
 import { useCart } from "@/store/CartProvider";
 
-interface CourseCardProps {
+export interface CourseCardProps {
   id: string;
   title: string;
   image: string;
@@ -15,6 +15,10 @@ interface CourseCardProps {
   oldPrice?: number;
   rating?: number;
   students?: number;
+  category: string;
+  progress: number;
+  lessonsCount: number;
+  lastLessonId: number;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({

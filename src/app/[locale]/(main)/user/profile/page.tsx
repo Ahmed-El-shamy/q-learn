@@ -1,15 +1,17 @@
-import MainBtn from "@/_components/common/buttons/MainBtn";
-import MainInput from "@/_components/common/inputs/mainInput/MainInput";
-import { Lock } from "lucide-react";
+"use client";
+import useGetUserData from "../_services/useGetUserData";
 import ProfileInfo from "./_components/ProfileInfo";
 import ProfilePassword from "./_components/ProfilePassword";
-
+import FetchHandler from "@/_components/common/fetchHandler/FetchHandler";
 const Page = () => {
+  const queryResult = useGetUserData();
   return (
-    <>
-      <ProfileInfo />
+    <FetchHandler queryResult={queryResult} skeletonType="profile">
+      {queryResult && queryResult?.data && (
+        <ProfileInfo user={queryResult?.data} />
+      )}
       <ProfilePassword />
-    </>
+    </FetchHandler>
   );
 };
 

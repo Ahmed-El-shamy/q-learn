@@ -1,5 +1,7 @@
 import HorizontalCarousel from "@/_components/common/carousels/HorizontalCarousel";
 import CategoryCard from "../category/_components/CategoryCard";
+import { Api } from "@/_lib/api/api";
+
 const categories = [
   { id: 1, title: "Blender", courses: 1 },
   { id: 2, title: "3D Design", courses: 1 },

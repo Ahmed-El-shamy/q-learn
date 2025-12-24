@@ -44,12 +44,19 @@ export class Api {
   static routes = {
     site: {
       sliders: "/site/sliders",
+      myCourses: "/site/my_courses",
+      myWishlists: "/site/wishlists"
     },
     auth: {
       login: "/login",
       register: "/register",
     },
     cart: "/cart",
+    user: {
+      me: "me",
+      update: "update_profile",
+      changePassword: "change_password"
+    }
   };
 
   async request<T>(
@@ -193,6 +200,62 @@ export class Api {
   async delete<T>(route: string, options?: Parameters<typeof fetch>["1"]) {
     return this.request<T>(route, { ...options, method: "DELETE" });
   }
+  async put<T>(
+    route: string,
+    body: any = {},
+    options?: Parameters<typeof fetch>["1"]
+  ) {
+    const headers = new Headers(options?.headers);
+
+    if (body instanceof FormData) {
+      headers.delete("Content-Type");
+
+      return this.request<T>(route, {
+        ...options,
+        method: "PUT",
+        body,
+        headers,
+      });
+    }
+
+    if (headers.get("Content-Type") === "multipart/form-data") {
+      const formData = new FormData();
+
+      Object.entries(body ?? {}).forEach(([key, value]) => {
+        if (value === undefined || value === null) return;
+
+        // arrays
+        if (Array.isArray(value)) {
+          value.forEach((v) => {
+            if (v === undefined || v === null) return;
+            formData.append(`${key}[]`, v as any);
+          });
+          return;
+        }
+
+        formData.append(key, value as any);
+      });
+
+      headers.delete("Content-Type");
+
+      return this.request<T>(route, {
+        ...options,
+        method: "PUT",
+        body: formData,
+        headers,
+      });
+    }
+
+    headers.set("Content-Type", "application/json");
+
+    return this.request<T>(route, {
+      ...options,
+      method: "PUT",
+      body: JSON.stringify(body),
+      headers,
+    });
+  }
+
 }
 
 const api = new Api();
@@ -228,6 +291,7 @@ api.requestInterceptor.use(async (requestOptions) => {
     const session = await getSession();
     if (session) {
       const headers = new Headers(requestOptions.headers);
+      console.log("s", session)
       headers.append("Authorization", `Bearer ${session.user.token}`);
       requestOptions.headers = headers;
     }
