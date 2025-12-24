@@ -3,7 +3,10 @@
 import { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChangeUserInfo, ProfileInfoSchema } from "../_schema/ProfileInfoSchema";
+import {
+  ChangeUserInfo,
+  ProfileInfoSchema,
+} from "../_schema/ProfileInfoSchema";
 import { User as UserType } from "@/types/user.types";
 import useEditProfile from "../../_services/useEditProfile";
 
@@ -108,9 +111,7 @@ const useChangeInfo = () => {
     } catch (err: any) {
       // ✅ Error handling بسيط (حسب axios)
       const msg =
-        err?.response?.data?.message ||
-        err?.message ||
-        "Something went wrong";
+        err?.response?.data?.message || err?.message || "Something went wrong";
       toast?.error?.(msg);
     }
   }

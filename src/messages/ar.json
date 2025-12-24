@@ -149,5 +149,37 @@
     "Choose Role": "اختر الدور"
   },
   "ok": "موافق",
-  "cancel": "إلغاء"
+  "cancel": "إلغاء",
+  "coursesPage": {
+    "heroTitle": "انضم إلى الملايين لتجربة تعليمية أفضل",
+    "filtersTitle": "الفلاتر",
+    "clearAll": "مسح الكل",
+    "resultsFound": "تم العثور على {count} كورس",
+    "noCourses": "لم يتم العثور على كورسات حالياً",
+    "errorMessage": "حدث خطأ أثناء تحميل البيانات"
+  },
+  "courseCard": {
+    "rating": "تقييم",
+    "students": "طالب",
+    "currency": "ر.س"
+  },
+  "filters": {
+    "category": "الأقسام",
+    "level": "المستوى الدراسي",
+    "mode": "نظام الدراسة",
+    "price type": "نوع السعر",
+    "price": "السعر",
+    "instructor": "المحاضرين",
+    "rating": "التقييم",
+    "search": "بحث"
+  },
+  "sort": {
+    "label": "ترتيب حسب",
+    "oldest": "الأقدم",
+    "latest": "الأحدث",
+    "lowest_rated": "الأقل تقييماً",
+    "most_rated": "الأعلى تقييماً",
+    "price_lowest": "الأقل سعراً",
+    "price_highest": "الأعلى سعراً"
+  }
 }

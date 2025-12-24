@@ -6,6 +6,10 @@ type RequestConfig = Parameters<typeof fetch>["1"] & { url?: string };
 // Response interceptor type: receives and returns response
 type ResponseData<T> = Response<T> | null;
 
+type GetOptions = Omit<Parameters<typeof fetch>[1], "body"> & {
+  params?: Record<string, string | number | undefined | null>;
+};
+
 class Interceptor<T> {
   interceptors: ((value: T) => T | Promise<T>)[];
 
@@ -56,8 +60,8 @@ export class Api {
     user: {
       me: "me",
       update: "update_profile",
-      changePassword: "change_password"
-    }
+      changePassword: "change_password",
+    },
   };
 
   async request<T>(
@@ -158,8 +162,49 @@ export class Api {
     }
   }
 
-  async get<T>(route: string, options?: Parameters<typeof fetch>["1"]) {
-    return this.request<T>(route, { ...options, method: "GET" });
+  async get<T>(route: string, options?: GetOptions) {
+    let url = route;
+    if (options?.params) {
+      const searchParams = new URLSearchParams();
+
+      Object.entries(options.params).forEach(([key, value]) => {
+        if (value) {
+          let finalValue = value;
+
+          if (
+            typeof value === "string" &&
+            value.startsWith("[") &&
+            value.endsWith("]")
+          ) {
+            try {
+              finalValue = JSON.parse(value);
+            } catch (e) {
+              finalValue = value;
+            }
+          }
+
+          if (Array.isArray(finalValue)) {
+            finalValue.forEach((v) => {
+              if (v !== "" && v !== undefined && v !== null) {
+                searchParams.append(key, String(v));
+              }
+            });
+          } else {
+            if (finalValue !== "") {
+              searchParams.append(key, String(finalValue));
+            }
+          }
+        }
+      });
+
+      const queryString = searchParams.toString();
+      if (queryString) {
+        url += url.includes("?") ? "&" + queryString : "?" + queryString;
+      }
+    }
+
+    const { params, ...fetchOptions } = options || {};
+    return this.request<T>(url, { ...fetchOptions, method: "GET" });
   }
 
   async post<T>(
@@ -256,7 +301,6 @@ export class Api {
       headers,
     });
   }
-
 }
 
 const api = new Api();
@@ -292,12 +336,12 @@ api.requestInterceptor.use(async (requestOptions) => {
     const session = await getSession();
     if (session) {
       const headers = new Headers(requestOptions.headers);
-      console.log("s", session)
+      console.log("s", session);
       headers.append("Authorization", `Bearer ${session.user.token}`);
       requestOptions.headers = headers;
     }
   }
   return requestOptions;
-})
+});
 
 export default api;

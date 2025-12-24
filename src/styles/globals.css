@@ -2,6 +2,7 @@
 @import "./font.css";
 @import "./layout.css";
 @import "./text.css";
+@import "./double-slider.css";
 
 :root {
   --background: #ffffff;
@@ -187,4 +188,19 @@ body {
 
 .custom-checkbox-container input:checked ~ .custom-checkmark:after {
   display: block;
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(-30%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.animate-progress {
+  animation: progress 3s infinite ease-in-out;
 }
