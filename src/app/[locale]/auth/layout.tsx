@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col md:flex-row min-h-screen px-10">
+    <div className="flex flex-col md:flex-row min-h-screen px-10 bg-white">
       <div className="flex-1 bg-white flex flex-col text-[#373737]">
         <Link prefetch={false} href="/">
           <Image

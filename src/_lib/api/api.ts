@@ -1,8 +1,5 @@
 import { Response } from "@/types/response.types";
-import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
-import { useLocale } from "next-intl";
-import { getLocale } from "next-intl/server";
 
 // Request interceptor type: receives and returns request config
 type RequestConfig = Parameters<typeof fetch>["1"] & { url?: string };
@@ -45,7 +42,10 @@ export class Api {
     site: {
       sliders: "/site/sliders",
       myCourses: "/site/my_courses",
-      myWishlists: "/site/wishlists"
+      myWishlists: "/site/wishlists",
+      courses: "/site/courses",
+      courseReview: "/site/courses/review",
+      reviews: "/site/reviews",
     },
     auth: {
       login: "/login",
@@ -62,7 +62,7 @@ export class Api {
   async request<T>(
     route: string,
     options?: Parameters<typeof fetch>["1"]
-  ): Promise<ResponseData<T> | undefined> {
+  ): Promise<ResponseData<T>> {
     try {
       const normalizedRoute = route.startsWith("/") ? route : `/${route}`;
       const url = this.baseRoute.concat(normalizedRoute);

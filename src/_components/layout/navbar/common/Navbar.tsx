@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import CartIcon from "./CartIcon";
+import UserIcon from "./UserIcon";
 
 async function Navbar({
   links = [],
@@ -48,7 +49,10 @@ async function Navbar({
 
           <div className="hidden lg:flex items-center gap-5">
             {session ? (
-              <Link href="/user">my account</Link>
+              <>
+                <UserIcon />
+                <CartIcon />
+              </>
             ) : (
               // <span className="text-sm text-gray-600">User is signed in</span>
               <>
@@ -60,8 +64,6 @@ async function Navbar({
                 </Link>
               </>
             )}
-
-            <CartIcon />
           </div>
         </div>
       </nav>

@@ -33,7 +33,11 @@
   },
   "courses": {
     "students": "طلاب",
-    "duration": "المدة",
+    "duration": {
+      "duration": "المدة",
+      "h": "{hours}h"
+    },
+    "hours": "{hours} ساعة",
     "lectures": "محاضرات",
     "course-content": "محتوى الدورة",
     "toggle-all-chapters": "تبديل كل الفصول",
@@ -48,6 +52,7 @@
     "apply": "تطبيق",
     "enter-your-coupon": "أدخل كود الخصم",
     "be-the-first-reviewer": "كن أول من يكتب مراجعة",
+    "review-the-course": "قيم الدورة",
     "rate-dialog-title": "قيم هذه الدورة",
     "rate-dialog-description": "شارك تجربتك من خلال تقييم هذه الدورة",
     "rate-dialog-review-placeholder": "اكتب مراجعتك...",
@@ -65,6 +70,7 @@
       "button": "تسجيل"
     },
     "login": {
+      "login": "تسجيل الدخول",
       "title": "مرحباً بعودتك. يرجى تسجيل الدخول إلى حسابك",
       "button": "تسجيل الدخول",
       "dontHaveAccount": "ليس لديك حساب؟",
@@ -75,7 +81,8 @@
     "roles": {
       "instructor": "مدرب",
       "user": "مستخدم"
-    }
+    },
+    "logout": "تسجيل الخروج"
   },
   "placeholder": {
     "firstName": "الاسم الأول",
@@ -105,7 +112,8 @@
     "loading": "جاري التحميل...",
     "no-data": "لا توجد بيانات متاحة",
     "show-password": "إظهار كلمة المرور",
-    "hide-password": "إخفاء كلمة المرور"
+    "hide-password": "إخفاء كلمة المرور",
+    "my-profile": "الملف الشخصي"
   },
   "or": "أو",
   "birth-date": "تاريخ الميلاد",

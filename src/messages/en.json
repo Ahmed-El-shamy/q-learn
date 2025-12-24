@@ -33,7 +33,11 @@
   },
   "courses": {
     "students": "students",
-    "duration": "Duration",
+    "duration": {
+      "duration": "Duration",
+      "h": "{hours}h"
+    },
+    "hours": "{hours} hours",
     "lectures": "lectures",
     "course-content": "Course content",
     "toggle-all-chapters": "Toggle all chapters",
@@ -48,6 +52,7 @@
       "apply": "Apply",
       "enter-your-coupon": "Enter your coupon",
       "be-the-first-reviewer": "Be the first reviewer",
+      "review-the-course": "Review the course",
       "rate-dialog-title": "Rate This Course",
       "rate-dialog-description": "Share your experience by rating this course",
       "rate-dialog-review-placeholder": "Write your review...",
@@ -72,6 +77,7 @@
       "button": "Register"
     },
     "login": {
+      "login": "Login",
       "title": "Welcome back. Please login to your account",
       "button": "Login",
       "dontHaveAccount": "Don't have account?",
@@ -82,7 +88,8 @@
     "roles": {
       "instructor": "Instructor",
       "user": "User"
-    }
+    },
+    "logout": "Logout"
   },
   "placeholder": {
     "firstName": "First Name",
@@ -112,7 +119,8 @@
     "loading": "Loading...",
     "no-data": "No data available",
     "show-password": "Show password",
-    "hide-password": "Hide password"
+    "hide-password": "Hide password",
+    "my-profile": "My Profile"
   },
   "or": "or",
   "birth-date": "Birth Date",
