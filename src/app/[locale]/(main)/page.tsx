@@ -1,57 +1,74 @@
 import Container from "@/_components/common/container/Container";
-import { useTranslations } from "next-intl";
-import TopCategoriesSection from "./_components/TopCategoriesSection";
+import TopCategoriesSection from "./_components/top-categories/TopCategoriesSection";
 import TestimonialsSection from "./_components/testimonials/TestimonialsSection";
 import TeachersSection from "./_components/teachers/TeachersSection";
 import StatisticsSection from "./_components/statistics/StatisticsSection";
 import BlogsSection from "./_components/blogs/BlogsSection";
 import AboutUsSection from "./_components/about/AboutUsSection";
 import HeroSection from "./_components/hero/HeroSection";
+import { Suspense } from "react";
+import StatisticsSectionSkeleton from "@/_components/common/loaders/skeltons/StatisticsSectionSkeleton";
+import TopCategoriesSkeleton from "@/_components/common/loaders/skeltons/TopCategoriesSkeleton";
+import HeroSkeleton from "@/_components/common/loaders/skeltons/HeroSkeltion";
+import BrandsCardSkeleton from "@/_components/common/loaders/skeltons/BrandSkelton";
+import AboutSklelton from "@/_components/common/loaders/skeltons/AboutSkelton";
+import BlogSkelton from "@/_components/common/loaders/skeltons/BlogSkelton";
 const HomePage = () => {
-  const t = useTranslations("Home");
-
   return (
     <>
       {/* Hero Section */}
-      <section className="py-10 md:py-32 lg:py-48 bg-[#cee8ff] relative">
-        <Container>
-          <HeroSection />
-        </Container>
-      </section>
+      <Suspense fallback={<HeroSkeleton />}>
+        <section className="py-10 md:py-32 lg:py-48 bg-[#cee8ff] relative">
+          <Container>
+            <HeroSection />
+          </Container>
+        </section>
+      </Suspense>
+
       {/* Statistics Section */}
-      <StatisticsSection />
+      <Suspense fallback={<StatisticsSectionSkeleton />}>
+        <StatisticsSection />
+      </Suspense>
+      <Suspense fallback={<TopCategoriesSkeleton />}>
+        <section className="bg-[#D7ECFF] py-16 md:py-20">
+          <div className="containerr">
+            <TopCategoriesSection />
+          </div>
+        </section>
+      </Suspense>
+      <Suspense fallback={<BlogSkelton />}>
+        <section className="bg-[#FFFFF] py-16 md:py-20">
+          <div className="containerr">
+            <TestimonialsSection />
+          </div>
+        </section>
+      </Suspense>
 
-      <section className="bg-[#D7ECFF] py-16 md:py-20">
-        <div className="containerr">
-          <TopCategoriesSection />
-        </div>
-      </section>
-
-      <section className="bg-[#FFFFF] py-16 md:py-20">
-        <div className="containerr">
-          <TestimonialsSection />
-        </div>
-      </section>
-
-      <section className="bg-[#FFFFF] py-16 md:py-20">
-        <div className="containerr">
-          <TeachersSection />
-        </div>
-      </section>
+      <Suspense fallback={<BrandsCardSkeleton />}>
+        <section className="bg-[#FFFFF] py-16 md:py-20">
+          <div className="containerr">
+            <TeachersSection />
+          </div>
+        </section>
+      </Suspense>
 
       {/* About Us Section */}
-      <section className="bg-[#cee8ff] py-15 md:py-28">
-        <Container>
-          <AboutUsSection />
-        </Container>
-      </section>
+      <Suspense fallback={<AboutSklelton />}>
+        <section className="bg-[#cee8ff] py-15 md:py-28">
+          <Container>
+            <AboutUsSection />
+          </Container>
+        </section>
+      </Suspense>
 
       {/* Blogs Section */}
-      <section className="bg-[#cee8ff] py-15 md:py-28 md:pb-96 pb-96">
-        <Container>
-          <BlogsSection />
-        </Container>
-      </section>
+      <Suspense fallback={<BlogSkelton />}>
+        <section className="bg-[#cee8ff] py-15 md:py-28 md:pb-96 pb-96">
+          <Container>
+            <BlogsSection />
+          </Container>
+        </section>
+      </Suspense>
     </>
   );
 };

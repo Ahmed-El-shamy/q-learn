@@ -22,4 +22,4 @@ export type SkeletonType =
     | "productDetails"
     | "coupon"
     | "footer"
-    | "testimonail";
+    | "testimonail" | "stats";

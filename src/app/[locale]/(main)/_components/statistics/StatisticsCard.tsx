@@ -1,40 +1,54 @@
 "use client";
-import { LucideIcon } from "lucide-react";
+
+import type { LucideIcon } from "lucide-react";
+import { BookOpen, Users, Earth, Heart } from "lucide-react";
 import { useCountUp } from "../../_hooks/useCountUp";
-interface StatisticsCardProps {
+
+type IconKey = "book" | "users" | "earth" | "heart";
+
+const ICONS: Record<IconKey, LucideIcon> = {
+  book: BookOpen,
+  users: Users,
+  earth: Earth,
+  heart: Heart,
+};
+
+type StatisticsCardProps = {
   className?: string;
   bgColor: string;
-  icon: LucideIcon;
-  number: number;
+  iconKey: IconKey;
+  number?: number;
   text: string;
-}
+};
 
-const StatisticsCard = ({
+export default function StatisticsCard({
   className,
   bgColor,
-  icon: Icon,
+  iconKey,
   number,
   text,
-}: StatisticsCardProps) => {
-  const countUp = number !== undefined ? useCountUp(number) : null;
+}: StatisticsCardProps) {
+  const Icon = ICONS[iconKey];
+  const countUp = typeof number === "number" ? useCountUp(number) : null;
+
   return (
-    <div className="bg-white rounded-2xl border border-[#cee8ff] p-10 text-[#425073]">
+    <div className="bg-white rounded-2xl flex flex-col items-center justify-center border border-[#cee8ff] p-10 text-[#425073]">
       <div
-        className={`icon w-20 h-20 rounded-full flex items-center justify-center ${
+        className={`w-20 h-20 rounded-full flex items-center justify-center ${
           className || ""
         }`}
         style={{ backgroundColor: bgColor }}
       >
         <Icon color="white" size={40} />
       </div>
-      {number !== undefined && (
-        <h2 ref={countUp?.ref || null} className="font-bold text-3xl mt-5">
+
+      {typeof number === "number" && (
+        <h2 ref={countUp?.ref ?? null} className="font-bold text-3xl mt-5">
           {countUp?.count}+
         </h2>
       )}
+
       <p>{text}</p>
     </div>
   );
-};
-
-export default StatisticsCard;
+}

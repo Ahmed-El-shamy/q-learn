@@ -114,3 +114,6 @@ const HorizontalCarousel: FC<HorizontalCarouselProps> = ({
 };
 
 export default HorizontalCarousel;
+/**
+ *
+ */
