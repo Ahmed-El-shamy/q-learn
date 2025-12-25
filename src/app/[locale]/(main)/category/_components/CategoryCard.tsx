@@ -1,56 +1,104 @@
-import type { FC, ReactNode } from "react";
+"use client";
+
+import type { FC } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 interface CategoryCardProps {
-  icon?: ReactNode;
-  title: string;
-  coursesCount: number;
+  name: string;
+  slug: string;
+  courses_count: number;
+  image?: string;
 }
 
-const CategoryCard: FC<CategoryCardProps> = ({ icon, title, coursesCount }) => {
+const CategoryCard: FC<CategoryCardProps> = ({
+  name,
+  slug,
+  courses_count,
+  image,
+}) => {
   return (
-    <article
+    <Link
+      href={`/categories/${slug}`}
+      aria-label={`Open category: ${name}`}
       className="
-        flex flex-col items-center justify-center
+        group block
         w-[180px] sm:w-[200px] md:w-[220px] lg:w-[230px]
-        h-[180px]
-        rounded-2xl
-        bg-[#2E3A4A]
-        text-white
-        px-6
-        shadow-sm duration-300
-        transition-transform transition-shadow
+        h-[200px]
+        rounded-3xl
+        border border-slate-200/70
+        bg-white
+        shadow-sm
+        overflow-hidden
+        transition
         hover:-translate-y-1 hover:shadow-lg
-        focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500
+        focus-visible:outline-none
+        focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2
       "
-      tabIndex={-1}
     >
-      {/* Icon */}
-      <div className="mb-6" aria-hidden="true">
-        {icon ?? (
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="opacity-90"
-          >
-            <rect x="3" y="10" width="3" height="10" rx="1.5" fill="white" />
-            <rect x="10.5" y="6" width="3" height="14" rx="1.5" fill="white" />
-            <rect x="18" y="3" width="3" height="17" rx="1.5" fill="white" />
-          </svg>
+      {/* Media */}
+      <div className="relative h-[110px] bg-gradient-to-br from-sky-50 to-indigo-50">
+        {image ? (
+          <Image
+            src={image}
+            alt={name}
+            fill
+            sizes="(max-width: 640px) 180px, (max-width: 768px) 200px, (max-width: 1024px) 220px, 230px"
+            className="
+              object-contain
+              p-4
+              transition-transform duration-300
+              group-hover:scale-[1.03]
+            "
+            quality={90}
+            loading="lazy"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-xs font-semibold text-slate-500">
+              No image
+            </span>
+          </div>
         )}
+
+        {/* subtle overlay for modern feel */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/40 via-transparent to-transparent"
+          aria-hidden="true"
+        />
       </div>
 
-      {/* Title */}
-      <h3 className="text-sm font-semibold truncate max-w-full mb-1">
-        {title}
-      </h3>
+      {/* Content */}
+      <div className="flex h-[90px] flex-col justify-between px-4 py-3">
+        <div className="min-w-0">
+          <h3 className="text-sm font-semibold text-slate-900 line-clamp-2 leading-snug">
+            {name}
+          </h3>
+        </div>
 
-      {/* Subtitle */}
-      <p className="text-xs text-white/70">
-        {coursesCount} {coursesCount === 1 ? "Courses" : "Courses"}
-      </p>
-    </article>
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-slate-500">
+            {courses_count} {courses_count === 1 ? "Course" : "Courses"}
+          </span>
+
+          <span
+            className="
+              inline-flex items-center
+              rounded-full
+              bg-slate-900
+              px-2.5 py-1
+              text-[11px] font-semibold
+              text-white
+              transition
+              group-hover:bg-sky-600
+            "
+            aria-label={`${courses_count} courses`}
+          >
+            Explore
+          </span>
+        </div>
+      </div>
+    </Link>
   );
 };
 

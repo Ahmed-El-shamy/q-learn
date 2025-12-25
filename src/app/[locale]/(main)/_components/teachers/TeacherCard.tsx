@@ -1,159 +1,305 @@
+"use client";
+
 import type { FC } from "react";
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
+import type {
+  Instructor,
+  InstructorSocialMedia,
+} from "@/types/instructor.types";
+import {
+  Star,
+  Users,
+  MessageSquare,
+  Globe,
+  Instagram,
+  Facebook,
+  Linkedin,
+  Youtube,
+  Twitter,
+  MessageCircle,
+  Music2,
+} from "lucide-react";
 
-type SocialPlatform = "facebook" | "twitter" | "linkedin" | "instagram";
-
-interface SocialLink {
-  platform: SocialPlatform;
-  href: string;
-}
-
-type GradientVariant = "blue" | "purple" | "pink";
-
-interface TeacherCardProps {
-  name: string;
-  title: string;
-  photo: StaticImageData | string;
-  photoAlt?: string;
-  socialLinks?: SocialLink[];
-  gradient?: GradientVariant;
+type TeacherCardProps = {
+  instructor: Instructor;
   className?: string;
+};
+
+/* =========================
+   Utils
+========================= */
+function formatCompact(n: number) {
+  if (!Number.isFinite(n)) return "0";
+  return Intl.NumberFormat("en", { notation: "compact" }).format(n);
 }
 
-const gradientClasses: Record<GradientVariant, string> = {
-  blue: "from-[#02A6FF] via-[#407BFF] to-[#0049FF]",
-  purple: "from-[#A855F7] via-[#8B5CF6] to-[#6366F1]",
-  pink: "from-[#EC4899] via-[#A855F7] to-[#6366F1]",
-};
+function isAbsoluteUrl(v: string) {
+  if (!v) return false;
+  return /^https?:\/\//i.test(v);
+}
 
-const platformLabel: Record<SocialPlatform, string> = {
-  facebook: "Facebook",
-  twitter: "Twitter / X",
-  linkedin: "LinkedIn",
-  instagram: "Instagram",
-};
+function safeUrl(url: string) {
+  if (!url) return "#";
+  if (/^https?:\/\//i.test(url)) return url;
+  return `https://${url.replace(/^\/+/, "")}`;
+}
 
-const platformLetter: Record<SocialPlatform, string> = {
-  facebook: "f",
-  twitter: "t",
-  linkedin: "in",
-  instagram: "ig",
-};
+function getSocialLabel(type: string, name?: string) {
+  const t = (type || "").toLowerCase();
+  if (name) return name;
+  if (t.includes("facebook")) return "Facebook";
+  if (t.includes("instagram")) return "Instagram";
+  if (t.includes("linkedin")) return "LinkedIn";
+  if (t.includes("youtube")) return "YouTube";
+  if (t.includes("tiktok")) return "TikTok";
+  if (t.includes("twitter") || t.includes("x")) return "X (Twitter)";
+  if (t.includes("whatsapp")) return "WhatsApp";
+  return "Website";
+}
 
-const TeacherCard: FC<TeacherCardProps> = ({
-  name,
-  title,
-  photo,
-  photoAlt,
-  socialLinks = [],
-  gradient = "blue",
-  className = "",
+function pickFallbackIcon(type: string, icon: string) {
+  const t = (type || "").toLowerCase();
+  const i = (icon || "").toLowerCase();
+
+  if (t.includes("instagram") || i.includes("instagram")) return Instagram;
+  if (t.includes("facebook") || i.includes("facebook")) return Facebook;
+  if (t.includes("linkedin") || i.includes("linkedin")) return Linkedin;
+  if (t.includes("youtube") || i.includes("youtube")) return Youtube;
+  if (t.includes("twitter") || t === "x" || i.includes("twitter"))
+    return Twitter;
+  if (t.includes("whatsapp") || i.includes("whatsapp")) return MessageCircle;
+  if (t.includes("tiktok") || i.includes("tiktok")) return Music2;
+
+  // heroicon-o-globe-alt, website, unknown …
+  return Globe;
+}
+
+/* =========================
+   Sub Components
+========================= */
+const SocialIconRenderer: FC<{ icon: string; type: string; alt: string }> = ({
+  icon,
+  type,
+  alt,
 }) => {
-  const gradientClass = gradientClasses[gradient];
+  if (isAbsoluteUrl(icon)) {
+    return (
+      <span className="relative h-5 w-5">
+        <Image
+          src={icon}
+          alt={alt}
+          fill
+          sizes="20px"
+          className="object-contain"
+        />
+      </span>
+    );
+  }
+
+  const Icon = pickFallbackIcon(type, icon);
+  return <Icon className="h-5 w-5" aria-hidden="true" />;
+};
+
+const SocialButton: FC<{
+  item: InstructorSocialMedia;
+  instructorName: string;
+}> = ({ item, instructorName }) => {
+  const label = getSocialLabel(item.type, item.name);
+
+  return (
+    <a
+      href={safeUrl(item.profile_url)}
+      target="_blank"
+      rel="noreferrer"
+      className="
+        inline-flex h-10 w-10 items-center justify-center
+        rounded-full
+        bg-white/90 backdrop-blur
+        shadow-sm
+        transition
+        hover:bg-white
+        focus-visible:outline-none
+        focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2
+      "
+      aria-label={`Open ${instructorName} on ${label}`}
+      title={label}
+    >
+      <SocialIconRenderer icon={item.icon} type={item.type} alt={label} />
+    </a>
+  );
+};
+
+const StatChip: FC<{
+  icon: React.ReactNode;
+  label: string;
+  value: number;
+}> = ({ icon, label, value }) => {
+  return (
+    <div
+      className="
+        flex items-center gap-2
+        rounded-2xl
+        bg-slate-50
+        px-3 py-2
+        text-slate-700
+      "
+      aria-label={`${label}: ${value}`}
+    >
+      <span className="shrink-0 text-slate-500" aria-hidden="true">
+        {icon}
+      </span>
+      <div className="min-w-0">
+        <p className="text-xs text-slate-500 leading-none">{label}</p>
+        <p className="text-sm font-semibold leading-none">
+          {formatCompact(value)}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+/* =========================
+   TeacherCard
+========================= */
+const TeacherCard: FC<TeacherCardProps> = ({ instructor, className = "" }) => {
+  const name = instructor.user?.name ?? "Instructor";
+  const title = instructor.user?.job_title || "Instructor";
+  const avatarSrc = instructor.avatar || instructor.user?.avatar_url;
+  const social = instructor.social_media ?? [];
 
   return (
     <article
       className={`
-        group relative mx-auto
-        w-[260px] sm:w-[280px]
-        pb-12   /* عشان نسيب مساحة للكارت الأبيض */
-        focus-within:outline-none
+        group relative
+        w-[260px] sm:w-[280px] md:w-[300px]
+        overflow-hidden rounded-3xl
+        border border-slate-200/70
+        bg-white
+        shadow-sm
+        transition
+        hover:shadow-lg
+        focus-within:shadow-lg
         ${className}
       `}
-      aria-label={`${name}, ${title}`}
+      aria-label={`Instructor card: ${name}`}
     >
-      {/* ظل خلفي خفيف */}
-      <div
-        className="
-          absolute inset-0
-          translate-x-3 translate-y-3
-          rounded-[32px]
-          bg-slate-100
-          pointer-events-none
-        "
-        aria-hidden="true"
-      />
-
-      {/* الكارت الأساسي */}
-      <div
-        className={`
-          relative z-[1]
-          rounded-[32px]
-          bg-gradient-to-b ${gradientClass}
-          shadow-lg
-          transition-transform transition-shadow
-          duration-300
-          group-hover:-translate-y-2
-          group-hover:shadow-2xl
-        `}
-      >
-        {/* صورة المدرّس */}
-        <div className="relative aspect-[3/4]">
+      {/* ====== Media ====== */}
+      <div className="relative aspect-[4/5] bg-slate-100">
+        {avatarSrc ? (
           <Image
-            src={photo}
-            alt={photoAlt ?? name}
+            src={avatarSrc}
+            alt={name}
             fill
-            sizes="(min-width: 1024px) 280px, 60vw"
-            className="object-cover object-bottom"
+            sizes="(max-width: 640px) 260px, (max-width: 768px) 280px, 300px"
+            className="
+              object-cover
+              transition-transform duration-500
+              group-hover:scale-[1.03]
+            "
+            quality={90}
             priority={false}
           />
-        </div>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center text-slate-400">
+            <span className="text-sm">No image</span>
+          </div>
+        )}
 
-        {/* الكارت الأبيض اللي تحت */}
+        {/* Gradient overlay */}
         <div
-          className="
-            absolute left-1/2 bottom-0
-            w-[85%] max-w-[230px]
-            -translate-x-1/2 translate-y-1/3  /* بدل 1/2 */
-          "
-        >
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-black/0"
+          aria-hidden="true"
+        />
+
+        {/* Social (Desktop hover) */}
+        {social.length > 0 && (
           <div
             className="
-              rounded-[24px]
-              bg-white
-              px-5 pt-4 pb-4
-              shadow-xl
-              flex flex-col items-center
-              text-center
+              absolute bottom-3 left-3 right-3
+              hidden md:flex items-center gap-2
+              opacity-0 translate-y-2
+              transition-all duration-300
+              group-hover:opacity-100 group-hover:translate-y-0
             "
           >
-            <h3 className="text-base sm:text-lg font-semibold text-slate-900">
-              {name}
-            </h3>
-            <p className="mt-1 text-xs sm:text-sm text-slate-500">{title}</p>
-
-            {socialLinks.length > 0 && (
-              <div className="mt-4 flex items-center justify-center gap-3">
-                {socialLinks.map(({ platform, href }) => (
-                  <a
-                    key={platform}
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="
-                      inline-flex h-9 w-9 items-center justify-center
-                      rounded-full
-                      bg-slate-100
-                      text-slate-600
-                      text-xs font-semibold
-                      hover:bg-slate-900 hover:text-white
-                      focus-visible:outline-none
-                      focus-visible:ring-2
-                      focus-visible:ring-offset-2
-                      focus-visible:ring-sky-500
-                      transition-colors
-                    "
-                    aria-label={`Visit ${name} on ${platformLabel[platform]}`}
-                  >
-                    <span aria-hidden="true" className="">
-                      {platformLetter[platform]}
-                    </span>
-                  </a>
-                ))}
-              </div>
-            )}
+            {social.slice(0, 5).map((item) => (
+              <SocialButton key={item.id} item={item} instructorName={name} />
+            ))}
           </div>
+        )}
+      </div>
+
+      {/* ====== Content (fixed height) ====== */}
+      <div className="flex min-h-[170px] flex-col justify-between px-4 py-4">
+        {/* Header */}
+        <div className="min-w-0">
+          <h3 className="line-clamp-1 text-lg font-semibold text-slate-900">
+            {name}
+          </h3>
+          <p className="mt-0.5 line-clamp-1 text-sm text-slate-500">{title}</p>
+
+          {/* Rating Row */}
+          <div className="mt-3 flex items-center gap-2 text-xs text-slate-600">
+            <span className="inline-flex items-center gap-1">
+              <Star className="h-4 w-4" aria-hidden="true" />
+              <span className="font-semibold">
+                {formatCompact(instructor.ratings_count ?? 0)}
+              </span>
+              <span className="text-slate-400">ratings</span>
+            </span>
+
+            <span className="h-4 w-px bg-slate-200" aria-hidden="true" />
+
+            <span className="inline-flex items-center gap-1">
+              <MessageSquare className="h-4 w-4" aria-hidden="true" />
+              <span className="font-semibold">
+                {formatCompact(instructor.courses_count ?? 0)}
+              </span>
+              <span className="text-slate-400">courses</span>
+            </span>
+            <span className="h-4 w-px bg-slate-200" aria-hidden="true" />
+            <span className="inline-flex items-center gap-1">
+              <Users className="h-4 w-4" aria-hidden="true" />
+              <span className="font-semibold">
+                {formatCompact(instructor.students_count ?? 0)}
+              </span>
+              <span className="text-slate-400">students</span>
+            </span>
+          </div>
+
+          {/* Social (Mobile visible) */}
+          {social.length > 0 && (
+            <div className="mt-3 flex items-center gap-2 md:hidden">
+              {social.slice(0, 4).map((item) => (
+                <SocialButton key={item.id} item={item} instructorName={name} />
+              ))}
+            </div>
+          )}
         </div>
+
+        {/* Stats chips */}
+        {/* <div className="mt-4 grid grid-cols-2 gap-2">
+          <StatChip
+            icon={<Users className="h-4 w-4" aria-hidden="true" />}
+            label="Students"
+            value={instructor.students_count ?? 0}
+          />
+          <StatChip
+            icon={<BookOpen className="h-4 w-4" aria-hidden="true" />}
+            label="Courses"
+            value={instructor.courses_count ?? 0}
+          />
+          <StatChip
+            icon={<MessageSquare className="h-4 w-4" aria-hidden="true" />}
+            label="Reviews"
+            value={instructor.reviews_count ?? 0}
+          />
+          <StatChip
+            icon={<Star className="h-4 w-4" aria-hidden="true" />}
+            label="Ratings"
+            value={instructor.ratings_count ?? 0}
+          />
+        </div> */}
       </div>
     </article>
   );

@@ -1,136 +1,148 @@
 import type { FC } from "react";
+import Image from "next/image";
+import type { Test } from "./types/test.types";
 
 interface TestimonialCardProps {
-  categoryLabel?: string; // Course Quality
-  rating?: number; // 1–5
-  quote: string;
-  name: string;
-  role: string; // Photographer, Cricketer, ...
-  company?: string; // LucidChart مثلا
-  avatarSrc?: string;
-  initials?: string; // لو مفيش صورة
+  review: Test;
+  className?: string;
+}
+
+function initials(name?: string) {
+  const n = (name ?? "").trim();
+  if (!n) return "??";
+  const parts = n.split(" ").filter(Boolean);
+  const chars = parts.slice(0, 2).map((p) => p[0]?.toUpperCase());
+  return chars.join("") || n.slice(0, 2).toUpperCase();
 }
 
 const TestimonialCard: FC<TestimonialCardProps> = ({
-  categoryLabel = "Course Quality",
-  rating = 5,
-  quote,
-  name,
-  role,
-  company,
-  avatarSrc,
-  initials,
+  review,
+  className = "",
 }) => {
-  const safeRating = Math.max(0, Math.min(5, rating));
+  const name = review?.name ?? "Student";
+  const job = review?.job_title ?? "Learner";
+  const quote = review?.quote ?? "";
 
   return (
-    <article
-      className="
-        relative
-        w-[360px] sm:w-[420px] lg:w-[440px]
-        bg-[#E7F3FF]
-        rounded-tr-[48px]
-        rounded-tl-[48px]
-        rounded-bl-[48px]
-        px-10 pt-16 pb-10
-        flex flex-col items-center justify-between
-        text-center
-        duration-300 transition-all hover:translate-y-2
-        h-full
-      "
+    <figure
+      className={`
+        group
+        w-[300px] sm:w-[360px] md:w-[420px]
+        h-[320px] sm:h-[340px]
+        rounded-3xl
+        border border-slate-200/70
+        bg-white
+        shadow-sm
+        overflow-hidden
+        transition
+        hover:-translate-y-1 hover:shadow-lg
+        ${className}
+      `}
       aria-label={`Testimonial from ${name}`}
     >
-      {/* Badge أعلى الكارت */}
+      {/* Top accent */}
       <div
-        className="
-          absolute top-0 left-1/2 -translate-x-1/2 
-          bg-[#4A5568]
-          text-white
-          rounded-full
-          px-8 py-2
-          flex items-center gap-2
-          text-xs sm:text-sm font-medium
-          shadow-md
-        "
-      >
-        {/* النجوم */}
-        <div className="flex items-center gap-0.5" aria-hidden="true">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <span
-              key={index}
-              className={
-                index < safeRating
-                  ? "text-[#FFB400] text-sm"
-                  : "text-white/40 text-sm"
-              }
-            >
-              ★
-            </span>
-          ))}
-        </div>
-        <span className="border-l border-white/20 h-4" aria-hidden="true" />
-        <span>{categoryLabel}</span>
-
-        {/* نص مخفي لقرّاء الشاشة */}
-        <span className="sr-only">
-          Rated {safeRating} out of 5 for {categoryLabel}
-        </span>
-      </div>
-
-      {/* علامة الاقتباس الخلفية */}
-      <div
-        className="
-          pointer-events-none
-          select-none
-          absolute right-16 bottom-16
-          text-[120px]
-          font-serif
-          leading-none
-          text-white/35
-        "
+        className="h-2 w-full bg-gradient-to-r from-sky-500/60 via-indigo-500/40 to-emerald-500/50"
         aria-hidden="true"
-      >
-        ”
-      </div>
+      />
 
-      {/* النص */}
-      <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl z-[1]">
-        {quote}
-      </p>
-
-      {/* الشخص */}
-      <div className="mt-6 flex flex-col items-center gap-2 z-[1]">
-        {/* Avatar */}
-        {avatarSrc ? (
-          <img
-            src={avatarSrc}
-            alt={name}
-            className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm"
-          />
-        ) : (
+      <div className="flex h-[calc(100%-0.5rem)] flex-col p-5 sm:p-6">
+        {/* Header (avatar + identity) */}
+        <figcaption className="flex items-center gap-3">
+          {/* Avatar */}
           <div
             className="
-              w-12 h-12 rounded-full
-              flex items-center justify-center
-              text-sm font-semibold
-              bg-[#00F2FE]
-              text-slate-800
-              shadow-md
+              relative h-12 w-12 shrink-0 overflow-hidden rounded-full
+              border border-slate-200 bg-slate-100
             "
-            aria-hidden="true"
           >
-            {initials}
+            {review?.image ? (
+              <Image
+                src={review.image}
+                alt={name}
+                fill
+                sizes="48px"
+                className="object-cover"
+                quality={85}
+                loading="lazy"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center">
+                <span className="text-sm font-semibold text-slate-700">
+                  {initials(name)}
+                </span>
+              </div>
+            )}
           </div>
-        )}
 
-        {/* Role + Name */}
-        <div className="text-xs text-slate-500">
-          {company && <div className="mb-0.5">{company}</div>}
-          <div>{role}</div>
+          {/* Name + role */}
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-slate-900 line-clamp-1">
+              {name}
+            </p>
+            <p className="text-xs text-slate-500 line-clamp-1">{job}</p>
+          </div>
+
+          {/* Optional badge (non-interactive) */}
+          <div className="ml-auto">
+            <span className="inline-flex items-center rounded-full bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+              Verified
+            </span>
+          </div>
+        </figcaption>
+
+        {/* Quote */}
+        <div className="mt-4 flex-1">
+          <blockquote className="relative">
+            {/* Quote mark */}
+            <span
+              className="absolute -left-1 -top-3 text-5xl leading-none text-slate-200 select-none"
+              aria-hidden="true"
+            >
+              “
+            </span>
+
+            <p className="pl-6 text-sm sm:text-base leading-relaxed text-slate-700 line-clamp-5">
+              {quote}
+            </p>
+          </blockquote>
         </div>
-        <div className="text-sm font-semibold text-slate-800">{name}</div>
+
+        {/* Footer */}
+        <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+          <div className="text-xs text-slate-500">
+            Education platform experience
+          </div>
+
+          {/* Rating (static UI – you can wire it later if API provides it) */}
+          <div
+            className="flex items-center gap-1"
+            aria-label="Rating 5 out of 5"
+          >
+            <span
+              className="h-2 w-2 rounded-full bg-sky-500"
+              aria-hidden="true"
+            />
+            <span
+              className="h-2 w-2 rounded-full bg-sky-500"
+              aria-hidden="true"
+            />
+            <span
+              className="h-2 w-2 rounded-full bg-sky-500"
+              aria-hidden="true"
+            />
+            <span
+              className="h-2 w-2 rounded-full bg-sky-500"
+              aria-hidden="true"
+            />
+            <span
+              className="h-2 w-2 rounded-full bg-sky-500"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
       </div>
-    </article>
+    </figure>
   );
 };
 

@@ -52,6 +52,13 @@ export class Api {
       reviews: "/site/reviews",
       courses_qa: "/site/courses_qa",
       blogs: "/site/blogs",
+      stats: "/site/home_statistics",
+      topCategories: "/site/categories/top",
+      hero: "/site/hero_section",
+      instructors: "/site/instructors",
+      partners: "/site/partners",
+      about: "/site/about_us",
+      testimonials: "/site/testimonials",
     },
     auth: {
       login: "/site/login",

@@ -1,111 +1,182 @@
-import MainBtn from "@/_components/common/buttons/MainBtn";
-import HorizontalCarousel from "@/_components/common/carousels/HorizontalCarousel";
-import { CircleCheckBig, Play } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { CircleCheckBig, Play } from "lucide-react";
 
-const partnerData = [
-  {
-    image: "/images/homepage/logo (1).jpg",
-  },
-  {
-    image: "/images/homepage/logo (2).jpg",
-  },
-  {
-    image: "/images/homepage/logo (3).jpg",
-  },
-  {
-    image: "/images/homepage/logo (4).jpg",
-  },
-  {
-    image: "/images/homepage/logo (1).jpg",
-  },
-  {
-    image: "/images/homepage/logo (2).jpg",
-  },
-  {
-    image: "/images/homepage/logo (3).jpg",
-  },
-  {
-    image: "/images/homepage/logo (4).jpg",
-  },
-];
+import api, { Api } from "@/_lib/api/api";
+import ErrorHandler from "@/_components/common/error-handler/ErrorHandler";
+import type { SimpleSection } from "@/types/simpleSection.types";
+import HtmlContent from "@/_components/common/HtmlContent";
+import Partners from "./partners/Partners";
+import MainBtn from "@/_components/common/buttons/MainBtn";
+import Container from "@/_components/common/container/Container";
 
-const AboutUsSection = () => {
-  return (
-    <>
-      <div className="text-center text-[#1f2b40]">
-        <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl xl:text-5xl">
-          About Us
-        </h2>
-        <p className="text-lg mt-5 mx-auto w-full sm:w-[90%] md:w-[60%] lg:w-full">
-          Here is short details about our institute, Also you can see how we
-          work
-        </p>
+const AboutUsSection = async () => {
+  try {
+    const response = await api.get(Api.routes.site.about);
+    if (!response?.status) return null;
 
-        <div className="flex flex-col lg:flex-row items-center gap-10 xl:gap-15 mt-20">
-          <div className="video w-92 md:w-auto lg:w-full relative">
-            <img
-              src="/images/homepage/about-1.jpg"
-              alt="Video Thumbnail"
-              className="rounded-xl w-full object-cover"
-            />
-            <Link
-              href="https://youtu.be/1SZle1skb84?si=jYHf_B_7uZZxSYrq"
-              className="absolute top-[40%] sm:top-[38%] left-[45%] sm:left-[42%] cursor-pointer block"
-            >
-              <button className="flex items-center justify-center w-14 sm:w-20 md:w-24 h-14 sm:h-20 md:h-24 rounded-full bg-white hover:bg-[#1f2b40] duration-300 cursor-pointer group">
-                <Play className="size-6 sm:size-10 fill-[#1f2b40] stroke-[#1f2b40] group-hover:fill-white group-hover:stroke-white" />
-              </button>
-            </Link>
-          </div>
+    const data = response.data as SimpleSection;
 
-          <div className="flex-column gap-5 xl:gap-7 text-left w-full">
-            <h3 className="font-semibold text-3xl">
-              Corporate Learning Institute
-            </h3>
-
-            <div className="flex-column gap-5 xl:gap-7 text-[#656a7b] text-[17px]">
-              <p>
-                Since the year of 2008 and now at in 2019 “Spondon It” most
-                popular in UI & UX, Web App Development, Digital Marketing and
-                Graphic Design related service provider company both Local
-                (Bangladesh) and global too!
+    return (
+      <section aria-labelledby="about-heading" className="py-12 md:py-16">
+        {/* Wrapper */}
+        <Container>
+          {/* Grid */}
+          <div className="grid items-center gap-10 md:grid-cols-2">
+            {/* Text side */}
+            <div className="text-start">
+              <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-600">
+                About our institute
               </p>
-              <p>
-                At a time we are also doing our best for our clients by giving
-                our service. This gives us boost in popularity in this Digital
-                Tech World.
-              </p>
-              <div className="flex gap-5">
-                <CircleCheckBig />
-                Explore the wide-range of online course in the world
-              </div>
-              <div className="flex gap-5">
-                <CircleCheckBig />
-                Popular online course in the world
+
+              <h2
+                id="about-heading"
+                className="mt-4 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl"
+              >
+                {data?.title}
+              </h2>
+
+              {data?.description && (
+                <div className="mt-4 text-slate-600">
+                  {/* لو عندك tailwind typography هتبقى جميلة جدًا */}
+                  <div className="prose prose-slate max-w-none prose-p:leading-relaxed">
+                    <HtmlContent html={data.description} />
+                  </div>
+                </div>
+              )}
+
+              {/* Feature bullets (static but perfect for education sites) */}
+              <ul
+                className="mt-6 grid gap-3 sm:grid-cols-2"
+                aria-label="Key highlights"
+              >
+                <li className="flex items-start gap-2 rounded-2xl border border-slate-200/70 bg-white px-4 py-3">
+                  <CircleCheckBig
+                    className="mt-0.5 h-5 w-5 text-slate-900"
+                    aria-hidden="true"
+                  />
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-slate-900">
+                      Expert-led courses
+                    </p>
+                    <p className="text-xs text-slate-600">
+                      Learn from instructors with real industry experience.
+                    </p>
+                  </div>
+                </li>
+
+                <li className="flex items-start gap-2 rounded-2xl border border-slate-200/70 bg-white px-4 py-3">
+                  <CircleCheckBig
+                    className="mt-0.5 h-5 w-5 text-slate-900"
+                    aria-hidden="true"
+                  />
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-slate-900">
+                      Flexible learning
+                    </p>
+                    <p className="text-xs text-slate-600">
+                      Study anytime with mobile-friendly lessons.
+                    </p>
+                  </div>
+                </li>
+
+                <li className="flex items-start gap-2 rounded-2xl border border-slate-200/70 bg-white px-4 py-3">
+                  <CircleCheckBig
+                    className="mt-0.5 h-5 w-5 text-slate-900"
+                    aria-hidden="true"
+                  />
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-slate-900">
+                      Practical outcomes
+                    </p>
+                    <p className="text-xs text-slate-600">
+                      Hands-on projects designed for real skills.
+                    </p>
+                  </div>
+                </li>
+
+                <li className="flex items-start gap-2 rounded-2xl border border-slate-200/70 bg-white px-4 py-3">
+                  <CircleCheckBig
+                    className="mt-0.5 h-5 w-5 text-slate-900"
+                    aria-hidden="true"
+                  />
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-slate-900">
+                      Trusted partners
+                    </p>
+                    <p className="text-xs text-slate-600">
+                      Collaborations that support your journey.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+
+              {/* CTA */}
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                {/* لو MainBtn عندك بيدعم asChild أو href استخدمه، وإلا استخدم Link */}
+                <MainBtn title="Explore courses" />
               </div>
             </div>
-            <MainBtn title="know more" className="w-fit" />
-          </div>
-        </div>
 
-        <div className="partner mt-28">
-          <h3 className="text-3xl mb-8">Our Partner</h3>
-          <HorizontalCarousel>
-            {partnerData.map((partner, i) => (
-              <div key={i} className="w-[250px] h-28 rounded-xl bg-white">
-                <img
-                  src={partner.image}
-                  alt="Logo"
-                  className="w-full h-full object-contain"
+            {/* Media side */}
+            <div className="relative">
+              <div
+                className="
+                  relative overflow-hidden rounded-3xl
+                  border border-slate-200/70 bg-slate-100
+                  shadow-sm
+                "
+              >
+                {/* Decorative gradient */}
+                <div
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-sky-500/10 via-transparent to-indigo-500/10"
+                  aria-hidden="true"
                 />
+
+                <div className="relative aspect-[4/3] sm:aspect-[16/11]">
+                  <Image
+                    src={data?.image}
+                    alt={data?.title || "About image"}
+                    fill
+                    priority={false}
+                    quality={90}
+                    sizes="(max-width: 768px) 100vw, 520px"
+                    className="object-cover"
+                  />
+                </div>
+
+                {/* Bottom overlay card */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="rounded-2xl bg-white/90 backdrop-blur border border-slate-200/70 px-4 py-3 shadow-sm">
+                    <p className="text-sm font-semibold text-slate-900 line-clamp-1">
+                      Learn smarter, grow faster.
+                    </p>
+                    <p className="mt-0.5 text-xs text-slate-600 line-clamp-2">
+                      Build skills with structured learning paths, real
+                      practice, and support.
+                    </p>
+                  </div>
+                </div>
               </div>
-            ))}
-          </HorizontalCarousel>
-        </div>
-      </div>
-    </>
-  );
+
+              {/* Small decorative blob */}
+              <div
+                className="pointer-events-none absolute -z-10 -right-8 -top-8 h-24 w-24 rounded-full bg-sky-200/40 blur-2xl"
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+
+          {/* Partners */}
+          <div className="mt-10">
+            <Partners />
+          </div>
+        </Container>
+      </section>
+    );
+  } catch {
+    return <ErrorHandler />;
+  }
 };
 
 export default AboutUsSection;

@@ -7,6 +7,7 @@ import LanguageSwitcher from "@/_components/lang/LanguageSwitcher";
 import ScrollToTop from "@/_components/common/ScrollToTop";
 import { Suspense } from "react";
 import NavbarSkeleton from "@/_components/common/loaders/skeltons/NavbarSkeleton";
+import "keen-slider/keen-slider.min.css";
 
 export default function MainLayout({
   children,
