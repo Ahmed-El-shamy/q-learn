@@ -12,6 +12,7 @@ const PriceTypeFilter = () => {
   ];
 
   const handleToggle = (value: string) => {
+    // * Why are we mapping over the array ? 
     const currentSelected = (filters.is_free || []).map(String);
 
     const newValues = currentSelected.includes(value)
