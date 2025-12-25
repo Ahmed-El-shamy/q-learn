@@ -210,7 +210,7 @@ const CourseStickyContent = () => {
                     {course?.preview_video && (
                         <VideoDialog videoUrl={course.preview_video}>
                             <MainBtn
-                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-16 h-16 md:w-20 md:h-20 p-0 flex items-center justify-center bg-white/90 hover:bg-white border-none shadow-lg"
+                                containerClassName="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-16 h-16 md:w-20 md:h-20 p-0 flex items-center justify-center bg-white/90 hover:bg-white border-none shadow-lg"
                             >
                                 <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" fill="currentColor" />
                             </MainBtn>

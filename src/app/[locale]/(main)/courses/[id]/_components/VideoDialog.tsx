@@ -18,6 +18,7 @@ const VideoDialog = ({ videoUrl, children }: VideoDialogProps) => {
             <Dialog.Portal>
                 <Dialog.Overlay className="fixed inset-0 bg-black/40 z-50" />
                 <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-4xl px-4 focus:outline-none">
+                    <Dialog.Title className="sr-only hidden">Video Player</Dialog.Title>
                     <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
                         <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                             <video

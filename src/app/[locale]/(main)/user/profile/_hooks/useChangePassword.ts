@@ -9,6 +9,7 @@ import {
 } from "../_schema/ProfilePasswordSchema";
 import { toast } from "sonner";
 import useChangePasswordApi from "../../_services/useChangePassword";
+
 function buildChangePasswordFormData(payload: ChangeUserPassword) {
   const fd = new FormData();
   fd.append("current_password", payload.currentPassword);
@@ -67,7 +68,6 @@ const useChangePassword = () => {
       toast.error(msg);
     }
   };
-
 
   return {
     methods,

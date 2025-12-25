@@ -2,9 +2,36 @@ import CourseHero from "./_components/CourseHero";
 import CoursePanels from "./_components/CoursePanels";
 import CourseStickyContent from "./_components/CourseStickyContent";
 import api, { Api } from "@/_lib/api/api";
-import { Course } from "../_types/course.types";
+import type { CourseDetails } from "../_types/course.types";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import CourseDetailsQuery from "./_data/CourseDetailsQuery";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+
+
+export const generateMetadata = async ({
+  params
+}: {
+  params: Promise<{
+    id: string
+  }>
+}): Promise<Metadata> => {
+  try {
+    const {id} = await params;
+    const response = await api.get<CourseDetails>(`${Api.routes.site.courses}/${id}`);
+    if(response?.data) {
+      const course = response.data;
+      return {
+        title: course.title,
+        description: course.short_description
+      }
+    }
+    notFound()
+  
+  } catch(e) {
+    notFound();
+  }
+}
 
 const Page = async ({
   params

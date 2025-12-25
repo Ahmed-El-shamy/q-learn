@@ -42,31 +42,39 @@
     "course-content": "Course content",
     "toggle-all-chapters": "Toggle all chapters",
     "preview": "Preview",
-      "course-full-rating": "Course Rating",
-      "course-rating": "Rating",
-      "reviews": "Reviews",
-      "courses": "Courses",
-      "as-a-student": "as a student to leave a review",
-      "instructor": "Instructor",
-      "share": "Share",
-      "apply": "Apply",
-      "enter-your-coupon": "Enter your coupon",
-      "be-the-first-reviewer": "Be the first reviewer",
-      "review-the-course": "Review the course",
-      "rate-dialog-title": "Rate This Course",
-      "rate-dialog-description": "Share your experience by rating this course",
-      "rate-dialog-review-placeholder": "Write your review...",
-      "qa-dialog-title": "Ask a Question",
-      "qa-dialog-description": "Ask the instructor or other students a question about this course",
-      "qa-dialog-label": "Your question",
-      "qa-dialog-placeholder": "Type your question here...",
-      "qa-dialog-submit": "Submit question",
-      "qa": {
-        "title": "Questions & Answers",
-        "titles": "Questions & Answers",
-        "login-to-ask": "Log in or sign up to ask a question about this course",
-        "ask-question": "Have a question about this course? Ask it here."
-      }
+    "to-leave-a-review": "to leave a review",
+    "to-ask-a-question": "to ask a question",
+    "review-the-course": "Review the course",
+    "qa": {
+      "title": "Questions & Answers",
+      "titles": "Questions & Answers",
+      "login-to-ask": "Log in or sign up to ask a question about this course",
+      "ask-question": "Have a question about this course? Ask it here."
+    },
+    "course-full-rating": "Course Rating",
+    "course-rating": "Rating",
+    "reviews": "Reviews",
+    "courses": "Courses",
+    "as-a-student": "as a student to leave a review",
+    "instructor": "Instructor",
+    "share": "Share",
+    "apply": "Apply",
+    "enter-your-coupon": "Enter your coupon",
+    "be-the-first-reviewer": "Be the first reviewer",
+    "rate-dialog-title": "Rate This Course",
+    "rate-dialog-description": "Share your experience by rating this course",
+    "rate-dialog-review-placeholder": "Write your review...",
+    "qa-dialog-title": "Ask a Question",
+    "qa-dialog-description": "Ask the instructor or other students a question about this course",
+    "qa-dialog-label": "Your question",
+    "qa-dialog-placeholder": "Type your question here...",
+    "qa-dialog-submit": "Submit question",
+    "notFound": {
+      "title": "Course Not Found",
+      "message": "Sorry, the course you're looking for doesn't exist or has been removed.",
+      "browseCourses": "Browse Courses",
+      "backToHome": "Back to Home"
+    }
   },
   "auth": {
     "signup": "Sign Up",
@@ -154,5 +162,37 @@
     "Choose Role": "Choose Role"
   },
   "ok": "Ok",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "coursesPage": {
+    "heroTitle": "Join the Millions for better learning experience",
+    "filtersTitle": "Filters",
+    "clearAll": "Clear All",
+    "resultsFound": "{count} Courses are found",
+    "noCourses": "No courses found",
+    "errorMessage": "An error occurred while loading data."
+  },
+  "courseCard": {
+    "rating": "Rating",
+    "students": "Students",
+    "currency": "SAR"
+  },
+  "filters": {
+    "category": "Category",
+    "level": "Level",
+    "mode": "Mode",
+    "price type": "Price Type",
+    "price": "Price",
+    "instructor": "Instructor",
+    "rating": "Rating",
+    "search": "Search"
+  },
+  "sort": {
+    "label": "Sort By",
+    "oldest": "Oldest",
+    "latest": "Latest",
+    "lowest_rated": "Lowest Rated",
+    "most_rated": "Most Rated",
+    "price_lowest": "Lowest Price",
+    "price_highest": "Highest Price"
+  }
 }

@@ -1,12 +1,13 @@
 import api, { Api } from "@/_lib/api/api";
 import { queryOptions } from "@tanstack/react-query";
-import { Course, Instructor, Review } from "../../_types/course.types";
+import { CourseDetails, Instructor, Review } from "../../_types/course.types";
+import { CourseQA } from "../course-details.types";
 
 const CourseDetailsQuery = (id: number | string) => queryOptions({
     queryKey: [Api.routes.site.courses, id],
     enabled: Boolean(id),
     queryFn: async () => {
-        const response = await api.get<Course>(`${Api.routes.site.courses}/${id}`);
+        const response = await api.get<CourseDetails>(`${Api.routes.site.courses}/${id}`);
         return response?.data;
     }, 
 });
@@ -23,6 +24,14 @@ export const courseReviewsQuery = (id: string) => queryOptions({
     queryKey: [Api.routes.site.reviews, id],
     queryFn: async () => {
         const response = await api.get<Review[]>(`${Api.routes.site.reviews}/${id}`);
+        return response?.data;
+    },
+});
+
+export const courseQAQuery = (id: string) => queryOptions({
+    queryKey: [Api.routes.site.courses_qa, id],
+    queryFn: async () => {
+        const response = await api.get<CourseQA[]>(`${Api.routes.site.courses_qa}/${id}`);
         return response?.data;
     },
 });

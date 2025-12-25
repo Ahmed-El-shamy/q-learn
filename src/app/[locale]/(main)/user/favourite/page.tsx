@@ -1,13 +1,9 @@
 "use client";
-import React from "react";
-import CourseCard from "@/_components/common/courses/CourseCard";
+import CourseCard from "../../courses/_components/CourseCard";
 import FetchHandler from "@/_components/common/fetchHandler/FetchHandler";
 import useGetMyWhishlist from "./_services/useGetMyWhishlist";
 import EmptyState from "../_components/EmptyState";
-import ProgressBar from "../_components/ProgressBar";
-import Card from "../_components/Card";
 import SectionHeader from "../_components/SectionHeader";
-import Link from "next/link";
 const data = [
   {
     id: 1,
@@ -112,9 +108,9 @@ const Page = () => {
                   key={c?.id}
                   id={c?.id}
                   title={c?.title}
-                  image={c?.image}
+                  thumbnail={c?.image}
                   level={c?.level}
-                  details={c?.details}
+                  description={c?.details}
                   price={c?.price}
                   oldPrice={c?.oldPrice}
                   rating={c?.rating}

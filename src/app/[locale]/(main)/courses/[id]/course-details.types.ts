@@ -1,25 +1,35 @@
-export type CourseLesson = {
-  name: string;
-  description: string;
-  duration: string;
-  isLocked: boolean;
-};
+import { Chapter } from "../../_types/course.types";
 
-export type CourseChapter = {
-  title: string;
-  duration: string;
-  lessons: CourseLesson[];
+export type CourseChapter = Chapter & {
   expanded: boolean;
 };
 
-export type CourseQAReply = {
-  text: string;
-  picture: string;
-  username: string;
-  date: string;
+export type CourseQAUser = {
+  id: number;
+  name: string;
+  avatar: string;
 };
 
-export interface CourseQA extends CourseQAReply {
-  replies: CourseQAReply[];
+export type CourseQAAnswer = {
+  id: number;
+  course_id: number;
+  user: CourseQAUser;
+  parent_id: number;
+  body: string;
+  is_pinned: boolean;
+  status: string;
+  created_at: string;
+};
+
+export interface CourseQA {
+  id: number;
+  course_id: number;
+  user: CourseQAUser;
+  parent_id: number | null;
+  body: string;
+  is_pinned: boolean;
+  status: string;
+  answers: CourseQAAnswer[];
+  created_at: string;
 };
 
