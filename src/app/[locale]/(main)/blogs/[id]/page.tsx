@@ -84,7 +84,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "@/i18n/navigation";
 import Image from "next/image";
 import BlogSocial from "../_components/BlogSocial";
-import { blogsData } from "../page";
+
+const blogsData: any[] = [];
 
 type TocItem = { id: string; title: string };
 

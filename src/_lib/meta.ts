@@ -132,15 +132,13 @@ export function buildMetadata(
   input: MetaInput,
   siteMeta: ReturnType<typeof getDefaultSiteMeta>
 ): Metadata {
-  const title = input.title
-    ? `${input.title} | ${siteMeta?.siteName}` // page-specific title
-    : siteMeta?.defaultTitle; // default site title
+  const title: Metadata['title'] = {
+    template: "%s | Qutell LMS",
+    default: "Qutell LMS",
+  }
 
   const description = input.description || siteMeta?.defaultDescription;
   const canonical = cleanCanonicalUrl(input.url);
-  console.log(
-    siteMeta?.siteUrl || siteUrl
-  )
 
   const metadata: Metadata = {
     title,

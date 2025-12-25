@@ -25,7 +25,7 @@ const ScrollToTop = () => {
 
     return (
         <MainBtn 
-            className={clsx("rounded-full duration-100 p-2 fixed bottom-36 lg:bottom-17 start-6", {
+            containerClassName={clsx("rounded-full duration-100 p-2 fixed bottom-36 lg:bottom-17 start-6", {
                 "opacity-0 pointer-events-none": !isScrolled,
             })}
             onClick={() => {

@@ -43,7 +43,7 @@ const LanguageSwitcher = ({
       ) : (
         <MainBtn
           onClick={switchLanguage}
-          className={twMerge("fixed cursor-pointer rounded-full main-background bottom-24 lg:bottom-6 start-6 z-50 flex-center gap-2 p-2 shadow-md border border-purple-600 transition-all", className)}
+          containerClassName={twMerge("fixed cursor-pointer rounded-full main-background bottom-24 lg:bottom-6 start-6 z-50 flex-center gap-2 p-2 shadow-md border border-purple-600 transition-all", className)}
         >
           <Image
             alt="language-flag"

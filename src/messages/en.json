@@ -194,5 +194,8 @@
     "most_rated": "Most Rated",
     "price_lowest": "Lowest Price",
     "price_highest": "Highest Price"
+  },
+  "blogs": {
+    "hero": "Explore Our Blog Posts"
   }
 }

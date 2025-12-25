@@ -6,23 +6,32 @@ import { getDefaultSiteMeta, buildMetadata } from "@/_lib/meta";
 import AppSessionProvider from "@/_components/common/SessionProvider";
 import "@/styles/globals.css";
 import { Toaster } from "sonner";
+import { Metadata } from "next";
 
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const messages = (await import(`@/messages/${locale}.json`)).default;
-  const siteMeta = getDefaultSiteMeta(messages);
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ locale: string }>;
+// }) {
+//   const { locale } = await params;
+//   const messages = (await import(`@/messages/${locale}.json`)).default;
+//   const siteMeta = getDefaultSiteMeta(messages);
 
-  const metadata = buildMetadata({}, siteMeta);
+//   const metadata = buildMetadata({}, siteMeta);
 
-  return metadata;
+//   return metadata;
+// }
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Qutell LMS",
+    default: "Qutell LMS",
+    absolute: "Qutell LMS"
+  }
 }
 
 export default async function LocaleLayout({ children, params }: Props) {
