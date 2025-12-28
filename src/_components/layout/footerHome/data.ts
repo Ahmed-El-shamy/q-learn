@@ -78,22 +78,13 @@ export const socialMediaLinks: FooterLink[] = [
     icon: "/images/footer/gitlab.svg",
     link: "https://gitlab.com/qutell-learning",
   },
-  {
-    icon: "/images/footer/facebook.svg",
-    link: "https://facebook.com/qutell-learning",
-  },
+
   {
     icon: "/images/footer/youtube.svg",
     link: "https://youtube.com/@qutell-learning",
   },
-  {
-    icon: "/images/footer/twitter.svg",
-    link: "https://twitter.com/qutell-learning",
-  },
-  {
-    icon: "/images/footer/linkedin.svg",
-    link: "https://linkedin.com/company/qutell-learning",
-  },
+
+
 ];
 
 export const paymentMethods = [

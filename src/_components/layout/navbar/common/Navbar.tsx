@@ -23,15 +23,17 @@ async function Navbar({
         <div className="w-[90%] mx-auto flex justify-between items-center">
           <div className="flex justify-center items-center gap-8">
             <div className="flex items-center gap-3">
-              <div className="w-16 h-16 rounded-full overflow-hidden">
-                <img
-                  src={logoImg}
-                  alt="Logo Image"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <p className="font-bold text-xl">{logoText}</p>
+              {logoImg ? (
+                <div className="w-16 h-16 rounded-full overflow-hidden">
+                  <img
+                    src={logoImg}
+                    alt="Logo Image"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ) : (
+                <p className="font-bold text-xl">{logoText}</p>
+              )}
             </div>
 
             <ul className="hidden lg:flex items-center justify-center gap-5">

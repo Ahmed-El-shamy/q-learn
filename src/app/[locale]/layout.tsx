@@ -7,33 +7,39 @@ import AppSessionProvider from "@/_components/common/SessionProvider";
 import "@/styles/globals.css";
 import { Toaster } from "sonner";
 import { Metadata } from "next";
+import { getSettings } from "@/_lib/server/getSettings";
 
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ locale: string }>;
-// }) {
-//   const { locale } = await params;
-//   const messages = (await import(`@/messages/${locale}.json`)).default;
-//   const siteMeta = getDefaultSiteMeta(messages);
 
-//   const metadata = buildMetadata({}, siteMeta);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
 
-//   return metadata;
-// }
+  const messages = (await import(`@/messages/${locale}.json`)).default;
+  const siteMeta = getDefaultSiteMeta(messages);
 
-export const metadata: Metadata = {
-  title: {
-    template: "%s | Qutell LMS",
-    default: "Qutell LMS",
-    absolute: "Qutell LMS"
-  }
+  const settings = await getSettings();
+
+  return buildMetadata(
+    {
+      title: settings?.seo_meta_title || messages?.PageMetaData?.contact?.title,
+      description:
+        settings?.seo_meta_description ||
+        messages?.PageMetaData?.contact?.description,
+      keywords: settings?.seo_meta_keywords || messages?.SEO?.keywords,
+      image: settings?.og_image || "",
+      url: "https://q-learn.dev.qutell.net",
+      type: "website",
+    },
+    siteMeta
+  );
 }
-
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
   const messages = (await import(`@/messages/${locale}.json`)).default;

@@ -1,15 +1,16 @@
 import Container from "@/_components/common/container/Container";
 import { Link } from "@/i18n/navigation";
 import React from "react";
-
-const CopyRights = () => {
+interface CopyRightsProps {
+  copyRight?: string;
+}
+const CopyRights: React.FC<CopyRightsProps> = ({ copyRight = "" }) => {
   return (
     <Container>
       <p className="text-center mt-12 text-[16px] md:text-xl">
-        Copyright © 2024 qutell. All rights reserved | Made By{" "}
-        <Link href={""} className="text-[#660af5]">
-          Qutell
-        </Link>
+        {copyRight
+          ? copyRight
+          : "  Copyright © 2024 qutell. All rights reserved | Made By Qutell"}
       </p>
     </Container>
   );

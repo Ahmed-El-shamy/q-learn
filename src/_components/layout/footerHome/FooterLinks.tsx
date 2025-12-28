@@ -3,14 +3,24 @@ import { Link } from "@/i18n/navigation";
 import React from "react";
 import { infoLinks, serviceLinks, supportLinks } from "./data";
 import MainBtn from "@/_components/common/buttons/MainBtn";
-
-const FooterLinks = () => {
+interface FooterLinksProps {
+  websiteTitle?: string;
+  slogan?: string;
+}
+const FooterLinks: React.FC<FooterLinksProps> = ({
+  websiteTitle = "",
+  slogan = "",
+}) => {
   return (
     <Container>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 md:gap-5 mt-20">
         <div className="about space-y-5 col-span-2">
-          <h3 className="font-bold text-xl xl:text-2xl">About</h3>
-          <h4 className="font-bold text-xl xl:text-2xl">Never Miss A Post!</h4>
+          {websiteTitle && (
+            <h3 className="font-bold text-xl xl:text-2xl">{websiteTitle}</h3>
+          )}
+          {slogan && (
+            <h5 className="font-bold text-xl xl:text-2xl">{slogan}</h5>
+          )}
           <p className="text-sm">
             Choose the most powerful courses and always be on demand
           </p>
