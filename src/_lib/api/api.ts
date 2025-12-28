@@ -62,6 +62,7 @@ export class Api {
       testimonials: "/site/testimonials",
       settings: "/site/settings",
       contact_us: "/site/contact_us",
+      newsLetter: "/site/newsletter/subscribe",
     },
     auth: {
       login: "/site/login",

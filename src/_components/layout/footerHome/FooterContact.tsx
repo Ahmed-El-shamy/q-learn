@@ -28,7 +28,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
             {hotLine && (
               <div className="flex gap-5">
                 <Headset className="size-10 xl:size-15" />
-                <div className="font-bold text-[16px] xl:text-xl">
+                <div className="font-semibold text-[16px] xl:text-xl">
                   <h5>Call Us 24/7</h5>
 
                   <a dir="ltr" href={`tel:${hotLine}`}>

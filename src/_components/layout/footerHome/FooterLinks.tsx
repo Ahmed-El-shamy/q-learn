@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import React from "react";
 import { infoLinks, serviceLinks, supportLinks } from "./data";
 import MainBtn from "@/_components/common/buttons/MainBtn";
+import NewsLetter from "@/_components/NewsLetter/NewLetter";
 interface FooterLinksProps {
   websiteTitle?: string;
   slogan?: string;
@@ -21,16 +22,7 @@ const FooterLinks: React.FC<FooterLinksProps> = ({
           {slogan && (
             <h5 className="font-bold text-xl xl:text-2xl">{slogan}</h5>
           )}
-          <p className="text-sm">
-            Choose the most powerful courses and always be on demand
-          </p>
-          <div className="flex flex-col sm:flex-row gap-2">
-            <input
-              placeholder="Enter e-mail Address"
-              className="border-0 outline-0 bg-white px-8 py-3 text-sm text-[#373737]"
-            />
-            <MainBtn title="subscribe" className="uppercase border-0" />
-          </div>
+          <NewsLetter />
         </div>
 
         <div className="support">
