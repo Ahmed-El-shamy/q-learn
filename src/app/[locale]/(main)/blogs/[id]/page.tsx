@@ -5,6 +5,23 @@ import { Blog } from "../_types/blogs.types";
 import { notFound } from "next/navigation";
 import HTMLConvertor from "@/_components/common/HTMLConvertor";
 import TOC from "./_components/TOC";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{
+    id: string
+  }>
+}): Promise<Metadata> {
+  const {id} = await params;
+  const response = await api.get<Blog>(`${Api.routes.site.blogs}/${id}`);
+  const blog = response?.data;
+
+  return {
+    title: blog?.name
+  }
+}
 
 export default async function Page({
   params

@@ -34,9 +34,10 @@ const TOC = () => {
             {
                 Boolean(blogHeaders.length) && blogHeaders.map(header => (
                     <a 
+                        key={header}
                         href={`#${header}`} 
                         className={clsx("px-2 py-2 overflow-hidden  hover:bg-purple-50 line-clamp-1", {
-                            "bg-purple-100/30 text-purple-500 font-bold": activeSection === header
+                            "bg-purple-100/50 text-purple-500": activeSection === header
                         })} 
                         title={header}
                     >
