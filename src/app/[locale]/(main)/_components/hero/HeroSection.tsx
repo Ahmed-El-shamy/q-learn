@@ -25,10 +25,7 @@ const HeroSection = async () => {
 
             <div className="flex flex-row md:flex-col lg:flex-row gap-4 lg:gap-8">
               <MainBtn title="view all courses" />
-              <MainBtn
-                title="view all quizzes"
-                className="text-[#1f2b40]! bg-white hover:text-white!"
-              />
+              <MainBtn title="view all quizzes" />
             </div>
           </div>
           {d?.image && (

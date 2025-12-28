@@ -38,6 +38,7 @@ export class Api {
 
   constructor() {
     this.baseRoute = "https://q-learn.dev.qutell.net/api";
+
     this.requestInterceptor = new Interceptor<RequestConfig>();
     this.responseInterceptor = new Interceptor<ResponseData<any>>();
   }
@@ -59,6 +60,9 @@ export class Api {
       partners: "/site/partners",
       about: "/site/about_us",
       testimonials: "/site/testimonials",
+      settings: "/site/settings",
+      contact_us: "/site/contact_us",
+      newsLetter: "/site/newsletter/subscribe",
     },
     auth: {
       login: "/site/login",

@@ -1,24 +1,76 @@
+// features/contact/_hook/useContact.ts
+"use client";
+
 import { useForm } from "react-hook-form";
-import { ContactPayload, ContactSchema } from "../_schema/ContactSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import useSubmitContactForm from "../queries/useSubmitContactForm";
+import { ContactPayload, ContactSchema } from "../_schema/ContactSchema";
+
+type ApiFieldErrors = Record<string, string[] | string>;
+
+function normalizeFieldErrors(err: unknown): ApiFieldErrors | null {
+
+  const anyErr = err as any;
+  return (
+    anyErr?.response?.data?.errors ||
+    anyErr?.response?.data?.data?.errors ||
+    null
+  );
+}
 
 const useContact = () => {
+  const submitMutation = useSubmitContactForm();
+
   const methods = useForm<ContactPayload>({
     resolver: zodResolver(ContactSchema),
     mode: "onChange",
+    reValidateMode: "onChange",
+    criteriaMode: "firstError",
+    shouldFocusError: true,
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    },
   });
 
-  async function handleSubmit(payload: ContactPayload) {
-    if (payload.name && payload.email) {
-      console.log("OK !!!");
-    } else {
-      console.log("Not OK !!!");
+  const onSubmit = async (payload: ContactPayload) => {
+    if (submitMutation.isPending) return;
+
+    try {
+      await submitMutation.mutateAsync(payload);
+
+      toast.success("Message sent successfully");
+      methods.reset();
+    } catch (err) {
+      const fieldErrors = normalizeFieldErrors(err);
+      if (fieldErrors) {
+        Object.entries(fieldErrors).forEach(([key, value]) => {
+          const msg = Array.isArray(value) ? value[0] : value;
+          if (!msg) return;
+
+          if (key in methods.getValues()) {
+            methods.setError(key as keyof ContactPayload, {
+              type: "server",
+              message: msg,
+            });
+          }
+        });
+
+        toast.error("Please fix the highlighted fields");
+        return;
+      }
+
+      toast.error("Failed to send message. Please try again.");
     }
-  }
+  };
 
   return {
     methods,
-    handleSubmit: methods.handleSubmit(handleSubmit),
+    onSubmit: methods.handleSubmit(onSubmit),
+    isSubmitting: submitMutation.isPending,
   };
 };
 
