@@ -219,40 +219,78 @@ export class Api {
     return this.request<T>(url, { ...fetchOptions, method: "GET" });
   }
 
+  // async post<T>(
+  //   route: string,
+  //   body: object = {},
+  //   options?: Parameters<typeof fetch>["1"]
+  // ) {
+  //   const headers = new Headers(options?.headers);
+
+  //   if (headers.get("Content-Type") === "multipart/form-data") {
+  //     const formData = new FormData();
+
+  //     Object.keys(body).forEach((key) => {
+  //       formData.append(key, body[key as keyof typeof body]);
+  //     });
+
+  //     return this.request<T>(route, {
+  //       ...options,
+  //       method: "POST",
+  //       body: formData,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         ...(options?.headers || {}),
+  //       },
+  //     });
+  //   } else {
+  //     return this.request<T>(route, {
+  //       ...options,
+  //       method: "POST",
+  //       body: JSON.stringify(body),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         ...(options?.headers || {}),
+  //       },
+  //     });
+  //   }
+  // }
+  // داخل Api.post
   async post<T>(
     route: string,
-    body: object = {},
+    body: Record<string, any> = {},
     options?: Parameters<typeof fetch>["1"]
   ) {
     const headers = new Headers(options?.headers);
 
+    // ✅ لو عايز تبعت FormData: استخدم header "multipart/form-data" كـ signal بس
     if (headers.get("Content-Type") === "multipart/form-data") {
       const formData = new FormData();
 
-      Object.keys(body).forEach((key) => {
-        formData.append(key, body[key as keyof typeof body]);
+      Object.entries(body ?? {}).forEach(([key, value]) => {
+        if (value === undefined || value === null) return;
+        formData.append(key, String(value));
       });
+
+      // ✅ مهم: نشيل Content-Type عشان المتصفح يضيف boundary
+      headers.delete("Content-Type");
 
       return this.request<T>(route, {
         ...options,
         method: "POST",
         body: formData,
-        headers: {
-          "Content-Type": "application/json",
-          ...(options?.headers || {}),
-        },
-      });
-    } else {
-      return this.request<T>(route, {
-        ...options,
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-          ...(options?.headers || {}),
-        },
+        headers,
       });
     }
+
+    return this.request<T>(route, {
+      ...options,
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+        ...(options?.headers || {}),
+      },
+    });
   }
 
   async delete<T>(route: string, options?: Parameters<typeof fetch>["1"]) {
@@ -344,7 +382,7 @@ api.requestInterceptor.use((requestOptions) => {
 });
 
 api.requestInterceptor.use(async (requestOptions) => {
-  if (typeof window !== undefined) {
+  if (typeof window !== "undefined") {
     const session = await getSession();
     if (session) {
       const headers = new Headers(requestOptions.headers);

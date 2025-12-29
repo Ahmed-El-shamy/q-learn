@@ -190,5 +190,12 @@
   },
   "blogs": {
     "hero": "استكشف مقالاتنا"
-  }
+  },
+
+  "loginRequiredForWishlist": "لازم تسجل دخول عشان تستخدم المفضلة",
+  "wishlistAdded": "تمت الإضافة للمفضلة",
+  "wishlistRemoved": "تمت الإزالة من المفضلة",
+  "wishlistFailed": "حصلت مشكلة أثناء تحديث المفضلة",
+  "addToWishlist": "إضافة للمفضلة",
+  "removeFromWishlist": "إزالة من المفضلة"
 }

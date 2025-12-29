@@ -4,7 +4,7 @@ import api, { Api } from "@/_lib/api/api";
 import Image from "next/image";
 import { Hero } from "./types/hero.types";
 import HtmlContent from "@/_components/common/HtmlContent";
-
+import { Link } from "@/i18n/navigation";
 const HeroSection = async () => {
   try {
     const response = await api.get(Api.routes.site.hero);
@@ -24,7 +24,10 @@ const HeroSection = async () => {
             )}
 
             <div className="flex flex-row md:flex-col lg:flex-row gap-4 lg:gap-8">
-              <MainBtn title="view all courses" />
+              <MainBtn>
+                <Link href="/courses">view all courses</Link>
+              </MainBtn>
+
               <MainBtn title="view all quizzes" />
             </div>
           </div>

@@ -1,11 +1,12 @@
 "use client";
+import React from "react";
 import { ShieldUser, ShoppingCart, Star } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import React from "react";
 import { useCart } from "@/store/CartProvider";
 import { Course } from "@/app/[locale]/(main)/courses/_types/courses.types";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { CourseWishlistButton } from "./CourseWishlistButton";
 
 const CourseCard: React.FC<Partial<Course>> = ({
   id,
@@ -16,21 +17,19 @@ const CourseCard: React.FC<Partial<Course>> = ({
   description,
   thumbnail,
   alt,
-  oldPrice,
-  progress,
   total_enrollments,
 }) => {
   const { addToCart } = useCart();
   const t = useTranslations("courseCard");
-  const local = useLocale();
 
   return (
     <div className="border border-[#d1d1d1] h-[530px] group overflow-hidden">
-      <Link href={`/courses/${id}`}>
-        <div className="w-full h-[45%] relative overflow-hidden">
+      <div className="w-full h-[45%] relative overflow-hidden">
+        <Link href={`/courses/${id}`} className="block w-full h-full">
           <p className="bg-[#963ed0]/60 text-white py-1 px-5 absolute top-5 start-5 z-10">
             {level}
           </p>
+
           <Image
             src={thumbnail || "/images/courses/10.jpg"}
             alt={alt || title || "Course Image"}
@@ -38,8 +37,10 @@ const CourseCard: React.FC<Partial<Course>> = ({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
-        </div>
-      </Link>
+        </Link>
+
+        <CourseWishlistButton courseId={id} />
+      </div>
 
       <div className="p-5">
         <div className="data">
@@ -74,13 +75,9 @@ const CourseCard: React.FC<Partial<Course>> = ({
             <h4 className="font-bold text-xl bg-linear-to-r from-[#660afb] to-[#b633ff] bg-clip-text text-transparent">
               {price?.sar} {t("currency")}
             </h4>
-            {/* <p className="text-sm line-through text-[#1f2b40]">${oldPrice}</p> */}
           </div>
 
-          <button
-            // onClick={() => addToCart(course)}
-            className="p-2 hover:bg-purple-50 rounded-full transition-colors"
-          >
+          <button className="p-2 hover:bg-purple-50 rounded-full transition-colors">
             <svg width="40" height="40" viewBox="0 0 24 24">
               <defs>
                 <linearGradient

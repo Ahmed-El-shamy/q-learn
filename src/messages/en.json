@@ -197,5 +197,11 @@
   },
   "blogs": {
     "hero": "Explore Our Blog Posts"
-  }
+  },
+  "loginRequiredForWishlist": "Please log in to use wishlist",
+  "wishlistAdded": "Added to wishlist",
+  "wishlistRemoved": "Removed from wishlist",
+  "wishlistFailed": "Could not update wishlist",
+  "addToWishlist": "Add to wishlist",
+  "removeFromWishlist": "Remove from wishlist"
 }
