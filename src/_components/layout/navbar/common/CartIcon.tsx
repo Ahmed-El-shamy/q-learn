@@ -47,7 +47,7 @@ const CartIcon = () => {
 
   const handleCheckout = () => {
     if (status === "unauthenticated") {
-      router.push("/auth/login?redirect=/checkout");
+      router.push("/auth/login?redirect_url=/checkout");
     } else {
       router.push("/checkout");
     }
