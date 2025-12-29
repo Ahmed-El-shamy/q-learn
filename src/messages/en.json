@@ -203,5 +203,25 @@
   "wishlistRemoved": "Removed from wishlist",
   "wishlistFailed": "Could not update wishlist",
   "addToWishlist": "Add to wishlist",
-  "removeFromWishlist": "Remove from wishlist"
+  "removeFromWishlist": "Remove from wishlist",
+  "cart": {
+    "there is no courses in cart": "There is no courses in cart",
+    "currency": "SAR",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "clearCart": "Clear Cart",
+    "checkout": "Checkout",
+    "added to cart": "Added to cart",
+    "items added to cart successfully": "Items added to cart successfully",
+    "failed to add course": "Failed to add course",
+    "course already in cart": "Course already in cart",
+    "item removed from cart": "Item removed from cart",
+    "failed to remove course": "Failed to remove course",
+    "are you sure you want to clear the cart": "Are you sure you want to clear the cart?",
+    "this action cannot be undone": "This action cannot be undone.",
+    "clear": "Clear",
+    "cancel": "Cancel",
+    "cart cleared": "Cart cleared",
+    "failed to clear cart": "Failed to clear cart"
+  }
 }

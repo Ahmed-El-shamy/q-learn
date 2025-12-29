@@ -64,6 +64,7 @@ async function Navbar({
                 <Link href="/auth/register">
                   <MainBtn variant="outlined">{t("signup")}</MainBtn>
                 </Link>
+                <CartIcon />
               </>
             )}
           </div>

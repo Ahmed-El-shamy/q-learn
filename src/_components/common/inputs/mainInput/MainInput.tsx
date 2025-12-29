@@ -112,7 +112,9 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder={
-              placeholder && required ? `${t(placeholder) || ""} *` : t(placeholder || "")
+              placeholder && required
+                ? `${t(placeholder) || ""} *`
+                : t(placeholder || "")
             }
             required={required}
             disabled={disabled}
@@ -127,8 +129,8 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
               ${label ? "py-0" : "py-3"}
               ${disabled || readOnly ? "opacity-50 cursor-not-allowed" : ""}
               ${error ? " border-b-red-500" : "border-b-[#d1d1d1]"}
-              ${Icon ? "pl-8" : ""} 
-              ${isPassword && showPasswordToggle ? "pr-8" : ""}
+              ${Icon ? "ps-8" : ""} 
+              ${isPassword && showPasswordToggle ? "pe-8" : ""}
               ${className || ""}
             `}
             {...rest}
@@ -138,7 +140,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
           {isPassword && showPasswordToggle && (
             <span
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-2 cursor-pointer"
+              className="absolute end-2 cursor-pointer"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}

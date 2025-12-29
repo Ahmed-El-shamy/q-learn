@@ -1,176 +1,239 @@
 "use client";
 
-import { CartItem } from "@/types/cart.types";
+import { CartContextProps, CartItem } from "@/types/cart.types";
 import {
   createContext,
   useCallback,
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { useCartApi } from "./hooks/useCartApi";
 import { useCartMutations } from "./hooks/useCartMutations";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Api } from "@/_lib/api/api";
 import { toast } from "sonner";
-
-interface CartContextProps {
-  items: CartItem[];
-  subtotal: number;
-  total: number;
-  couponCode?: { code: string; value: string; type: string };
-  setCouponCode: (code?: { code: string; value: string; type: string }) => void;
-  addToCart: (item: CartItem) => void;
-  removeFromCart: (course_id: string) => void;
-  clearCart: () => void;
-  isInCart: (course_id: string) => CartItem | undefined;
-}
+import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 const LOCAL_CART_KEY = "guest_cart_courses";
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
+  const queryClient = useQueryClient();
   const { getCart } = useCartApi();
-  //   const { user } = useAuth();
-  const user = null;
+  const { status } = useSession();
+  const t = useTranslations("cart");
+
   const [items, setItems] = useState<CartItem[]>([]);
-  const [couponCode, setCouponCode] = useState<{
-    code: string;
-    value: string;
-    type: string;
-  }>();
+  const [couponCode, setCouponCode] = useState<string | null>(null);
+
+  const isMerging = useRef(false);
   const { addMutation, removeMutation, clearMutation } = useCartMutations(
     items,
-    setItems
+    setItems,
+    isMerging
   );
 
   const localSubtotal = useMemo(() => {
     return items.reduce((sum, item) => {
-      const price =
-        item.has_discount && item.sale_price
-          ? item.sale_price
-          : Number(item.price || 0);
-      return sum + price;
+      const price = parseFloat(String(item.price || 0));
+      return sum + (isNaN(price) ? 0 : price);
     }, 0);
   }, [items]);
 
   //   Guest: load local cart
   useEffect(() => {
-    if (!user) {
+    if (typeof window !== "undefined" && status === "unauthenticated") {
       const local = localStorage.getItem(LOCAL_CART_KEY);
-      if (local) setItems(JSON.parse(local));
-      else setItems([]);
+      if (local) {
+        try {
+          setItems(JSON.parse(local));
+        } catch (e) {
+          console.log("Error parsing cart data", e);
+          setItems([]);
+        }
+      }
     }
-  }, [user]);
+  }, [status]);
 
   //   Logged user: fetch cart
   const cartQuery = useQuery({
-    queryKey: [Api.routes.cart],
+    queryKey: [Api.routes.site.cart],
     queryFn: getCart,
-    enabled: !!user,
+    enabled: status === "authenticated",
+    staleTime: 1000 * 60 * 5,
+    retry: 1,
+    refetchOnWindowFocus: true,
   });
 
-  const subtotal = user ? Number(cartQuery.data?.subTotal || 0) : localSubtotal;
-  const total = user ? Number(cartQuery.data?.total || 0) : localSubtotal;
+  useEffect(() => {
+    if (status === "authenticated") {
+      cartQuery.refetch();
+    }
+  }, [status]);
+
+  const subtotal = useMemo(() => {
+    if (status === "authenticated" && cartQuery.data?.cart.subtotal) {
+      return Number(cartQuery.data.cart.subtotal);
+    }
+    return localSubtotal;
+  }, [status, cartQuery.data, localSubtotal]);
+
+  const total = useMemo(() => {
+    if (status === "authenticated" && cartQuery.data?.cart?.total) {
+      return Number(cartQuery.data.cart.total);
+    }
+    return localSubtotal;
+  }, [status, cartQuery.data, localSubtotal]);
 
   //   Merge guest cart after login
   useEffect(() => {
-    if (!user) return;
+    if (status !== "authenticated" || isMerging.current) return;
 
     const local = localStorage.getItem(LOCAL_CART_KEY);
     if (!local) return;
 
-    const guestItems: CartItem[] = JSON.parse(local);
-    if (!guestItems.length) return;
+    try {
+      const guestItems: CartItem[] = JSON.parse(local);
+      if (guestItems.length === 0) return;
 
-    const courses = guestItems.map((item) => ({
-      course_id: item.course_id,
-    }));
+      const courseIds = guestItems.map((item) => item.item_id).filter(Boolean);
 
-    addMutation.mutate(courses, {
-      onSuccess: () => {
-        localStorage.removeItem(LOCAL_CART_KEY);
-        if (cartQuery.data?.coupon) {
-          setCouponCode(cartQuery.data.coupon);
-        }
-      },
-    });
-  }, [user]);
+      isMerging.current = true;
+
+      addMutation.mutate(courseIds as number[], {
+        onSuccess: (data: any) => {
+          localStorage.removeItem(LOCAL_CART_KEY);
+          queryClient.invalidateQueries({ queryKey: [Api.routes.site.cart] });
+
+          setItems((prev) => {
+            const serverItems = data?.data?.cart?.items || [];
+            const merged = [
+              ...prev.filter(
+                (p) => !serverItems.find((s: any) => s.item_id === p.item_id)
+              ),
+              ...serverItems,
+            ];
+            return merged;
+          });
+        },
+        onSettled: () => {
+          isMerging.current = false;
+        },
+      });
+    } catch (e) {
+      console.log("Merge Faild", e);
+      isMerging.current = false;
+    }
+  }, [status, addMutation, queryClient]);
 
   //   Sync server cart
   useEffect(() => {
-    if (cartQuery.data?.items) {
-      setItems(cartQuery.data.items);
+    if (status === "authenticated" && cartQuery.data) {
+      const data = cartQuery.data;
+      if (data.cart?.items) {
+        setItems(data?.cart?.items);
+      }
     }
-  }, [cartQuery.data]);
+  }, [cartQuery.data, status]);
 
   //   Helpers
   const presistGuestCart = (updated: CartItem[]) => {
-    localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(updated));
+    if (typeof window !== "undefined" && status === "unauthenticated") {
+      localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(updated));
+    }
   };
 
   //   Actions
   const addToCart = useCallback(
-    (course: CartItem) => {
-      if (!user) {
-        if (items.some((i) => i.course_id === course.course_id)) {
-          console.log("Course already in cart");
-          return toast.info("Course already in cart");
+    (item: CartItem) => {
+      if (status === "loading") return;
+      const courseId = item.item_id ?? item.course?.id ?? (item as any).id;
+      if (!courseId) return;
+
+      if (status === "unauthenticated") {
+        const exists = items.some((i) => i.item_id === courseId);
+
+        if (exists) {
+          toast.info(t("course already in cart"));
+          return;
         }
-        const updated = [...items, course];
+
+        const newItem = { ...item, item_id: courseId };
+        const updated = [...items, newItem];
+
         setItems(updated);
         presistGuestCart(updated);
+        toast.success(t("added to cart"));
       } else {
-        addMutation.mutate([{ course_id: course.course_id }], {
+        const exists = items.some((i) => i.item_id === courseId);
+        if (exists) {
+          toast.info(t("course already in cart"));
+          return;
+        }
+
+        addMutation.mutate([courseId as number], {
           onSuccess: () => {
-            toast.success("Added to cart");
-            console.log("Added to cart");
+            queryClient.invalidateQueries({ queryKey: [Api.routes.site.cart] });
           },
         });
       }
     },
-    [user, items, addMutation]
+    [status, items, addMutation, presistGuestCart]
   );
 
   const removeFromCart = useCallback(
-    (course_id: string) => {
-      if (!user) {
-        const updated = items.filter((i) => i.course_id !== course_id);
+    (id: number) => {
+      if (status === "loading") return;
+
+      if (status === "unauthenticated") {
+        const updated = items.filter((i) => i.id !== id);
         setItems(updated);
         presistGuestCart(updated);
+        toast.success(t("item removed from cart"));
       } else {
-        removeMutation.mutate(course_id, {
-          onSuccess: () => {
-            toast.success("Removed from cart");
-            console.log("Removed from cart");
-          },
-        });
+        removeMutation.mutate(id);
       }
     },
-    [user, items, removeMutation]
+    [status, items, removeMutation]
   );
 
   const clearCart = useCallback(() => {
-    if (!user) {
+    if (status === "loading") return;
+
+    if (status === "unauthenticated") {
       setItems([]);
       localStorage.removeItem(LOCAL_CART_KEY);
+      toast.success(t("cart cleared"));
     } else {
       clearMutation.mutate();
     }
-  }, [user, clearMutation]);
+  }, [status, clearMutation]);
 
   const isInCart = useCallback(
-    (course_id: string) => items.find((item) => item.course_id === course_id),
+    (courseId: number) => {
+      return items.some((item) => {
+        const idInCart = item.item_id || item.course?.id;
+        return Number(idInCart) === Number(courseId);
+      });
+    },
     [items]
   );
 
   const value = useMemo(
     () => ({
       items,
-      subtotal,
-      total,
+      subtotal: String(subtotal),
+      total: String(total),
       couponCode,
+      isLoading:
+        cartQuery.isLoading ||
+        addMutation.isPending ||
+        removeMutation.isPending ||
+        clearMutation.isPending,
       setCouponCode,
       addToCart,
       removeFromCart,
@@ -182,6 +245,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       subtotal,
       total,
       couponCode,
+      cartQuery.isLoading,
+      addMutation.isPending,
+      removeMutation.isPending,
+      clearMutation.isPending,
       setCouponCode,
       addToCart,
       removeFromCart,

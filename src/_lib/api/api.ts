@@ -63,12 +63,12 @@ export class Api {
       settings: "/site/settings",
       contact_us: "/site/contact_us",
       newsLetter: "/site/newsletter/subscribe",
+      cart: "/site/cartItems",
     },
     auth: {
       login: "/site/login",
       register: "/site/register",
     },
-    cart: "/cart",
     user: {
       me: "me",
       update: "update_profile",

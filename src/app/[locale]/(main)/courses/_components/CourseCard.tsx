@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { CourseWishlistButton } from "./CourseWishlistButton";
 
-const CourseCard: React.FC<Partial<Course>> = ({
+const CourseCard: React.FC<Course> = ({
   id,
   price,
   level,
@@ -16,11 +16,27 @@ const CourseCard: React.FC<Partial<Course>> = ({
   title,
   description,
   thumbnail,
+  instructor,
   alt,
+  oldPrice,
   total_enrollments,
 }) => {
   const { addToCart } = useCart();
   const t = useTranslations("courseCard");
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addToCart({
+      id: id!,
+      course_id: id!,
+      title: title || "Course",
+      thumbnail: thumbnail || "",
+      price: price?.sar?.toString() || "0",
+      sale_price: price?.sar?.toString(),
+      has_discount: false,
+      instructor_name: instructor.user.name,
+    });
+  };
 
   return (
     <div className="border border-[#d1d1d1] h-[530px] group overflow-hidden">
@@ -77,7 +93,10 @@ const CourseCard: React.FC<Partial<Course>> = ({
             </h4>
           </div>
 
-          <button className="p-2 hover:bg-purple-50 rounded-full transition-colors">
+          <button
+            onClick={handleAddToCart}
+            className="p-2 hover:bg-purple-50 rounded-full transition-colors"
+          >
             <svg width="40" height="40" viewBox="0 0 24 24">
               <defs>
                 <linearGradient

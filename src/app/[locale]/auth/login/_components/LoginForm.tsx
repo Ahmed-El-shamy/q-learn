@@ -3,21 +3,34 @@
 import MainInput from "@/_components/common/inputs/mainInput/MainInput";
 import useLogin from "../_hooks/useLogin";
 import { Lock, Mail } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import MainBtn from "@/_components/common/buttons/MainBtn";
 import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const LoginForm = () => {
   const t = useTranslations("auth.login");
+  const { data: session } = useSession();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const redirect = searchParams.get("redirect") || "/";
+
+  useEffect(() => {
+    if (session) {
+      router.push(redirect);
+    }
+  }, [session, redirect, router]);
+
   const {
     methods: {
       register,
       formState: { errors },
     },
     handleSubmit,
-    mutation: {
-      isPending
-    }
+    mutation: { isPending },
   } = useLogin();
 
   return (

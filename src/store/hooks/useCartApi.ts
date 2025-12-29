@@ -1,30 +1,27 @@
-import api from "@/_lib/api/api";
+import api, { Api } from "@/_lib/api/api";
 import { CartResponse } from "@/types/cart.types";
 
 export const useCartApi = () => {
-  // Get Cart
   const getCart = async (): Promise<CartResponse> => {
-    const response = await api.get<CartResponse>("/cart");
-    return response?.data || { items: [] };
+    const response = await api.get(Api.routes.site.cart);
+    return response?.data as CartResponse;
   };
 
-  const addToCart = async (courses: { course_id: string }[]) => {
-    const response = await api.post("/cart/add", { courses });
-    return response;
+  const addToCart = async (course_id: number[]) => {
+    const response = await api.post(Api.routes.site.cart, {
+      course_id,
+    });
+    return response?.data;
   };
 
-  const removeFromCart = async (course_id: string) => {
-    const response = await api.delete(`/cart/remove/${course_id}`);
-    return response;
+  const removeFromCart = async (id: number) => {
+    const response = await api.delete(`${Api.routes.site.cart}/${id}`);
+    return response?.data;
   };
 
   const clearCart = async () => {
-    const response = await api.delete("/cart/clear");
-  };
-
-  const getCartTotal = async () => {
-    const response = await api.get("/cart/total");
-    return response;
+    const response = await api.delete(Api.routes.site.cart);
+    return response?.data;
   };
 
   return {
@@ -32,6 +29,5 @@ export const useCartApi = () => {
     addToCart,
     removeFromCart,
     clearCart,
-    getCartTotal,
   };
 };

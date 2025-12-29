@@ -197,5 +197,25 @@
   "wishlistRemoved": "تمت الإزالة من المفضلة",
   "wishlistFailed": "حصلت مشكلة أثناء تحديث المفضلة",
   "addToWishlist": "إضافة للمفضلة",
-  "removeFromWishlist": "إزالة من المفضلة"
+  "removeFromWishlist": "إزالة من المفضلة",
+  "cart": {
+    "there is no courses in cart": "لا توجد دورات في السلة",
+    "currency": "ر.س",
+    "subtotal": "المجموع الفرعي",
+    "total": "الإجمالي",
+    "clearCart": "إفراغ السلة",
+    "checkout": "إتمام الشراء",
+    "added to cart": "تمت الإضافة إلى السلة",
+    "items added to cart successfully": "تمت إضافة العناصر إلى السلة بنجاح",
+    "failed to add course": "فشل إضافة الكورس إلى السلة",
+    "course already in cart": "الكورس موجود بالفعل في السلة",
+    "item removed from cart": "تمت إزالة العنصر من السلة",
+    "failed to remove course": "فشل إزالة الكورس من السلة",
+    "are you sure you want to clear the cart": "هل أنت متأكد أنك تريد إفراغ السلة؟",
+    "this action cannot be undone": "لا يمكن التراجع عن هذا الإجراء.",
+    "clear": "إفراغ",
+    "cancel": "إلغاء",
+    "cart cleared": "تم إفراغ السلة",
+    "failed to clear cart": "فشل إفراغ السلة"
+  }
 }

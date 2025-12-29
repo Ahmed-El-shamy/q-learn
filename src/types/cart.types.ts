@@ -1,34 +1,69 @@
+import { Course } from "@/app/[locale]/(main)/courses/_types/courses.types";
+
+export interface LocalizedString {
+  en: string;
+  ar: string;
+}
 export interface CartItem {
-  id: string;
-  course_id: string;
-
+  id: number;
+  item_id: number;
+  type?: string;
   title: string;
-  description?: string;
-  image?: string;
-  instructor?: string;
-  category?: string;
-
-  price?: number;
-  has_discount?: boolean;
-  sale_price?: number;
-
-  is_in_wishlist?: boolean;
-  isLoading?: boolean;
-
-  details?: string;
-  level?: string;
+  price: string;
+  subtotal: string;
+  currency: string;
+  course: Course;
+  learning_path: any | null;
+  created_at: string;
 }
 
 export interface CartResponse {
-  items: CartItem[];
-  total?: number;
-  subTotal?: number;
-  discount_amount?: string;
-  coupon?: {
-    code: string;
-    value: string;
-    type: string;
+  cart: {
+    id: number;
+    status: string;
+    items_count: number;
+    is_empty: boolean;
+    subtotal: string;
+    discount: string;
+    total: string;
+    currency: string;
+    coupon_code: string | null;
+    expires_at?: string;
+    items: CartItem[];
+    created_at?: string;
   };
-  tax?: string;
-  shipping?: string;
+  items: CartItem[];
 }
+
+export interface CartContextProps {
+  items: CartItem[];
+  subtotal: string;
+  total: string;
+  isLoading: boolean;
+  couponCode: string | null;
+  setCouponCode: (coupon: string) => void;
+  addToCart: (item: CartItem) => void;
+  removeFromCart: (itemId: number) => void;
+  clearCart: () => void;
+  isInCart: (course_id: number) => boolean;
+}
+
+// export interface CartResponse {
+//   status: boolean;
+//   message: string;
+//   data: {
+//     cart: {
+//       id: number;
+//       status: string;
+//       items_count: number;
+//       is_empty: boolean;
+//       subtotal: string;
+//       discount: string;
+//       total: string;
+//       currency: string;
+//       coupon_code: string;
+//       items: CartItem[];
+//     };
+//   };
+//   items: CartItem[];
+// }

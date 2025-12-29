@@ -1,9 +1,11 @@
+"use client";
 import { CartItem } from "@/types/cart.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useRef } from "react";
 import { useCartApi } from "./useCartApi";
 import { Api } from "@/_lib/api/api";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const showToast = (type: "success" | "error", message: string) => {
   if (type === "success") toast.success(message);
@@ -12,62 +14,61 @@ const showToast = (type: "success" | "error", message: string) => {
 
 export const useCartMutations = (
   items: CartItem[],
-  setItems: React.Dispatch<React.SetStateAction<CartItem[]>>
+  setItems: React.Dispatch<React.SetStateAction<CartItem[]>>,
+  isMerging: React.MutableRefObject<boolean>
 ) => {
   const queryClient = useQueryClient();
   const { addToCart, removeFromCart, clearCart } = useCartApi();
+  const t = useTranslations("cart");
 
   const invalidateCart = useCallback(() => {
-    queryClient.invalidateQueries({ queryKey: [Api.routes.cart] });
+    queryClient.invalidateQueries({ queryKey: [Api.routes.site.cart] });
   }, [queryClient]);
 
   const addMutation = useMutation({
-    mutationFn: (courses: { course_id: string }[]) => addToCart(courses),
+    mutationFn: (course_id: number[]) => {
+      return addToCart(course_id);
+    },
 
-    onMutate: async (courses) => {
-      await queryClient.cancelQueries({ queryKey: [Api.routes.cart] });
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: [Api.routes.site.cart] });
       const previous = items;
 
-      const newItem: CartItem = {
-        id: courses[0].course_id,
-        course_id: courses[0].course_id,
-        title: "",
-        description: "",
-        image: "",
-        instructor: "",
-        category: "",
-        price: 0,
-        has_discount: false,
-        sale_price: 0,
-        is_in_wishlist: false,
-        isLoading: false,
-      };
-
-      setItems((prev) => [...prev, newItem]);
       return { previous };
     },
 
-    onError: (e, _, context) => {
+    onSuccess: () => {
+      if (isMerging.current) {
+        toast.success(t("items added to cart successfully"));
+      } else {
+        toast.success(t("added to cart"));
+      }
+    },
+
+    onError: (_, __, context) => {
       if (context?.previous) setItems(context.previous);
-      showToast("error", "Faild to add course");
+      showToast("error", t("failed to add course"));
     },
 
     onSettled: invalidateCart,
   });
 
   const removeMutation = useMutation({
-    mutationFn: (course_id: string) => removeFromCart(course_id),
+    mutationFn: (id: number) => removeFromCart(id),
 
-    onMutate: async (course_id) => {
-      await queryClient.cancelQueries({ queryKey: [Api.routes.cart] });
+    onMutate: async (id) => {
+      await queryClient.cancelQueries({ queryKey: [Api.routes.site.cart] });
       const previous = items;
-      setItems((prev) => prev.filter((i) => i.course_id !== course_id));
+      setItems((prev) => prev.filter((i) => i.id !== id));
       return { previous };
+    },
+    onSuccess: () => {
+      toast.success(t("item removed from cart"));
     },
 
     onError: (_, __, context) => {
       if (context?.previous) setItems(context.previous);
-      showToast("error", "Failed to remove course");
+      showToast("error", t("failed to remove course"));
     },
 
     onSettled: invalidateCart,
@@ -77,18 +78,21 @@ export const useCartMutations = (
     mutationFn: clearCart,
 
     onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: [Api.routes.cart] });
+      await queryClient.cancelQueries({ queryKey: [Api.routes.site.cart] });
       const previous = items;
       setItems([]);
       return { previous };
     },
 
-    onError: (_, __, context) => {
-      if (context?.previous) setItems(context.previous);
-      showToast("error", "Failed to clear cart");
+    onSuccess: () => {
+      toast.success(t("cart cleared"));
     },
 
-    onSuccess: () => showToast("success", "Cart cleared"),
+    onError: (_, __, context) => {
+      if (context?.previous) setItems(context.previous);
+      showToast("error", t("failed to clear cart"));
+    },
+
     onSettled: invalidateCart,
   });
   return { addMutation, removeMutation, clearMutation };
