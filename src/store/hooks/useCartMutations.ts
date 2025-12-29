@@ -30,9 +30,16 @@ export const useCartMutations = (
       return addToCart(course_id);
     },
 
-    onMutate: async () => {
+    onMutate: async (courseIds) => {
       await queryClient.cancelQueries({ queryKey: [Api.routes.site.cart] });
       const previous = items;
+      const newItems: CartItem[] = courseIds.map((id) => ({
+        id: id,
+        item_id: id,
+        title: t("courseName"),
+        price: t("price"),
+      }));
+      setItems((prev) => [...prev, ...newItems]);
 
       return { previous };
     },

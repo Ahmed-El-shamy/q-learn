@@ -216,8 +216,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const isInCart = useCallback(
     (courseId: number) => {
       return items.some((item) => {
-        const idInCart = item.item_id || item.course?.id;
-        return Number(idInCart) === Number(courseId);
+        const idInCart = item.item_id;
+        return idInCart === courseId;
       });
     },
     [items]

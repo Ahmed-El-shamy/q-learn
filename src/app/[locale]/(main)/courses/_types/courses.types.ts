@@ -3,7 +3,7 @@ export interface Course {
   slug: string;
   user_id: number | null;
   user: string;
-  instructor: Instructor;
+  instructor: Partial<Instructor>;
   category: {
     id: number;
     name: string;
@@ -27,9 +27,9 @@ export interface Course {
   total_enrollments?: number;
   total_purchases?: number;
   publish_date?: string | null;
-  title: string | { en: string; ar: string };
-  description: string | { en: string; ar: string };
-  short_description?: string | { en: string; ar: string };
+  title: string;
+  description: string;
+  short_description?: string;
   target_audience?: string;
   accrediting_organization?: string;
   thumbnail?: string | null;

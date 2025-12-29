@@ -167,7 +167,8 @@
   "courseCard": {
     "rating": "تقييم",
     "students": "طالب",
-    "currency": "ر.س"
+    "currency": "ر.س",
+    "alt": "صورة الكورس"
   },
   "filters": {
     "category": "الأقسام",
@@ -199,6 +200,8 @@
   "addToWishlist": "إضافة للمفضلة",
   "removeFromWishlist": "إزالة من المفضلة",
   "cart": {
+    "courseName": "اسم الكورس",
+    "price": "0",
     "there is no courses in cart": "لا توجد دورات في السلة",
     "currency": "ر.س",
     "subtotal": "المجموع الفرعي",

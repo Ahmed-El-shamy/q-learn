@@ -174,7 +174,8 @@
   "courseCard": {
     "rating": "Rating",
     "students": "Students",
-    "currency": "SAR"
+    "currency": "SAR",
+    "alt": "Course Image"
   },
   "filters": {
     "category": "Category",
@@ -205,6 +206,8 @@
   "addToWishlist": "Add to wishlist",
   "removeFromWishlist": "Remove from wishlist",
   "cart": {
+    "courseName": "Course Name",
+    "price": "0",
     "there is no courses in cart": "There is no courses in cart",
     "currency": "SAR",
     "subtotal": "Subtotal",
