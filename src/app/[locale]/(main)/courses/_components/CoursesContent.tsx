@@ -57,7 +57,7 @@ const CoursesContent = () => {
       {isFetching && !isLoading && (
         <div className="fixed top-0 left-0 w-full z-100">
           <div className="h-1 bg-purple-100 w-full overflow-hidden">
-            <div className="h-full bg-linear-to-r from-[#660afb] to-[#b633ff] animate-progress origin-left"></div>
+            <div className="h-full gradient-background animate-progress origin-left"></div>
           </div>
         </div>
       )}

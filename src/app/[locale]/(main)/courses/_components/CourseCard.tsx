@@ -96,7 +96,7 @@ const CourseCard: React.FC<Course> = ({
 
         <div className="flex justify-between items-center border-t border-t-[#d1d1d1] mt-8 py-4">
           <div className="flex items-center justify-center gap-1">
-            <h4 className="font-bold text-xl bg-linear-to-r from-[#660afb] to-[#b633ff] bg-clip-text text-transparent">
+            <h4 className="font-bold text-xl gradient-background bg-clip-text text-transparent">
               {price?.sar} {t("currency")}
             </h4>
           </div>

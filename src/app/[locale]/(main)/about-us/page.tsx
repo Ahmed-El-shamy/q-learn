@@ -31,7 +31,7 @@ const Page = () => {
               Personal.
             </h2>
           </div>
-          <div className="flex-1 p-10 px-5 lg:px-16 bg-linear-to-r from-[#660afb] to-[#b633ff] text-white">
+          <div className="flex-1 p-10 px-5 lg:px-16 gradient-background text-white">
             <h2 className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl w-full lg:w-[90%] xl:w-[85%] leading-12">
               We are here to meet your demand and teach the most beneficial way
               for you in Personal.
