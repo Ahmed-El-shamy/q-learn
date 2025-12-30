@@ -178,7 +178,8 @@
     "price": "السعر",
     "instructor": "المحاضرين",
     "rating": "التقييم",
-    "search": "بحث"
+    "search": "بحث",
+    "currency": "ر.س"
   },
   "sort": {
     "label": "ترتيب حسب",
@@ -220,5 +221,18 @@
     "cancel": "إلغاء",
     "cart cleared": "تم إفراغ السلة",
     "failed to clear cart": "فشل إفراغ السلة"
+  },
+  "levels": {
+    "beginner": "مبتدئ",
+    "intermediate": "متوسط",
+    "advanced": "متقدم"
+  },
+  "priceType": {
+    "paid": "مدفوع",
+    "free": "مجاني"
+  },
+  "mode": {
+    "offline": "أوفلاين",
+    "online": "أونلاين"
   }
 }

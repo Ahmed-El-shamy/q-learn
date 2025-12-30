@@ -105,10 +105,14 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
         style={{ direction: language === "ar" ? "rtl" : "ltr" }}
       >
         <div className="flex items-center gap-2">
-          <p>{minVal}</p> SAR
+          <p>
+            {minVal} {t("currency")}
+          </p>
         </div>
         <div className="flex items-center gap-2">
-          <p>{maxVal}</p> SAR
+          <p>
+            {maxVal} {t("currency")}
+          </p>
         </div>
       </div>
     </div>

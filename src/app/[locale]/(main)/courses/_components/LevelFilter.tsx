@@ -4,15 +4,14 @@ import { useCourseQuery } from "../_services/_hooks/useCourseQuery";
 import { useTranslations } from "next-intl";
 
 const LevelFilter = () => {
-  const { filters, sortBy, handleChangeFilters } = useCoursesFilters();
-  const { data } = useCourseQuery({ filters: {}, sort: sortBy });
+  const { filters, handleChangeFilters } = useCoursesFilters();
   const t = useTranslations("filters");
+  const tLevel = useTranslations("levels");
 
-  const levels = useMemo(() => {
-    if (!data) return [];
-    const level = data.map((course) => course.level);
-    return Array.from(new Set(level));
-  }, [data]);
+  const levels = useMemo(
+    () => [tLevel("beginner"), tLevel("intermediate"), tLevel("advanced")],
+    [tLevel]
+  );
 
   const handleToggle = (value: string) => {
     const currentSelected = filters.level || [];
@@ -20,7 +19,7 @@ const LevelFilter = () => {
       ? currentSelected.filter((v) => v !== value)
       : [...currentSelected, value];
 
-    handleChangeFilters("level", newValues);
+    handleChangeFilters("level", newValues, true);
   };
 
   return (
@@ -28,9 +27,9 @@ const LevelFilter = () => {
       <h2 className="text-xl text-[#202e3b] shrink-0">{t("level")}</h2>
 
       <div className="mt-5 flex-1 overflow-y-auto pe-3 space-y-4 pb-5">
-        {levels.map((level, i) => (
+        {levels.map((level) => (
           <label
-            key={i}
+            key={level}
             className="custom-checkbox-container group cursor-pointer flex items-center gap-3"
           >
             <input

@@ -1,13 +1,15 @@
+export interface Category {
+  id: number;
+  name: string;
+}
+
 export interface Course {
   id: number;
   slug: string;
   user_id: number | null;
   user: string;
   instructor: Partial<Instructor>;
-  category: {
-    id: number;
-    name: string;
-  };
+  category: Category;
   price: {
     egp: string;
     usd: string;
@@ -69,7 +71,7 @@ export interface Instructor {
 }
 
 export interface CourseFilters {
-  category_id?: string[];
+  category_id?: number[];
   level?: string[];
   instructor?: string[];
   mode?: string[];
@@ -91,6 +93,7 @@ export type SortBy =
 export interface CoursesFilterContext {
   sortBy?: SortBy;
   filters: CourseFilters;
+  serverFilters: CourseFilters;
   setSortBy: (sortBy: SortBy) => void;
 
   handleChangeFilters: <K extends keyof CourseFilters>(

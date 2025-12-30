@@ -56,7 +56,7 @@ const SortDropdown = () => {
       </button>
 
       {isOpen && (
-        <ul className="absolute start-0 w-full mt-1 border border-gray-300 rounded-md bg-white shadow-md z-20">
+        <ul className="absolute start-0 w-full mt-1 border border-gray-300 rounded-md bg-white shadow-md z-100">
           {options.map((opt) => (
             <li
               key={opt}

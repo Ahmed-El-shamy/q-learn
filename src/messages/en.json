@@ -185,7 +185,8 @@
     "price": "Price",
     "instructor": "Instructor",
     "rating": "Rating",
-    "search": "Search"
+    "search": "Search",
+    "currency": "SAR"
   },
   "sort": {
     "label": "Sort By",
@@ -226,5 +227,18 @@
     "cancel": "Cancel",
     "cart cleared": "Cart cleared",
     "failed to clear cart": "Failed to clear cart"
+  },
+  "levels": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "priceType": {
+    "paid": "Paid",
+    "free": "Free"
+  },
+  "mode": {
+    "offline": "Offline",
+    "online": "Online"
   }
 }

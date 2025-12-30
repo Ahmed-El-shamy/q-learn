@@ -6,7 +6,9 @@ import { useCoursesFilters } from "../_services/CourseFilterProvider";
 const ModeFilter = () => {
   const { filters, handleChangeFilters } = useCoursesFilters();
   const t = useTranslations("filters");
-  const mode = ["offline", "online"];
+  const tMode = useTranslations("mode");
+
+  const mode = [tMode("offline"), tMode("online")];
 
   const handleToggle = (value: string) => {
     const currentSelected = filters.mode || [];
@@ -14,7 +16,7 @@ const ModeFilter = () => {
       ? currentSelected.filter((v) => v !== value)
       : [...currentSelected, value];
 
-    handleChangeFilters("mode", newValues);
+    handleChangeFilters("mode", newValues, true);
   };
 
   return (

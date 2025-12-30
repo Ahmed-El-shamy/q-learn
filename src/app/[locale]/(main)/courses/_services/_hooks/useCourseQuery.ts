@@ -1,6 +1,7 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Course, CourseFilters, SortBy } from "../../_types/courses.types";
-import { useCourseApi } from "./useCourseApi";
+import { getCourseById, getCourses } from "../../_quires/course.api";
+import { Api } from "@/_lib/api/api";
 
 type UseCourseQueryProps = {
   filters?: CourseFilters;
@@ -8,10 +9,8 @@ type UseCourseQueryProps = {
 };
 
 export const useCourseQuery = ({ filters, sort }: UseCourseQueryProps) => {
-  const { getCourses } = useCourseApi();
-
   return useQuery({
-    queryKey: ["courses", filters, sort],
+    queryKey: [Api.routes.site.courses, { filters, sort }],
     queryFn: () => {
       const formattedFilters: any = { ...filters };
       Object.keys(formattedFilters).forEach((key) => {
@@ -32,25 +31,9 @@ export const useCourseQuery = ({ filters, sort }: UseCourseQueryProps) => {
 };
 
 export const useCourseByIdQuery = (id: string) => {
-  const { getCourseById } = useCourseApi();
-
   return useQuery<Course>({
-    queryKey: ["course", id],
+    queryKey: [`${Api.routes.site.courses}/${id}`],
     queryFn: () => getCourseById(id),
     enabled: !!id,
   });
 };
-
-// export const useCourseQuery = ({ filters, sort }: UseCourseQueryProps) => {
-//   const { getCourses } = useCourseApi();
-
-//   return useQuery({
-//     queryKey: ["courses", filters, sort],
-//     queryFn: () =>
-//       getCourses({
-//         ...filters,
-//         ...(sort && { sort_by: sort }),
-//       }),
-//     placeholderData: keepPreviousData,
-//   });
-// };
