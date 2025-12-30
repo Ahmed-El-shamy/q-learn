@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { ShieldUser, ShoppingCart, Star } from "lucide-react";
+import { CheckCircle, ShieldUser, ShoppingCart, Star } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/store/CartProvider";
 import { Course } from "@/app/[locale]/(main)/courses/_types/courses.types";
@@ -17,27 +17,35 @@ const CourseCard: React.FC<Course> = ({
   title,
   description,
   thumbnail,
-  instructor,
   alt,
   total_enrollments,
 }) => {
-  const { addToCart, isInCart } = useCart();
+  const { addToCart, removeFromCart, isInCart, items } = useCart();
   const t = useTranslations("courseCard");
 
   const isAlreadyInCart = isInCart(id!);
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleCartAction = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (isAlreadyInCart) return; // نمنع الإضافة لو موجود فعلاً
+    e.stopPropagation();
+
+    if (isAlreadyInCart) {
+      const cartItem = items.find((item) => item.item_id === id);
+      if (cartItem) {
+        removeFromCart(cartItem.id);
+      }
+      return;
+    }
 
     addToCart({
-      id: id!,
+      id: id,
       item_id: id!,
-      title: title,
+      title,
       price: price?.sar?.toString(),
       course: { thumbnail },
     });
   };
+
   return (
     <div className="border border-[#d1d1d1] h-[530px] group overflow-hidden">
       <div className="w-full h-[45%] relative overflow-hidden">
@@ -94,13 +102,10 @@ const CourseCard: React.FC<Course> = ({
           </div>
 
           <GradientIcon
-            Icon={ShoppingCart}
-            onClick={handleAddToCart}
-            className={
-              isAlreadyInCart
-                ? "opacity-50 cursor-not-allowed"
-                : "cursor-pointer"
-            }
+            Icon={isAlreadyInCart ? CheckCircle : ShoppingCart}
+            onClick={handleCartAction}
+            stroke={isAlreadyInCart ? "#3DD598 " : ""}
+            fill={isAlreadyInCart ? "#FFF" : ""}
           />
         </div>
       </div>

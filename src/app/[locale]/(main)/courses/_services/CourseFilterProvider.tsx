@@ -132,6 +132,7 @@ export const CourseFilterProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const resetFilters = useCallback(() => {
+    setoptimisticFilters({} as CourseFilters);
     router.replace(pathname, { scroll: false });
   }, [pathname, router]);
 

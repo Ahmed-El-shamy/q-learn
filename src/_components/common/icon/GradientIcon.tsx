@@ -9,6 +9,8 @@ interface GradientIconProps {
   gradientFrom?: string;
   gradientTo?: string;
   className?: string;
+  stroke?: string;
+  fill?: string;
 }
 
 const GradientIcon: React.FC<GradientIconProps> = ({
@@ -18,6 +20,8 @@ const GradientIcon: React.FC<GradientIconProps> = ({
   gradientFrom = "#660afb",
   gradientTo = "#b633ff",
   className = "",
+  stroke,
+  fill,
 }) => {
   return (
     <button
@@ -32,9 +36,10 @@ const GradientIcon: React.FC<GradientIconProps> = ({
           </linearGradient>
         </defs>
         <Icon
-          stroke="url(#iconGradient)"
-          fill="url(#iconGradient)"
+          stroke={stroke || "url(#iconGradient)"}
+          fill={fill || "url(#iconGradient)"}
           size={size}
+          className="cursor-pointer"
         />
       </svg>
     </button>
