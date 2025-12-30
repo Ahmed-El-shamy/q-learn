@@ -5,27 +5,28 @@ import { useLocale } from "next-intl";
 import { useQueryClient } from "@tanstack/react-query";
 import { twMerge } from "tailwind-merge";
 import MainBtn from "../common/buttons/MainBtn";
+import { useSearchParams } from "next/navigation";
 
-const LanguageSwitcher = ({
-  className
-}: {
-  className?: string
-}) => {
+const LanguageSwitcher = ({ className }: { className?: string }) => {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+
   const isLoginPages =
     pathname === "/login" ||
     pathname === "/register" ||
     pathname === "/forget-password";
+
   const switchLanguage = () => {
     const newLocale = locale === "ar" ? "en" : "ar";
-    router.push(pathname, { locale: newLocale });
-    queryClient.resetQueries();
-    queryClient.invalidateQueries();
+    const query = searchParams.toString();
+
+    router.push(query ? `${pathname}?${query}` : pathname, {
+      locale: newLocale,
+    });
   };
-  
+
   return (
     <>
       {isLoginPages ? (
@@ -43,7 +44,10 @@ const LanguageSwitcher = ({
       ) : (
         <MainBtn
           onClick={switchLanguage}
-          containerClassName={twMerge("fixed cursor-pointer rounded-full main-background bottom-24 lg:bottom-6 start-6 z-50 flex-center gap-2 p-2 shadow-md border border-purple-600 transition-all", className)}
+          containerClassName={twMerge(
+            "fixed cursor-pointer rounded-full main-background bottom-24 lg:bottom-6 start-6 z-50 flex-center gap-2 p-2 shadow-md border border-purple-600 transition-all",
+            className
+          )}
         >
           <Image
             alt="language-flag"
