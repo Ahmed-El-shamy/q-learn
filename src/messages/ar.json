@@ -168,7 +168,8 @@
   "courseCard": {
     "rating": "تقييم",
     "students": "طالب",
-    "currency": "ر.س"
+    "currency": "ر.س",
+    "alt": "صورة الكورس"
   },
   "filters": {
     "category": "الأقسام",
@@ -178,7 +179,8 @@
     "price": "السعر",
     "instructor": "المحاضرين",
     "rating": "التقييم",
-    "search": "بحث"
+    "search": "بحث",
+    "currency": "ر.س"
   },
   "sort": {
     "label": "ترتيب حسب",
@@ -200,6 +202,8 @@
   "addToWishlist": "إضافة للمفضلة",
   "removeFromWishlist": "إزالة من المفضلة",
   "cart": {
+    "courseName": "اسم الكورس",
+    "price": "0",
     "there is no courses in cart": "لا توجد دورات في السلة",
     "currency": "ر.س",
     "subtotal": "المجموع الفرعي",
@@ -218,5 +222,18 @@
     "cancel": "إلغاء",
     "cart cleared": "تم إفراغ السلة",
     "failed to clear cart": "فشل إفراغ السلة"
+  },
+  "levels": {
+    "beginner": "مبتدئ",
+    "intermediate": "متوسط",
+    "advanced": "متقدم"
+  },
+  "priceType": {
+    "paid": "مدفوع",
+    "free": "مجاني"
+  },
+  "mode": {
+    "offline": "أوفلاين",
+    "online": "أونلاين"
   }
 }

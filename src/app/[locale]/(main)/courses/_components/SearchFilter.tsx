@@ -9,24 +9,16 @@ const SearchFilter = () => {
   const [value, setValue] = useState(filters.search || "");
   const t = useTranslations("filters");
 
-  const filterHandlerRef = useRef(handleChangeFilters);
-  useEffect(() => {
-    filterHandlerRef.current = handleChangeFilters;
-  }, [handleChangeFilters]);
-
   useEffect(() => {
     setValue(filters.search || "");
   }, [filters.search]);
 
-  useEffect(() => {
-    if (value === (filters.search || "")) return;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setValue(newValue);
 
-    const timer = setTimeout(() => {
-      filterHandlerRef.current("search", value, false);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [value, filters.search]);
+    handleChangeFilters("search", newValue, true);
+  };
 
   return (
     <div className="relative w-full">
@@ -34,7 +26,7 @@ const SearchFilter = () => {
       <input
         type="search"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
         className="pe-4 ps-11 py-4 text-[#373737] placeholder:text-[#373737] placeholder:text-sm border border-[#d1d1d1] w-full outline-0"
         placeholder={`${t("search")}...`}
       />

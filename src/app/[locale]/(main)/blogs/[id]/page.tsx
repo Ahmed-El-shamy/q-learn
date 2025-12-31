@@ -8,27 +8,27 @@ import TOC from "./_components/TOC";
 import { Metadata } from "next";
 
 export async function generateMetadata({
-  params
+  params,
 }: {
   params: Promise<{
-    id: string
-  }>
+    id: string;
+  }>;
 }): Promise<Metadata> {
-  const {id} = await params;
+  const { id } = await params;
   const response = await api.get<Blog>(`${Api.routes.site.blogs}/${id}`);
   const blog = response?.data;
 
   return {
-    title: blog?.name
-  }
+    title: blog?.name,
+  };
 }
 
 export default async function Page({
-  params
+  params,
 }: {
   params: Promise<{
-    id: string
-  }>
+    id: string;
+  }>;
 }) {
   const { id } = await params;
   const response = await api.get<Blog>(`${Api.routes.site.blogs}/${id}`);
@@ -51,7 +51,7 @@ export default async function Page({
 
               <div className="px-5 py-10 md:p-10 flex flex-col gap-8 flex-1">
                 <div className="flex flex-wrap gap-3 md:gap-5">
-                  <div className="flex items-center py-2 sm:py-1 ps-3 sm:ps-1 pe-7 bg-linear-to-r from-[#660afb] to-[#b633ff] rounded-full gap-2 cursor-pointer">
+                  <div className="flex items-center py-2 sm:py-1 ps-3 sm:ps-1 pe-7 gradient-background rounded-full gap-2 cursor-pointer">
                     <div className="w-6 sm:w-10 h-6 sm:h-10 rounded-full overflow-hidden">
                       <Image
                         src="/images/homepage/business-man1.jpg"

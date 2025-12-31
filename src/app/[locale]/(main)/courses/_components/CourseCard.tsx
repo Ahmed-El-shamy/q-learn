@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
-import { ShieldUser, ShoppingCart, Star } from "lucide-react";
+import { CheckCircle, ShieldUser, ShoppingCart, Star } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/store/CartProvider";
 import { Course } from "@/app/[locale]/(main)/courses/_types/courses.types";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { CourseWishlistButton } from "./CourseWishlistButton";
+import GradientIcon from "@/_components/common/icon/GradientIcon";
 
 const CourseCard: React.FC<Course> = ({
   id,
@@ -16,25 +17,32 @@ const CourseCard: React.FC<Course> = ({
   title,
   description,
   thumbnail,
-  instructor,
   alt,
-  oldPrice,
   total_enrollments,
 }) => {
-  const { addToCart } = useCart();
+  const { addToCart, removeFromCart, isInCart, items } = useCart();
   const t = useTranslations("courseCard");
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const isAlreadyInCart = isInCart(id!);
+
+  const handleCartAction = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
+
+    if (isAlreadyInCart) {
+      const cartItem = items.find((item) => item.item_id === id);
+      if (cartItem) {
+        removeFromCart(cartItem.id);
+      }
+      return;
+    }
+
     addToCart({
-      id: id!,
-      course_id: id!,
-      title: title || "Course",
-      thumbnail: thumbnail || "",
-      price: price?.sar?.toString() || "0",
-      sale_price: price?.sar?.toString(),
-      has_discount: false,
-      instructor_name: instructor.user.name,
+      id: id,
+      item_id: id!,
+      title,
+      price: price?.sar?.toString(),
+      course: { thumbnail },
     });
   };
 
@@ -48,7 +56,7 @@ const CourseCard: React.FC<Course> = ({
 
           <Image
             src={thumbnail || "/images/courses/10.jpg"}
-            alt={alt || title || "Course Image"}
+            alt={alt || title || t("alt")}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -81,43 +89,24 @@ const CourseCard: React.FC<Course> = ({
             </div>
           </div>
 
-          <p className="line-clamp-2 text-sm text-[#737887] leading-relaxed">
+          <p className="line-clamp-2 h-12 text-[#737887] leading-relaxed">
             {description}
           </p>
         </div>
 
         <div className="flex justify-between items-center border-t border-t-[#d1d1d1] mt-8 py-4">
           <div className="flex items-center justify-center gap-1">
-            <h4 className="font-bold text-xl bg-linear-to-r from-[#660afb] to-[#b633ff] bg-clip-text text-transparent">
+            <h4 className="font-bold text-xl gradient-background bg-clip-text text-transparent">
               {price?.sar} {t("currency")}
             </h4>
           </div>
 
-          <button
-            onClick={handleAddToCart}
-            className="p-2 hover:bg-purple-50 rounded-full transition-colors"
-          >
-            <svg width="40" height="40" viewBox="0 0 24 24">
-              <defs>
-                <linearGradient
-                  id="iconGradient"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="0%"
-                >
-                  <stop offset="0%" stopColor="#660afb" />
-                  <stop offset="100%" stopColor="#b633ff" />
-                </linearGradient>
-              </defs>
-              <ShoppingCart
-                stroke="url(#iconGradient)"
-                fill="url(#iconGradient)"
-                size={18}
-                className="cursor-pointer"
-              />
-            </svg>
-          </button>
+          <GradientIcon
+            Icon={isAlreadyInCart ? CheckCircle : ShoppingCart}
+            onClick={handleCartAction}
+            stroke={isAlreadyInCart ? "#3DD598 " : ""}
+            fill={isAlreadyInCart ? "#FFF" : ""}
+          />
         </div>
       </div>
     </div>

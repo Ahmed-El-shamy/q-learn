@@ -10,11 +10,11 @@ export interface CartItem {
   type?: string;
   title: string;
   price: string;
-  subtotal: string;
-  currency: string;
-  course: Course;
-  learning_path: any | null;
-  created_at: string;
+  subtotal?: string;
+  currency?: string;
+  course?: Partial<Course>;
+  learning_path?: any | null;
+  created_at?: string;
 }
 
 export interface CartResponse {

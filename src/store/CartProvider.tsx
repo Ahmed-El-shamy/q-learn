@@ -10,20 +10,19 @@ import {
   useRef,
   useState,
 } from "react";
-import { useCartApi } from "./hooks/useCartApi";
 import { useCartMutations } from "./hooks/useCartMutations";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Api } from "@/_lib/api/api";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { getCart } from "./_quires/cart.api";
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 const LOCAL_CART_KEY = "guest_cart_courses";
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const queryClient = useQueryClient();
-  const { getCart } = useCartApi();
   const { status } = useSession();
   const t = useTranslations("cart");
 
@@ -216,8 +215,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const isInCart = useCallback(
     (courseId: number) => {
       return items.some((item) => {
-        const idInCart = item.item_id || item.course?.id;
-        return Number(idInCart) === Number(courseId);
+        const idInCart = item.item_id;
+        return idInCart === courseId;
       });
     },
     [items]

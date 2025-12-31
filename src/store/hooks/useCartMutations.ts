@@ -2,10 +2,10 @@
 import { CartItem } from "@/types/cart.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useRef } from "react";
-import { useCartApi } from "./useCartApi";
 import { Api } from "@/_lib/api/api";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { addToCart, clearCart, removeFromCart } from "../_quires/cart.api";
 
 const showToast = (type: "success" | "error", message: string) => {
   if (type === "success") toast.success(message);
@@ -18,7 +18,6 @@ export const useCartMutations = (
   isMerging: React.MutableRefObject<boolean>
 ) => {
   const queryClient = useQueryClient();
-  const { addToCart, removeFromCart, clearCart } = useCartApi();
   const t = useTranslations("cart");
 
   const invalidateCart = useCallback(() => {
@@ -30,9 +29,16 @@ export const useCartMutations = (
       return addToCart(course_id);
     },
 
-    onMutate: async () => {
+    onMutate: async (courseIds) => {
       await queryClient.cancelQueries({ queryKey: [Api.routes.site.cart] });
       const previous = items;
+      const newItems: CartItem[] = courseIds.map((id) => ({
+        id: id,
+        item_id: id,
+        title: t("courseName"),
+        price: t("price"),
+      }));
+      setItems((prev) => [...prev, ...newItems]);
 
       return { previous };
     },

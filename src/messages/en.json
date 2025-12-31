@@ -175,7 +175,8 @@
   "courseCard": {
     "rating": "Rating",
     "students": "Students",
-    "currency": "SAR"
+    "currency": "SAR",
+    "alt": "Course Image"
   },
   "filters": {
     "category": "Category",
@@ -185,7 +186,8 @@
     "price": "Price",
     "instructor": "Instructor",
     "rating": "Rating",
-    "search": "Search"
+    "search": "Search",
+    "currency": "SAR"
   },
   "sort": {
     "label": "Sort By",
@@ -206,6 +208,8 @@
   "addToWishlist": "Add to wishlist",
   "removeFromWishlist": "Remove from wishlist",
   "cart": {
+    "courseName": "Course Name",
+    "price": "0",
     "there is no courses in cart": "There is no courses in cart",
     "currency": "SAR",
     "subtotal": "Subtotal",
@@ -224,5 +228,18 @@
     "cancel": "Cancel",
     "cart cleared": "Cart cleared",
     "failed to clear cart": "Failed to clear cart"
+  },
+  "levels": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "priceType": {
+    "paid": "Paid",
+    "free": "Free"
+  },
+  "mode": {
+    "offline": "Offline",
+    "online": "Online"
   }
 }
