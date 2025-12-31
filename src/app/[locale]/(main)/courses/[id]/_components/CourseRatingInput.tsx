@@ -1,12 +1,11 @@
 "use client";
 
-import { Star } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
-import clsx from "clsx";
+import { useCallback } from "react";
 import DialogComponent from "@/_components/common/dialog/Dialog";
 import useRating from "../_hooks/useRating";
 import { Controller } from "react-hook-form";
 import MainTextArea from "@/_components/common/inputs/mainInput/MainTextArea";
+import RateInput from "@/_components/common/inputs/rateInput/RateInput";
 import { useTranslations } from "next-intl";
 
 const CourseRatingInput = () => {
@@ -23,11 +22,6 @@ const CourseRatingInput = () => {
         },
         submit,
     } = useRating();
-    const [hoveredRate, setHoveredRate] = useState(0);
-
-    const rateStars = useMemo(() => {
-        return Array(5).fill(1).map((num, index) => num + index);
-    }, []);
 
     const handleCancel = useCallback(() => {
         setValue("review", "");
@@ -40,6 +34,16 @@ const CourseRatingInput = () => {
             content={(
                 <form onSubmit={submit}>
                     <div className="space-y-4">
+                        <Controller
+                            name="rating"
+                            control={control}
+                            render={({ field }) => (
+                                <RateInput
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
+                        />
                         <MainTextArea
                             {...register("review")}
                             label="Review"
@@ -64,34 +68,10 @@ const CourseRatingInput = () => {
                 name="rating"
                 control={control}
                 render={({ field }) => (
-                    <div
-                        className="flex justify-center items-center"
-                        onMouseLeave={() => setHoveredRate(0)}
-                    >
-                        {rateStars.map((star) => {
-                            const isFilled = star <= field.value || star <= hoveredRate;
-                            return (
-                                <div
-                                    className="px-1 cursor-pointer"
-                                    onMouseEnter={() => setHoveredRate(star)}
-                                    onClick={() => field.onChange(star)}
-                                    key={star}
-                                >
-                                    <Star
-                                        size={17}
-                                        fill={isFilled ? "var(--color-purple-500)" : "var(--color-purple-100)"}
-                                        className={clsx("duration-100 cursor-pointer", {
-                                            "text-purple-500": isFilled,
-                                            "text-purple-100": !isFilled,
-                                            "opacity-60": star > hoveredRate && star <= field.value && hoveredRate != 0
-                                        })}
-                                    />
-                                </div>
-
-                            )
-                        })}
-                    </div>
-
+                    <RateInput
+                        value={field.value}
+                        onChange={field.onChange}
+                    />
                 )}
             />
         </DialogComponent>

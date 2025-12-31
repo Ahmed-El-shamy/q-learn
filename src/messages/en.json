@@ -74,7 +74,8 @@
       "message": "Sorry, the course you're looking for doesn't exist or has been removed.",
       "browseCourses": "Browse Courses",
       "backToHome": "Back to Home"
-    }
+    },
+    "auto-next": "Auto Next"
   },
   "auth": {
     "signup": "Sign Up",
