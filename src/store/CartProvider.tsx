@@ -70,7 +70,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (status === "authenticated") {
-      cartQuery.refetch();
+      cartQuery.refetch().then(({ data }) => {
+        if (data?.cart?.items) {
+          setItems(data.cart.items);
+        }
+      });
     }
   }, [status]);
 

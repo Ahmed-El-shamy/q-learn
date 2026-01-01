@@ -1,5 +1,7 @@
-import React from "react";
+"use client";
 import PaymentMethods from "./_components/PaymentMethods";
+import OrderDetails from "./_components/OrderDetails";
+import { useState } from "react";
 
 const page = () => {
   return (
@@ -17,10 +19,12 @@ const page = () => {
       <section className="containerr">
         <div className="my-15">
           <div className="grid grid-cols-12 gap-5">
-            <div className="col-span-7">
+            <div className="col-span-12 lg:col-span-7">
               <PaymentMethods />
             </div>
-            <div className="col-span-5 bg-green-500"></div>
+            <div className="col-span-12 lg:col-span-5 mt-10 lg:mt-0">
+              <OrderDetails />
+            </div>
           </div>
         </div>
       </section>
