@@ -55,7 +55,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
         <div className="flex flex-row lg:flex-col xl:flex-row items-center lg:items-start xl:items-center gap-8 lg:gap-5 xl:gap-8 mt-5">
           <MainBtn title="Read More" className="py-3 text-sm font-normal" />
-          <p className="bg-linear-to-r from-[#660afb] to-[#b633ff] bg-clip-text text-transparent">
+          <p className="gradient-background bg-clip-text text-transparent">
             {time}
           </p>
         </div>

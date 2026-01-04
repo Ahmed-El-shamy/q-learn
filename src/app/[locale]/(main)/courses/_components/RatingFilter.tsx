@@ -15,7 +15,7 @@ const RatingFilter = () => {
     const newValues = isAlreadySelected
       ? currentSelected.filter((v) => v !== value)
       : [...currentSelected, value];
-    handleChangeFilters("rating", newValues);
+    handleChangeFilters("rating", newValues, true);
   };
 
   return (

@@ -50,3 +50,7 @@
 .main-background {
   @apply bg-linear-to-r from-[#660afb] via-[#b633ff] to-[#660afb];
 }
+
+.gradient-background {
+  @apply bg-linear-to-r from-[#660afb] to-[#b633ff];
+}

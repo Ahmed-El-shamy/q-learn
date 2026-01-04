@@ -1,29 +1,14 @@
 "use client";
 
-import { useMemo } from "react";
-import { useCourseQuery } from "../_services/_hooks/useCourseQuery";
 import { useCoursesFilters } from "../_services/CourseFilterProvider";
-import { Instructor } from "../_types/courses.types";
 import { useTranslations } from "next-intl";
+import { useInstructorsQuery } from "../_services/_hooks/useFiltersQuery";
+import FilterSkelton from "./FilterSkelton";
 
 const InstructorsFilter = () => {
-  const { filters, sortBy, handleChangeFilters } = useCoursesFilters();
-  const { data } = useCourseQuery({ filters: {}, sort: sortBy });
+  const { filters, handleChangeFilters } = useCoursesFilters();
+  const { data: instructors, isLoading, isFetching } = useInstructorsQuery();
   const t = useTranslations("filters");
-
-  const instructors = useMemo(() => {
-    if (!data) return [];
-
-    const allInstructors = data
-      .map((course) => course.instructor)
-      .filter(Boolean) as Instructor[];
-
-    const uniqueInstructors = Array.from(
-      new Map(allInstructors.map((inst) => [inst.user.id, inst])).values()
-    );
-
-    return uniqueInstructors;
-  }, [data]);
 
   const handleToggle = (id: number) => {
     const currentSelected = filters.instructor || [];
@@ -33,15 +18,19 @@ const InstructorsFilter = () => {
       ? currentSelected.filter((v) => v !== stringId)
       : [...currentSelected, stringId];
 
-    handleChangeFilters("instructor", newValues);
+    handleChangeFilters("instructor", newValues, true);
   };
+
+  if (isLoading || isFetching) {
+    return <FilterSkelton />;
+  }
 
   return (
     <div className="border border-[#d1d1d1] p-4 min-h-20 max-h-80 flex flex-col">
       <h2 className="text-xl text-[#202e3b] shrink-0">{t("instructor")}</h2>
 
       <div className="mt-5 flex-1 overflow-y-auto pe-3 space-y-4 pb-5">
-        {instructors.map((instructor, i) => {
+        {instructors?.map((instructor, i) => {
           const isChecked =
             filters.instructor?.includes(String(instructor.user.id)) || false;
           return (

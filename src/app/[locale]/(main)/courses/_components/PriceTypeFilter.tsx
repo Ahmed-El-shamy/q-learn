@@ -5,21 +5,22 @@ import { useCoursesFilters } from "../_services/CourseFilterProvider";
 const PriceTypeFilter = () => {
   const { filters, handleChangeFilters } = useCoursesFilters();
   const t = useTranslations("filters");
+  const tPrice = useTranslations("priceType");
 
   const priceTypes = [
-    { label: "Paid", value: "false" },
-    { label: "Free", value: "true" },
+    { label: tPrice("paid"), value: "false" },
+    { label: tPrice("free"), value: "true" },
   ];
 
   const handleToggle = (value: string) => {
-    // * Why are we mapping over the array ? 
+    // * Why are we mapping over the array ?
     const currentSelected = (filters.is_free || []).map(String);
 
     const newValues = currentSelected.includes(value)
       ? currentSelected.filter((v) => v !== value)
       : [...currentSelected, value];
 
-    handleChangeFilters("is_free", newValues);
+    handleChangeFilters("is_free", newValues, true);
   };
 
   return (

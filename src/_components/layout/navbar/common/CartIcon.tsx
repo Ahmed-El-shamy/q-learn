@@ -41,13 +41,13 @@ const CartIcon = () => {
           console.log("Cancelled");
         },
       },
-      duration: 6000,
+      duration: 5000,
     });
   }, [clearCart]);
 
   const handleCheckout = () => {
     if (status === "unauthenticated") {
-      router.push("/auth/login?redirect=/checkout");
+      router.push("/auth/login?redirect_url=/checkout");
     } else {
       router.push("/checkout");
     }
@@ -95,7 +95,7 @@ const CartIcon = () => {
                   <div className="flex items-center gap-3">
                     <div className="w-20 h-16 shrink-0">
                       <Image
-                        src={item.course?.thumbnail || "/images/blogs/1.jpg"}
+                        src={item.course?.thumbnail || "/images/courses/10.jpg"}
                         alt={item.title || "Course 1"}
                         width={50}
                         height={100}

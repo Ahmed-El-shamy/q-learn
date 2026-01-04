@@ -1,3 +1,4 @@
+import { Coupon } from "@/app/[locale]/(main)/checkout/_types/coupon.types";
 import { Course } from "@/app/[locale]/(main)/courses/_types/courses.types";
 
 export interface LocalizedString {
@@ -10,11 +11,11 @@ export interface CartItem {
   type?: string;
   title: string;
   price: string;
-  subtotal: string;
-  currency: string;
-  course: Course;
-  learning_path: any | null;
-  created_at: string;
+  subtotal?: string;
+  currency?: string;
+  course?: Partial<Course>;
+  learning_path?: any | null;
+  created_at?: string;
 }
 
 export interface CartResponse {
@@ -40,30 +41,10 @@ export interface CartContextProps {
   subtotal: string;
   total: string;
   isLoading: boolean;
-  couponCode: string | null;
-  setCouponCode: (coupon: string) => void;
+  couponCode: Coupon | null;
+  setCouponCode: React.Dispatch<React.SetStateAction<Coupon | null>>;
   addToCart: (item: CartItem) => void;
   removeFromCart: (itemId: number) => void;
   clearCart: () => void;
   isInCart: (course_id: number) => boolean;
 }
-
-// export interface CartResponse {
-//   status: boolean;
-//   message: string;
-//   data: {
-//     cart: {
-//       id: number;
-//       status: string;
-//       items_count: number;
-//       is_empty: boolean;
-//       subtotal: string;
-//       discount: string;
-//       total: string;
-//       currency: string;
-//       coupon_code: string;
-//       items: CartItem[];
-//     };
-//   };
-//   items: CartItem[];
-// }

@@ -6,8 +6,10 @@ import {
   PropsWithChildren,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import {
   CourseFilters,
@@ -40,7 +42,7 @@ export const CourseFilterProvider: FC<PropsWithChildren> = ({ children }) => {
     };
 
     return {
-      category_id: parseCustomArray("category_id"),
+      category_id: parseCustomArray("category_id").map(Number),
       level: parseCustomArray("level"),
       mode: parseCustomArray("mode"),
       instructor: parseCustomArray("instructor"),
@@ -52,6 +54,9 @@ export const CourseFilterProvider: FC<PropsWithChildren> = ({ children }) => {
     } as CourseFilters;
   }, [searchParams]);
 
+  const [optimisticFilters, setoptimisticFilters] =
+    useState<CourseFilters>(filters);
+
   const sortBy = searchParams.get("sort_by") as SortBy;
 
   const handleChangeFilters = useCallback(
@@ -60,6 +65,11 @@ export const CourseFilterProvider: FC<PropsWithChildren> = ({ children }) => {
       value: CourseFilters[K],
       debounce = false
     ) => {
+      setoptimisticFilters((prev) => ({
+        ...prev,
+        [key]: value,
+      }));
+
       if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
 
       const params = new URLSearchParams(window.location.search);
@@ -97,7 +107,7 @@ export const CourseFilterProvider: FC<PropsWithChildren> = ({ children }) => {
       };
 
       if (debounce) {
-        debounceTimerRef.current = setTimeout(performUpdate, 500);
+        debounceTimerRef.current = setTimeout(performUpdate, 1000);
       } else {
         performUpdate();
       }
@@ -122,12 +132,20 @@ export const CourseFilterProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const resetFilters = useCallback(() => {
+    setoptimisticFilters({} as CourseFilters);
     router.replace(pathname, { scroll: false });
   }, [pathname, router]);
 
   return (
     <CourseFilterContext.Provider
-      value={{ filters, sortBy, handleChangeFilters, resetFilters, setSortBy }}
+      value={{
+        filters: optimisticFilters,
+        serverFilters: filters,
+        sortBy,
+        handleChangeFilters,
+        resetFilters,
+        setSortBy,
+      }}
     >
       {children}
     </CourseFilterContext.Provider>

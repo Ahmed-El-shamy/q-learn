@@ -167,7 +167,8 @@
   "courseCard": {
     "rating": "تقييم",
     "students": "طالب",
-    "currency": "ر.س"
+    "currency": "ر.س",
+    "alt": "صورة الكورس"
   },
   "filters": {
     "category": "الأقسام",
@@ -177,7 +178,8 @@
     "price": "السعر",
     "instructor": "المحاضرين",
     "rating": "التقييم",
-    "search": "بحث"
+    "search": "بحث",
+    "currency": "ر.س"
   },
   "sort": {
     "label": "ترتيب حسب",
@@ -199,6 +201,8 @@
   "addToWishlist": "إضافة للمفضلة",
   "removeFromWishlist": "إزالة من المفضلة",
   "cart": {
+    "courseName": "اسم الكورس",
+    "price": "0",
     "there is no courses in cart": "لا توجد دورات في السلة",
     "currency": "ر.س",
     "subtotal": "المجموع الفرعي",
@@ -217,5 +221,40 @@
     "cancel": "إلغاء",
     "cart cleared": "تم إفراغ السلة",
     "failed to clear cart": "فشل إفراغ السلة"
+  },
+  "levels": {
+    "beginner": "مبتدئ",
+    "intermediate": "متوسط",
+    "advanced": "متقدم"
+  },
+  "priceType": {
+    "paid": "مدفوع",
+    "free": "مجاني"
+  },
+  "mode": {
+    "offline": "أوفلاين",
+    "online": "أونلاين"
+  },
+  "checkout": {
+    "bank transfer": "تحويل بنكي",
+    "please upload the bank transfer receipt to proceed with your order": "يرجى رفع إيصال التحويل البنكي لإتمام طلبك.",
+    "upload transfer receipt": "رفع إيصال التحويل",
+    "transfer receipt": "إيصال التحويل",
+    "please make sure the uploaded receipt is clear and includes the transaction details": "يرجى التأكد من أن الإيصال المرفوع واضح ويحتوي على تفاصيل العملية.",
+    "order notes": "ملاحظات الطلب",
+    "write your notes here": "اكتب ملاحظاتك هنا...",
+    "complete order": "إتمام الطلب",
+    "your order": "طلبك",
+    "course image": "صورة الكورس",
+    "subtotal": "المجموع الفرعي",
+    "payable amount": "المبلغ المستحق",
+    "place an order": "تنفيذ الطلب",
+    "currency": "ر.س",
+    "coupon": {
+      "enter coupon code": "أدخل كود الخصم",
+      "apply": "تطبيق",
+      "coupon applied successfully": "تم تطبيق الكوبون بنجاح",
+      "invalid coupon": "الكوبون غير صالح"
+    }
   }
 }

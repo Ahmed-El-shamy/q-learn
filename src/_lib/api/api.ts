@@ -64,6 +64,8 @@ export class Api {
       contact_us: "/site/contact_us",
       newsLetter: "/site/newsletter/subscribe",
       cart: "/site/cartItems",
+      list: "/site",
+      coupon: "/site/coupons/validate",
     },
     auth: {
       login: "/site/login",
