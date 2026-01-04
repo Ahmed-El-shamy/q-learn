@@ -45,11 +45,10 @@ export function useToggleWishlist({
             const cid = Number(courseId);
             const wasWished = Boolean(prev[cid]);
 
-            // ✅ optimistic toggle
             qc.setQueryData<WishlistMap>(wishlistKeys.all, (old = {}) => {
                 const next = { ...old };
                 if (next[cid]) delete next[cid];
-                else next[cid] = -Date.now(); // temp placeholder
+                else next[cid] = -Date.now();
                 return next;
             });
 
@@ -64,7 +63,6 @@ export function useToggleWishlist({
         },
 
         onSuccess: (_res, _vars, ctx) => {
-            // ✅ we infer action from previous state
             if (ctx?.wasWished) {
                 toast.success(messages?.removed ?? "Removed from wishlist");
             } else {
@@ -73,7 +71,6 @@ export function useToggleWishlist({
         },
 
         onSettled: () => {
-            // ✅ sync with server to get real ids/state
             qc.invalidateQueries({ queryKey: wishlistKeys.all });
         },
     });
