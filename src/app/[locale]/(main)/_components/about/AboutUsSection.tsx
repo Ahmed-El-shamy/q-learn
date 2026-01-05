@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import { CircleCheckBig, Play } from "lucide-react";
+import { CircleCheckBig } from "lucide-react";
 
 import api, { Api } from "@/_lib/api/api";
 import ErrorHandler from "@/_components/common/error-handler/ErrorHandler";
@@ -16,7 +15,6 @@ const AboutUsSection = async () => {
     if (!response?.status) return null;
 
     const data = response.data as SimpleSection;
-
     return (
       <section aria-labelledby="about-heading" className="py-12 md:py-16">
         {/* Wrapper */}

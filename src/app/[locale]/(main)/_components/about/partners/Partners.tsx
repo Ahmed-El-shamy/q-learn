@@ -84,7 +84,7 @@ const Partners = async () => {
 
     const partners = response.data as Partner[];
     if (!partners?.length) return null;
-
+    console.log("data from partners", partners);
     return (
       <section className="mt-28" aria-labelledby="partners-heading">
         <div className="flex items-end justify-between gap-4 mb-6">
