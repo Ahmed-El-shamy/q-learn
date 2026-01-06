@@ -1,9 +1,8 @@
 "use client";
 
 import type { FC } from "react";
-import Link from "next/link";
 import Image from "next/image";
-
+import { Link } from "@/i18n/navigation";
 interface CategoryCardProps {
   name: string;
   slug: string;
@@ -19,7 +18,7 @@ const CategoryCard: FC<CategoryCardProps> = ({
 }) => {
   return (
     <Link
-      href={`/categories/${slug}`}
+      href={`/category/${slug}`}
       aria-label={`Open category: ${name}`}
       className="
         group block
@@ -45,10 +44,9 @@ const CategoryCard: FC<CategoryCardProps> = ({
             fill
             sizes="(max-width: 640px) 180px, (max-width: 768px) 200px, (max-width: 1024px) 220px, 230px"
             className="
-              object-contain
-              p-4
-              transition-transform duration-300
-              group-hover:scale-[1.03]
+              object-cover
+  transition-transform duration-300
+  group-hover:scale-105
             "
             quality={90}
             loading="lazy"

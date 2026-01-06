@@ -1,5 +1,4 @@
-import { Chapter } from "../../_types/course.types";
-
+import type { Chapter } from "../_types/course.types";
 export type CourseChapter = Chapter & {
   expanded: boolean;
 };

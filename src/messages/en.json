@@ -251,5 +251,27 @@
     "description": "We encountered an error while loading the course content. Please try again or return to the homepage.",
     "tryAgain": "Try again",
     "goToHomepage": "Go to Homepage"
+  },
+  "checkout": {
+    "bank transfer": "Bank Transfer",
+    "please upload the bank transfer receipt to proceed with your order": "Please upload the bank transfer receipt to proceed with your order.",
+    "upload transfer receipt": "Upload Transfer Receipt",
+    "transfer receipt": "Transfer Receipt",
+    "please make sure the uploaded receipt is clear and includes the transaction details": "Please make sure the uploaded receipt is clear and includes the transaction details.",
+    "order notes": "Order Notes",
+    "write your notes here": "Write your notes here...",
+    "complete order": "Complete Order",
+    "your order": "Your Order",
+    "course image": "Course Image",
+    "subtotal": "Subtotal",
+    "payable amount": "Payable Amount",
+    "place an order": "Place An Order",
+    "currency": "SAR",
+    "coupon": {
+      "enter coupon code": "Enter coupon code",
+      "apply": "Apply",
+      "coupon applied successfully": "Coupon applied successfully",
+      "invalid coupon": "Invalid coupon"
+    }
   }
 }
