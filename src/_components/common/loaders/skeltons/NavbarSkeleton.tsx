@@ -1,8 +1,8 @@
 const NavbarSkeleton = () => {
   return (
     <>
-      <header className="hidden md:block bg-white shadow-sm py-6 border-b">
-        <div className="containerr flex-between gap-4 xl:gap-6">
+      <header className="hidden md:block bg-white shadow-sm py-4 h-14 border-b border-b-gray-200">
+        <div className="containerr flex-between gap-4 xl:gap-6 h-full">
           {/* Logo Skeleton */}
           <div className="animate-pulse">
             <div className="w-32 h-12 bg-gray-200 rounded" />

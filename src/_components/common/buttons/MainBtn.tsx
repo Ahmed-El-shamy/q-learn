@@ -1,4 +1,4 @@
-import React, { ComponentProps, ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import cn from "@/utils/cn";
 import clsx from "clsx";
@@ -9,7 +9,6 @@ interface MainBtnProps
   extends Omit<ComponentProps<"button">, "disabled">,
   VariantProps<typeof buttonVariants> {
   className?: string;
-  title?: string;
   children?: ReactNode;
   isLoading?: boolean;
   containerClassName?: string;
@@ -45,7 +44,6 @@ const buttonVariants = cva(
 const MainBtn = ({
   className,
   containerClassName,
-  title,
   children,
   variant = "main",
   size = "medium",
@@ -75,7 +73,7 @@ const MainBtn = ({
           }))}
         >
           {
-            title ? title : children
+            children
           }
         </div>
       </div>
