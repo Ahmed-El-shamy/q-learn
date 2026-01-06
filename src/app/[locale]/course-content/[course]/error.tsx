@@ -36,3 +36,4 @@ const Error = ({ error, reset }: ErrorProps) => {
 export default Error;
 
 
+

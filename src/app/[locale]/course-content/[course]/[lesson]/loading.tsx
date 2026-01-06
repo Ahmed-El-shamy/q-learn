@@ -1,7 +1,7 @@
 const LoadingPage = () => {
     return (
         <div>
-            imposter page
+            Loading UI....
         </div>
     )
 }

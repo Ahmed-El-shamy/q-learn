@@ -26,7 +26,7 @@ const ContentNavbar = async ({
 
     if(courseResponse?.data) {
         return (
-            <div className="w-full bg-white py-1 px-6 flex justify-between items-center">
+            <div className="w-full bg-white h-14 py-1 px-6 flex justify-between items-center">
                 <div className="flex items-center gap-5">
                     <Link href="/">
                         <Image 

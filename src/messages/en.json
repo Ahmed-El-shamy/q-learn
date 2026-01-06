@@ -75,7 +75,11 @@
       "browseCourses": "Browse Courses",
       "backToHome": "Back to Home"
     },
-    "auto-next": "Auto Next"
+    "auto-next": "Auto Next",
+    "noChaptersAvailable": "No chapters available",
+    "noContentAvailable": "No content available for this course.",
+    "noVideoAvailable": "No video available for this lesson",
+    "videoNotSupported": "Your browser does not support the video tag."
   },
   "auth": {
     "signup": "Sign Up",
@@ -241,5 +245,11 @@
   "mode": {
     "offline": "Offline",
     "online": "Online"
+  },
+  "Error": {
+    "title": "Something went wrong!",
+    "description": "We encountered an error while loading the course content. Please try again or return to the homepage.",
+    "tryAgain": "Try again",
+    "goToHomepage": "Go to Homepage"
   }
 }
