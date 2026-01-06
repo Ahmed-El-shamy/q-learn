@@ -22,12 +22,11 @@ export default async function BlogsLayout({
       </div>
 
       <div className="containerr mt-20 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-9">{children}</div>
-          <BlogSidebar />
+        <div>
+          {children}
+          {/* <BlogSidebar /> */}
         </div>
       </div>
     </>
   );
 }
-

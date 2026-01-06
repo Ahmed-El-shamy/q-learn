@@ -1,35 +1,30 @@
 "use client";
+
 import PaymentMethods from "./_components/PaymentMethods";
 import OrderDetails from "./_components/OrderDetails";
-import { useState } from "react";
 
-const page = () => {
+const Page = () => {
   return (
-    <>
-      <section
-        className="bg-[url('/images/about-us/about-hero.webp')] 
-             bg-cover bg-center bg-no-repeat
-             h-64 w-full text-center"
-      >
-        <h1 className="text-white text-2xl sm:text-4xl md:text-5xl font-bold translate-y-24">
-          Complete Your Purchase
+    <section className="min-h-screen bg-[#F8F9FB] py-16">
+      <div className="containerr">
+        <h1 className="text-3xl font-semibold text-[#1f2b40] mb-10">
+          Checkout
         </h1>
-      </section>
 
-      <section className="containerr">
-        <div className="my-15">
-          <div className="grid grid-cols-12 gap-5">
-            <div className="col-span-12 lg:col-span-7">
-              <PaymentMethods />
-            </div>
-            <div className="col-span-12 lg:col-span-5 mt-10 lg:mt-0">
-              <OrderDetails />
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Payment */}
+          <div className="lg:col-span-2 bg-white rounded-xl p-8 shadow-sm">
+            <PaymentMethods />
+          </div>
+
+          {/* Order Summary */}
+          <div className="bg-white rounded-xl p-8 shadow-sm sticky top-10">
+            <OrderDetails />
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 
-export default page;
+export default Page;

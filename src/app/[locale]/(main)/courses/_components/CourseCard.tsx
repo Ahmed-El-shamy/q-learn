@@ -19,6 +19,7 @@ const CourseCard: React.FC<Course> = ({
   thumbnail,
   alt,
   total_enrollments,
+  is_enrolled = 0,
 }) => {
   const { addToCart, removeFromCart, isInCart, items } = useCart();
   const t = useTranslations("courseCard");
@@ -100,13 +101,14 @@ const CourseCard: React.FC<Course> = ({
               {price?.sar} {t("currency")}
             </h4>
           </div>
-
-          <GradientIcon
-            Icon={isAlreadyInCart ? CheckCircle : ShoppingCart}
-            onClick={handleCartAction}
-            stroke={isAlreadyInCart ? "#3DD598 " : ""}
-            fill={isAlreadyInCart ? "#FFF" : ""}
-          />
+          {is_enrolled === 0 ? (
+            <GradientIcon
+              Icon={isAlreadyInCart ? CheckCircle : ShoppingCart}
+              onClick={handleCartAction}
+              stroke={isAlreadyInCart ? "#3DD598 " : ""}
+              fill={isAlreadyInCart ? "#FFF" : ""}
+            />
+          ) : null}
         </div>
       </div>
     </div>
