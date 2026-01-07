@@ -43,7 +43,7 @@ export interface Course {
   rating?: number;
   students?: number;
   content?: any;
-  is_enrolled?: 0 | 1
+  is_enrolled?: boolean
 }
 
 export interface Instructor {

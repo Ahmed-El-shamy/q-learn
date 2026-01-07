@@ -32,7 +32,7 @@ const PaymentMethods = () => {
           </div>
         </button>
 
-        <button
+        {/* <button
           onClick={() => setMethod("bank")}
           className={`flex-1 border rounded-lg p-4 flex items-center gap-3 transition
             ${
@@ -46,7 +46,7 @@ const PaymentMethods = () => {
             <p className="font-medium">Bank Transfer</p>
             <span className="text-sm text-gray-500">Upload receipt</span>
           </div>
-        </button>
+        </button> */}
       </div>
 
       {/* Content */}

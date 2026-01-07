@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { CourseWishlistButton } from "./CourseWishlistButton";
 import GradientIcon from "@/_components/common/icon/GradientIcon";
+import HtmlContent from "@/_components/common/HtmlContent";
 
 const CourseCard: React.FC<Course> = ({
   id,
@@ -19,7 +20,7 @@ const CourseCard: React.FC<Course> = ({
   thumbnail,
   alt,
   total_enrollments,
-  is_enrolled = 0,
+  is_enrolled = false,
 }) => {
   const { addToCart, removeFromCart, isInCart, items } = useCart();
   const t = useTranslations("courseCard");
@@ -89,10 +90,9 @@ const CourseCard: React.FC<Course> = ({
               </span>
             </div>
           </div>
-
-          <p className="line-clamp-2 h-12 text-[#737887] leading-relaxed">
-            {description}
-          </p>
+          <div className="line-clamp-2! h-12! text-[#737887]! leading-relaxed!">
+            <HtmlContent html={description} />
+          </div>
         </div>
 
         <div className="flex justify-between items-center border-t border-t-[#d1d1d1] mt-8 py-4">
@@ -101,14 +101,14 @@ const CourseCard: React.FC<Course> = ({
               {price?.sar} {t("currency")}
             </h4>
           </div>
-          {is_enrolled === 0 ? (
+          {is_enrolled ? null : (
             <GradientIcon
               Icon={isAlreadyInCart ? CheckCircle : ShoppingCart}
               onClick={handleCartAction}
               stroke={isAlreadyInCart ? "#3DD598 " : ""}
               fill={isAlreadyInCart ? "#FFF" : ""}
             />
-          ) : null}
+          )}
         </div>
       </div>
     </div>
