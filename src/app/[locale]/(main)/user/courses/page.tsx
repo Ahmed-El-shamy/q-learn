@@ -61,13 +61,13 @@ export default function CoursesPage() {
                 <Card
                   key={c.id}
                   title={c.title}
-                  description={`${c.category} • ${c.lessonsCount} lessons`}
+                  description={`${c.category} • 12 lessons`}
                   action={<Link href={`/courses/${c?.id}`}>Open</Link>}
                 >
-                  <ProgressBar value={c.progress} />
+                  <ProgressBar value={10} />
                   <div className="mt-4 flex gap-2">
                     <Link
-                      href={`/courses/${c?.id}/lessons/${c.lastLessonId}`}
+                      href={`/course-content/${c.id}`}
                       className="inline-flex items-center justify-center rounded-xl main-background px-4 py-2 text-sm font-medium text-white "
                     >
                       Continue

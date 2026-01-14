@@ -13,7 +13,7 @@ type Props = {
 export default function LocaleProviders({ children, locale, messages }: Props) {
   return (
     <QueryClientProvider client={queryClient}>
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <NextIntlClientProvider locale={locale} timeZone="UTC" messages={messages}>
         <CartProvider>{children}</CartProvider>
       </NextIntlClientProvider>
     </QueryClientProvider>

@@ -1,4 +1,3 @@
-import { Coupon } from "@/app/[locale]/(main)/checkout/_types/coupon.types";
 import { Course } from "@/app/[locale]/(main)/courses/_types/courses.types";
 
 export interface LocalizedString {
@@ -41,8 +40,8 @@ export interface CartContextProps {
   subtotal: string;
   total: string;
   isLoading: boolean;
-  couponCode: Coupon | null;
-  setCouponCode: React.Dispatch<React.SetStateAction<Coupon | null>>;
+  couponCode: string | null;
+  setCouponCode: React.Dispatch<React.SetStateAction<string | null>>;
   addToCart: (item: CartItem) => void;
   removeFromCart: (itemId: number) => void;
   clearCart: () => void;

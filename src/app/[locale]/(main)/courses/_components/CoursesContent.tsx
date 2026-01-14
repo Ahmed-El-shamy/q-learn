@@ -115,7 +115,7 @@ const CoursesContent = () => {
               (data?.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-10 sm:mt-0">
                   {data.map((course, i) => (
-                    <CourseCard key={course.id || i} {...course} />
+                    <CourseCard key={course.id || i} {...course} is_free={course.is_free!!} />
                   ))}
                 </div>
               ) : (

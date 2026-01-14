@@ -3,11 +3,11 @@ import React from "react";
 import { CheckCircle, ShieldUser, ShoppingCart, Star } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/store/CartProvider";
-import { Course } from "@/app/[locale]/(main)/courses/_types/courses.types";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { CourseWishlistButton } from "./CourseWishlistButton";
 import GradientIcon from "@/_components/common/icon/GradientIcon";
+import { Course } from "../_types/course.types";
 
 const CourseCard: React.FC<Course> = ({
   id,
@@ -17,7 +17,6 @@ const CourseCard: React.FC<Course> = ({
   title,
   description,
   thumbnail,
-  alt,
   total_enrollments,
 }) => {
   const { addToCart, removeFromCart, isInCart, items } = useCart();
@@ -56,7 +55,7 @@ const CourseCard: React.FC<Course> = ({
 
           <Image
             src={thumbnail || "/images/courses/10.jpg"}
-            alt={alt || title || t("alt")}
+            alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-110"

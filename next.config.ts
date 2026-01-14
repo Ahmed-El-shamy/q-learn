@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "q-learn.dev.qutell.net",
+                hostname: "dash-learn.dev.qutell.net",
+                pathname: "/**"
             },
 
             // 👇 لو عندك CDN أو API domains تانية للصور
@@ -21,6 +22,7 @@ const nextConfig: NextConfig = {
             //   hostname: "**.qutell.net",
             // },
         ],
+        qualities: [75, 90, 100],
     },
 };
 

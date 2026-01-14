@@ -1,5 +1,6 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { Course, CourseFilters, SortBy } from "../../_types/courses.types";
+import { CourseFilters, SortBy } from "../../_types/courses.types";
+import type { Course } from "../../_types/course.types";
 import { getCourseById, getCourses } from "../../_quires/course.api";
 import { Api } from "@/_lib/api/api";
 

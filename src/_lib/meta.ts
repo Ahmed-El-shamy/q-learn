@@ -166,8 +166,7 @@ export function buildMetadata(
       shortcut: siteMeta?.favicon || "",
       apple: "/apple-touch-icon.png",
     },
-    manifest: siteMeta?.manifest || "",
-    metadataBase: new URL(siteMeta?.siteUrl || siteUrl),
+     metadataBase: new URL(siteMeta?.siteUrl || siteUrl),
     // Verification
     other: {
       ...(siteMeta?.verification.google

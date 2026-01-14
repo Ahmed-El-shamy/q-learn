@@ -133,7 +133,8 @@
     "no-data": "No data available",
     "show-password": "Show password",
     "hide-password": "Hide password",
-    "my-profile": "My Profile"
+    "my-profile": "My Profile",
+    "something-went-wrong": "Something went wrong"
   },
   "or": "or",
   "birth-date": "Birth Date",

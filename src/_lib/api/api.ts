@@ -37,7 +37,7 @@ export class Api {
   responseInterceptor: Interceptor<ResponseData<any>>;
 
   constructor() {
-    this.baseRoute = "https://q-learn.dev.qutell.net/api";
+    this.baseRoute = "https://dash-learn.dev.qutell.net/api";
 
     this.requestInterceptor = new Interceptor<RequestConfig>();
     this.responseInterceptor = new Interceptor<ResponseData<any>>();

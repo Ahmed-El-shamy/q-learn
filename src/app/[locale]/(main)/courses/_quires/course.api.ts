@@ -1,5 +1,5 @@
 import api, { Api } from "@/_lib/api/api";
-import { Course } from "../_types/courses.types";
+import type { Course } from "../_types/course.types";
 
 export const getCourses = async (params?: Record<string, any>) => {
   const response = await api.get(Api.routes.site.courses, {
