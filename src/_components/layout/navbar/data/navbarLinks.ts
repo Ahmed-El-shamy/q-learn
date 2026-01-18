@@ -8,15 +8,15 @@ export const NavLinks = [
     label: "courses",
   },
   {
-    href: "/events",
-    label: "events",
+    href: "/about-us",
+    label: "about us",
   },
   {
     href: "/blogs",
     label: "blogs",
   },
   {
-    href: "/contact",
+    href: "/contact-us",
     label: "contact",
   },
 ];

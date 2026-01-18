@@ -37,6 +37,7 @@ export type Course = {
   tags: unknown[];
   added_by: string | null;
   instructor: Instructor;
+  is_enrolled?: boolean
 };
 
 export type InstructorUser = {

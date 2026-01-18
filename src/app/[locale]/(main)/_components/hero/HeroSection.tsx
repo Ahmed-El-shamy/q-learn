@@ -18,7 +18,7 @@ const HeroSection = async () => {
               {d?.title}
             </h1>
             {d?.description && (
-              <div className="text-[#777e93]! text-lg! my-4! md:my-8!">
+              <div className="text-[#777e93]! text-lg! my-4! ">
                 <HtmlContent html={d?.description} />
               </div>
             )}
@@ -27,8 +27,6 @@ const HeroSection = async () => {
               <MainBtn>
                 <Link href="/courses">view all courses</Link>
               </MainBtn>
-
-              <MainBtn title="view all quizzes" />
             </div>
           </div>
           {d?.image && (

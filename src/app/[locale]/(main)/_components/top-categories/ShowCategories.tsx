@@ -39,10 +39,3 @@ const ShowCategories = () => {
 };
 
 export default ShowCategories;
-//         <HydrationBoundary state={dehydrate(qc)}>
-//           <HorizontalCarousel >
-//             {categories.map((cat) => (
-//               <CategoryCard key={cat.id} />
-//             ))}
-//           </HorizontalCarousel>
-//         </HydrationBoundary>

@@ -112,7 +112,7 @@ const AboutUsSection = async () => {
               {/* CTA */}
               <div className="mt-7 flex flex-wrap items-center gap-3">
                 {/* لو MainBtn عندك بيدعم asChild أو href استخدمه، وإلا استخدم Link */}
-                <MainBtn title="Explore courses" />
+                {/* <MainBtn title="Explore courses" /> */}
               </div>
             </div>
 

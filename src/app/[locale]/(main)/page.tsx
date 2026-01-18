@@ -13,6 +13,7 @@ import HeroSkeleton from "@/_components/common/loaders/skeltons/HeroSkeltion";
 import BrandsCardSkeleton from "@/_components/common/loaders/skeltons/BrandSkelton";
 import AboutSklelton from "@/_components/common/loaders/skeltons/AboutSkelton";
 import BlogSkelton from "@/_components/common/loaders/skeltons/BlogSkelton";
+import TrendedCoursesSection from "./courses/_components/TrendedCoursesSection";
 const HomePage = () => {
   return (
     <>
@@ -33,6 +34,13 @@ const HomePage = () => {
         <section className="bg-[#D7ECFF] py-16 md:py-20">
           <div className="containerr">
             <TopCategoriesSection />
+          </div>
+        </section>
+      </Suspense>
+      <Suspense fallback={<TopCategoriesSkeleton />}>
+        <section className="bg-[#D7ECFF] py-16 md:py-20">
+          <div className="containerr">
+            <TrendedCoursesSection />
           </div>
         </section>
       </Suspense>
