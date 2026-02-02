@@ -7,7 +7,7 @@ import { useCallback, useState, useEffect } from "react";
 import CustomSkeleton from "@/_components/common/loaders/skeltons/CustomSkeleton";
 import { Link } from "@/i18n/navigation";
 import { Chapter } from "@/app/[locale]/(main)/courses/_types/course.types";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Video, FileQuestion } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 interface CourseChapterWithLinksProps {
@@ -56,6 +56,12 @@ const CourseChapterWithLinks = ({ chapter, expanded, toggleChapter, activeLesson
                                     className="w-4 h-4 cursor-pointer accent-purple-600 shrink-0"
                                     onClick={(e) => e.preventDefault()}
                                 />
+                                {lesson.type === "video" && (
+                                    <Video className="w-4 h-4 shrink-0 text-gray-600" />
+                                )}
+                                {lesson.type === "quiz" && (
+                                    <FileQuestion className="w-4 h-4 shrink-0 text-gray-600" />
+                                )}
                                 <p className="line-clamp-1 flex-1">
                                     {lesson.title}
                                 </p>

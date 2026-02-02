@@ -86,17 +86,44 @@ export type CourseReference = {
   name: string;
 };
 
+export type QuizOption = {
+  en: string;
+  ar: string;
+};
+
+export type QuizQuestion = {
+  id: number;
+  question: string;
+  type: string;
+  points: string;
+  options: QuizOption[];
+  sort_order: number;
+};
+
+export type Quiz = {
+  id: number;
+  max_attempts: number;
+  passing_score: string;
+  title: string;
+  description: string;
+  time_limit_minutes: number;
+  user_attempts: number;
+  show_results_immediately: boolean;
+  randomize_questions: boolean;
+  questions?: QuizQuestion[];
+};
+
 export type Lesson = {
   id: number;
   course: CourseReference;
   title: string;
   description: string;
   content_text: string;
-  type: string;
+  type: "video" | "quiz";
   is_free_preview: boolean;
   image: string | null;
   video: string | null;
-  quiz: unknown | null;
+  quiz: Quiz | null;
 };
 
 export type Chapter = {
@@ -110,7 +137,7 @@ export type Chapter = {
   is_active: boolean;
   sort_order: number;
   lessons: Lesson[];
-  quizzes: unknown[];
+  quizzes: Quiz[];
   lessons_count: number;
   quizzes_count: number;
 };

@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import CustomSkeleton from "@/_components/common/loaders/skeltons/CustomSkeleton";
 import { useTranslations } from "next-intl";
+import QuizComponent from "./QuizComponent";
 
 const CourseContentComponent = () => {
     const params = useParams<{course: string; lesson: string}>();
@@ -42,8 +43,10 @@ const CourseContentComponent = () => {
     }
 
     return (
-        <div className="w-full aspect-video h-[60vh] xl:h-[calc(100vh-56px)] flex items-center justify-center bg-black">
-            {currentLesson?.video ? (
+        <div className="w-full aspect-video h-[60vh] xl:h-[calc(100vh-56px)] bg-black">
+            {currentLesson?.type === "quiz" && currentLesson?.quiz ? (
+                <QuizComponent quizId={currentLesson.quiz.id} />
+            ) : currentLesson?.type === "video" && currentLesson?.video ? (
                 <video 
                     className="w-full h-full object-contain"
                     controls

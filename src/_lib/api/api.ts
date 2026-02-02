@@ -65,7 +65,10 @@ export class Api {
       newsLetter: "/site/newsletter/subscribe",
       cart: "/site/cartItems",
       list: "/site",
-      coupon: "/site/coupons/validate", enrollments: "/site/enrollments"
+      coupon: "/site/coupons/validate",
+      enrollments: "/site/enrollments",
+      quizzes: "/site/quizzes",
+      quizAttempts: "/site/quiz-attempts"
     },
     auth: {
       login: "/site/login",

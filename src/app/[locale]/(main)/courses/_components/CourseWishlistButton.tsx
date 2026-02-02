@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Heart } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -16,7 +16,6 @@ import { useRequireAuthToast } from "../../_features/auth/requireAuthToast";
 
 export function CourseWishlistButton({ courseId }: { courseId?: number }) {
   const tCourse = useTranslations("courseCard");
-  const tCommon = useTranslations("common");
   const { status } = useSession();
   const authed = status === "authenticated";
 

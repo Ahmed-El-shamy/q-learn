@@ -72,7 +72,21 @@
     "noChaptersAvailable": "لا توجد فصول متاحة",
     "noContentAvailable": "لا يوجد محتوى متاح لهذه الدورة.",
     "noVideoAvailable": "لا يوجد فيديو متاح لهذا الدرس",
-    "videoNotSupported": "متصفحك لا يدعم علامة الفيديو."
+    "videoNotSupported": "متصفحك لا يدعم علامة الفيديو.",
+    "quizLesson": "هذا الدرس من نوع اختبار",
+    "maxAttempts": "الحد الأقصى للمحاولات",
+    "passingScore": "درجة النجاح",
+    "timeLimit": "الوقت المحدد",
+    "yourAttempts": "محاولاتك",
+    "minutes": "دقائق",
+    "startExam": "ابدأ الاختبار",
+    "question": "سؤال",
+    "previous": "السابق",
+    "next": "التالي",
+    "submitAnswers": "إرسال الإجابات",
+    "errorTitle": "حدث خطأ ما!",
+    "errorMessage": "واجهنا خطأ أثناء تحميل الدرس. يرجى المحاولة مرة أخرى.",
+    "tryAgain": "حاول مرة أخرى"
   },
   "auth": {
     "signup": "إنشاء حساب",
@@ -174,7 +188,11 @@
     "rating": "تقييم",
     "students": "طالب",
     "currency": "ر.س",
-    "alt": "صورة الكورس"
+    "alt": "صورة الكورس",
+    "wishlistAdded": "تمت الإضافة للمفضلة",
+    "wishlistRemoved": "تمت الإزالة من المفضلة",
+    "wishlistFailed": "حصلت مشكلة أثناء تحديث المفضلة",
+    "addToWishlist": "إضافة للمفضلة"
   },
   "filters": {
     "category": "الأقسام",

@@ -79,7 +79,21 @@
     "noChaptersAvailable": "No chapters available",
     "noContentAvailable": "No content available for this course.",
     "noVideoAvailable": "No video available for this lesson",
-    "videoNotSupported": "Your browser does not support the video tag."
+    "videoNotSupported": "Your browser does not support the video tag.",
+    "quizLesson": "This lesson is of type Quiz",
+    "maxAttempts": "Max Attempts",
+    "passingScore": "Passing Score",
+    "timeLimit": "Time Limit",
+    "yourAttempts": "Your Attempts",
+    "minutes": "minutes",
+    "startExam": "Start Exam",
+    "question": "Question",
+    "previous": "Previous",
+    "next": "Next",
+    "submitAnswers": "Submit Answers",
+    "errorTitle": "Something went wrong!",
+    "errorMessage": "We encountered an error while loading the lesson. Please try again.",
+    "tryAgain": "Try again"
   },
   "auth": {
     "signup": "Sign Up",
@@ -181,7 +195,11 @@
     "rating": "Rating",
     "students": "Students",
     "currency": "SAR",
-    "alt": "Course Image"
+    "alt": "Course Image",
+    "wishlistAdded": "Added to wishlist",
+    "wishlistRemoved": "Removed from wishlist",
+    "wishlistFailed": "Could not update wishlist",
+    "addToWishlist": "Add to wishlist"
   },
   "filters": {
     "category": "Category",
