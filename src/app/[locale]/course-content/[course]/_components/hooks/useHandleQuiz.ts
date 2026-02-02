@@ -16,7 +16,14 @@ export function useHandleQuiz({ quizId, totalQuestions }: UseHandleQuizParams) {
     const [isStartingExam, setIsStartingExam] = useState(false);
     const [attemptId, setAttemptId] = useState<number | null>(null);
 
-    const { mutate: submitAttempt, isPending: isSubmitting } = useSubmitQuizAttempt();
+    const {
+        mutate: submitAttempt,
+        data: submitResult,
+        isPending: isSubmitting,
+        isError: isSubmitError,
+        error: submitError,
+        reset: resetSubmit,
+    } = useSubmitQuizAttempt();
 
     const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
     const isFirstQuestion = currentQuestionIndex === 0;
@@ -68,6 +75,15 @@ export function useHandleQuiz({ quizId, totalQuestions }: UseHandleQuizParams) {
         submitAttempt({ attemptId, answers });
     }, [attemptId, answers, submitAttempt]);
 
+    const resetQuiz = useCallback(() => {
+        resetSubmit();
+        setExamStarted(false);
+        setCurrentQuestionIndex(0);
+        setAnswers({});
+        setAttemptId(null);
+        setIsStartingExam(false);
+    }, [resetSubmit]);
+
     const isQuestionAnswered = useCallback(
         (questionId: number) => answers[questionId] !== undefined,
         [answers]
@@ -80,6 +96,11 @@ export function useHandleQuiz({ quizId, totalQuestions }: UseHandleQuizParams) {
         isStartingExam,
         attemptId,
         isSubmitting,
+        submitResult,
+        isSubmitError,
+        submitError,
+        resetSubmit,
+        resetQuiz,
         isLastQuestion,
         isFirstQuestion,
         handleStartExam,
