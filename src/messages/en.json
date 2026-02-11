@@ -22,6 +22,13 @@
   "Footer": {
     "abazeer": "Qutell"
   },
+  "footer": {
+    "medalAlt": "medal",
+    "rewardBoxAlt": "reward box",
+    "title": "Win Reward Points",
+    "description": "Buy course, complete course, incarese activity & many more way to win club points. You will be able to use your club points to get free prizes and courses. Start using the system now and collect points!",
+    "view-all-courses": "view all courses"
+  },
   "NotFound": {
     "Oops": "Oops! The page you are looking for doesn’t exist.",
     "back": "back to home page",
@@ -30,6 +37,16 @@
   "Icons": {
     "home": "home",
     "my account": "my account"
+  },
+  "navbar": {
+    "logoImageAlt": "Logo Image",
+    "links": {
+      "home": "home",
+      "courses": "courses",
+      "aboutUs": "about us",
+      "blogs": "blogs",
+      "contact": "contact"
+    }
   },
   "courses": {
     "students": "students",
@@ -236,7 +253,9 @@
     "price_highest": "Highest Price"
   },
   "blogs": {
-    "hero": "Explore Our Blog Posts"
+    "hero": "Explore Our Blog Posts",
+    "read-more": "Read More",
+    "minutes-to-read": "{minutes} minutes to read"
   },
   "loginRequiredForWishlist": "Please log in to use wishlist",
   "wishlistAdded": "Added to wishlist",

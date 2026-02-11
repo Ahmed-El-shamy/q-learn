@@ -2,6 +2,7 @@ import { Link } from "@/i18n/navigation";
 import React from "react";
 import MainBtn from "@/_components/common/buttons/MainBtn";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface BlogCardProps {
   id: string;
@@ -11,7 +12,7 @@ interface BlogCardProps {
   category: string;
   user?: string;
   date?: string;
-  time?: string;
+  time?: number;
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({
@@ -24,6 +25,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   date,
   time,
 }) => {
+  const t = useTranslations("blogs");
   return (
     <div className="border border-[#d1d1d1] group overflow-hidden flex flex-col h-full">
       <Link href={`/blogs/${id}`}>
@@ -55,11 +57,15 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
         <div className="flex flex-row lg:flex-col xl:flex-row items-center lg:items-start xl:items-center gap-8 lg:gap-5 xl:gap-8 mt-5">
           <Link href={`/blogs/${id}`}>
-            <MainBtn title="Read More" className="py-3 text-sm font-normal" />
+            <MainBtn className="py-3 text-sm font-normal"> 
+              {t("read-more")}
+            </MainBtn>
           </Link>
-          <p className="gradient-background bg-clip-text text-transparent">
-            {time}
-          </p>
+          {time && (
+            <p className="gradient-background bg-clip-text text-transparent">
+              {t("minutes-to-read", { minutes: time })}
+            </p>
+          )}
         </div>
       </div>
     </div>

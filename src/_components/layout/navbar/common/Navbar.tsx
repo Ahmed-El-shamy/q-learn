@@ -15,6 +15,7 @@ async function Navbar({
   logoImg = "https://placehold.co/80x80",
 }: NavbarProps) {
   const t = await getTranslations("auth");
+  const tNavbar = await getTranslations("navbar");
   const session = await getServerSession(authOptions);
 
   return (
@@ -27,7 +28,7 @@ async function Navbar({
                 <div className="w-16 h-16 rounded-full overflow-hidden">
                   <img
                     src={logoImg}
-                    alt="Logo Image"
+                    alt={tNavbar("logoImageAlt")}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -37,13 +38,25 @@ async function Navbar({
             </div>
 
             <ul className="hidden lg:flex items-center justify-center gap-5">
-              {NavLinks.concat(links).map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="capitalize">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              {NavLinks.concat(links).map((link) => {
+                // Map label to translation key
+                const labelToKey: Record<string, string> = {
+                  "home": "home",
+                  "courses": "courses",
+                  "about us": "aboutUs",
+                  "blogs": "blogs",
+                  "contact": "contact"
+                };
+                const translationKey = labelToKey[link.label.toLowerCase()] || link.label.toLowerCase().replace(/\s+/g, "");
+                const translatedLabel = tNavbar(`links.${translationKey}`);
+                return (
+                  <li key={link.label}>
+                    <Link href={link.href} className="capitalize">
+                      {translatedLabel}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

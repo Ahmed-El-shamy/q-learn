@@ -18,12 +18,12 @@ const formatDate = (dateString: string): string => {
 };
 
 // Helper function to calculate reading time (rough estimate)
-const calculateReadingTime = (description: string): string => {
+const calculateReadingTime = (description: string): number => {
   const wordsPerMinute = 200;
   const text = description.replace(/<[^>]*>/g, ""); // Remove HTML tags
   const wordCount = text.split(/\s+/).length;
   const minutes = Math.ceil(wordCount / wordsPerMinute);
-  return `${minutes} Min To Read`;
+  return minutes;
 };
 
 export const metadata: Metadata = {
