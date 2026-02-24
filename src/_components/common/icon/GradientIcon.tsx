@@ -26,7 +26,7 @@ const GradientIcon: React.FC<GradientIconProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`p-2 hover:bg-purple-50 rounded-full transition-colors ${className}`}
+      className={`flex items-center justify-center p-2 hover:bg-purple-50 rounded-full cursor-pointer transition-colors ${className}`}
     >
       <svg width={size * 2} height={size * 2} viewBox="0 0 24 24">
         <defs>
@@ -35,12 +35,14 @@ const GradientIcon: React.FC<GradientIconProps> = ({
             <stop offset="100%" stopColor={gradientTo} />
           </linearGradient>
         </defs>
-        <Icon
-          stroke={stroke || "url(#iconGradient)"}
-          fill={fill || "url(#iconGradient)"}
-          size={size}
-          className="cursor-pointer"
-        />
+        <g transform={`translate(${(24 - size) / 2}, ${(24 - size) / 2})`}>
+          <Icon
+            stroke={stroke || "url(#iconGradient)"}
+            fill={fill || "url(#iconGradient)"}
+            size={size}
+            className="cursor-pointer"
+          />
+        </g>
       </svg>
     </button>
   );

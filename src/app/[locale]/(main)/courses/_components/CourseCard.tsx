@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { CheckCircle, ShieldUser, ShoppingCart, Star } from "lucide-react";
+import { ShieldUser, ShoppingCart, Star, Trash2 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/store/CartProvider";
 import { useTranslations } from "next-intl";
@@ -48,7 +48,7 @@ const CourseCard: React.FC<Course> = ({
   };
 
   return (
-    <div className="border border-[#d1d1d1] h-[530px] group overflow-hidden">
+    <div className="border border-[#d1d1d1] h-[400px] group overflow-hidden">
       <div className="w-full h-[45%] relative overflow-hidden">
         <Link href={`/courses/${id}`} className="block w-full h-full">
           <p className="bg-[#963ed0]/60 text-white py-1 px-5 absolute top-5 start-5 z-10">
@@ -77,7 +77,7 @@ const CourseCard: React.FC<Course> = ({
 
           <div className="flex items-center justify-between mt-1 mb-8">
             <div className="flex items-center gap-1">
-              <Star size={18} fill="yellow" stroke="yellow" />
+              <Star size={18} className="fill-purple-500 stroke-purple-500" />
               <span className="text-[#1f2b40] text-sm">
                 {total_ratings} {t("rating")}
               </span>
@@ -102,10 +102,8 @@ const CourseCard: React.FC<Course> = ({
           </div>
           {is_enrolled ? null : (
             <GradientIcon
-              Icon={isAlreadyInCart ? CheckCircle : ShoppingCart}
+              Icon={isAlreadyInCart ? Trash2 : ShoppingCart}
               onClick={handleCartAction}
-              stroke={isAlreadyInCart ? "#3DD598 " : ""}
-              fill={isAlreadyInCart ? "#FFF" : ""}
             />
           )}
         </div>

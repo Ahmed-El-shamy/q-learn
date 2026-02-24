@@ -3,6 +3,7 @@ import { trendedCoursesOptions } from "../_quires/trendedCoursesOptions";
 import { useQuery } from "@tanstack/react-query";
 import CourseCard from "./CourseCard";
 import type { Course } from "../_types/course.types";
+import HorizontalCarousel from "@/_components/common/carousels/HorizontalCarousel";
 
 const ShowTrendedCourses = () => {
   const queryResult = useQuery(trendedCoursesOptions());
@@ -21,11 +22,14 @@ const ShowTrendedCourses = () => {
         </p>
 
         {queryResult?.data && queryResult?.data?.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+          <HorizontalCarousel
+            ariaLabel="Trended courses slider"
+            slidesPerView={{ base: 2, sm: 3, md: 4, lg: 5, xl: 6 }}
+          >
             {queryResult?.data?.slice(0, 10).map((item: Course) => (
               <CourseCard key={item.id} {...item} />
             ))}
-          </div>
+          </HorizontalCarousel>
         ) : null}
       </div>
     </section>
