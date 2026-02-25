@@ -10,14 +10,14 @@ export const RegisterSchema = z
     phoneNumber: z
       .string()
       .regex(/^[0-9]+$/, "validation.phoneNumber.numbers")
-      .min(11, "validation.phoneNumber.minLength")
+      .min(10, "validation.phoneNumber.minLength")
       .max(11, "validation.phoneNumber.maxLength"),
     password: passwordSchema,
     password_confirmation: z.string(),
     type: userTypeSchema,
     birthDate: z
       .date({ error: "validation.birthdate" })
-      .max(new Date(), "validation.birthdate.future")
+      .max(new Date(), "validation.birthdate.future"),
   })
   .refine((data) => data.password === data.password_confirmation, {
     message: "validation.password.notMatch",

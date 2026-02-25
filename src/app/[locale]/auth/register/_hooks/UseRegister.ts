@@ -21,14 +21,25 @@ const useRegister = () => {
       const response = await api.post(Api.routes.auth.register, {
         ...payload,
         name: `${payload.firstName} ${payload.lastName}`,
-        account_type: payload.type === "user" ? "individual" : undefined,
+        account_type: payload.type === "user" ? "individual" : "company",
         auth_method: "email",
       });
       return response;
     },
-    onSuccess: (response) => {
+    /*************  ✨ Windsurf Command ⭐  *************/
+    /**
+ * onSuccess: (response) => {
+ *   toast.success(response?.message);
+ *   if () router.push("/auth/login");
+ * }
+/*******  b826d2dc-c757-48fd-9a1d-588b5f339635  *******/
+    onSuccess: (response, variables) => {
       toast.success(response?.message);
-      router.push("/auth/login");
+      if (variables.type === "instructor") {
+        router.push("/auth/login?redirect_url=/instructor/dashboard");
+      } else {
+        router.push("/auth/login");
+      }
     },
     onError: (err: unknown) => {
       toastErrorMessage(err);

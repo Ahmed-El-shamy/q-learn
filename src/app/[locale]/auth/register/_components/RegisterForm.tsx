@@ -69,14 +69,14 @@ const RegisterForm = () => {
           )}
         />
 
-        <Controller 
+        <Controller
           name="birthDate"
           control={control}
           render={({ field }) => (
             <DateInput
               name={field.name}
               placeholder="placeholder.birthdate"
-              onChange={val => field.onChange(val)}
+              onChange={(val) => field.onChange(val)}
               currentValue={field.value}
               error={errors?.[field.name]?.message}
               required
@@ -116,8 +116,12 @@ const RegisterForm = () => {
         />
 
         {/* <AuthBtn text="Register" classname="mt-4" /> */}
-        <MainBtn isLoading={registerMutation.isPending} containerClassName="mt-4" size={"large"} >
-         {t("register")}  
+        <MainBtn
+          isLoading={registerMutation.isPending}
+          containerClassName="mt-4"
+          size={"large"}
+        >
+          {t("register")}
         </MainBtn>
 
         <p className="text-center">

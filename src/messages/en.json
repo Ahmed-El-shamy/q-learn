@@ -168,7 +168,7 @@
     "birthdate": "Invalid birth date",
     "phoneNumber": {
       "numbers": "Phone number must be numbers only",
-      "minLength": "Phone number must be at least 11 digits",
+      "minLength": "Phone number must be at least 10 digits",
       "maxLength": "Phone number must not exceed 11 digits"
     },
     "password": {
