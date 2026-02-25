@@ -24,7 +24,7 @@ const ShowTrendedCourses = () => {
         {queryResult?.data && queryResult?.data?.length > 0 ? (
           <HorizontalCarousel
             ariaLabel="Trended courses slider"
-            slidesPerView={{ base: 2, sm: 3, md: 4, lg: 5, xl: 6 }}
+            slidesPerView={{ base: 1, sm: 1, md: 3, lg: 4, xl: 5 }}
           >
             {queryResult?.data?.slice(0, 10).map((item: Course) => (
               <CourseCard key={item.id} {...item} />
