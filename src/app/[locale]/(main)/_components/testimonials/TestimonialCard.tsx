@@ -1,5 +1,9 @@
+"use client";
+
 import type { FC } from "react";
 import Image from "next/image";
+import { ImageIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { Test } from "./types/test.types";
 
 interface TestimonialCardProps {
@@ -7,20 +11,13 @@ interface TestimonialCardProps {
   className?: string;
 }
 
-function initials(name?: string) {
-  const n = (name ?? "").trim();
-  if (!n) return "??";
-  const parts = n.split(" ").filter(Boolean);
-  const chars = parts.slice(0, 2).map((p) => p[0]?.toUpperCase());
-  return chars.join("") || n.slice(0, 2).toUpperCase();
-}
-
 const TestimonialCard: FC<TestimonialCardProps> = ({
   review,
   className = "",
 }) => {
-  const name = review?.name ?? "Student";
-  const job = review?.job_title ?? "Learner";
+  const t = useTranslations("testimonials");
+  const name = review?.name ?? t("defaultName");
+  const job = review?.job_title ?? t("defaultJob");
   const quote = review?.quote ?? "";
 
   return (
@@ -38,7 +35,7 @@ const TestimonialCard: FC<TestimonialCardProps> = ({
         hover:-translate-y-1 hover:shadow-lg
         ${className}
       `}
-      aria-label={`Testimonial from ${name}`}
+      aria-label={t("testimonialFrom", { name })}
     >
       {/* Top accent */}
       <div
@@ -67,10 +64,8 @@ const TestimonialCard: FC<TestimonialCardProps> = ({
                 loading="lazy"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center">
-                <span className="text-sm font-semibold text-slate-700">
-                  {initials(name)}
-                </span>
+              <div className="flex h-full w-full items-center justify-center bg-slate-100">
+                <ImageIcon className="h-6 w-6 text-slate-400" aria-hidden />
               </div>
             )}
           </div>
@@ -86,7 +81,7 @@ const TestimonialCard: FC<TestimonialCardProps> = ({
           {/* Optional badge (non-interactive) */}
           <div className="ml-auto">
             <span className="inline-flex items-center rounded-full bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
-              Verified
+              {t("verified")}
             </span>
           </div>
         </figcaption>
@@ -111,13 +106,13 @@ const TestimonialCard: FC<TestimonialCardProps> = ({
         {/* Footer */}
         <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
           <div className="text-xs text-slate-500">
-            Education platform experience
+            {t("educationExperience")}
           </div>
 
           {/* Rating (static UI – you can wire it later if API provides it) */}
           <div
             className="flex items-center gap-1"
-            aria-label="Rating 5 out of 5"
+            aria-label={t("ratingLabel")}
           >
             <span
               className="h-2 w-2 rounded-full bg-sky-500"

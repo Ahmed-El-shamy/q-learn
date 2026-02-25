@@ -1,6 +1,7 @@
 "use client";
 
 import type { FC } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import type {
   Instructor,
@@ -18,6 +19,7 @@ import {
   Twitter,
   MessageCircle,
   Music2,
+  Image as ImageIcon,
 } from "lucide-react";
 
 type TeacherCardProps = {
@@ -162,8 +164,9 @@ const StatChip: FC<{
    TeacherCard
 ========================= */
 const TeacherCard: FC<TeacherCardProps> = ({ instructor, className = "" }) => {
+  const t = useTranslations("teachers");
   const name = instructor.user?.name ?? "Instructor";
-  const title = instructor.user?.job_title || "Instructor";
+  const title = instructor.user?.job_title || t("instructor");
   const avatarSrc = instructor.avatar || instructor.user?.avatar_url;
   const social = instructor.social_media ?? [];
 
@@ -201,7 +204,8 @@ const TeacherCard: FC<TeacherCardProps> = ({ instructor, className = "" }) => {
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-slate-400">
-            <span className="text-sm">No image</span>
+            <span className="sr-only">No image</span>
+            <ImageIcon className="h-10 w-10" aria-hidden="true" />
           </div>
         )}
 
@@ -245,7 +249,7 @@ const TeacherCard: FC<TeacherCardProps> = ({ instructor, className = "" }) => {
               <span className="font-semibold">
                 {formatCompact(instructor.ratings_count ?? 0)}
               </span>
-              <span className="text-slate-400">ratings</span>
+              <span className="text-slate-400">{t("ratings")}</span>
             </span>
 
             <span className="h-4 w-px bg-slate-200" aria-hidden="true" />
@@ -255,7 +259,7 @@ const TeacherCard: FC<TeacherCardProps> = ({ instructor, className = "" }) => {
               <span className="font-semibold">
                 {formatCompact(instructor.courses_count ?? 0)}
               </span>
-              <span className="text-slate-400">courses</span>
+              <span className="text-slate-400">{t("courses")}</span>
             </span>
             <span className="h-4 w-px bg-slate-200" aria-hidden="true" />
             <span className="inline-flex items-center gap-1">
@@ -263,7 +267,7 @@ const TeacherCard: FC<TeacherCardProps> = ({ instructor, className = "" }) => {
               <span className="font-semibold">
                 {formatCompact(instructor.students_count ?? 0)}
               </span>
-              <span className="text-slate-400">students</span>
+              <span className="text-slate-400">{t("students")}</span>
             </span>
           </div>
 
@@ -276,30 +280,6 @@ const TeacherCard: FC<TeacherCardProps> = ({ instructor, className = "" }) => {
             </div>
           )}
         </div>
-
-        {/* Stats chips */}
-        {/* <div className="mt-4 grid grid-cols-2 gap-2">
-          <StatChip
-            icon={<Users className="h-4 w-4" aria-hidden="true" />}
-            label="Students"
-            value={instructor.students_count ?? 0}
-          />
-          <StatChip
-            icon={<BookOpen className="h-4 w-4" aria-hidden="true" />}
-            label="Courses"
-            value={instructor.courses_count ?? 0}
-          />
-          <StatChip
-            icon={<MessageSquare className="h-4 w-4" aria-hidden="true" />}
-            label="Reviews"
-            value={instructor.reviews_count ?? 0}
-          />
-          <StatChip
-            icon={<Star className="h-4 w-4" aria-hidden="true" />}
-            label="Ratings"
-            value={instructor.ratings_count ?? 0}
-          />
-        </div> */}
       </div>
     </article>
   );

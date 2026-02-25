@@ -23,11 +23,21 @@
   },
   "testimonials": {
     "title": "What Our Students Say",
-    "description": "Real feedback from learners who completed our courses. See how we help people reach their goals."
+    "description": "Real feedback from learners who completed our courses. See how we help people reach their goals.",
+    "defaultName": "Student",
+    "defaultJob": "Learner",
+    "testimonialFrom": "Testimonial from {name}",
+    "verified": "Verified",
+    "educationExperience": "Education platform experience",
+    "ratingLabel": "Rating 5 out of 5"
   },
   "teachers": {
     "title": "Expert Teachers",
-    "description": "Learn from industry professionals and experienced educators who are committed to your success."
+    "description": "Learn from industry professionals and experienced educators who are committed to your success.",
+    "instructor": "Instructor",
+    "ratings": "ratings",
+    "courses": "courses",
+    "students": "students"
   },
   "about": {
     "badge": "About our institute",
