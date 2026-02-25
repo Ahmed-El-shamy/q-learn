@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import QuizQuery from "../_data/QuizQuery";
 import { useTranslations, useLocale } from "next-intl";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { CheckCircle2, ChevronLeft, ChevronRight, XCircle } from "lucide-react";
 import Loader from "@/_components/common/loaders/spinner/Loader";
 import MainBtn from "@/_components/common/buttons/MainBtn";
 import { useHandleQuiz } from "./hooks/useHandleQuiz";
@@ -29,6 +29,9 @@ const QuizComponent = ({ quizId }: QuizComponentProps) => {
         answers,
         isStartingExam,
         isSubmitting,
+        submitResult,
+        isSubmitError,
+        resetQuiz,
         isLastQuestion,
         isFirstQuestion,
         handleStartExam,
@@ -55,6 +58,126 @@ const QuizComponent = ({ quizId }: QuizComponentProps) => {
             <div className="w-full aspect-video h-[60vh] xl:h-[calc(100vh-56px)] bg-white p-8">
                 <div className="text-gray-600">
                     <p>{t("noContentAvailable")}</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (submitResult || isSubmitError) {
+        const isPassed = submitResult?.is_passed ?? false;
+        const Icon = isPassed ? CheckCircle2 : XCircle;
+        const accent = isPassed ? "green" : "red";
+
+        const title = isSubmitError
+            ? t("quizSubmitErrorTitle")
+            : isPassed
+                ? t("quizPassedTitle")
+                : t("quizFailedTitle");
+
+        const subtitle = isSubmitError
+            ? t("quizSubmitErrorMessage")
+            : `${t("yourScore")}: ${submitResult?.score ?? 0}/${submitResult?.max_score ?? 0}`;
+
+        return (
+            <div className={`w-full aspect-video h-[60vh] xl:h-[calc(100vh-56px)] bg-white p-8`}>
+                <div className="max-w-4xl w-full">
+                    <div
+                        className={`flex items-start gap-4 rounded-xl border p-6 ${
+                            accent === "green"
+                                ? "border-green-200 bg-green-50"
+                                : "border-red-200 bg-red-50"
+                        }`}
+                    >
+                        <Icon
+                            className={`mt-1 h-8 w-8 ${
+                                accent === "green" ? "text-green-600" : "text-red-600"
+                            }`}
+                        />
+                        <div className="flex-1">
+                            <h2
+                                className={`text-xl font-bold ${
+                                    accent === "green" ? "text-green-800" : "text-red-800"
+                                }`}
+                            >
+                                {title}
+                            </h2>
+                            <p
+                                className={`mt-1 ${
+                                    accent === "green" ? "text-green-700" : "text-red-700"
+                                }`}
+                            >
+                                {subtitle}
+                            </p>
+
+                            {!isSubmitError && submitResult && (
+                                <div className="mt-4 grid grid-cols-2 gap-4 text-sm text-gray-700">
+                                    <div>
+                                        <span className="font-semibold">{t("timeTaken")}:</span>{" "}
+                                        {submitResult.time_taken_seconds} {t("seconds")}
+                                    </div>
+                                    <div>
+                                        <span className="font-semibold">{t("attemptNumber")}:</span>{" "}
+                                        {submitResult.attempt_number}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {submitResult?.quiz?.show_results_immediately && submitResult?.answers?.length ? (
+                        <div className="mt-6 rounded-xl border border-gray-200 bg-white p-6">
+                            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                                {t("answersReview")}
+                            </h3>
+                            <div className="space-y-3">
+                                {submitResult.answers.map((a) => (
+                                    <div
+                                        key={a.id}
+                                        className={`flex items-center justify-between rounded-lg border p-4 ${
+                                            a.is_correct
+                                                ? "border-green-200 bg-green-50"
+                                                : "border-red-200 bg-red-50"
+                                        }`}
+                                    >
+                                        <div className="text-sm text-gray-800">
+                                            <div className="font-semibold">
+                                                {t("question")} #{a.quiz_question_id}
+                                            </div>
+                                            <div className="text-gray-700">
+                                                {t("yourAnswer")}: {a.answer}
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={`text-sm font-semibold ${
+                                                a.is_correct ? "text-green-700" : "text-red-700"
+                                            }`}
+                                        >
+                                            {a.is_correct ? t("correct") : t("incorrect")}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ) : null}
+
+                    <div className="mt-6 flex gap-3">
+                        <MainBtn
+                            onClick={() => resetQuiz()}
+                            variant="secondary"
+                        >
+                            {t("backToQuiz")}
+                        </MainBtn>
+
+                        {isSubmitError ? (
+                            <MainBtn
+                                onClick={handleSubmit}
+                                isLoading={isSubmitting}
+                                containerClassName="flex-1"
+                            >
+                                {t("retrySubmit")}
+                            </MainBtn>
+                        ) : null}
+                    </div>
                 </div>
             </div>
         );

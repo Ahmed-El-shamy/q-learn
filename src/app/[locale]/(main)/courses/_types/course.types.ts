@@ -113,6 +113,30 @@ export type Quiz = {
   questions?: QuizQuestion[];
 };
 
+export type QuizAttemptSubmittedAnswer = {
+  id: number;
+  quiz_question_id: number;
+  answer: string;
+  is_correct: boolean;
+  points_earned: number;
+  feedback: string | null;
+};
+
+export type QuizAttemptSubmitResponse = {
+  id: number;
+  quiz_id: number;
+  user_id: number;
+  attempt_number: number;
+  score: number;
+  max_score: number;
+  is_passed: boolean;
+  started_at: string;
+  submitted_at: string;
+  time_taken_seconds: number;
+  quiz: Quiz;
+  answers: QuizAttemptSubmittedAnswer[];
+};
+
 export type Lesson = {
   id: number;
   course: CourseReference;

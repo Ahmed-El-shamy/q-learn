@@ -127,6 +127,8 @@ import {
   type PropsWithChildren,
   useRef,
   useCallback,
+  useState,
+  useEffect,
 } from "react";
 
 interface SlidesPerView {
@@ -135,6 +137,19 @@ interface SlidesPerView {
   md?: number;
   lg?: number;
   xl?: number;
+}
+
+const BREAKPOINTS = { sm: 640, md: 768, lg: 1024, xl: 1280 } as const;
+
+function getSlidesPerView(
+  width: number,
+  config: SlidesPerView
+): number {
+  if (width >= BREAKPOINTS.xl && config.xl != null) return config.xl;
+  if (width >= BREAKPOINTS.lg && config.lg != null) return config.lg;
+  if (width >= BREAKPOINTS.md && config.md != null) return config.md;
+  if (width >= BREAKPOINTS.sm && config.sm != null) return config.sm;
+  return config.base ?? 1;
 }
 
 interface HorizontalCarouselProps extends PropsWithChildren {
@@ -150,6 +165,15 @@ const HorizontalCarousel: FC<HorizontalCarouselProps> = ({
   slidesPerView = { base: 1, md: 3, lg: 4 },
 }) => {
   const viewportRef = useRef<HTMLDivElement | null>(null);
+  const [currentSlidesPerView, setCurrentSlidesPerView] = useState(1);
+
+  useEffect(() => {
+    const update = () =>
+      setCurrentSlidesPerView(getSlidesPerView(window.innerWidth, slidesPerView));
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [slidesPerView]);
 
   const scroll = useCallback((direction: "prev" | "next") => {
     const viewport = viewportRef.current;
@@ -163,31 +187,7 @@ const HorizontalCarousel: FC<HorizontalCarouselProps> = ({
   }, []);
 
   const totalSlides = Children.count(children);
-
-  const slideWidthClass = `
-    w-[${100 / (slidesPerView.base ?? 1)}%]
-    sm:w-[${100 / (slidesPerView.sm ?? slidesPerView.base ?? 1)}%]
-    md:w-[${
-      100 / (slidesPerView.md ?? slidesPerView.sm ?? slidesPerView.base ?? 1)
-    }%]
-    lg:w-[${
-      100 /
-      (slidesPerView.lg ??
-        slidesPerView.md ??
-        slidesPerView.sm ??
-        slidesPerView.base ??
-        1)
-    }%]
-    xl:w-[${
-      100 /
-      (slidesPerView.xl ??
-        slidesPerView.lg ??
-        slidesPerView.md ??
-        slidesPerView.sm ??
-        slidesPerView.base ??
-        1)
-    }%]
-  `;
+  const slideWidthPercent = 100 / currentSlidesPerView;
 
   return (
     <section
@@ -216,7 +216,8 @@ const HorizontalCarousel: FC<HorizontalCarouselProps> = ({
               role="group"
               aria-roledescription="slide"
               aria-label={`Item ${index + 1} of ${totalSlides}`}
-              className={`shrink-0 ${slideWidthClass}`}
+              className="shrink-0"
+              style={{ width: `calc(${slideWidthPercent}% - 12px)` }}
             >
               {child}
             </div>

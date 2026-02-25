@@ -1,5 +1,6 @@
 import { Response } from "@/types/response.types";
 import { getSession } from "next-auth/react";
+import { getLocale } from "next-intl/server";
 
 // Request interceptor type: receives and returns request config
 type RequestConfig = Parameters<typeof fetch>["1"] & { url?: string };
@@ -360,7 +361,7 @@ export class Api {
 
 const api = new Api();
 
-api.requestInterceptor.use((requestOptions) => {
+api.requestInterceptor.use(async (requestOptions) => {
   // Read locale from cookie dynamically on each request
   let language = "en";
   if (typeof window !== "undefined") {
@@ -373,9 +374,13 @@ api.requestInterceptor.use((requestOptions) => {
         break;
       }
     }
+  } else {
+    const serverLanguage = await getLocale();
+    if (serverLanguage) language = serverLanguage.trim();
+    console.log(serverLanguage);
   }
 
-  // Create new headers object to avoid mutating the original
+  //Create new headers object to avoid mutating the original
   const headers = new Headers(requestOptions.headers);
 
   // Use set instead of append to avoid duplicates and ensure fresh value
