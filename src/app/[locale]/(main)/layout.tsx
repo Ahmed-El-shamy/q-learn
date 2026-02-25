@@ -8,12 +8,22 @@ import { Suspense } from "react";
 import NavbarSkeleton from "@/_components/common/loaders/skeltons/NavbarSkeleton";
 import "keen-slider/keen-slider.min.css";
 import { getSettings } from "@/_lib/server/getSettings";
+import { getLocale } from "next-intl/server";
+
 export default async function MainLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const settings = await getSettings();
+  const locale = await getLocale();
+  const isAr = locale === "ar";
+  const websiteTitle = isAr
+    ? (settings?.site_name_ar ?? settings?.site_name)
+    : settings?.site_name;
+  const slogan = isAr
+    ? (settings?.site_description_ar ?? settings?.site_description)
+    : settings?.site_description;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -30,8 +40,8 @@ export default async function MainLayout({
         instagram={settings?.social_instagram}
         linkedin={settings?.social_linkedin}
         x={settings?.social_twitter}
-        websiteTitle={settings?.site_name}
-        slogan={settings?.site_description}
+        websiteTitle={websiteTitle}
+        slogan={slogan}
         copyRight={settings?.copyright_text}
       />
       <LanguageSwitcher />

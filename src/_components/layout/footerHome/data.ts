@@ -1,76 +1,28 @@
 import { FooterLink } from "./Footer.types";
 
 export const supportLinks: FooterLink[] = [
-  {
-    label: "Unlock Your Potential",
-    link: "/unlock-your-potential",
-  },
-  {
-    label: "Privacy policy and cookie policy",
-    link: "/privacy-policy",
-  },
-  {
-    label: "Sitemap",
-    link: "/sitemap",
-  },
-  {
-    label: "Featured courses",
-    link: "/featured-courses",
-  },
-  {
-    label: "Join Us",
-    link: "/join-us",
-  },
+  { labelKey: "linkUnlockPotential", link: "/unlock-your-potential" },
+  { labelKey: "linkPrivacyPolicy", link: "/privacy-policy" },
+  { labelKey: "linkSitemap", link: "/sitemap" },
+  { labelKey: "linkFeaturedCourses", link: "/featured-courses" },
+  { labelKey: "linkJoinUs", link: "/join-us" },
 ];
 
 export const infoLinks: FooterLink[] = [
-  {
-    label: "Learn with Qutell",
-    link: "/learn",
-  },
-  {
-    label: "Teach on Qutell",
-    link: "/teach",
-  },
-  {
-    label: "Git the app",
-    link: "/git-the-app",
-  },
-  {
-    label: "About us",
-    link: "/about-us",
-  },
-  {
-    label: "Contact Us",
-    link: "/contact-us",
-  },
+  { labelKey: "linkLearnWithQutell", link: "/learn" },
+  { labelKey: "linkTeachOnQutell", link: "/teach" },
+  { labelKey: "linkGetTheApp", link: "/git-the-app" },
+  { labelKey: "linkAboutUs", link: "/about-us" },
+  { labelKey: "linkContactUs", link: "/contact-us" },
 ];
 
 export const serviceLinks: FooterLink[] = [
-  {
-    label: "Careers",
-    link: "/careers",
-  },
-  {
-    label: "Blog",
-    link: "/blog",
-  },
-  {
-    label: "Help and Support",
-    link: "/help",
-  },
-  {
-    label: "Terms",
-    link: "/terms",
-  },
-  {
-    label: "Certificate Verification",
-    link: "/certificate",
-  },
-  {
-    label: "Free Course",
-    link: "/free-course",
-  },
+  { labelKey: "linkCareers", link: "/careers" },
+  { labelKey: "linkBlog", link: "/blog" },
+  { labelKey: "linkHelpSupport", link: "/help" },
+  { labelKey: "linkTerms", link: "/terms" },
+  { labelKey: "linkCertificateVerification", link: "/certificate" },
+  { labelKey: "linkFreeCourse", link: "/free-course" },
 ];
 
 export const socialMediaLinks: FooterLink[] = [

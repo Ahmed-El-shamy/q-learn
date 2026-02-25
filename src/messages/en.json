@@ -1,4 +1,55 @@
 {
+  "hero": {
+    "viewAllCourses": "view all courses"
+  },
+  "statistics": {
+    "onlineCourses": "Online Courses",
+    "studentEnrolled": "Student Enrolled",
+    "countriesStudent": "Countries Student",
+    "positiveFeedback": "Positive Feedback"
+  },
+  "categoryCard": {
+    "explore": "Explore",
+    "course": "Course",
+    "courses": "Courses"
+  },
+  "topCategories": {
+    "title": "Top Categories",
+    "description": "Browse by subject and find the right courses for you. Explore our most popular categories and start learning today."
+  },
+  "trendedCourses": {
+    "title": "Trended Courses",
+    "description": "Discover our most popular courses. Start with what others are learning and get ahead."
+  },
+  "testimonials": {
+    "title": "What Our Students Say",
+    "description": "Real feedback from learners who completed our courses. See how we help people reach their goals."
+  },
+  "teachers": {
+    "title": "Expert Teachers",
+    "description": "Learn from industry professionals and experienced educators who are committed to your success."
+  },
+  "about": {
+    "badge": "About our institute",
+    "expertLedTitle": "Expert-led courses",
+    "expertLedDesc": "Learn from instructors with real industry experience.",
+    "flexibleTitle": "Flexible learning",
+    "flexibleDesc": "Study anytime with mobile-friendly lessons.",
+    "practicalTitle": "Practical outcomes",
+    "practicalDesc": "Hands-on projects designed for real skills.",
+    "partnersTitle": "Trusted partners",
+    "partnersDesc": "Collaborations that support your journey.",
+    "cardTitle": "Learn smarter, grow faster.",
+    "cardDesc": "Build skills with structured learning paths, real practice, and support."
+  },
+  "partners": {
+    "heading": "Our Partners",
+    "description": "Trusted by leading organizations and brands.",
+    "carouselLabel": "Partners logos carousel",
+    "partnerLogoAlt": "{name} logo",
+    "openPartner": "Open partner: {name}",
+    "partnerFallback": "Partner"
+  },
   "SEO": {
     "defaultTitle": "Qutell - The best site for your courses",
     "defaultDescription": "Discover our unique courses at the best prices. Shop now and have a unique experience.",
@@ -26,8 +77,38 @@
     "medalAlt": "medal",
     "rewardBoxAlt": "reward box",
     "title": "Win Reward Points",
-    "description": "Buy course, complete course, incarese activity & many more way to win club points. You will be able to use your club points to get free prizes and courses. Start using the system now and collect points!",
-    "view-all-courses": "view all courses"
+    "description": "Buy course, complete course, increase activity & many more ways to win club points. You will be able to use your club points to get free prizes and courses. Start using the system now and collect points!",
+    "view-all-courses": "view all courses",
+    "supportZone": "Support Zone",
+    "companyInfo": "Company Info",
+    "exploreServices": "Explore Services",
+    "linkUnlockPotential": "Unlock Your Potential",
+    "linkPrivacyPolicy": "Privacy policy and cookie policy",
+    "linkSitemap": "Sitemap",
+    "linkFeaturedCourses": "Featured courses",
+    "linkJoinUs": "Join Us",
+    "linkLearnWithQutell": "Learn with Qutell",
+    "linkTeachOnQutell": "Teach on Qutell",
+    "linkGetTheApp": "Get the app",
+    "linkAboutUs": "About us",
+    "linkContactUs": "Contact Us",
+    "linkCareers": "Careers",
+    "linkBlog": "Blog",
+    "linkHelpSupport": "Help and Support",
+    "linkTerms": "Terms",
+    "linkCertificateVerification": "Certificate Verification",
+    "linkFreeCourse": "Free Course",
+    "callUs24_7": "Call Us 24/7",
+    "followUs": "Follow Us",
+    "paymentMethod": "Payment method",
+    "socialIconsAlt": "Social media links",
+    "paymentMethodsAlt": "Payment methods",
+    "copyrightDefault": "Copyright © 2024 Qutell. All rights reserved | Made by Qutell",
+    "newsletterTitle": "Subscribe to get our latest news!",
+    "newsletterDescription": "Get updates on new courses, tips, and offers.",
+    "newsletterEmailLabel": "Email address",
+    "newsletterPlaceholder": "you@example.com",
+    "newsletterSubmit": "Subscribe"
   },
   "NotFound": {
     "Oops": "Oops! The page you are looking for doesn’t exist.",
@@ -175,6 +256,7 @@
   },
   "common": {
     "loading": "Loading...",
+    "login": "Login",
     "no-data": "No data available",
     "show-password": "Show password",
     "hide-password": "Hide password",
@@ -227,10 +309,12 @@
     "students": "Students",
     "currency": "SAR",
     "alt": "Course Image",
+    "loginRequiredForWishlist": "Please log in to use wishlist",
     "wishlistAdded": "Added to wishlist",
     "wishlistRemoved": "Removed from wishlist",
     "wishlistFailed": "Could not update wishlist",
-    "addToWishlist": "Add to wishlist"
+    "addToWishlist": "Add to wishlist",
+    "removeFromWishlist": "Remove from wishlist"
   },
   "filters": {
     "category": "Category",
@@ -254,6 +338,8 @@
   },
   "blogs": {
     "hero": "Explore Our Blog Posts",
+    "title": "Articles & News",
+    "description": "Stay updated with tips, insights, and news from our blog. New articles published regularly.",
     "read-more": "Read More",
     "minutes-to-read": "{minutes} minutes to read"
   },

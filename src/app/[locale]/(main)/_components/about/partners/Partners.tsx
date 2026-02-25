@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import ErrorHandler from "@/_components/common/error-handler/ErrorHandler";
 import api, { Api } from "@/_lib/api/api";
 import type { Partner } from "./partners.types";
@@ -10,15 +11,19 @@ function safeUrl(url?: string) {
   return `https://${url.replace(/^\/+/, "")}`;
 }
 
-function partnerAlt(partner: Partner) {
-  return partner?.name ? `${partner.name} logo` : "Partner logo";
-}
-
 type PartnerLogoCardProps = {
   partner: Partner;
+  alt: string;
+  ariaLabel: string;
+  title: string;
 };
 
-const PartnerLogoCard = ({ partner }: PartnerLogoCardProps) => {
+const PartnerLogoCard = ({
+  partner,
+  alt,
+  ariaLabel,
+  title,
+}: PartnerLogoCardProps) => {
   const href = safeUrl(partner?.link);
 
   return (
@@ -40,8 +45,8 @@ const PartnerLogoCard = ({ partner }: PartnerLogoCardProps) => {
         focus-visible:outline-none
         focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2
       "
-      aria-label={`Open partner: ${partner?.name ?? "Partner"}`}
-      title={partner?.name ?? "Partner"}
+      aria-label={ariaLabel}
+      title={title}
     >
       {/* subtle background for modern feel */}
       <div
@@ -58,7 +63,7 @@ const PartnerLogoCard = ({ partner }: PartnerLogoCardProps) => {
         <div className="relative h-full w-full">
           <Image
             src={partner.image}
-            alt={partnerAlt(partner)}
+            alt={alt}
             fill
             sizes="(max-width: 640px) 180px, (max-width: 768px) 200px, 220px"
             className="
@@ -78,12 +83,14 @@ const PartnerLogoCard = ({ partner }: PartnerLogoCardProps) => {
 };
 
 const Partners = async () => {
+  const t = await getTranslations("partners");
   try {
     const response = await api.get(Api.routes.site.partners);
     if (!response?.status) return null;
 
     const partners = response.data as Partner[];
     if (!partners?.length) return null;
+    const partnerFallback = t("partnerFallback");
     return (
       <section className="mt-28" aria-labelledby="partners-heading">
         <div className="flex items-end justify-between gap-4 mb-6">
@@ -92,24 +99,30 @@ const Partners = async () => {
               id="partners-heading"
               className="text-2xl md:text-3xl font-bold text-slate-900"
             >
-              Our Partners
+              {t("heading")}
             </h3>
             <p className="mt-1 text-sm md:text-base text-slate-600">
-              Trusted by leading organizations and brands.
+              {t("description")}
             </p>
           </div>
         </div>
 
         <HorizontalCarousel
-          ariaLabel="Partners logos carousel"
+          ariaLabel={t("carouselLabel")}
           className="py-2"
         >
-          {partners.map((partner) => (
-            <PartnerLogoCard
-              key={partner?.link ?? partner?.name}
-              partner={partner}
-            />
-          ))}
+          {partners.map((partner) => {
+            const name = partner?.name ?? partnerFallback;
+            return (
+              <PartnerLogoCard
+                key={partner?.link ?? partner?.name}
+                partner={partner}
+                alt={t("partnerLogoAlt", { name })}
+                ariaLabel={t("openPartner", { name })}
+                title={name}
+              />
+            );
+          })}
         </HorizontalCarousel>
       </section>
     );

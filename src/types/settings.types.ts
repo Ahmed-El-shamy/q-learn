@@ -8,6 +8,8 @@ export interface ContactSetting {
 export interface Settings extends ContactSetting {
     site_name: string,
     site_description: string,
+    site_name_ar?: string,
+    site_description_ar?: string,
     site_logo: string,
     site_favicon: string,
     copyright_text: string,

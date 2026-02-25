@@ -377,7 +377,6 @@ api.requestInterceptor.use(async (requestOptions) => {
   } else {
     const serverLanguage = await getLocale();
     if (serverLanguage) language = serverLanguage.trim();
-    console.log(serverLanguage);
   }
 
   //Create new headers object to avoid mutating the original
@@ -396,7 +395,6 @@ api.requestInterceptor.use(async (requestOptions) => {
     const session = await getSession();
     if (session) {
       const headers = new Headers(requestOptions.headers);
-      console.log("s", session);
       headers.append("Authorization", `Bearer ${session.user.token}`);
       requestOptions.headers = headers;
     }
