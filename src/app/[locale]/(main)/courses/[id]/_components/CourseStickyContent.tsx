@@ -1,8 +1,10 @@
 "use client";
+
 import MainBtn from "@/_components/common/buttons/MainBtn";
 import Image from "next/image";
-import CouponInput from "./CouponInput";
 import { useTranslations } from "next-intl";
+import { useCart } from "@/store/CartProvider";
+import { useRouter } from "@/i18n/navigation";
 import type { IconType } from "react-icons";
 import {
   FaCertificate,
@@ -61,12 +63,47 @@ const socialMediaLinksConfig = [
 
 const CourseStickyContent = () => {
     const t = useTranslations("courses");
+    const tCart = useTranslations("cart");
+    const { addToCart, removeFromCart, isInCart, items, isLoading } = useCart();
+    const router = useRouter();
     const imageContainer = useRef<HTMLDivElement>(null);
     const isCollapsed = useRef(false);
     const [isImageError, setIsImageError] = useState(false);
     const params: {id: string} = useParams();
     const query = useQuery({...CourseDetailsQuery(params.id), refetchOnMount: false});
     const course = query.data;
+
+    const courseId = course?.id != null ? Number(course.id) : null;
+    const isAlreadyInCart = courseId != null && isInCart(courseId);
+
+    const addCurrentCourseToCart = () => {
+        if (!course || courseId == null) return;
+        addToCart({
+            id: courseId,
+            item_id: courseId,
+            title: course.title ?? "",
+            price: course.price?.sar ?? course.price?.usd ?? course.price?.egp ?? "0",
+            course: { thumbnail: course.thumbnail ?? undefined },
+        });
+    };
+
+    const handleCartClick = () => {
+        if (!course || courseId == null) return;
+        if (isAlreadyInCart) {
+            const cartItem = items.find((item) => item.item_id === courseId);
+            if (cartItem) removeFromCart(cartItem.id);
+        } else {
+            addCurrentCourseToCart();
+        }
+    };
+
+    const handleBuyNowClick = () => {
+        if (!course || courseId == null) return;
+        if (!isAlreadyInCart) {
+            addCurrentCourseToCart();
+        }
+        router.push("/checkout");
+    };
 
     const currentUrl = typeof window !== "undefined" ? window.location.href : "";
     const socialMediaLinks = socialMediaLinksConfig.map((link) => ({
@@ -238,11 +275,21 @@ const CourseStickyContent = () => {
                 )}
 
                 <div className="flex flex-col gap-2">
-                    <MainBtn>
-                        Add to Cart 
-                    </MainBtn>
-                    <MainBtn variant="outlined">
-                        Buy now
+                    {course && (
+                        <MainBtn
+                            variant={isAlreadyInCart ? "outlined" : undefined}
+                            onClick={handleCartClick}
+                            disabled={isLoading}
+                        >
+                            {isAlreadyInCart ? tCart("removeFromCart") : tCart("addToCart")}
+                        </MainBtn>
+                    )}
+                    <MainBtn
+                        variant="outlined"
+                        onClick={handleBuyNowClick}
+                        disabled={isLoading}
+                    >
+                        {tCart("buyNow")}
                     </MainBtn>
                 </div> 
                 <div className="flex flex-col gap-2 sm:gap-3 py-3 sm:py-4">
@@ -255,7 +302,6 @@ const CourseStickyContent = () => {
                         </div>
                     ))}
                 </div>
-                <CouponInput />
                 <p className="pt-3 sm:pt-4 text-sm sm:text-base md:text-lg font-bold">
                     {t("share")}
                 </p>

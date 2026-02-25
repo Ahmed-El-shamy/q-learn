@@ -28,6 +28,7 @@ const ShowCategories = () => {
             {queryResult?.data?.map((item: CategoryBase) => (
               <CategoryCard
                 key={item?.id}
+                id={item.id}
                 name={item?.name}
                 slug={item?.slug}
                 courses_count={item?.courses_count}

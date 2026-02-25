@@ -356,6 +356,9 @@
   "cart": {
     "courseName": "اسم الكورس",
     "price": "0",
+    "addToCart": "إضافة إلى السلة",
+    "removeFromCart": "إزالة من السلة",
+    "buyNow": "اشتري الآن",
     "there is no courses in cart": "لا توجد دورات في السلة",
     "currency": "ر.س",
     "subtotal": "المجموع الفرعي",

@@ -362,6 +362,9 @@
   "cart": {
     "courseName": "Course Name",
     "price": "0",
+    "addToCart": "Add to Cart",
+    "removeFromCart": "Remove from cart",
+    "buyNow": "Buy now",
     "there is no courses in cart": "There is no courses in cart",
     "currency": "SAR",
     "subtotal": "Subtotal",

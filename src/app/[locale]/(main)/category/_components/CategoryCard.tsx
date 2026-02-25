@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
 interface CategoryCardProps {
+  id: number;
   name: string;
   slug: string;
   courses_count: number;
@@ -15,6 +16,7 @@ interface CategoryCardProps {
 }
 
 const CategoryCard: FC<CategoryCardProps> = ({
+  id,
   name,
   slug,
   courses_count,
@@ -25,7 +27,7 @@ const CategoryCard: FC<CategoryCardProps> = ({
 
   return (
     <Link
-      href={`/category/${slug}`}
+      href={{ pathname: "/courses", query: { category_id: `[${id}]` } }}
       aria-label={`Open category: ${name}`}
       className="
         group block
