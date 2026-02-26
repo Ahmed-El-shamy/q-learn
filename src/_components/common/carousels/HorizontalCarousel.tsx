@@ -158,6 +158,8 @@ interface HorizontalCarouselProps extends PropsWithChildren {
   slidesPerView?: SlidesPerView;
 }
 
+const GAP_PX = 24; // gap-6
+
 const HorizontalCarousel: FC<HorizontalCarouselProps> = ({
   children,
   ariaLabel = "Carousel",
@@ -165,11 +167,19 @@ const HorizontalCarousel: FC<HorizontalCarouselProps> = ({
   slidesPerView = { base: 1, md: 3, lg: 4 },
 }) => {
   const viewportRef = useRef<HTMLDivElement | null>(null);
+  const [slideWidthPx, setSlideWidthPx] = useState(0);
   const [currentSlidesPerView, setCurrentSlidesPerView] = useState(1);
 
   useEffect(() => {
-    const update = () =>
-      setCurrentSlidesPerView(getSlidesPerView(window.innerWidth, slidesPerView));
+    const update = () => {
+      const w = window.innerWidth;
+      const n = getSlidesPerView(w, slidesPerView);
+      setCurrentSlidesPerView(n);
+      // Account for px-8 (32px) or md:px-16 (64px) so visible width is less
+      const padding = w >= 768 ? 64 : 32;
+      const visibleWidth = w - padding;
+      setSlideWidthPx((visibleWidth - (n - 1) * GAP_PX) / n);
+    };
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
@@ -187,7 +197,6 @@ const HorizontalCarousel: FC<HorizontalCarouselProps> = ({
   }, []);
 
   const totalSlides = Children.count(children);
-  const slideWidthPercent = 100 / currentSlidesPerView;
 
   return (
     <section
@@ -217,7 +226,7 @@ const HorizontalCarousel: FC<HorizontalCarouselProps> = ({
               aria-roledescription="slide"
               aria-label={`Item ${index + 1} of ${totalSlides}`}
               className="shrink-0"
-              style={{ width: `calc(${slideWidthPercent}% - 12px)` }}
+              style={{ width: slideWidthPx ? `${slideWidthPx}px` : undefined }}
             >
               {child}
             </div>

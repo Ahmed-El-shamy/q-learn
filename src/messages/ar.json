@@ -141,6 +141,13 @@
   },
   "courses": {
     "students": "طلاب",
+    "panels": {
+      "overview": "نظرة عامة",
+      "content": "المحتوى",
+      "instructor": "المدرب",
+      "QA": "الأسئلة والأجوبة",
+      "reviews": "المراجعات"
+    },
     "duration": {
       "duration": "المدة",
       "h": "{hours}h"
@@ -150,6 +157,8 @@
     "course-content": "محتوى الدورة",
     "toggle-all-chapters": "تبديل كل الفصول",
     "preview": "معاينة",
+    "no-reviews": "لا توجد مراجعات حالياً",
+    "login-to-leave-review": "يرجى <login>تسجيل الدخول</login> لتتمكن من إضافة تقييمك",
     "course-full-rating": "تقييم الدورة",
     "course-rating": "التقييم",
     "reviews": "المراجعات",

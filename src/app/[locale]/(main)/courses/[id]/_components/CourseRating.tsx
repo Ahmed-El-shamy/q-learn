@@ -13,7 +13,6 @@ import { Review } from "../../_types/course.types";
 
 const CourseRating = () => {
     const t = useTranslations("courses");
-    const baseT = useTranslations();
     const session = useSession();
     const isAuthenticated = session.status === "authenticated";
     const params: {id: string} = useParams();
@@ -110,25 +109,13 @@ const CourseRating = () => {
                     !isAuthenticated ?
                         <div className="flex flex-col sm:flex-row justify-between text-nowrap items-start sm:items-center gap-2 sm:gap-1 mt-4">
                             <div className="text-xs sm:text-sm md:text-base">
-                                There are currently no reviews
+                                {t("no-reviews")}
                             </div>
-                            <div className="flex flex-wrap gap-1 sm:gap-2 [&>a]:hover:underline [&>a]:cursor-pointer [&>a]:text-blue-500 text-xs sm:text-sm md:text-base">
-                                <Link href="/auth/login">
-                                    {baseT("auth.login.login")}
-                                </Link>
-                                <p>
-                                    {baseT("or")}
-                                </p>
-                                <Link href={"/auth/register"}>
-                                    {baseT("auth.signup")}
-                                </Link>
-                                <p>
-                                    {t("as-a-student")}
-                                </p>
-                                <p>
-                                    {t("to-leave-a-review")}
-                                </p>
-                            </div>
+                            <p className="text-xs sm:text-sm md:text-base [&>a]:hover:underline [&>a]:text-blue-500 [&>a]:font-medium">
+                                {t.rich("login-to-leave-review", {
+                                    login: (chunks) => <Link href="/auth/login">{chunks}</Link>,
+                                })}
+                            </p>
                         </div>
                         :
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mt-4">

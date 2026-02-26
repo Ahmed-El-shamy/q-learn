@@ -141,6 +141,13 @@
   },
   "courses": {
     "students": "students",
+    "panels": {
+      "overview": "Overview",
+      "content": "Content",
+      "instructor": "Instructor",
+      "QA": "Q&A",
+      "reviews": "Reviews"
+    },
     "duration": {
       "duration": "Duration",
       "h": "{hours}h"
@@ -150,6 +157,8 @@
     "course-content": "Course content",
     "toggle-all-chapters": "Toggle all chapters",
     "preview": "Preview",
+    "no-reviews": "There are currently no reviews",
+    "login-to-leave-review": "Please <login>log in</login> to add your review",
     "to-leave-a-review": "to leave a review",
     "to-ask-a-question": "to ask a question",
     "review-the-course": "Review the course",

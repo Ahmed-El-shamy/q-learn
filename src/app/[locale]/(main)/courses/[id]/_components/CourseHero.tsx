@@ -40,7 +40,7 @@ const CourseHero: FC<Props> = ({
           </p>
           <div className="py-4 sm:py-6 md:py-8 flex items-center gap-2 sm:gap-4">
             <Link
-              href={`/courses/?filter-category=${category.id}`}
+              href={`/courses?category_id=[${category.id}]`}
               className="underline text-white text-xs sm:text-sm md:text-base"
             >
               {
