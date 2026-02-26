@@ -1,7 +1,10 @@
+"use client";
+
 import Container from "@/_components/common/container/Container";
-import { Link } from "@/i18n/navigation";
 import { Headset } from "lucide-react";
-import { paymentMethods, socialMediaLinks } from "./data";
+import { useTranslations } from "next-intl";
+import { paymentMethods } from "./data";
+
 interface FooterContactProps {
   hotLine?: string;
   email?: string;
@@ -20,6 +23,9 @@ const FooterContact: React.FC<FooterContactProps> = ({
   linkedin = "",
   x = "",
 }) => {
+  const t = useTranslations("footer");
+  const socialAlt = t("socialIconsAlt");
+  const paymentAlt = t("paymentMethodsAlt");
   return (
     <Container>
       <div className="mt-20 py-10 w-full bg-linear-to-r from-[#660afb] via-[#b633ff] to-[#660afb]">
@@ -29,7 +35,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
               <div className="flex gap-5">
                 <Headset className="size-10 xl:size-15" />
                 <div className="font-semibold text-[16px] xl:text-xl">
-                  <h5>Call Us 24/7</h5>
+                  <h5>{t("callUs24_7")}</h5>
 
                   <a dir="ltr" href={`tel:${hotLine}`}>
                     {hotLine}
@@ -56,7 +62,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 xl:gap-5">
             <div>
               <h5 className="text-xl xl:text-2xl font-bold uppercase">
-                Follow Us
+                {t("followUs")}
               </h5>
               <ul className="flex flex-wrap mt-3 gap-3">
                 {/* {socialMediaLinks.map((social, i) => (
@@ -72,7 +78,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
                     >
                       <img
                         src="/images/footer/facebook.svg"
-                        alt="social icons"
+                        alt={socialAlt}
                         loading="lazy"
                         className="w-4 h-4"
                       />
@@ -89,7 +95,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
                     >
                       <img
                         src="/images/footer/twitter.svg"
-                        alt="social icons"
+                        alt={socialAlt}
                         loading="lazy"
                         className="w-4 h-4"
                       />
@@ -106,7 +112,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
                     >
                       <img
                         src="/images/footer/linkedin.svg"
-                        alt="social icons"
+                        alt={socialAlt}
                         loading="lazy"
                         className="w-4 h-4"
                       />
@@ -123,7 +129,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
                     >
                       <img
                         src="/images/instagram.png"
-                        alt="social icons"
+                        alt={socialAlt}
                         loading="lazy"
                         className="w-4 h-4"
                       />
@@ -135,7 +141,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
 
             <div>
               <h5 className="font-bold text-xl xl:text-2xl uppercase">
-                Payment method
+                {t("paymentMethod")}
               </h5>
               <div className="flex flex-wrap gap-2 mt-3">
                 {paymentMethods.map((payment, i) => (
@@ -145,7 +151,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
                   >
                     <img
                       src={payment.image}
-                      alt="payment methods"
+                      alt={paymentAlt}
                       className="w-full h-full object-contain rounded-sm"
                       loading="lazy"
                     />

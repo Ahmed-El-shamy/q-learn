@@ -48,7 +48,7 @@ const CourseCard: React.FC<Course> = ({
   };
 
   return (
-    <div className="border border-[#d1d1d1] h-[400px] group overflow-hidden">
+    <div className="border border-[#d1d1d1] h-[540px] group overflow-hidden">
       <div className="w-full h-[45%] relative overflow-hidden">
         <Link href={`/courses/${id}`} className="block w-full h-full">
           <p className="bg-[#963ed0]/60 text-white py-1 px-5 absolute top-5 start-5 z-10">

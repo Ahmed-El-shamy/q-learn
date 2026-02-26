@@ -2,6 +2,7 @@
 
 import type { LucideIcon } from "lucide-react";
 import { BookOpen, Users, Earth, Heart } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCountUp } from "../../_hooks/useCountUp";
 
 type IconKey = "book" | "users" | "earth" | "heart";
@@ -18,7 +19,7 @@ type StatisticsCardProps = {
   bgColor: string;
   iconKey: IconKey;
   number?: number;
-  text: string;
+  textKey: string;
 };
 
 export default function StatisticsCard({
@@ -26,8 +27,9 @@ export default function StatisticsCard({
   bgColor,
   iconKey,
   number,
-  text,
+  textKey,
 }: StatisticsCardProps) {
+  const t = useTranslations("statistics");
   const Icon = ICONS[iconKey];
   const countUp = typeof number === "number" ? useCountUp(number) : null;
 
@@ -48,7 +50,7 @@ export default function StatisticsCard({
         </h2>
       )}
 
-      <p>{text}</p>
+      <p>{t(textKey)}</p>
     </div>
   );
 }

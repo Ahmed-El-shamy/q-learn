@@ -37,7 +37,7 @@ export function useToggleWishlist({
         },
 
         onMutate: async () => {
-            if (!courseId) return;
+            if (!courseId || !isAuthed) return;
 
             await qc.cancelQueries({ queryKey: wishlistKeys.all });
 

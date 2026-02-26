@@ -5,7 +5,10 @@ import Image from "next/image";
 import { Hero } from "./types/hero.types";
 import HtmlContent from "@/_components/common/HtmlContent";
 import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
+
 const HeroSection = async () => {
+  const t = await getTranslations("hero");
   try {
     const response = await api.get(Api.routes.site.hero);
     if (!response?.status) return null;
@@ -25,7 +28,7 @@ const HeroSection = async () => {
 
             <div className="flex flex-row md:flex-col lg:flex-row gap-4 lg:gap-8">
               <MainBtn>
-                <Link href="/courses">view all courses</Link>
+                <Link href="/courses">{t("viewAllCourses")}</Link>
               </MainBtn>
             </div>
           </div>

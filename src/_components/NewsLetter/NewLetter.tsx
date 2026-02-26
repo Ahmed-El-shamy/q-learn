@@ -2,6 +2,7 @@
 
 import { useId, useRef, useState } from "react";
 import { Send, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { useSubmitNewsLetter } from "./_quires/useSubmitNewsLetter";
 function isValidEmail(email: string) {
@@ -10,6 +11,7 @@ function isValidEmail(email: string) {
 }
 
 const NewsLetter = () => {
+  const t = useTranslations("footer");
   const formId = useId();
   const errorId = `${formId}-error`;
 
@@ -56,8 +58,11 @@ const NewsLetter = () => {
 
   return (
     <div>
-      <p className="font-normal mb-2 lg:text-md">
-        Subscribe to get our latest news!
+      <h3 className="font-bold text-xl xl:text-2xl mb-1">
+        {t("newsletterTitle")}
+      </h3>
+      <p className="font-normal mb-2 lg:text-md text-white/90">
+        {t("newsletterDescription")}
       </p>
 
       <form
@@ -66,7 +71,7 @@ const NewsLetter = () => {
         className="border flex w-full max-w-xl bg-white text-black font-normal"
       >
         <label htmlFor={formId} className="sr-only">
-          Email address
+          {t("newsletterEmailLabel")}
         </label>
 
         <input
@@ -86,7 +91,7 @@ const NewsLetter = () => {
           required
           inputMode="email"
           autoComplete="email"
-          placeholder="you@example.com"
+          placeholder={t("newsletterPlaceholder")}
           aria-invalid={Boolean(localError)}
           aria-describedby={localError ? errorId : undefined}
           disabled={isSubmitting}
@@ -103,7 +108,7 @@ const NewsLetter = () => {
           ) : (
             <Send color="white" />
           )}
-          <span className="sr-only">Subscribe</span>
+          <span className="sr-only">{t("newsletterSubmit")}</span>
         </button>
       </form>
 

@@ -1,11 +1,14 @@
 "use client";
-import { instructorsOptions } from "./_quires/teachersOptions";
+
 import { useQuery } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import HorizontalCarousel from "@/_components/common/carousels/HorizontalCarousel";
-import CategoryCard from "../../category/_components/CategoryCard";
 import type { Instructor } from "@/types/instructor.types";
 import TeacherCard from "./TeacherCard";
+import { instructorsOptions } from "./_quires/teachersOptions";
+
 const ShowTeachers = () => {
+  const t = useTranslations("teachers");
   const queryResult = useQuery(instructorsOptions());
 
   return (
@@ -15,11 +18,10 @@ const ShowTeachers = () => {
           id="teachers-heading"
           className="text-3xl md:text-4xl font-bold text-slate-900 mb-4"
         >
-          Expert Teachers
+          {t("title")}
         </h2>
         <p className="max-w-2xl mx-auto text-sm md:text-base text-slate-600">
-          Here is short details about our institute, Also you can see how we
-          work
+          {t("description")}
         </p>
         {queryResult?.data && queryResult?.data?.length > 0 ? (
           <HorizontalCarousel ariaLabel="Top categories slider">

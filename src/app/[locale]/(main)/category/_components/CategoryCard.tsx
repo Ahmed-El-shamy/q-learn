@@ -1,9 +1,14 @@
 "use client";
 
 import type { FC } from "react";
+import { useState } from "react";
 import Image from "next/image";
+import { ImageIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+
 interface CategoryCardProps {
+  id: number;
   name: string;
   slug: string;
   courses_count: number;
@@ -11,14 +16,18 @@ interface CategoryCardProps {
 }
 
 const CategoryCard: FC<CategoryCardProps> = ({
+  id,
   name,
   slug,
   courses_count,
   image,
 }) => {
+  const t = useTranslations("categoryCard");
+  const [imageError, setImageError] = useState(false);
+
   return (
     <Link
-      href={`/category/${slug}`}
+      href={{ pathname: "/courses", query: { category_id: `[${id}]` } }}
       aria-label={`Open category: ${name}`}
       className="
         group block
@@ -37,7 +46,7 @@ const CategoryCard: FC<CategoryCardProps> = ({
     >
       {/* Media */}
       <div className="relative h-[110px] bg-gradient-to-br from-sky-50 to-indigo-50">
-        {image ? (
+        {image && !imageError ? (
           <Image
             src={image}
             alt={name}
@@ -50,12 +59,11 @@ const CategoryCard: FC<CategoryCardProps> = ({
             "
             quality={90}
             loading="lazy"
+            onError={() => setImageError(true)}
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-xs font-semibold text-slate-500">
-              No image
-            </span>
+          <div className="absolute inset-0 flex items-center justify-center bg-slate-200">
+            <ImageIcon className="h-10 w-10 text-slate-400" aria-hidden />
           </div>
         )}
 
@@ -76,7 +84,7 @@ const CategoryCard: FC<CategoryCardProps> = ({
 
         <div className="flex items-center justify-between">
           <span className="text-xs text-slate-500">
-            {courses_count} {courses_count === 1 ? "Course" : "Courses"}
+            {courses_count} {courses_count === 1 ? t("course") : t("courses")}
           </span>
 
           <span
@@ -90,9 +98,9 @@ const CategoryCard: FC<CategoryCardProps> = ({
               transition
               group-hover:bg-sky-600
             "
-            aria-label={`${courses_count} courses`}
+            aria-label={`${courses_count} ${t("courses")}`}
           >
-            Explore
+            {t("explore")}
           </span>
         </div>
       </div>

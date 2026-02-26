@@ -1,15 +1,16 @@
 import Image from "next/image";
 import { CircleCheckBig } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
 import api, { Api } from "@/_lib/api/api";
 import ErrorHandler from "@/_components/common/error-handler/ErrorHandler";
 import type { SimpleSection } from "@/types/simpleSection.types";
 import HtmlContent from "@/_components/common/HtmlContent";
 import Partners from "./partners/Partners";
-import MainBtn from "@/_components/common/buttons/MainBtn";
 import Container from "@/_components/common/container/Container";
 
 const AboutUsSection = async () => {
+  const t = await getTranslations("about");
   try {
     const response = await api.get(Api.routes.site.about);
     if (!response?.status) return null;
@@ -17,14 +18,11 @@ const AboutUsSection = async () => {
     const data = response.data as SimpleSection;
     return (
       <section aria-labelledby="about-heading" className="py-12 md:py-16">
-        {/* Wrapper */}
         <Container>
-          {/* Grid */}
           <div className="grid items-center gap-10 md:grid-cols-2">
-            {/* Text side */}
             <div className="text-start">
               <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-600">
-                About our institute
+                {t("badge")}
               </p>
 
               <h2
@@ -55,10 +53,10 @@ const AboutUsSection = async () => {
                   />
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-slate-900">
-                      Expert-led courses
+                      {t("expertLedTitle")}
                     </p>
                     <p className="text-xs text-slate-600">
-                      Learn from instructors with real industry experience.
+                      {t("expertLedDesc")}
                     </p>
                   </div>
                 </li>
@@ -70,10 +68,10 @@ const AboutUsSection = async () => {
                   />
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-slate-900">
-                      Flexible learning
+                      {t("flexibleTitle")}
                     </p>
                     <p className="text-xs text-slate-600">
-                      Study anytime with mobile-friendly lessons.
+                      {t("flexibleDesc")}
                     </p>
                   </div>
                 </li>
@@ -85,10 +83,10 @@ const AboutUsSection = async () => {
                   />
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-slate-900">
-                      Practical outcomes
+                      {t("practicalTitle")}
                     </p>
                     <p className="text-xs text-slate-600">
-                      Hands-on projects designed for real skills.
+                      {t("practicalDesc")}
                     </p>
                   </div>
                 </li>
@@ -100,20 +98,16 @@ const AboutUsSection = async () => {
                   />
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-slate-900">
-                      Trusted partners
+                      {t("partnersTitle")}
                     </p>
                     <p className="text-xs text-slate-600">
-                      Collaborations that support your journey.
+                      {t("partnersDesc")}
                     </p>
                   </div>
                 </li>
               </ul>
 
-              {/* CTA */}
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                {/* لو MainBtn عندك بيدعم asChild أو href استخدمه، وإلا استخدم Link */}
-                {/* <MainBtn title="Explore courses" /> */}
-              </div>
+              <div className="mt-7 flex flex-wrap items-center gap-3" />
             </div>
 
             {/* Media side */}
@@ -147,11 +141,10 @@ const AboutUsSection = async () => {
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="rounded-2xl bg-white/90 backdrop-blur border border-slate-200/70 px-4 py-3 shadow-sm">
                     <p className="text-sm font-semibold text-slate-900 line-clamp-1">
-                      Learn smarter, grow faster.
+                      {t("cardTitle")}
                     </p>
                     <p className="mt-0.5 text-xs text-slate-600 line-clamp-2">
-                      Build skills with structured learning paths, real
-                      practice, and support.
+                      {t("cardDesc")}
                     </p>
                   </div>
                 </div>

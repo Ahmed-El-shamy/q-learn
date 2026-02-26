@@ -1,17 +1,25 @@
+"use client";
+
 import Container from "@/_components/common/container/Container";
 import { Link } from "@/i18n/navigation";
 import React from "react";
+import { useTranslations } from "next-intl";
 import { infoLinks, serviceLinks, supportLinks } from "./data";
-import MainBtn from "@/_components/common/buttons/MainBtn";
 import NewsLetter from "@/_components/NewsLetter/NewLetter";
+
 interface FooterLinksProps {
   websiteTitle?: string;
   slogan?: string;
 }
+
 const FooterLinks: React.FC<FooterLinksProps> = ({
   websiteTitle = "",
   slogan = "",
 }) => {
+  const t = useTranslations("footer");
+  const linkLabel = (link: (typeof supportLinks)[0]) =>
+    link.labelKey ? t(link.labelKey) : link.label ?? "";
+
   return (
     <Container>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 md:gap-5 mt-20">
@@ -26,7 +34,9 @@ const FooterLinks: React.FC<FooterLinksProps> = ({
         </div>
 
         <div className="support">
-          <h3 className="font-bold text-xl xl:text-2xl mb-5">Support Zone</h3>
+          <h3 className="font-bold text-xl xl:text-2xl mb-5">
+            {t("supportZone")}
+          </h3>
           <ul className="space-y-3">
             {supportLinks.map((support, i) => (
               <li key={i}>
@@ -35,7 +45,7 @@ const FooterLinks: React.FC<FooterLinksProps> = ({
                   className="text-sm hover:underline"
                   target="_blank"
                 >
-                  {support.label}
+                  {linkLabel(support)}
                 </Link>
               </li>
             ))}
@@ -43,16 +53,18 @@ const FooterLinks: React.FC<FooterLinksProps> = ({
         </div>
 
         <div className="info">
-          <h3 className="font-bold text-xl xl:text-2xl mb-5">Company Info</h3>
+          <h3 className="font-bold text-xl xl:text-2xl mb-5">
+            {t("companyInfo")}
+          </h3>
           <ul className="space-y-3">
             {infoLinks.map((info, i) => (
               <li key={i}>
                 <Link
                   href={info.link}
-                  className="text-sm  hover:underline"
+                  className="text-sm hover:underline"
                   target="_blank"
                 >
-                  {info.label}
+                  {linkLabel(info)}
                 </Link>
               </li>
             ))}
@@ -61,17 +73,17 @@ const FooterLinks: React.FC<FooterLinksProps> = ({
 
         <div className="service">
           <h3 className="font-bold text-xl xl:text-2xl mb-5">
-            Explore Services
+            {t("exploreServices")}
           </h3>
           <ul className="space-y-3">
             {serviceLinks.map((service, i) => (
               <li key={i}>
                 <Link
                   href={service.link}
-                  className="text-sm  hover:underline"
+                  className="text-sm hover:underline"
                   target="_blank"
                 >
-                  {service.label}
+                  {linkLabel(service)}
                 </Link>
               </li>
             ))}

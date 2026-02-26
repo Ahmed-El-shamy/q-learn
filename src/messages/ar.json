@@ -1,4 +1,65 @@
 {
+  "hero": {
+    "viewAllCourses": "عرض جميع الدورات"
+  },
+  "statistics": {
+    "onlineCourses": "دورات أونلاين",
+    "studentEnrolled": "طلاب مسجلين",
+    "countriesStudent": "دول",
+    "positiveFeedback": "تقييمات إيجابية"
+  },
+  "categoryCard": {
+    "explore": "استكشف",
+    "course": "دورة",
+    "courses": "دورات"
+  },
+  "topCategories": {
+    "title": "أهم التصنيفات",
+    "description": "تصفح حسب الموضوع واختر الدورات المناسبة لك. استكشف أكثر التصنيفات شيوعاً وابدأ التعلم اليوم."
+  },
+  "trendedCourses": {
+    "title": "الدورات الأكثر رواجاً",
+    "description": "اكتشف أشهر دوراتنا. ابدأ بما يتعلمه الآخرون وتميز."
+  },
+  "testimonials": {
+    "title": "ماذا يقول طلابنا",
+    "description": "تقييمات حقيقية من متعلمين أتموا دوراتنا. شاهد كيف نساعد الناس في تحقيق أهدافهم.",
+    "defaultName": "طالب",
+    "defaultJob": "متعلم",
+    "testimonialFrom": "تقييم من {name}",
+    "verified": "موثق",
+    "educationExperience": "تجربة على منصة التعليم",
+    "ratingLabel": "التقييم 5 من 5"
+  },
+  "teachers": {
+    "title": "مدربون خبراء",
+    "description": "تعلم من محترفين في المجال ومعلمين ذوي خبرة ملتزمين بنجاحك.",
+    "instructor": "المدرب",
+    "ratings": "التقييمات",
+    "courses": "الدورات",
+    "students": "الطلاب"
+  },
+  "about": {
+    "badge": "عن معهدنا",
+    "expertLedTitle": "دورات يقدمها خبراء",
+    "expertLedDesc": "تعلم من مدربين بخبرة حقيقية في المجال.",
+    "flexibleTitle": "تعلم مرن",
+    "flexibleDesc": "ادرس في أي وقت مع دروس متوافقة مع الجوال.",
+    "practicalTitle": "نتائج عملية",
+    "practicalDesc": "مشاريع تطبيقية مصممة لمهارات حقيقية.",
+    "partnersTitle": "شركاء موثوقون",
+    "partnersDesc": "شراكات تدعم رحلتك.",
+    "cardTitle": "تعلم بذكاء، نمُ أسرع.",
+    "cardDesc": "اكتسب المهارات بمسارات تعلم منظمة وتطبيق حقيقي ودعم."
+  },
+  "partners": {
+    "heading": "شركاؤنا",
+    "description": "موثوق من منظمات وعلامات رائدة.",
+    "carouselLabel": "سلايدر شعارات الشركاء",
+    "partnerLogoAlt": "شعار {name}",
+    "openPartner": "فتح صفحة الشريك: {name}",
+    "partnerFallback": "شريك"
+  },
   "SEO": {
     "defaultTitle": "كيوتل- أفضل موقع تعليمي",
     "defaultDescription": "اكتشف كورساتنا المميزة بأفضل الأسعار. تسوق الآن واحصل على تجربة فريدة.",
@@ -27,7 +88,37 @@
     "rewardBoxAlt": "صندوق المكافآت",
     "title": "احصل على نقاط المكافآت",
     "description": "اشترِ دورة، أكمل دورة، زد نشاطك والعديد من الطرق الأخرى للفوز بنقاط النادي. ستتمكن من استخدام نقاط النادي للحصول على جوائز ودورات مجانية. ابدأ في استخدام النظام الآن وجمع النقاط!",
-    "view-all-courses": "عرض جميع الدورات"
+    "view-all-courses": "عرض جميع الدورات",
+    "supportZone": "منطقة الدعم",
+    "companyInfo": "معلومات الشركة",
+    "exploreServices": "استكشف الخدمات",
+    "linkUnlockPotential": "أطلق قدراتك",
+    "linkPrivacyPolicy": "سياسة الخصوصية والكوكيز",
+    "linkSitemap": "خريطة الموقع",
+    "linkFeaturedCourses": "دورات مميزة",
+    "linkJoinUs": "انضم إلينا",
+    "linkLearnWithQutell": "تعلّم مع كيوتل",
+    "linkTeachOnQutell": "درّب على كيوتل",
+    "linkGetTheApp": "حمّل التطبيق",
+    "linkAboutUs": "من نحن",
+    "linkContactUs": "اتصل بنا",
+    "linkCareers": "الوظائف",
+    "linkBlog": "المدونة",
+    "linkHelpSupport": "المساعدة والدعم",
+    "linkTerms": "الشروط",
+    "linkCertificateVerification": "التحقق من الشهادات",
+    "linkFreeCourse": "دورة مجانية",
+    "callUs24_7": "اتصل بنا 24/7",
+    "followUs": "تابعنا",
+    "paymentMethod": "طرق الدفع",
+    "socialIconsAlt": "روابط التواصل الاجتماعي",
+    "paymentMethodsAlt": "طرق الدفع",
+    "copyrightDefault": "© 2024 كيوتل. جميع الحقوق محفوظة | صنع بواسطة كيوتل",
+    "newsletterTitle": "اشترك ليصلك آخر أخبارنا!",
+    "newsletterDescription": "احصل على آخر الدورات والنصائح والعروض.",
+    "newsletterEmailLabel": "البريد الإلكتروني",
+    "newsletterPlaceholder": "you@example.com",
+    "newsletterSubmit": "اشترك"
   },
   "NotFound": {
     "Oops": "عفواً! الصفحة التي تبحث عنها غير موجودة.",
@@ -196,6 +287,7 @@
   },
   "common": {
     "loading": "جاري التحميل...",
+    "login": "تسجيل الدخول",
     "no-data": "لا توجد بيانات متاحة",
     "show-password": "إظهار كلمة المرور",
     "hide-password": "إخفاء كلمة المرور",
@@ -248,10 +340,12 @@
     "students": "طالب",
     "currency": "ر.س",
     "alt": "صورة الكورس",
+    "loginRequiredForWishlist": "لازم تسجل دخول عشان تستخدم المفضلة",
     "wishlistAdded": "تمت الإضافة للمفضلة",
     "wishlistRemoved": "تمت الإزالة من المفضلة",
     "wishlistFailed": "حصلت مشكلة أثناء تحديث المفضلة",
-    "addToWishlist": "إضافة للمفضلة"
+    "addToWishlist": "إضافة للمفضلة",
+    "removeFromWishlist": "إزالة من المفضلة"
   },
   "filters": {
     "category": "الأقسام",
@@ -275,6 +369,8 @@
   },
   "blogs": {
     "hero": "استكشف مقالاتنا",
+    "title": "مقالات وأخبار",
+    "description": "ابقَ على اطلاع بنصائح ورؤى وأخبار من مدونتنا. مقالات جديدة تنشر بانتظام.",
     "read-more": "اقرأ المزيد",
     "minutes-to-read": "{minutes} دقيقة للقراءة"
   },
@@ -288,6 +384,9 @@
   "cart": {
     "courseName": "اسم الكورس",
     "price": "0",
+    "addToCart": "إضافة إلى السلة",
+    "removeFromCart": "إزالة من السلة",
+    "buyNow": "اشتري الآن",
     "there is no courses in cart": "لا توجد دورات في السلة",
     "currency": "ر.س",
     "subtotal": "المجموع الفرعي",

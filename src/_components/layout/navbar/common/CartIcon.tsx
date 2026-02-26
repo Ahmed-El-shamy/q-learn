@@ -8,7 +8,7 @@ import { useCart } from "@/store/CartProvider";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
-import { useRouter } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 
 const CartIcon = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -104,7 +104,13 @@ const CartIcon = () => {
                     </div>
 
                     <div className="flex flex-col text-[#1f2b40] text-sm">
-                      <p className="font-semibold line-clamp-2">{item.title}</p>
+                      <Link
+                        href={`/courses/${item.item_id}`}
+                        className="font-semibold line-clamp-2 hover:text-[#660afb]"
+                        onClick={() => setCartOpen(false)}
+                      >
+                        {item.title}
+                      </Link>
                       <p className="text-[#737887]">
                         {item.course?.instructor?.user?.name ||
                           item.course?.category?.name ||

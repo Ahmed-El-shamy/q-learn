@@ -17,25 +17,25 @@ export default async function StatisticsSection() {
             bgColor="#425073"
             iconKey="book"
             number={d?.online_courses_count}
-            text="Online Courses"
+            textKey="onlineCourses"
           />
           <StatisticsCard
             bgColor="#17c7ff"
             iconKey="users"
             number={d?.student_enrolled_count}
-            text="Student Enrolled"
+            textKey="studentEnrolled"
           />
           <StatisticsCard
             bgColor="#feb74c"
             iconKey="earth"
             number={d?.countries_count}
-            text="Countries Student"
+            textKey="countriesStudent"
           />
           <StatisticsCard
             bgColor="#4b64ec"
             iconKey="heart"
             number={d?.positive_feedback_count}
-            text="Positive Feedback"
+            textKey="positiveFeedback"
           />
         </div>
       </Container>
