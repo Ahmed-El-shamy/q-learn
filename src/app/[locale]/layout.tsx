@@ -28,14 +28,15 @@ export async function generateMetadata({
 
   return buildMetadata(
     {
-      title: settings?.seo_meta_title || messages?.PageMetaData?.contact?.title,
+      title: settings?.site_name || messages?.PageMetaData?.contact?.title,
       description:
         settings?.seo_meta_description ||
         messages?.PageMetaData?.contact?.description,
       keywords: settings?.seo_meta_keywords || messages?.SEO?.keywords,
-      image: settings?.og_image || "",
+      image: settings?.site_favicon || "",
       url: "https://q-learn.dev.qutell.net",
       type: "website",
+      favicon: settings.site_favicon
     },
     siteMeta
   );

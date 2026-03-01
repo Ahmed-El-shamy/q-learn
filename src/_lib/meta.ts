@@ -17,6 +17,7 @@ export type MetaInput = {
   noIndex?: boolean;
   twitterHandle?: string;
   additionalMeta?: { name: string; content: string }[];
+  favicon?: string;
 };
 export type metaTypesTypes =
   | "website"
@@ -162,8 +163,8 @@ export function buildMetadata(
       ? { index: false, follow: true }
       : { index: true, follow: true },
     icons: {
-      icon: siteMeta?.favicon || "",
-      shortcut: siteMeta?.favicon || "",
+      icon: input?.favicon || siteMeta?.favicon || "",
+      shortcut: input?.favicon || siteMeta?.favicon || "",
       apple: "/apple-touch-icon.png",
     },
      metadataBase: new URL(siteMeta?.siteUrl || siteUrl),
