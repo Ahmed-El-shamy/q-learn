@@ -42,7 +42,7 @@ export default async function MainLayout({
         x={settings?.social_twitter}
         websiteTitle={websiteTitle}
         slogan={slogan}
-        copyRight={settings?.copyright_text}
+        copyRight={isAr ? (settings?.copyright_text_ar ?? settings?.copyright_text) : settings?.copyright_text}
       />
       <LanguageSwitcher />
       <ScrollToTop />

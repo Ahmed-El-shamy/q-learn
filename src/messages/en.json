@@ -118,7 +118,11 @@
     "newsletterDescription": "Get updates on new courses, tips, and offers.",
     "newsletterEmailLabel": "Email address",
     "newsletterPlaceholder": "you@example.com",
-    "newsletterSubmit": "Subscribe"
+    "newsletterSubmit": "Subscribe",
+    "newsletterValidationRequired": "Email is required",
+    "newsletterValidationInvalidEmail": "Please enter a valid email",
+    "newsletterToastSuccess": "Subscribed successfully",
+    "newsletterToastError": "Failed to subscribe. Please try again."
   },
   "contact": {
     "heroTitle": "We're here with you every step of the way",
@@ -276,6 +280,10 @@
     "tryAgain": "Try again"
   },
   "auth": {
+    "layout": {
+      "welcomeTitle": "Welcome to Qutell Learning Management System",
+      "loginImageAlt": "Login image"
+    },
     "signup": "Sign Up",
     "choose role": "Choose Role",
     "register": {
@@ -291,6 +299,37 @@
       "rememberMe": "Remember Me",
       "forgetPassword": "Forget Password?",
       "register": "Register"
+    },
+    "forgetPassword": {
+      "pageTitle": "Forget Password",
+      "title": "Please enter your email to reset your password",
+      "emailPlaceholder": "Enter Your Email",
+      "sendOtp": "Send OTP",
+      "otpSent": "Verification code sent to your email"
+    },
+    "otp": {
+      "pageTitle": "Verify OTP",
+      "title": "Please enter the verification code to continue",
+      "enterOtp": "Enter OTP",
+      "sentCodeToEmail": "We sent a 6-digit code to your email",
+      "verifyOtp": "Verify OTP",
+      "didntReceiveCode": "Didn't receive code?",
+      "resend": "Resend",
+      "pleaseEnterAllDigits": "Please enter all 6 digits of the OTP",
+      "verified": "Code verified successfully",
+      "resendSuccess": "New code sent to your email",
+      "emailRequired": "Email is required. Please start from forget password.",
+      "backToForgetPassword": "Back to Forget Password"
+    },
+    "resetPassword": {
+      "pageTitle": "Reset Password",
+      "title": "Please create a new password to continue",
+      "newPasswordPlaceholder": "Enter Your New Password",
+      "confirmPasswordPlaceholder": "Enter Your Confirm New Password",
+      "button": "Reset Password",
+      "success": "Password reset successfully. You can now sign in.",
+      "emailRequired": "Invalid link. Please request a new password reset.",
+      "backToForgetPassword": "Back to Forget Password"
     },
     "roles": {
       "instructor": "Instructor",
@@ -481,6 +520,64 @@
       "apply": "Apply",
       "coupon applied successfully": "Coupon applied successfully",
       "invalid coupon": "Invalid coupon"
+    }
+  },
+  "staticPages": {
+    "unlock-your-potential": {
+      "title": "Unlock Your Potential",
+      "description": "Discover your strengths and grow with our courses and resources. We help you build the skills and confidence you need to achieve your goals."
+    },
+    "privacy-policy": {
+      "title": "Privacy Policy",
+      "description": "We respect your privacy and are committed to protecting your personal data. This policy explains how we collect, use, and safeguard your information when you use our platform."
+    },
+    "sitemap": {
+      "title": "Sitemap",
+      "description": "Browse our sitemap to find courses, categories, and all sections of our learning platform. We organize content to help you navigate easily."
+    },
+    "featured-courses": {
+      "title": "Featured Courses",
+      "description": "Explore our handpicked featured courses. These are some of the most popular and highly rated programs to help you learn and grow."
+    },
+    "join-us": {
+      "title": "Join Us",
+      "description": "Become part of our learning community. Create an account to enroll in courses, track your progress, and connect with instructors and fellow learners."
+    },
+    "learn": {
+      "title": "Learn with Qutell",
+      "description": "Access a wide range of courses designed for every level. Learn at your own pace with expert instructors and practical projects."
+    },
+    "teach": {
+      "title": "Teach on Qutell",
+      "description": "Share your expertise with learners worldwide. Create and publish courses, set your schedule, and grow your audience on our platform."
+    },
+    "git-the-app": {
+      "title": "Get the App",
+      "description": "Download our mobile app to learn on the go. Access your courses, watch lessons, and track your progress from your phone or tablet."
+    },
+    "careers": {
+      "title": "Careers",
+      "description": "Join our team and help shape the future of online learning. We are always looking for talented people in teaching, design, and technology."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Read tips, updates, and stories about learning, teaching, and career growth. Stay informed with our latest articles and resources."
+    },
+    "help": {
+      "title": "Help and Support",
+      "description": "Find answers to common questions, how-to guides, and contact our support team. We are here to help you get the most out of our platform."
+    },
+    "terms": {
+      "title": "Terms",
+      "description": "Please read our terms of use carefully. By using our platform you agree to these terms and our community guidelines."
+    },
+    "certificate": {
+      "title": "Certificate Verification",
+      "description": "Use this page to verify the authenticity of certificates issued by Qutell. Enter the certificate ID to confirm its validity."
+    },
+    "free-course": {
+      "title": "Free Course",
+      "description": "Start learning with our free course. Get a taste of our platform and content at no cost. Enroll now and begin your learning journey."
     }
   }
 }

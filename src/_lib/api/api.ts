@@ -74,6 +74,10 @@ export class Api {
     auth: {
       login: "/site/login",
       register: "/site/register",
+      sendOtp: "/send_otp",
+      checkOtp: "/check_otp",
+      resendOtp: "/resend_otp",
+      resetPassword: "/reset_password",
     },
     user: {
       me: "me",

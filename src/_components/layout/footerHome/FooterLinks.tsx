@@ -43,7 +43,6 @@ const FooterLinks: React.FC<FooterLinksProps> = ({
                 <Link
                   href={support.link}
                   className="text-sm hover:underline"
-                  target="_blank"
                 >
                   {linkLabel(support)}
                 </Link>
@@ -62,7 +61,6 @@ const FooterLinks: React.FC<FooterLinksProps> = ({
                 <Link
                   href={info.link}
                   className="text-sm hover:underline"
-                  target="_blank"
                 >
                   {linkLabel(info)}
                 </Link>
@@ -81,7 +79,6 @@ const FooterLinks: React.FC<FooterLinksProps> = ({
                 <Link
                   href={service.link}
                   className="text-sm hover:underline"
-                  target="_blank"
                 >
                   {linkLabel(service)}
                 </Link>

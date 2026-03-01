@@ -8,12 +8,12 @@ interface CopyRightsProps {
   copyRight?: string;
 }
 
-const CopyRights: React.FC<CopyRightsProps> = ({ copyRight = "" }) => {
+const CopyRights: React.FC<CopyRightsProps> = ({ copyRight }) => {
   const t = useTranslations("footer");
   return (
     <Container>
       <p className="text-center mt-12 text-[16px] md:text-xl">
-        {copyRight || t("copyrightDefault")}
+        {copyRight?.trim() || t("copyrightDefault")}
       </p>
     </Container>
   );

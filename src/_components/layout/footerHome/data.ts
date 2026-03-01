@@ -1,28 +1,28 @@
 import { FooterLink } from "./Footer.types";
 
 export const supportLinks: FooterLink[] = [
-  { labelKey: "linkUnlockPotential", link: "/unlock-your-potential" },
-  { labelKey: "linkPrivacyPolicy", link: "/privacy-policy" },
-  { labelKey: "linkSitemap", link: "/sitemap" },
-  { labelKey: "linkFeaturedCourses", link: "/featured-courses" },
-  { labelKey: "linkJoinUs", link: "/join-us" },
+  { labelKey: "linkUnlockPotential", link: "/static/unlock-your-potential" },
+  { labelKey: "linkPrivacyPolicy", link: "/static/privacy-policy" },
+  { labelKey: "linkSitemap", link: "/static/sitemap" },
+  { labelKey: "linkFeaturedCourses", link: "/static/featured-courses" },
+  { labelKey: "linkJoinUs", link: "/static/join-us" },
 ];
 
 export const infoLinks: FooterLink[] = [
-  { labelKey: "linkLearnWithQutell", link: "/learn" },
-  { labelKey: "linkTeachOnQutell", link: "/teach" },
-  { labelKey: "linkGetTheApp", link: "/git-the-app" },
+  { labelKey: "linkLearnWithQutell", link: "/static/learn" },
+  { labelKey: "linkTeachOnQutell", link: "/static/teach" },
+  { labelKey: "linkGetTheApp", link: "/static/git-the-app" },
   { labelKey: "linkAboutUs", link: "/about-us" },
   { labelKey: "linkContactUs", link: "/contact-us" },
 ];
 
 export const serviceLinks: FooterLink[] = [
-  { labelKey: "linkCareers", link: "/careers" },
-  { labelKey: "linkBlog", link: "/blog" },
-  { labelKey: "linkHelpSupport", link: "/help" },
-  { labelKey: "linkTerms", link: "/terms" },
-  { labelKey: "linkCertificateVerification", link: "/certificate" },
-  { labelKey: "linkFreeCourse", link: "/free-course" },
+  { labelKey: "linkCareers", link: "/static/careers" },
+  { labelKey: "linkBlog", link: "/static/blog" },
+  { labelKey: "linkHelpSupport", link: "/static/help" },
+  { labelKey: "linkTerms", link: "/static/terms" },
+  { labelKey: "linkCertificateVerification", link: "/static/certificate" },
+  { labelKey: "linkFreeCourse", link: "/static/free-course" },
 ];
 
 export const socialMediaLinks: FooterLink[] = [

@@ -1,4 +1,18 @@
+import { getTranslations } from "next-intl/server";
+import { Metadata } from "next";
 import ForgetPasswordForm from "./_components/ForgetPasswordForm";
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "auth.forgetPassword" });
+  return {
+    title: t("pageTitle"),
+  };
+}
 
 const ForgetPasswordPage = () => {
   return (

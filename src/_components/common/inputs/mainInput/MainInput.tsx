@@ -112,9 +112,11 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder={
-              placeholder && required
-                ? `${t(placeholder) || ""} *`
-                : t(placeholder || "")
+              placeholder != null
+                ? required
+                  ? `${t(placeholder) || ""} *`
+                  : t(placeholder)
+                : undefined
             }
             required={required}
             disabled={disabled}

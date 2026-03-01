@@ -1,6 +1,7 @@
 "use client";
 import MainBtn from "@/_components/common/buttons/MainBtn";
 import Container from "@/_components/common/container/Container";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
 const RewardWidget = () => {
@@ -33,7 +34,9 @@ const RewardWidget = () => {
             <p className="my-8 text-lg text-[#a4abbd]">
               {t("description")}
             </p>
-            <MainBtn>{t("view-all-courses")}</MainBtn>
+            <MainBtn>
+              <Link href="/courses">{t("view-all-courses")}</Link>
+            </MainBtn>
           </div>
         </div>
       </div>

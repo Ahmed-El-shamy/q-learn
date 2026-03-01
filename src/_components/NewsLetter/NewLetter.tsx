@@ -30,12 +30,12 @@ const NewsLetter = () => {
 
     // client validation
     if (!normalized) {
-      setLocalError("Email is required");
+      setLocalError(t("newsletterValidationRequired"));
       inputRef.current?.focus();
       return;
     }
     if (!isValidEmail(normalized)) {
-      setLocalError("Please enter a valid email");
+      setLocalError(t("newsletterValidationInvalidEmail"));
       inputRef.current?.focus();
       return;
     }
@@ -44,14 +44,13 @@ const NewsLetter = () => {
 
     try {
       const data = await submitMutation.mutateAsync(normalized);
-      toast.success(data?.message || "Subscribed successfully");
+      toast.success(data?.message || t("newsletterToastSuccess"));
       setEmail(""); // reset
     } catch (err: any) {
-      // حاول تقرأ رسالة من الباك لو موجودة
       const msg =
         err?.response?.data?.message ||
         err?.message ||
-        "Failed to subscribe. Please try again.";
+        t("newsletterToastError");
       toast.error(msg);
     }
   };
@@ -85,7 +84,7 @@ const NewsLetter = () => {
           onBlur={() => {
             if (!email.trim()) return;
             if (!isValidEmail(email.trim()))
-              setLocalError("Please enter a valid email");
+              setLocalError(t("newsletterValidationInvalidEmail"));
             else setLocalError(null);
           }}
           required

@@ -8,6 +8,8 @@ import "@/styles/globals.css";
 import { Toaster } from "sonner";
 import { Metadata } from "next";
 import { getSettings } from "@/_lib/server/getSettings";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
+import { settingsOptions } from "@/app/[locale]/auth/_queries/settingsOptions";
 
 type Props = {
   children: React.ReactNode;
@@ -46,11 +48,19 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = (await import(`@/messages/${locale}.json`)).default;
   if (!hasLocale(routing.locales, locale)) notFound();
 
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(settingsOptions());
+  const dehydratedState = dehydrate(queryClient);
+
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body>
         <AppSessionProvider>
-          <LocaleProviders locale={locale} messages={messages}>
+          <LocaleProviders
+            locale={locale}
+            messages={messages}
+            dehydratedState={dehydratedState}
+          >
             <main>{children}</main>
             <Toaster position="top-center" />
           </LocaleProviders>

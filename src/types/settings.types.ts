@@ -13,6 +13,7 @@ export interface Settings extends ContactSetting {
     site_logo: string,
     site_favicon: string,
     copyright_text: string,
+    copyright_text_ar?: string,
     hot_line: string,
     whats_numper: string,
     social_facebook: string,
