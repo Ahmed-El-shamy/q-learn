@@ -10,8 +10,11 @@ import MainBtn from "@/_components/common/buttons/MainBtn";
 import StudentsAlsoBought from "./StudentsAlsoBought";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-import CourseDetailsQuery, { courseReviewsQuery, courseQAQuery } from "../_data/CourseDetailsQuery";
 import { useTranslations } from "next-intl";
+import CourseDetailsQuery, {
+  courseReviewsQuery,
+  courseQAQuery,
+} from "../_data/CourseDetailsQuery";
 
 const panels = [
   {
@@ -32,15 +35,18 @@ const panels = [
 ] as const;
 
 const CoursePanels = () => {
-  const [currentPanel, setCurrentPanel] = useState<(typeof panels)[number]["title"]>(
-    panels[0].title,
-  );
+  const t = useTranslations("courses");
+  const [currentPanel, setCurrentPanel] = useState<
+    (typeof panels)[number]["title"]
+  >(panels[0].title);
   const panelsRef = useRef<HTMLDivElement>(null);
   const queryClient = useQueryClient();
   const params: { id: string } = useParams();
-  const query = useQuery({ ...CourseDetailsQuery(params.id), refetchOnMount: false });
+  const query = useQuery({
+    ...CourseDetailsQuery(params.id),
+    refetchOnMount: false,
+  });
   const course = query.data!;
-  const t = useTranslations("courses.panels");
 
   // prefetching the reviews for later consumption when the reviews panel is opened.
   queryClient.prefetchQuery({
@@ -81,7 +87,9 @@ const CoursePanels = () => {
             <MainBtn
               variant={currentPanel === panel.title ? "main" : "secondary"}
               containerClassName="min-w-fit"
-              className={currentPanel === panel.title ? "pointer-events-none" : ""}
+              className={
+                currentPanel === panel.title ? "pointer-events-none" : ""
+              }
               onClick={() => changeActivePanel(panel.title)}
               key={panel.title}
             >
