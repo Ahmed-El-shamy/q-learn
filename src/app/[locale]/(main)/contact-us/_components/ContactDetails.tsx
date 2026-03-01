@@ -104,7 +104,7 @@ const ContactDetails = () => {
               dangerouslySetInnerHTML={{ __html: queryResult?.data?.iframe }}
             />
 
-            <div className="absolute inset-0 bg-black/50 pointer-events-none rounded-4xl" />
+            <div className="absolute inset-0 bg-black/10 pointer-events-none rounded-4xl" />
           </div>
         </section>
       )}
