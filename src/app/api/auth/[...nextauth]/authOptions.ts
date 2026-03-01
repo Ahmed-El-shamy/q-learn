@@ -64,6 +64,8 @@ export const authOptions: NextAuthOptions = {
         token.token = user.token;
         token.email = user.email;
         token.id = user.id;
+        token.name = user.name;
+        token.type = user.type;
       }
       return token;
     },
@@ -74,7 +76,7 @@ export const authOptions: NextAuthOptions = {
           id: token.id,
           name: token.name as string,
           token: token.token,
-          type: token.account_type as string,
+          type: token.type
         };
       }
       return session;

@@ -10,11 +10,6 @@ import MainSelect from "@/_components/common/inputs/main-select-input/MainSelect
 import DateInput from "@/_components/common/inputs/date-input/DateInput";
 import { useTranslations } from "next-intl";
 
-const roleOptions = [
-  { id: "instructor", name: "Instructor" },
-  { id: "user", name: "User" },
-];
-
 const RegisterForm = () => {
   const {
     methods: {
@@ -27,6 +22,11 @@ const RegisterForm = () => {
   } = useRegister();
 
   const t = useTranslations();
+
+  const roleOptions = [
+    { id: "instructor", name: t("auth.register.userType.instructor") },
+    { id: "user", name: t("auth.register.userType.user") },
+  ];
 
   return (
     <>
@@ -121,13 +121,13 @@ const RegisterForm = () => {
           containerClassName="mt-4"
           size={"large"}
         >
-          {t("register")}
+          {t("auth.register.button")}
         </MainBtn>
 
         <p className="text-center">
           {t("auth.register.already-have-an-account")}{" "}
           <Link href={`/auth/login`} className="text-[#77c8fe]">
-            Login
+            {t("auth.login.login")}
           </Link>
         </p>
       </form>

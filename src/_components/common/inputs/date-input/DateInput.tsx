@@ -2,9 +2,12 @@ import { Activity, useCallback, useEffect, useMemo, useRef, useState } from "rea
 import { twMerge } from "tailwind-merge";
 import { Asterisk, Calendar } from "lucide-react";
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
+import { arSA, enGB } from "react-day-picker/locale";
 import clsx from "clsx";
 import "react-day-picker/style.css";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+
+const localeMap = { ar: arSA, en: enGB } as const;
 
 const classNames = getDefaultClassNames();
 const tenYears = new Date((new Date().getFullYear() + 10).toString());
@@ -39,6 +42,9 @@ const DateInput = ({
     hint,
 }: Props) => {
     const t = useTranslations();
+    const locale = useLocale() as "ar" | "en";
+    const dayPickerLocale = localeMap[locale] ?? enGB;
+    const isRtl = locale === "ar";
 
     const [isOpened, setIsOpened] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
@@ -107,7 +113,7 @@ const DateInput = ({
                             }))}
                         >
                             {
-                                currentValue ? typeof currentValue === "string" ? currentValue : currentValue.toLocaleDateString("en-UK") : t(placeholder || "").concat(required ? "*" : "")
+                                currentValue ? typeof currentValue === "string" ? currentValue : currentValue.toLocaleDateString(locale === "ar" ? "ar-EG" : "en-GB") : t(placeholder || "").concat(required ? "*" : "")
                             }
                         </p>
                     </div>
@@ -143,7 +149,9 @@ const DateInput = ({
                 mode={isOpened ? "visible" : "hidden"}
             >
                 <div className="absolute bg-white rounded-md z-50 border top-[65px] start-0 end-0 p-2 w-fit">
-                    <DayPicker 
+                    <DayPicker
+                        locale={dayPickerLocale}
+                        dir={isRtl ? "rtl" : "ltr"}
                         selected={selected}
                         mode="single"
                         onSelect={handleChange}

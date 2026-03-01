@@ -205,3 +205,10 @@ body {
 .animate-progress {
   animation: progress 3s infinite ease-in-out;
 }
+
+/* React Day Picker: rotate nav arrows when dir is RTL so prev/next are correct */
+[dir="rtl"] .rdp-button_previous,
+[dir="rtl"] .rdp-button_next {
+  transform: rotate(180deg);
+  transform-origin: 50%;
+}

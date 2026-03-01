@@ -30,7 +30,7 @@ const useLogin = () => {
       if (response?.ok) {
         const redirectUrl = searchParams.get("redirect_url");
         const session = await getSession();
-        console.log("session is", session);
+        console.log(session);
         const role = (session?.user as any)?.type;
         if (redirectUrl) {
           router.push(redirectUrl);

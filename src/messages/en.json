@@ -289,7 +289,11 @@
     "register": {
       "title": "Create Account",
       "already-have-an-account": "Already have an account?",
-      "button": "Register"
+      "button": "Register",
+      "userType": {
+        "instructor": "Instructor",
+        "user": "User"
+      }
     },
     "login": {
       "login": "Login",

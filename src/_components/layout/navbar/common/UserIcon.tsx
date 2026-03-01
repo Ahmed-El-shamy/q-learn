@@ -44,7 +44,7 @@ const UserIcon = () => {
         isOpen && (
             <div
                 className={`
-                    absolute z-50 start-1/2 -translate-x-1/2 w-fit flex flex-col bg-white shadow-md shadow-gray-300 border border-gray-200 top-[110%]
+                    absolute z-50 left-1/2 -translate-x-1/2 w-fit flex flex-col bg-white shadow-md shadow-gray-300 border border-gray-200 top-[110%]
                     *:px-8 *:py-2 *:hover:bg-gray-100 *:duration-100 *:cursor-pointer 
                     ${
                     isOpen

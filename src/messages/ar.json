@@ -283,7 +283,11 @@
     "register": {
       "title": "إنشاء حساب",
       "already-have-an-account": "هل لديك حساب بالفعل؟",
-      "button": "تسجيل"
+      "button": "تسجيل",
+      "userType": {
+        "instructor": "مدرب",
+        "user": "مستخدم"
+      }
     },
     "login": {
       "login": "تسجيل الدخول",
