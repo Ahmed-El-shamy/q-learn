@@ -4,6 +4,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import useSubmitContactForm from "../queries/useSubmitContactForm";
 import { ContactPayload, ContactSchema } from "../_schema/ContactSchema";
 
@@ -20,6 +21,7 @@ function normalizeFieldErrors(err: unknown): ApiFieldErrors | null {
 }
 
 const useContact = () => {
+  const t = useTranslations("contact");
   const submitMutation = useSubmitContactForm();
 
   const methods = useForm<ContactPayload>({
@@ -42,7 +44,7 @@ const useContact = () => {
     try {
       await submitMutation.mutateAsync(payload);
 
-      toast.success("Message sent successfully");
+      toast.success(t("toastSuccess"));
       methods.reset();
     } catch (err) {
       const fieldErrors = normalizeFieldErrors(err);
@@ -59,11 +61,11 @@ const useContact = () => {
           }
         });
 
-        toast.error("Please fix the highlighted fields");
+        toast.error(t("toastErrorFields"));
         return;
       }
 
-      toast.error("Failed to send message. Please try again.");
+      toast.error(t("toastErrorGeneric"));
     }
   };
 

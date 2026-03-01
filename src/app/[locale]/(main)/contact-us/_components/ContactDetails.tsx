@@ -28,7 +28,7 @@ import { MapPin, PhoneCall, Mail } from "lucide-react";
  */
 const ContactDetails = () => {
   const queryResult = useQuery(contactSettingsOptions());
-  const t = useTranslations();
+  const t = useTranslations("contact");
   return (
     <>
       <section className="containerr mt-20 relative z-1">

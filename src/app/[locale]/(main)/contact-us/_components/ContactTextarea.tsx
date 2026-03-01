@@ -1,4 +1,5 @@
 import { InputHTMLAttributes } from "react";
+import { useTranslations } from "next-intl";
 
 interface ContactTextareaProps
   extends InputHTMLAttributes<HTMLTextAreaElement> {
@@ -7,6 +8,7 @@ interface ContactTextareaProps
 }
 
 const ContactTextarea = ({ label, error, ...rest }: ContactTextareaProps) => {
+  const t = useTranslations("contact");
   return (
     <div className="relative w-full">
       <textarea
@@ -18,7 +20,7 @@ const ContactTextarea = ({ label, error, ...rest }: ContactTextareaProps) => {
 
       <label
         className="
-          absolute px-2 left-6 top-4 text-lg text-[#373737] bg-[#faf5ff]
+          absolute px-2 start-6 top-4 text-lg text-[#373737] bg-[#faf5ff]
           transition-all duration-500
 
           peer-focus:-top-2
@@ -32,6 +34,7 @@ const ContactTextarea = ({ label, error, ...rest }: ContactTextareaProps) => {
       >
         {label}
       </label>
+      {error && <p className="mt-1 text-sm text-red-500 text-start">{t(error)}</p>}
     </div>
   );
 };

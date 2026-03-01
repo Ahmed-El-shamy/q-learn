@@ -120,6 +120,27 @@
     "newsletterPlaceholder": "you@example.com",
     "newsletterSubmit": "اشترك"
   },
+  "contact": {
+    "heroTitle": "نحن معك في كل خطوة على الطريق",
+    "formTitle": "أرسل لنا رسالة",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "address": "العنوان",
+    "labelName": "الاسم",
+    "labelEmail": "البريد الإلكتروني",
+    "labelSubject": "الموضوع",
+    "labelMessage": "الرسالة",
+    "sendMessage": "إرسال الرسالة",
+    "sending": "جاري الإرسال...",
+    "toastSuccess": "تم إرسال رسالتك بنجاح. سنقوم بالرد عليك في أقرب وقت",
+    "toastErrorFields": "يرجى تصحيح الحقول المميزة",
+    "toastErrorGeneric": "عذراً، فشل إرسال الرسالة. يرجى المحاولة مرة أخرى لاحقاً.",
+    "validation": {
+      "required": "هذا الحقل مطلوب",
+      "name": "يرجى إدخال اسم صحيح (حروف ومسافات فقط)",
+      "email": "يرجى إدخال بريد إلكتروني صحيح"
+    }
+  },
   "NotFound": {
     "Oops": "عفواً! الصفحة التي تبحث عنها غير موجودة.",
     "back": "العودة للصفحة الرئيسية",
@@ -175,6 +196,7 @@
     "to-ask-a-question": "لسؤال",
     "instructor": "المدرب",
     "share": "مشاركة",
+    "linkCopiedSuccess": "تم نسخ الرابط بنجاح",
     "apply": "تطبيق",
     "enter-your-coupon": "أدخل كود الخصم",
     "be-the-first-reviewer": "كن أول من يكتب مراجعة",

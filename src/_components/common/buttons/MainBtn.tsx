@@ -31,7 +31,7 @@ const buttonVariants = cva(
         large: "py-3 px-8 text-lg",
       },
       disabled: {
-        true: "pointer-events-none",
+        true: "pointer-events-none opacity-60 cursor-not-allowed",
         false: null,
       },
     },
@@ -54,7 +54,7 @@ const MainBtn = ({
   return (
     <button
       className={cn(buttonVariants({ variant, size, disabled, className: containerClassName }), {
-        "pointer-events-none": isLoading
+        "pointer-events-none cursor-not-allowed": isLoading
       })}
       disabled={disabled as boolean}
       {...props}

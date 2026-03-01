@@ -1,11 +1,28 @@
 "use client";
-import Image from "next/image";
-import { useCountUp } from "../_hooks/useCountUp";
 
-const Page = () => {
+import Image from "next/image";
+import { useCountUp } from "../../_hooks/useCountUp";
+import HtmlContent from "@/_components/common/HtmlContent";
+import type { SimpleSection } from "@/types/simpleSection.types";
+
+const defaultHeroTitle = "Learn More About Us";
+const defaultWhoWeAreTitle = "Improving lives through Learning. We are always Inspired by the world and people us. Celebrating e-Learning excellence in Personal.";
+const defaultSubheading = "We are here to meet your demand and teach the most beneficial way for you in Personal.";
+const defaultLibraryTitle = "Build your own library for your career and personal growth.";
+const defaultLibraryDesc = "Our goal is to learn the next generation of creative professionals for a future in any industry. We offer course in most demanded industries. Whether begin to your journey on our courses website or choose the flexibility of video learning our courses are designed to help you along your path.";
+
+type Props = {
+  data: SimpleSection | null;
+};
+
+export default function AboutUsPageContent({ data }: Props) {
   const teachers = useCountUp(100);
   const courses = useCountUp(200);
   const students = useCountUp(150);
+
+  const heroTitle = data?.title || defaultHeroTitle;
+  const whoWeAreTitle = data?.title || defaultWhoWeAreTitle;
+  const hasDescription = Boolean(data?.description?.trim());
 
   return (
     <>
@@ -15,7 +32,7 @@ const Page = () => {
              h-64 w-full text-center"
       >
         <h1 className="text-white text-2xl sm:text-4xl md:text-5xl font-bold translate-y-24">
-          Learn More About Us
+          {heroTitle}
         </h1>
       </section>
 
@@ -26,29 +43,42 @@ const Page = () => {
               Who we are
             </p>
             <h2 className="font-bold text-xl sm:text-2xl lg:text-3xl text-[#202e3b] mt-5 w-full lg:w-[90%] xl:w-[85%] leading-10">
-              Improving lives through Learning. We are always Inspired by the
-              world and people us. Celebrating e-Learning excellence in
-              Personal.
+              {whoWeAreTitle}
             </h2>
           </div>
           <div className="flex-1 p-10 px-5 lg:px-16 gradient-background text-white">
-            <h2 className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl w-full lg:w-[90%] xl:w-[85%] leading-12">
-              We are here to meet your demand and teach the most beneficial way
-              for you in Personal.
-            </h2>
+            {hasDescription ? (
+              <div className="prose prose-invert max-w-none prose-p:leading-relaxed [&_p]:text-xl [&_p]:font-bold [&_p]:md:text-3xl [&_p]:lg:text-4xl [&_p]:w-full [&_p]:lg:w-[90%] [&_p]:xl:w-[85%] [&_p]:leading-12">
+                <HtmlContent html={data!.description} />
+              </div>
+            ) : (
+              <h2 className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl w-full lg:w-[90%] xl:w-[85%] leading-12">
+                {defaultSubheading}
+              </h2>
+            )}
           </div>
         </div>
 
         <div className="flex gap-20 xl:mt-64">
           <div className="flex-1 hidden md:flex gap-10">
             <div>
-              <Image
-                src={"/images/about-us/1.jpg"}
-                alt=""
-                width={400}
-                height={100}
-                className=" h-[300px] xl:-translate-y-40 xl:translate-x-10 hidden lg:block"
-              />
+              {data?.image ? (
+                <Image
+                  src={data.image}
+                  alt={data.title || ""}
+                  width={400}
+                  height={300}
+                  className="h-[300px] xl:-translate-y-40 xl:translate-x-10 hidden lg:block object-cover"
+                />
+              ) : (
+                <Image
+                  src={"/images/about-us/1.jpg"}
+                  alt=""
+                  width={400}
+                  height={100}
+                  className=" h-[300px] xl:-translate-y-40 xl:translate-x-10 hidden lg:block"
+                />
+              )}
               <Image
                 src={"/images/about-us/2.jpg"}
                 alt=""
@@ -68,22 +98,18 @@ const Page = () => {
 
           <div className="flex-1">
             <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl xl:text-6xl text-[#202e3b] w-full md:w-[95%] lg:w-[90%] xl:w-[85%]">
-              Build your own library for your career and personal growth.
+              {defaultLibraryTitle}
             </h2>
             <p className="mt-5 text-[#373737] text-xl w-full md:w-[90%] xl:w-[80%]">
-              Our goal is to learn the next generation of creative professionals
-              for a future in any industry. We offer course in most demanded
-              industries. Whether begin to your journey on our courses website
-              or choose the flexibility of video learning our courses are
-              designed to help you along your path.
+              {defaultLibraryDesc}
             </p>
           </div>
         </div>
       </section>
 
       <section className="flex lg:h-screen">
-        <div className="space-y-10 py-28 px-4 sm:px-10 md:px-0 relative z-1 md:-mr-96 rtl:md:mr-0 rtl:md:-ml-96">
-          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-10 md:translate-x-40 rtl:md:-translate-x-40">
+        <div className="space-y-10 py-28 px-4 sm:px-10 md:px-0 relative z-1 md:-mr-96">
+          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-10 md:translate-x-40">
             <h2
               ref={teachers.ref}
               className="text-[#656a7b] text-4xl md:text-6xl font-bold"
@@ -102,7 +128,7 @@ const Page = () => {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-10 md:translate-x-32 rtl:md:-translate-x-32">
+          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-10 md:translate-x-32">
             <h2
               ref={courses.ref}
               className="text-[#656a7b] text-4xl md:text-6xl font-bold"
@@ -121,7 +147,7 @@ const Page = () => {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-10 md:translate-x-16 rtl:md:-translate-x-16">
+          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-10 md:translate-x-16">
             <h2
               ref={students.ref}
               className="text-[#656a7b] text-4xl md:text-6xl font-bold"
@@ -143,12 +169,11 @@ const Page = () => {
         <div className="w-full hidden lg:block">
           <img
             src={"/images/about-us/counter_bg.png"}
-            className="w-full h-full object-cover [clip-path:polygon(25%_0%,100%_0,100%_100%,0%_100%)] rtl:[clip-path:polygon(0%_0%,75%_0,100%_100%,0%_100%)]"
+            alt=""
+            className="[clip-path:polygon(25%_0%,100%_0,100%_100%,0%_100%)] w-full h-full object-cover"
           />
         </div>
       </section>
     </>
   );
-};
-
-export default Page;
+}

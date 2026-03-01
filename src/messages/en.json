@@ -120,6 +120,27 @@
     "newsletterPlaceholder": "you@example.com",
     "newsletterSubmit": "Subscribe"
   },
+  "contact": {
+    "heroTitle": "We're here with you every step of the way",
+    "formTitle": "Send us a Message",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "labelName": "Name",
+    "labelEmail": "Email Address",
+    "labelSubject": "Subject",
+    "labelMessage": "Message",
+    "sendMessage": "Send Message",
+    "sending": "Sending...",
+    "toastSuccess": "Your message has been sent successfully. We will get back to you as soon as possible.",
+    "toastErrorFields": "Please fix the highlighted fields",
+    "toastErrorGeneric": "Sorry, failed to send the message. Please try again later.",
+    "validation": {
+      "required": "This field is required",
+      "name": "Please enter a valid name (letters and spaces only)",
+      "email": "Please enter a valid email address"
+    }
+  },
   "NotFound": {
     "Oops": "Oops! The page you are looking for doesn’t exist.",
     "back": "back to home page",
@@ -202,6 +223,7 @@
     "as-a-student": "as a student to leave a review",
     "instructor": "Instructor",
     "share": "Share",
+    "linkCopiedSuccess": "Link copied successfully",
     "apply": "Apply",
     "enter-your-coupon": "Enter your coupon",
     "be-the-first-reviewer": "Be the first reviewer",

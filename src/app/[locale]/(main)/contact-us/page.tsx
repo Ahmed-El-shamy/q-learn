@@ -3,6 +3,7 @@ import {
   dehydrate,
   HydrationBoundary,
 } from "@tanstack/react-query";
+import { getTranslations } from "next-intl/server";
 import { contactSettingsOptions } from "./queries/contactSettingsOptions";
 import ContactDetails from "./_components/ContactDetails";
 import ContactForm from "./_components/ContactForm";
@@ -10,6 +11,7 @@ import ContactForm from "./_components/ContactForm";
 const Page = async () => {
   const qc = new QueryClient();
   await qc.prefetchQuery(contactSettingsOptions());
+  const t = await getTranslations("contact");
 
   return (
     <>
@@ -29,7 +31,7 @@ const Page = async () => {
              h-64 w-full text-center"
       >
         <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold translate-y-24">
-          We're here with you every step way
+          {t("heroTitle")}
         </h1>
       </section>
       <HydrationBoundary state={dehydrate(qc)}>

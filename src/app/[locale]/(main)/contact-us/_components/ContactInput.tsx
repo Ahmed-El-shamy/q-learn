@@ -1,4 +1,5 @@
 import { InputHTMLAttributes } from "react";
+import { useTranslations } from "next-intl";
 
 interface ContactInputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: string;
@@ -12,6 +13,7 @@ const ContactInput = ({
   error,
   ...rest
 }: ContactInputProps) => {
+  const t = useTranslations("contact");
   return (
     <div className="relative w-full">
       <input
@@ -27,7 +29,7 @@ const ContactInput = ({
 
       <label
         className="
-          absolute px-2 left-6 top-4 text-lg text-[#373737] bg-[#faf5ff]
+          absolute px-2 start-6 top-4 text-lg text-[#373737] bg-[#faf5ff]
           transition-all duration-500
 
           peer-focus:-top-2
@@ -42,7 +44,7 @@ const ContactInput = ({
         {label}
       </label>
 
-      {error && <p className="mt-1 text-sm text-red-500 text-left">{error}</p>}
+      {error && <p className="mt-1 text-sm text-red-500 text-start">{t(error)}</p>}
     </div>
   );
 };

@@ -28,6 +28,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import CourseDetailsQuery from "../_data/CourseDetailsQuery";
 import VideoDialog from "./VideoDialog";
+import { toast } from "sonner";
 
 const socialMediaLinksConfig = [
   {
@@ -337,7 +338,10 @@ const CourseStickyContent = () => {
                 href={href}
                 onClick={
                   onClickHandler
-                    ? (e) => onClickHandler(e, currentUrl)
+                    ? (e) => {
+                        onClickHandler(e, currentUrl);
+                        toast.success(t("linkCopiedSuccess"));
+                      }
                     : undefined
                 }
                 aria-label={label}
