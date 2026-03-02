@@ -1,17 +1,19 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useCoursesFilters } from "../_services/CourseFilterProvider";
 import { useCourseQuery } from "../_services/_hooks/useCourseQuery";
 import { useTranslations } from "next-intl";
+
+const LEVEL_OPTIONS = [
+  { labelKey: "beginner" as const, value: "beginner" },
+  { labelKey: "intermediate" as const, value: "intermediate" },
+  { labelKey: "advanced" as const, value: "advanced" },
+  { labelKey: "professional" as const, value: "pro" },
+] as const;
 
 const LevelFilter = () => {
   const { filters, handleChangeFilters } = useCoursesFilters();
   const t = useTranslations("filters");
   const tLevel = useTranslations("levels");
-
-  const levels = useMemo(
-    () => [tLevel("beginner"), tLevel("intermediate"), tLevel("advanced")],
-    [tLevel]
-  );
 
   const handleToggle = (value: string) => {
     const currentSelected = filters.level || [];
@@ -27,15 +29,15 @@ const LevelFilter = () => {
       <h2 className="text-xl text-[#202e3b] shrink-0">{t("level")}</h2>
 
       <div className="mt-5 flex-1 overflow-y-auto pe-3 space-y-4 pb-5">
-        {levels.map((level) => (
+        {LEVEL_OPTIONS.map((option) => (
           <label
-            key={level}
+            key={option.value}
             className="custom-checkbox-container group cursor-pointer flex items-center gap-3"
           >
             <input
               type="checkbox"
-              checked={(filters.level || []).includes(level)}
-              onChange={() => handleToggle(level)}
+              checked={(filters.level || []).includes(option.value)}
+              onChange={() => handleToggle(option.value)}
               name="skill-web-dev"
             />
 
@@ -45,7 +47,7 @@ const LevelFilter = () => {
               className="text-[#202e3b] transition-all duration-300
                 group-hover:bg-linear-to-r group-hover:from-[#660afb] group-hover:to-[#b633ff] group-hover:bg-clip-text group-hover:text-transparent"
             >
-              {level}
+              {tLevel(option.labelKey)}
             </span>
           </label>
         ))}

@@ -490,7 +490,8 @@
   "levels": {
     "beginner": "مبتدئ",
     "intermediate": "متوسط",
-    "advanced": "متقدم"
+    "advanced": "متقدم",
+    "professional": "محترف"
   },
   "priceType": {
     "paid": "مدفوع",

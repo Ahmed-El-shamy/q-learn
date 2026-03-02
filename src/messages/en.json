@@ -491,7 +491,8 @@
   "levels": {
     "beginner": "Beginner",
     "intermediate": "Intermediate",
-    "advanced": "Advanced"
+    "advanced": "Advanced",
+    "professional": "Professional"
   },
   "priceType": {
     "paid": "Paid",
