@@ -69,7 +69,8 @@ export class Api {
       coupon: "/site/coupons/validate",
       enrollments: "/site/enrollments",
       quizzes: "/site/quizzes",
-      quizAttempts: "/site/quiz-attempts"
+      quizAttempts: "/site/quiz-attempts",
+      pages: "/site/pages"
     },
     auth: {
       login: "/site/login",
