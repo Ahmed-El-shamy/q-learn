@@ -234,6 +234,8 @@
     "rate-dialog-title": "Rate This Course",
     "rate-dialog-description": "Share your experience by rating this course",
     "rate-dialog-review-placeholder": "Write your review...",
+    "reviewSubmissionSuccess": "Thank you! Your review has been submitted and is pending approval.",
+    "reviewSubmissionError": "We couldn't submit your review. Please try again.",
     "qa-dialog-title": "Ask a Question",
     "qa-dialog-description": "Ask the instructor or other students a question about this course",
     "qa-dialog-label": "Your question",

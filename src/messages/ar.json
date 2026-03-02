@@ -208,6 +208,8 @@
     "rate-dialog-title": "قيم هذه الدورة",
     "rate-dialog-description": "شارك تجربتك من خلال تقييم هذه الدورة",
     "rate-dialog-review-placeholder": "اكتب مراجعتك...",
+    "reviewSubmissionSuccess": "شكراً! تم إرسال مراجعتك وهي بانتظار الموافقة.",
+    "reviewSubmissionError": "تعذر إرسال مراجعتك. يرجى المحاولة مرة أخرى.",
     "Duration": "المدة",
     "hour": "ساعة",
     "hours": "ساعات",

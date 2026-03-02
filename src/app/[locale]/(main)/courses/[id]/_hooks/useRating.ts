@@ -6,12 +6,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import api, { Api } from "@/_lib/api/api";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import toastErrorMessage from "@/_lib/api/toastErrorMessage";
 
 const useRating = () => {
-    const {id} = useParams();
-    
+    const { id } = useParams();
+    const t = useTranslations("courses");
+
     const methods = useForm<RatePayload>({
         mode: "onSubmit",
         reValidateMode: "onChange",
@@ -29,13 +30,14 @@ const useRating = () => {
                 ...body,
                 course_id: id
             });
-            return response
+            return response;
         },
-        onSuccess: async (response) => {
-            // Do not revalidate the course, because the rating has to be approved in the first place to have an effect.
-            toast.success(response?.message || "");
+        onSuccess: () => {
+            toast.success(t("reviewSubmissionSuccess"));
         },
-        onError: (err: unknown) => toastErrorMessage(err),
+        onError: () => {
+            toast.error(t("reviewSubmissionError"));
+        },
     });
 
     async function handleSubmit(payload: RatePayload) {
