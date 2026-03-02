@@ -13,7 +13,7 @@ interface PriceFilterProps {
 
 const PriceFilter: React.FC<PriceFilterProps> = ({
   initialMin = 0,
-  initialMax = 2000,
+  initialMax = 5000,
   step = 10,
   language = "en",
 }) => {
@@ -45,7 +45,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
     const maxPercent = getPercent(Number(maxVal));
 
     if (rangeRef.current) {
-      rangeRef.current.style.left = `${minPercent}%`;
+      rangeRef.current.style.insetInlineStart = `${minPercent}%`;
       rangeRef.current.style.width = `${maxPercent - minPercent}%`;
     }
   }, [minVal, maxVal, getPercent]);
@@ -55,7 +55,6 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
       <h2 className="text-xl text-[#202e3b] shrink-0 mb-4">{t("price")}</h2>
       <div
         className="flex-center relative"
-        style={{ direction: language === "ar" ? "rtl" : "ltr" }}
       >
         <input
           type="range"
@@ -102,7 +101,6 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
 
       <div
         className="flex items-center justify-between text-[#202e3b] mt-4"
-        style={{ direction: language === "ar" ? "rtl" : "ltr" }}
       >
         <div className="flex items-center gap-2">
           <p>
