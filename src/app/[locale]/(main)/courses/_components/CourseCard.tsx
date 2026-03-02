@@ -13,6 +13,7 @@ import HtmlContent from "@/_components/common/HtmlContent";
 const CourseCard: React.FC<Course> = ({
   id,
   price,
+  discount_price_sar,
   level,
   total_ratings,
   title,
@@ -42,7 +43,7 @@ const CourseCard: React.FC<Course> = ({
       id: id,
       item_id: id!,
       title,
-      price: price?.sar?.toString(),
+      price: (discount_price_sar != null && discount_price_sar !== "" ? discount_price_sar : price?.sar)?.toString(),
       course: { image },
     });
   };
@@ -95,10 +96,21 @@ const CourseCard: React.FC<Course> = ({
         </div>
 
         <div className="flex justify-between items-center border-t border-t-[#d1d1d1] mt-8 py-4">
-          <div className="flex items-center justify-center gap-1">
-            <h4 className="font-bold text-xl gradient-background bg-clip-text text-transparent">
-              {price?.sar} {t("currency")}
-            </h4>
+          <div className="flex items-center justify-center gap-1 flex-wrap">
+            {discount_price_sar != null && discount_price_sar !== "" && price?.sar ? (
+              <>
+                <span className="font-bold text-base text-gray-500 line-through">
+                  {price.sar} {t("currency")}
+                </span>
+                <h4 className="font-bold text-xl gradient-background bg-clip-text text-transparent">
+                  {discount_price_sar} {t("currency")}
+                </h4>
+              </>
+            ) : (
+              <h4 className="font-bold text-xl gradient-background bg-clip-text text-transparent">
+                {price?.sar} {t("currency")}
+              </h4>
+            )}
           </div>
           {is_enrolled ? null : (
             <GradientIcon

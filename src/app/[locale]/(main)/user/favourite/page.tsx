@@ -15,7 +15,7 @@ const Page = () => {
           query?.data?.length > 0 ? (
             <div className="grid gap-4  lg:grid-cols-2 xl:grid-cols-3">
               {query?.data.map((c) => (
-                <CourseCard key={c?.id} {...c} user={c.user || ""} />
+                <CourseCard key={c?.id} {...c} />
               ))}
             </div>
           ) : (

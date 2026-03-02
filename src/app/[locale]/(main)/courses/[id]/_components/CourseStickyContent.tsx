@@ -99,7 +99,7 @@ const CourseStickyContent = () => {
       id: courseId,
       item_id: courseId,
       title: course.title ?? "",
-      price: course.price?.sar ?? course.price?.usd ?? course.price?.egp ?? "0",
+      price: (course.discount_price_sar != null && course.discount_price_sar !== "" ? course.discount_price_sar : course.price?.sar) ?? course.price?.usd ?? course.price?.egp ?? "0",
       course: { image: course.image ?? undefined },
     });
   };
@@ -283,29 +283,44 @@ const CourseStickyContent = () => {
               </p>
             ) : (
               <>
-                {course.original_price &&
-                  (course.original_price.usd ||
-                    course.original_price.egp ||
-                    course.original_price.sar) && (
-                  <p className="text-base sm:text-lg md:text-xl font-bold text-gray-500 line-through">
-                    {course.original_price.usd
-                      ? `$${course.original_price.usd}`
-                      : course.original_price.egp
-                        ? `${course.original_price.egp} EGP`
-                        : course.original_price.sar
+                {course.discount_price_sar != null && course.discount_price_sar !== "" ? (
+                  <>
+                    {course.price?.sar && (
+                      <p className="text-base sm:text-lg md:text-xl font-bold text-gray-500 line-through">
+                        {course.price.sar} SAR
+                      </p>
+                    )}
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold">
+                      {course.discount_price_sar} SAR
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    {course.original_price &&
+                      (course.original_price.sar ||
+                        course.original_price.usd ||
+                        course.original_price.egp) && (
+                      <p className="text-base sm:text-lg md:text-xl font-bold text-gray-500 line-through">
+                        {course.original_price.sar
                           ? `${course.original_price.sar} SAR`
-                          : ""}
-                  </p>
-                )}
-                <p className="text-xl sm:text-2xl md:text-3xl font-bold">
-                  {course.price?.usd
-                    ? `$${course.price.usd}`
-                    : course.price?.egp
-                      ? `${course.price.egp} EGP`
-                      : course.price?.sar
+                          : course.original_price.usd
+                            ? `$${course.original_price.usd}`
+                            : course.original_price.egp
+                              ? `${course.original_price.egp} EGP`
+                              : ""}
+                      </p>
+                    )}
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold">
+                      {course.price?.sar
                         ? `${course.price.sar} SAR`
-                        : "N/A"}
-                </p>
+                        : course.price?.usd
+                          ? `$${course.price.usd}`
+                          : course.price?.egp
+                            ? `${course.price.egp} EGP`
+                            : "N/A"}
+                    </p>
+                  </>
+                )}
               </>
             )}
           </div>

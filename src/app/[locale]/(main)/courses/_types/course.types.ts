@@ -15,6 +15,8 @@ export type Course = {
   instructor: Instructor;
   category: CourseCategory;
   price: CoursePrice;
+  /** When set, the course has a discount; show price.sar as original (strikethrough) and this as current price in SAR. */
+  discount_price_sar?: string;
   /** When set, the course has a discount; show this as original (strikethrough) and price as current. */
   original_price?: Partial<CoursePrice>;
   is_free: boolean;

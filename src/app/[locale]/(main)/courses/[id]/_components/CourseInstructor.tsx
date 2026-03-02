@@ -80,11 +80,6 @@ const CourseInstructor = () => {
                                     {data.user.name}
                                 </p>
                             )}
-                            {data?.description && (
-                                <p className="line-clamp-3 text-xs sm:text-sm text-gray-600">
-                                    {data.description}
-                                </p>
-                            )}
                             <div className="flex gap-1 mt-2 justify-center sm:justify-start">
                                 <div className="main-background rounded-full p-1.5 sm:p-2">
                                     <Image height={16} width={16} className="sm:w-5 sm:h-5" src="/images/footer/facebook.svg" alt="facebook" />

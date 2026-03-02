@@ -13,6 +13,8 @@ export interface Course {
     usd: string;
     sar: string;
   };
+  /** When set, the course has a discount; show price.sar as original (strikethrough) and this as current price in SAR. */
+  discount_price_sar?: string;
   is_free?: boolean;
   progress?: string | number;
   mode?: string;
