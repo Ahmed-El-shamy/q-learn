@@ -14,14 +14,19 @@ const ContactTextarea = ({ label, error, ...rest }: ContactTextareaProps) => {
       <textarea
         placeholder=" "
         rows={4}
-        className="peer block w-full rounded-md border px-8 py-5 border-gray-300 focus:border-[#373737] outline-none"
+        className={`
+          peer block w-full rounded-md border px-8 py-5 focus:border-[#373737] outline-none
+          ${error ? "border-red-500" : "border-gray-300"}
+        `}
+        aria-invalid={!!error}
+        aria-describedby={error ? "message-error" : undefined}
         {...rest}
       />
 
       <label
         className="
           absolute px-2 start-6 top-4 text-lg text-[#373737] bg-[#faf5ff]
-          transition-all duration-500
+          transition-all duration-150
 
           peer-focus:-top-2
           peer-focus:text-sm
@@ -34,7 +39,11 @@ const ContactTextarea = ({ label, error, ...rest }: ContactTextareaProps) => {
       >
         {label}
       </label>
-      {error && <p className="mt-1 text-sm text-red-500 text-start">{t(error)}</p>}
+      {error && (
+        <p id="message-error" className="mt-1 text-sm text-red-500 text-start" role="alert">
+          {t(error)}
+        </p>
+      )}
     </div>
   );
 };

@@ -506,6 +506,15 @@
     "goToHomepage": "Go to Homepage"
   },
   "checkout": {
+    "title": "Checkout",
+    "paymentMethod": "Payment Method",
+    "onlinePayment": "Online Payment",
+    "onlinePaymentDescription": "Card / Apple Pay / Google Pay",
+    "uploadReceipt": "Upload receipt",
+    "paymentsSecured": "Payments are secured & encrypted",
+    "payOnline": "Pay Online",
+    "redirectDescription": "You will be redirected to our secure payment provider to complete your purchase.",
+    "proceedToPayment": "Proceed to Payment",
     "bank transfer": "Bank Transfer",
     "please upload the bank transfer receipt to proceed with your order": "Please upload the bank transfer receipt to proceed with your order.",
     "upload transfer receipt": "Upload Transfer Receipt",

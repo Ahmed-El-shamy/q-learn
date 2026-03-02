@@ -2,9 +2,11 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import MainBtn from "@/_components/common/buttons/MainBtn";
 
 const BankTransfer = () => {
+  const t = useTranslations("checkout");
   const [preview, setPreview] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -15,7 +17,7 @@ const BankTransfer = () => {
 
   return (
     <div className="border rounded-xl p-6 space-y-6">
-      <h3 className="font-semibold text-lg">Bank Transfer</h3>
+      <h3 className="font-semibold text-lg">{t("bank transfer")}</h3>
 
       <input
         ref={inputRef}
@@ -26,13 +28,13 @@ const BankTransfer = () => {
       />
 
       <MainBtn onClick={() => inputRef.current?.click()}>
-        Upload Receipt
+        {t("upload transfer receipt")}
       </MainBtn>
 
       {preview && (
         <Image
           src={preview}
-          alt="Receipt"
+          alt={t("transfer receipt")}
           width={200}
           height={200}
           className="rounded-lg"

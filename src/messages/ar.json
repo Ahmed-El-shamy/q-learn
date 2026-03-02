@@ -501,6 +501,15 @@
     "goToHomepage": "العودة للصفحة الرئيسية"
   },
   "checkout": {
+    "title": "إتمام الشراء",
+    "paymentMethod": "طريقة الدفع",
+    "onlinePayment": "الدفع أونلاين",
+    "onlinePaymentDescription": "بطاقة / أبل باي / جوجل باي",
+    "uploadReceipt": "رفع الإيصال",
+    "paymentsSecured": "المدفوعات مؤمنة ومشفرة",
+    "payOnline": "الدفع أونلاين",
+    "redirectDescription": "سيتم توجيهك إلى مزود الدفع الآمن لإتمام عملية الشراء.",
+    "proceedToPayment": "متابعة للدفع",
     "bank transfer": "تحويل بنكي",
     "please upload the bank transfer receipt to proceed with your order": "يرجى رفع إيصال التحويل البنكي لإتمام طلبك.",
     "upload transfer receipt": "رفع إيصال التحويل",
