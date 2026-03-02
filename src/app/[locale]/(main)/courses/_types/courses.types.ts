@@ -6,8 +6,6 @@ export interface Category {
 export interface Course {
   id: number;
   slug: string;
-  user_id: number | null;
-  user: string;
   instructor: Partial<Instructor>;
   category: Category;
   price: {
@@ -34,16 +32,15 @@ export interface Course {
   short_description?: string;
   target_audience?: string;
   accrediting_organization?: string;
-  thumbnail?: string | null;
+  image?: string | null;
   alt?: string;
-  preview_video?: string;
+  video?: string;
   tags?: unknown[];
-  added_by?: string | null;
   oldPrice?: number;
   rating?: number;
   students?: number;
-  content?: any;
-  is_enrolled?: boolean
+  content?: unknown;
+  is_enrolled?: boolean;
 }
 
 export interface Instructor {
@@ -52,6 +49,8 @@ export interface Instructor {
     name: string;
     email: string;
     phone: string;
+    job_title?: string;
+    avatar_url?: string;
     account_type: string;
     type: number;
     auth_method: string;
@@ -63,7 +62,6 @@ export interface Instructor {
     is_banned: boolean;
   };
   avatar: string;
-  avatar_url?: string;
   ratings_count: number;
   reviews_count: number;
   students_count: number;

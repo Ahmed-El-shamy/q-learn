@@ -4,11 +4,13 @@ import { useTranslations } from "next-intl";
 import Rate from "../../_components/Rate";
 import { FC } from "react";
 import { CourseCategory } from "../../_types/course.types";
+import Avatar from "@/_components/common/avatar/Avatar";
 
 interface Props {
   title: string;
   description: string;
   instructor: string;
+  instructorAvatar?: string | null;
   students: number;
   rating: number;
   hours: string | number;
@@ -20,6 +22,7 @@ const CourseHero: FC<Props> = ({
   description,
   students: studentsCount,
   instructor,
+  instructorAvatar,
   hours,
   rating,
   category,
@@ -45,8 +48,17 @@ const CourseHero: FC<Props> = ({
           </div>
           <div className="flex items-center flex-wrap gap-2 sm:gap-4">
             <div className="bg-primary p-1.5 sm:p-2 flex items-center gap-1.5 sm:gap-2 rounded">
-              <div className="flex justify-center items-center rounded-full bg-gray-100 p-1.5 sm:p-2">
-                <User className="text-gray-700" size={16} />
+              <div className="flex justify-center items-center rounded-full bg-gray-100 p-0.5 overflow-hidden shrink-0 w-8 h-8 sm:w-9 sm:h-9">
+                {instructorAvatar ? (
+                  <Avatar
+                    src={instructorAvatar}
+                    alt={instructor || "Instructor"}
+                    size={32}
+                    className="w-8 h-8 sm:w-9 sm:h-9"
+                  />
+                ) : (
+                  <User className="text-gray-700" size={16} />
+                )}
               </div>
               <p className="text-xs sm:text-sm md:text-base">{instructor}</p>
             </div>

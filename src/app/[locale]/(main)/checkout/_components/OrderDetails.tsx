@@ -40,7 +40,7 @@ const OrderDetails = () => {
             <div key={i.title} className="flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <Image
-                  src={i.course?.thumbnail || "/images/courses/1.jpg"}
+                  src={i.course?.image || "/images/courses/1.jpg"}
                   alt={t("course image")}
                   width={100}
                   height={100}

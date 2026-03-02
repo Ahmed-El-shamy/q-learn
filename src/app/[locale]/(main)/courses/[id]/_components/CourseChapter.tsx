@@ -17,11 +17,11 @@ const CourseChapter = ({
 
     return (
         <>
-        <div onClick={() => toggleChapter(chapter.id)} className="main-background cursor-pointer text-white flex justify-between items-center p-2 sm:p-3 md:p-4 rounded">
-            <p className="text-sm sm:text-base md:text-lg font-bold flex-1 pr-2">
+        <div onClick={() => toggleChapter(chapter.id)} className="main-background cursor-pointer text-white flex justify-between items-center p-1.5 sm:p-2.5 md:p-3 rounded">
+            <p className="text-xs sm:text-sm md:text-base font-bold flex-1 pr-2">
                 {chapter.title}
             </p>
-            <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm shrink-0">
                 <div>
                     <span>{lectureCount}</span>
                     <span>{t("lectures")}</span>
@@ -30,10 +30,10 @@ const CourseChapter = ({
             </div>
         </div>
         <div className={`grid transition-all duration-500 ease-in-out overflow-hidden bg-white ${expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
-            <div className="min-h-0 p-1 sm:p-2">
+            <div className="min-h-0 p-1 sm:p-1.5">
                 {
                     chapter.lessons.map((lesson) => (
-                        <div key={lesson.id} className="w-full px-2 sm:px-3 md:px-4 py-3 sm:py-4 md:py-6 text-sm sm:text-base md:text-lg border-b">
+                        <div key={lesson.id} className="w-full px-2 sm:px-3 py-2.5 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base border-b">
                             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                                 <div className="flex items-center gap-1.5 sm:gap-2 w-full sm:w-1/2 line-clamp-1">
                                     <div className="shrink-0">
@@ -52,7 +52,7 @@ const CourseChapter = ({
                                     {
                                         (lesson.is_free_preview && lesson.video) && (
                                             <VideoDialog videoUrl={lesson.video}>
-                                                <p className="hover:underline text-primary cursor-pointer text-xs sm:text-sm md:text-base">
+                                                <p className="hover:underline text-primary cursor-pointer text-xs sm:text-sm">
                                                     {t("preview")}
                                                 </p>
                                             </VideoDialog>
@@ -60,7 +60,7 @@ const CourseChapter = ({
                                     }
                                 </div>
                             </div>
-                            <p className="mt-2 sm:mt-3 md:mt-4 text-xs sm:text-sm md:text-base text-gray-600">
+                            <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-gray-600">
                                 {lesson.description}
                             </p>
                         </div>

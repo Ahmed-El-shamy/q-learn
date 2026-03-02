@@ -80,9 +80,9 @@ const CoursePanels = () => {
 
   return (
     <div className="rounded-lg mx-auto max-w-[600px] md:max-w-[800px] lg:max-w-[1400px] px-2 md:px-8 pt-6">
-      <div className="w-full lg:w-2/3 bg-white border shadow-md rounded py-2 px-4">
+      <div className="w-full lg:w-2/3 bg-white border shadow-md rounded py-1.5 px-3">
         <div className="h-0" ref={panelsRef} />
-        <div className="flex items-center gap-2 w-full py-1 overflow-x-auto sticky top-0 bg-white z-40">
+        <div className="flex items-center gap-1.5 w-full py-0.5 overflow-x-auto sticky top-0 bg-white z-40">
           {panels.map((panel) => (
             <MainBtn
               variant={currentPanel === panel.title ? "main" : "secondary"}
@@ -97,7 +97,7 @@ const CoursePanels = () => {
             </MainBtn>
           ))}
         </div>
-        <div className="py-10">{renderActivePanel()}</div>
+        <div className="py-6 sm:py-8">{renderActivePanel()}</div>
         <StudentsAlsoBought />
       </div>
     </div>

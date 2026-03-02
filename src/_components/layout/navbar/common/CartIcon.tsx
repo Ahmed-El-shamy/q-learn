@@ -95,7 +95,7 @@ const CartIcon = () => {
                   <div className="flex items-center gap-3">
                     <div className="w-20 h-16 shrink-0">
                       <Image
-                        src={item.course?.thumbnail || "/images/courses/10.jpg"}
+                        src={item.course?.image || "/images/courses/10.jpg"}
                         alt={item.title || "Course 1"}
                         width={50}
                         height={100}

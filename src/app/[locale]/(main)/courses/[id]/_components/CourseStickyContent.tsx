@@ -100,7 +100,7 @@ const CourseStickyContent = () => {
       item_id: courseId,
       title: course.title ?? "",
       price: course.price?.sar ?? course.price?.usd ?? course.price?.egp ?? "0",
-      course: { thumbnail: course.thumbnail ?? undefined },
+      course: { image: course.image ?? undefined },
     });
   };
 
@@ -248,21 +248,21 @@ const CourseStickyContent = () => {
     <div className="lg:w-fit w-full">
       <div className="max-h-[1000px] overflow-hidden" ref={imageContainer}>
         <div className="h-[300px] w-full md:h-[500px] lg:h-[200px] min-w-[280px] xl:min-w-none xl:h-[270px] xl:w-[380px] relative overflow-hidden bg-gray-300">
-          {isImageError || !course?.thumbnail ? (
+          {isImageError || !course?.image ? (
             <div className="w-full h-full flex items-center justify-center bg-gray-300">
               <ImageIcon className="text-gray-600 w-16 h-16" />
             </div>
           ) : (
             <Image
               fill
-              src={course.thumbnail}
+              src={course.image}
               alt={course.title || "course-preview-image"}
               className="object-cover"
               onError={() => setIsImageError(true)}
             />
           )}
-          {course?.preview_video && (
-            <VideoDialog videoUrl={course.preview_video}>
+          {course?.video && (
+            <VideoDialog videoUrl={course.video}>
               <MainBtn containerClassName="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-16 h-16 md:w-20 md:h-20 p-0 flex items-center justify-center bg-white/90 hover:bg-white border-none shadow-lg">
                 <Play
                   className="w-8 h-8 md:w-10 md:h-10 text-white ml-1"

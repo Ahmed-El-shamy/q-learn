@@ -17,7 +17,7 @@ const CourseCard: React.FC<Course> = ({
   total_ratings,
   title,
   description,
-  thumbnail,
+  image,
   total_enrollments,
   is_enrolled = false,
 }) => {
@@ -43,7 +43,7 @@ const CourseCard: React.FC<Course> = ({
       item_id: id!,
       title,
       price: price?.sar?.toString(),
-      course: { thumbnail },
+      course: { image },
     });
   };
 
@@ -56,7 +56,7 @@ const CourseCard: React.FC<Course> = ({
           </p>
 
           <Image
-            src={thumbnail || "/images/courses/10.jpg"}
+            src={image || "/images/courses/10.jpg"}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

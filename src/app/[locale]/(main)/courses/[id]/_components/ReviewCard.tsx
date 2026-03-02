@@ -15,21 +15,21 @@ interface ReviewCardProps {
 
 const ReviewCard = ({ review }: ReviewCardProps) => {
     return (
-        <div className="border border-gray-300 rounded-lg p-4 sm:p-5 md:p-6 bg-white">
-            <div className="flex flex-col gap-3 sm:gap-4">
-                <div className="flex items-center gap-3 sm:gap-4">
+        <div className="border border-gray-300 rounded-lg p-3 sm:p-4 md:p-5 bg-white">
+            <div className="flex flex-col gap-2 sm:gap-3">
+                <div className="flex items-center gap-2 sm:gap-3">
                     <Avatar
                         src="/"
                         alt={review.user.name}
                         size={48}
-                        className="w-10 h-10 sm:w-12 sm:h-12 shrink-0"
+                        className="w-9 h-9 sm:w-10 sm:h-10 shrink-0"
                     />
-                    <p className="font-semibold text-sm sm:text-base md:text-lg text-gray-900">
+                    <p className="font-semibold text-xs sm:text-sm md:text-base text-gray-900">
                         {review.user.name}
                     </p>
                 </div>
                 <Rate rate={review.rating} size={16} />
-                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                     {review.review}
                 </p>
             </div>

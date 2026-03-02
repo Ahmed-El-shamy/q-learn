@@ -12,8 +12,7 @@ export type CoursePrice = {
 export type Course = {
   id: number;
   slug: string;
-  user_id: number | null;
-  user: string | null;
+  instructor: Instructor;
   category: CourseCategory;
   price: CoursePrice;
   is_free: boolean;
@@ -32,12 +31,11 @@ export type Course = {
   short_description: string;
   target_audience: string;
   accrediting_organization: string;
-  thumbnail: string | null;
-  preview_video: string;
+  image: string | null;
+  video: string;
   tags: unknown[];
-  added_by: string | null;
-  instructor: Instructor;
-  is_enrolled?: boolean
+  is_enrolled?: boolean;
+  content?: CourseContent;
 };
 
 export type InstructorUser = {
@@ -45,6 +43,8 @@ export type InstructorUser = {
   name: string;
   email: string;
   phone: string;
+  job_title: string;
+  avatar_url: string;
   account_type: string;
   type: number;
   auth_method: string;
@@ -59,11 +59,11 @@ export type InstructorUser = {
 export type Instructor = {
   user: InstructorUser;
   avatar: string;
-  description?: string;
   ratings_count: number;
   reviews_count: number;
   students_count: number;
   courses_count: number;
+  social_media: unknown[];
 };
 
 export type ReviewUser = {

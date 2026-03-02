@@ -210,6 +210,9 @@
     "rate-dialog-review-placeholder": "اكتب مراجعتك...",
     "reviewSubmissionSuccess": "شكراً! تم إرسال مراجعتك وهي بانتظار الموافقة.",
     "reviewSubmissionError": "تعذر إرسال مراجعتك. يرجى المحاولة مرة أخرى.",
+    "qa-dialog-label": "سؤالك",
+    "qa-dialog-placeholder": "اكتب سؤالك هنا...",
+    "qa-dialog-submit": "إرسال السؤال",
     "Duration": "المدة",
     "hour": "ساعة",
     "hours": "ساعات",
@@ -232,6 +235,7 @@
     "qa": {
       "title": "الأسئلة والأجوبة",
       "titles": "الأسئلة والأجوبة",
+      "ask-question": "هل لديك سؤال عن هذه الدورة؟ اطرحه هنا.",
       "no-questions": "لا توجد اسئلة متوفرة الان",
       "login-to-ask": "سجل الدخول أو أنشئ حساب لطرح سؤال حول هذه الدورة"
     },

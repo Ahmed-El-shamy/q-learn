@@ -46,8 +46,8 @@ const CourseContent = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col gap-3 sm:gap-4">
-        <p className="text-xl sm:text-2xl md:text-3xl font-bold">
+      <div className="flex flex-col gap-2 sm:gap-3">
+        <p className="text-base sm:text-lg md:text-xl font-bold">
           {t("course-content")}
         </p>
         <CustomSkeleton />
@@ -58,11 +58,11 @@ const CourseContent = () => {
   // Handle empty content case
   if (!content || !content.chapters || content.chapters.length === 0) {
     return (
-      <div className="flex flex-col gap-3 sm:gap-4">
-        <p className="text-xl sm:text-2xl md:text-3xl font-bold">
+      <div className="flex flex-col gap-2 sm:gap-3">
+        <p className="text-base sm:text-lg md:text-xl font-bold">
           {t("course-content")}
         </p>
-        <div className="border border-gray-300 rounded-lg p-6 text-center text-gray-600">
+        <div className="border border-gray-300 rounded-lg p-4 sm:p-5 text-center text-gray-600 text-sm">
           <p>
             {t("no-content-available") ||
               "No content available for this course."}
@@ -73,12 +73,12 @@ const CourseContent = () => {
   }
 
   return (
-    <div className="flex flex-col gap-3 sm:gap-4">
-      <p className="text-xl sm:text-2xl md:text-3xl font-bold">
+    <div className="flex flex-col gap-2 sm:gap-3">
+      <p className="text-base sm:text-lg md:text-xl font-bold">
         {t("course-content")}
       </p>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
-        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap text-sm sm:text-base xl:text-xl">
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap text-xs sm:text-sm">
           <span>
             {content.total_chapters}{" "}
             {t(content.total_chapters === 1 ? "chapter" : "chapters")}
@@ -95,7 +95,7 @@ const CourseContent = () => {
         </div>
         {content.chapters.length > 0 && (
           <button
-            className="text-primary text-sm sm:text-base xl:text-xl cursor-pointer"
+            className="text-primary text-xs sm:text-sm cursor-pointer"
             onClick={toggleAllChapters}
           >
             {t("toggle-all-chapters")}

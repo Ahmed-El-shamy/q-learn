@@ -29,7 +29,7 @@ const CourseQA = () => {
 
   return (
     <div>
-        <p className="pb-3 sm:pb-4 text-xl sm:text-2xl md:text-3xl font-bold">
+        <p className="pb-2 sm:pb-3 text-base sm:text-lg md:text-xl font-bold">
             {t("qa.title")}
         </p>
         <div>
@@ -39,16 +39,16 @@ const CourseQA = () => {
                         <QuestionCard key={question.id} question={question} />
                     ))
                 ) : (
-                    <div className="py-4 sm:py-5 md:py-6 text-xs sm:text-sm md:text-base text-gray-500 text-center">
+                    <div className="py-3 sm:py-4 text-xs sm:text-sm text-gray-500 text-center">
                         {t("qa.no-questions") || "No questions yet. Be the first to ask!"}
                     </div>
                 )
             }
         </div>
-        <div className="mt-4">
+        <div className="mt-3">
           {
             !isAuthenticated ? (
-              <div className="flex flex-col xl:flex-row xl:justify-between text-nowrap items-start xl:items-center gap-2 sm:gap-1 mt-4">
+              <div className="flex flex-col xl:flex-row xl:justify-between text-nowrap items-start xl:items-center gap-2 sm:gap-1 mt-3">
                 <div className="text-xs sm:text-sm md:text-base">
                   {t("qa.login-to-ask")}
                 </div>
@@ -71,8 +71,8 @@ const CourseQA = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col gap-4 mt-4">
-                <p className="text-xs sm:text-sm md:text-base">
+              <div className="flex flex-col gap-3 mt-3">
+                <p className="text-xs sm:text-sm">
                   {t("qa.ask-question")}
                 </p>
                 <div className="text-xs sm:text-sm md:text-base w-full sm:w-auto">
