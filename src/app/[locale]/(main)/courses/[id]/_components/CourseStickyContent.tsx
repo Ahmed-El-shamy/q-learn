@@ -276,11 +276,27 @@ const CourseStickyContent = () => {
 
       <div className="px-2 xl:px-8">
         {course && (
-          <div className="flex items-end gap-2 sm:gap-4 py-2 xl:py-6">
+          <div className="flex flex-wrap items-end gap-x-2 gap-y-1 sm:gap-x-4 py-2 xl:py-6">
             {course.is_free ? (
-              <p className="text-xl sm:text-2xl md:text-3xl font-bold">Free</p>
+              <p className="text-xl sm:text-2xl md:text-3xl font-bold">
+                {t("free")}
+              </p>
             ) : (
               <>
+                {course.original_price &&
+                  (course.original_price.usd ||
+                    course.original_price.egp ||
+                    course.original_price.sar) && (
+                  <p className="text-base sm:text-lg md:text-xl font-bold text-gray-500 line-through">
+                    {course.original_price.usd
+                      ? `$${course.original_price.usd}`
+                      : course.original_price.egp
+                        ? `${course.original_price.egp} EGP`
+                        : course.original_price.sar
+                          ? `${course.original_price.sar} SAR`
+                          : ""}
+                  </p>
+                )}
                 <p className="text-xl sm:text-2xl md:text-3xl font-bold">
                   {course.price?.usd
                     ? `$${course.price.usd}`
@@ -290,7 +306,6 @@ const CourseStickyContent = () => {
                         ? `${course.price.sar} SAR`
                         : "N/A"}
                 </p>
-                {/* Add original price display if discount exists */}
               </>
             )}
           </div>

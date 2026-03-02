@@ -5,7 +5,7 @@ const useSignout = () => {
     return useMutation({
         mutationKey: ["signout"],
         mutationFn: async () => {
-            await signOut();
+            await signOut({callbackUrl: "/"});
         }
     });
 }

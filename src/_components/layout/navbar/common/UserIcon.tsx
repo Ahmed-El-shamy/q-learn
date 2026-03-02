@@ -13,9 +13,14 @@ const UserIcon = () => {
   const t = useTranslations();
   const menuRef = useRef<HTMLDivElement>(null);
   const {
-    mutate: signout,
+    mutateAsync: signout,
     isPending: signoutPending
   } = useSignout();
+
+  const handleLogout = () => {
+    signout();
+    setIsOpen(false);
+  }
 
   const toggleOpen = useCallback(() => setIsOpen(prev => !prev), []);
 
@@ -58,7 +63,7 @@ const UserIcon = () => {
                     {t("common.my-profile")}
                 </Link>
                 <button 
-                    onClick={() => signout()}
+                    onClick={handleLogout}
                     className={clsx({
                         "pointer-events-none": signoutPending 
                     })}
