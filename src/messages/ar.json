@@ -360,6 +360,7 @@
     "select-country": "اختر دولة"
   },
   "common": {
+    "publication_date": "تاريخ النشر",
     "loading": "جاري التحميل...",
     "login": "تسجيل الدخول",
     "no-data": "لا توجد بيانات متاحة",

@@ -366,6 +366,7 @@
     "select-country": "Select a country"
   },
   "common": {
+    "publication_date": "Published at",
     "loading": "Loading...",
     "login": "Login",
     "no-data": "No data available",
