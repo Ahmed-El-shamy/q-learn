@@ -19,7 +19,13 @@ const ShowBlogs = () => {
           {t("description")}
         </p>
 
-        <HorizontalCarousel className="mt-10">
+        <HorizontalCarousel slidesPerView={{
+          base: 1,
+          sm: 1.5,
+          md: 2,
+          lg: 2.5, 
+          xl: 3
+        }} className="mt-10">
           {queryResult?.data &&
             queryResult?.data?.length > 0 &&
             queryResult?.data.map((blog) => (

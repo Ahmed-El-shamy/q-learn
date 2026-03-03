@@ -29,7 +29,16 @@ const TestimonialsSection: FC = async () => {
           </div>
 
           {/* السلايدر */}
-          <HorizontalCarousel ariaLabel="Students testimonials slider">
+          <HorizontalCarousel 
+            ariaLabel="Students testimonials slider"
+            slidesPerView={{
+              base: 1,
+              sm: 1.5,
+              md: 1.8,
+              lg: 2.5, 
+              xl: 3
+            }}
+          >
             {d.map((item) => (
               <TestimonialCard key={item.id} review={item} />
             ))}
