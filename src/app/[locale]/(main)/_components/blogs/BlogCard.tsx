@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import type { Blog } from "../../blogs/types/blog.types";
 import { Calendar, User } from "lucide-react";
 import { formatDate } from "@/utils/formatDate";
+import { useTranslations } from "next-intl";
 interface BlogCardProps {
   blog: Blog;
   className?: string;
@@ -24,6 +25,7 @@ const BlogCard = ({ blog, className = "" }: BlogCardProps) => {
   const author = blog?.author ?? "";
   const date = blog?.published_at;
   const excerpt = htmlToText(blog?.description).slice(0, 140); // ثابت
+  const t = useTranslations("blogs");
 
   return (
     <article
@@ -125,7 +127,7 @@ const BlogCard = ({ blog, className = "" }: BlogCardProps) => {
           {/* CTA */}
           <div className="mt-5 flex items-center justify-between">
             <span className="text-sm font-semibold text-sky-700">
-              Read more
+              {t("read-more")}
             </span>
 
             {/* سهم بسيط + hover */}
