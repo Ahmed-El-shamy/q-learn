@@ -26,7 +26,7 @@ const OrderDetails = () => {
   };
 
   return (
-    <div className="w-full md:max-w-2xl mx-auto border border-[#d1d1d1] rounded-lg p-8 space-y-6">
+    <div className="w-full md:max-w-2xl mx-auto rounded-lg p-8 space-y-6">
       <h2 className="text-xl text-[#1f2b40] font-semibold">
         {t("your order")}
       </h2>
