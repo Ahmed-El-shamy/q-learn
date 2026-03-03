@@ -133,7 +133,7 @@ const CourseRating = () => {
             {reviewsData && Array.isArray(reviewsData) && reviewsData.length > 0 && (
                 <div className="mt-4 sm:mt-6 space-y-3 sm:space-y-4">
                     {reviewsData
-                        .filter((review) => review.is_approved && review.is_active && review.status === "approved")
+                        .filter((review) => review.is_active && review.status === "approved")
                         .map((review) => (
                             <ReviewCard key={review.id} review={review} />
                         ))}
