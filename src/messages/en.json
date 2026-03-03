@@ -501,7 +501,8 @@
   },
   "mode": {
     "offline": "Offline",
-    "online": "Online"
+    "online": "Online",
+    "distance_learning": "Distance Learning"
   },
   "Error": {
     "title": "Something went wrong!",

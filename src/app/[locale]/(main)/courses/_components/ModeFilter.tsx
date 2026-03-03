@@ -8,7 +8,10 @@ const ModeFilter = () => {
   const t = useTranslations("filters");
   const tMode = useTranslations("mode");
 
-  const mode = [tMode("offline"), tMode("online")];
+  const mode = ["offline", "online", "distance_learning"].map(mode => ({
+    label: tMode(mode),
+    value: mode
+  }))
 
   const handleToggle = (value: string) => {
     const currentSelected = filters.mode || [];
@@ -31,9 +34,9 @@ const ModeFilter = () => {
           >
             <input
               type="checkbox"
-              checked={(filters.mode || []).includes(mod)}
+              checked={(filters.mode || []).includes(mod.value)}
               onChange={() => {
-                handleToggle(mod);
+                handleToggle(mod.value);
               }}
               name="skill-web-dev"
             />
@@ -44,7 +47,7 @@ const ModeFilter = () => {
               className="text-[#202e3b] transition-all duration-300 capitalize
                 group-hover:bg-linear-to-r group-hover:from-[#660afb] group-hover:to-[#b633ff] group-hover:bg-clip-text group-hover:text-transparent"
             >
-              {mod}
+              {mod.label}
             </span>
           </label>
         ))}

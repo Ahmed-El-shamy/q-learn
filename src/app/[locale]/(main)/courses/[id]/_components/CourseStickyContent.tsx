@@ -283,16 +283,16 @@ const CourseStickyContent = () => {
               </p>
             ) : (
               <>
-                {course.discount_price_sar != null && course.discount_price_sar !== "" ? (
+                {!!course.discount_price_sar && parseInt(course.discount_price_sar) > 0 ? (
                   <>
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold">
+                      {course.discount_price_sar} SAR
+                    </p>
                     {course.price?.sar && (
                       <p className="text-base sm:text-lg md:text-xl font-bold text-gray-500 line-through">
                         {course.price.sar} SAR
                       </p>
                     )}
-                    <p className="text-xl sm:text-2xl md:text-3xl font-bold">
-                      {course.discount_price_sar} SAR
-                    </p>
                   </>
                 ) : (
                   <>

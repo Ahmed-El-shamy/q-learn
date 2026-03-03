@@ -500,7 +500,8 @@
   },
   "mode": {
     "offline": "أوفلاين",
-    "online": "أونلاين"
+    "online": "أونلاين",
+    "distance_learning": "التعليم عن بُعد"
   },
   "Error": {
     "title": "حدث خطأ!",

@@ -97,7 +97,7 @@ const CourseCard: React.FC<Course> = ({
 
         <div className="flex justify-between items-center border-t border-t-[#d1d1d1] mt-8 py-4">
           <div className="flex items-center justify-center gap-1 flex-wrap">
-            {discount_price_sar != null && discount_price_sar !== "" && price?.sar ? (
+            {discount_price_sar != null && discount_price_sar !== "" && price?.sar && parseInt(discount_price_sar) > 0 ? (
               <>
                 <span className="font-bold text-base text-gray-500 line-through">
                   {price.sar} {t("currency")}
