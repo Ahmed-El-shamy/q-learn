@@ -598,5 +598,8 @@
       "title": "Free Course",
       "description": "Start learning with our free course. Get a taste of our platform and content at no cost. Enroll now and begin your learning journey."
     }
+  },
+  "currency": {
+    "SAR": "SAR"
   }
 }

@@ -2,6 +2,7 @@
 "use client";
 
 import { Asterisk } from "lucide-react";
+import { useTranslations } from "next-intl";
 import React, { useEffect, useId, useState } from "react";
 
 interface MainTextAreaProps
@@ -41,6 +42,7 @@ const MainTextArea = React.forwardRef<HTMLTextAreaElement, MainTextAreaProps>(
   ) => {
     const autoId = useId();
     const inputId = id || autoId;
+    const t = useTranslations();
 
     // Use internal state only for uncontrolled mode (when value prop is not provided)
     const isControlled = controlledValue !== undefined;
@@ -153,7 +155,7 @@ const MainTextArea = React.forwardRef<HTMLTextAreaElement, MainTextAreaProps>(
               role="alert"
               className="text-red-500 text-xs"
             >
-              {error}
+              {t(error)}
             </p>
           )}
           {!error && hint && (
