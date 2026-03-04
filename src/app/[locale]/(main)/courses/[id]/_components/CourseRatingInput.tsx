@@ -7,6 +7,7 @@ import { Controller } from "react-hook-form";
 import MainTextArea from "@/_components/common/inputs/mainInput/MainTextArea";
 import RateInput from "@/_components/common/inputs/rateInput/RateInput";
 import { useTranslations } from "next-intl";
+import { flushSync } from "react-dom";
 
 const CourseRatingInput = () => {
     const t = useTranslations();
@@ -19,6 +20,7 @@ const CourseRatingInput = () => {
             control,
             watch,
             setValue,
+            trigger,
         },
         submit,
     } = useRating();
@@ -60,7 +62,11 @@ const CourseRatingInput = () => {
                 action: handleCancel 
             }}
             action={{
-                action: submit 
+                action: async () => {
+                    const manualValidation = await trigger();
+                    if (Object.values(errors).length || !manualValidation) throw new Error("validation.fields");
+                    return submit();
+                }
             }}
             onSuccess={handleCancel}
         >

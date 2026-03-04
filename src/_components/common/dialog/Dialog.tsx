@@ -61,7 +61,7 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
 
     const handleAction = useCallback(async () => {
         try {
-            setIsLoading(true);
+            setIsLoading(true); 
             await action?.action();
             onSuccess?.();
             setIsLoading(false);
