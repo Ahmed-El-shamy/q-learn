@@ -28,7 +28,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
   const paymentAlt = t("paymentMethodsAlt");
   return (
     <Container>
-      <div className="mt-20 py-10 w-full bg-linear-to-r from-[#660afb] via-[#b633ff] to-[#660afb]">
+      <div className="mt-20 py-10 w-full bg-linear-to-r from-[#00C950] via-[#007A33] to-[#00C950]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-5 items-center px-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-0">
             {hotLine && (
@@ -74,7 +74,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       href={facebook}
-                      className="bg-white/10 w-8 xl:w-10 h-8 xl:h-10 rounded-full inline-flex items-center justify-center duration-500 hover:bg-[#1f2b40]"
+                      className="bg-white/10 w-8 xl:w-10 h-8 xl:h-10 rounded-full inline-flex items-center justify-center duration-500 hover:bg-[#0B2F1B]"
                     >
                       <img
                         src="/images/footer/facebook.svg"
@@ -91,7 +91,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       href={x}
-                      className="bg-white/10 w-8 xl:w-10 h-8 xl:h-10 rounded-full inline-flex items-center justify-center duration-500 hover:bg-[#1f2b40]"
+                      className="bg-white/10 w-8 xl:w-10 h-8 xl:h-10 rounded-full inline-flex items-center justify-center duration-500 hover:bg-[#0B2F1B]"
                     >
                       <img
                         src="/images/footer/twitter.svg"
@@ -108,7 +108,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       href={linkedin}
-                      className="bg-white/10 w-8 xl:w-10 h-8 xl:h-10 rounded-full inline-flex items-center justify-center duration-500 hover:bg-[#1f2b40]"
+                      className="bg-white/10 w-8 xl:w-10 h-8 xl:h-10 rounded-full inline-flex items-center justify-center duration-500 hover:bg-[#0B2F1B]"
                     >
                       <img
                         src="/images/footer/linkedin.svg"
@@ -125,7 +125,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       href={instagram}
-                      className="bg-white/10 w-8 xl:w-10 h-8 xl:h-10 rounded-full inline-flex items-center justify-center duration-500 hover:bg-[#1f2b40]"
+                      className="bg-white/10 w-8 xl:w-10 h-8 xl:h-10 rounded-full inline-flex items-center justify-center duration-500 hover:bg-[#0B2F1B]"
                     >
                       <img
                         src="/images/instagram.png"

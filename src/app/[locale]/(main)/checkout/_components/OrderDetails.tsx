@@ -8,9 +8,10 @@ import Coupon from "./Coupon";
 import useCheckout from "../_quires/useCheckout";
 
 const OrderDetails = () => {
-  const { items, subtotal, total, isLoading } = useCart();
+  const { items, subtotal, total, isLoading, cartQuery } = useCart();
   const { isPending, mutateAsync } = useCheckout();
   const t = useTranslations("checkout");
+  const tCommon = useTranslations();
 
   const handlePay = async () => {
     if (!items.length) return;
@@ -54,27 +55,38 @@ const OrderDetails = () => {
             </div>
           ))}
 
-      {/* Subtotal */}
-      <div className="flex-between border-y border-y-[#d1d1d1] py-5">
-        <h2 className="text-lg text-[#1f2b40] font-semibold">
-          {t("subtotal")}
-        </h2>
-        <p className="text-[#373737] text-sm font-semibold">
-          {subtotal} {t("currency")}
-        </p>
-      </div>
 
       {/* Coupon Code */}
       <Coupon />
 
-      {/* Payable */}
-      <div className="flex-between">
-        <h2 className="text-lg text-[#1f2b40] font-semibold">
-          {t("payable amount")}
-        </h2>
-        <p className="text-[#373737] text-sm font-semibold">
-          {total} {t("currency")}
-        </p>
+      {/* Discount and Total - Invoice Style */}
+      <div className="space-y-2">
+        <div className="flex-between">
+          <p className="text-[#515051] text-sm">
+            {t("subtotal")}
+          </p>
+          <p className="text-[#373737] text-sm font-semibold">
+            {subtotal} {tCommon("currency.SAR")}
+          </p>
+        </div>
+        {cartQuery.data?.cart?.discount && (
+          <div className="flex-between">
+            <p className="text-[#515051] text-sm">
+              {t("discount")}
+            </p>
+            <p className="text-[#00C950] text-sm font-semibold">
+              - {cartQuery.data.cart.discount} {tCommon("currency.SAR")}
+            </p>
+          </div>
+        )}
+        <div className="flex-between pt-3 border-t border-t-[#d1d1d1]">
+          <h2 className="text-xl text-[#1f2b40] font-bold">
+            {t("payable amount")}
+          </h2>
+          <p className="text-xl text-[#1f2b40] font-bold">
+            {total} {tCommon("currency.SAR")}
+          </p>
+        </div>
       </div>
 
       <div className="w-full mt-10">

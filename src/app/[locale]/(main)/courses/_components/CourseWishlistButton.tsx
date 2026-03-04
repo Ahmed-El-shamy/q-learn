@@ -57,14 +57,14 @@ export function CourseWishlistButton({ courseId }: { courseId?: number }) {
         bg-white/90 backdrop-blur border border-black/5 shadow-sm
         transition-all  hover:bg-white hover:shadow active:scale-95
         disabled:opacity-60 disabled:cursor-not-allowed
-        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b633ff]/60
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00C950]/60
       "
     >
       <Heart
         size={18}
         className={`
           transition-colors duration-200
-          ${isWished ? "fill-[#b633ff] text-[#b633ff]" : "text-[#1f2b40]"}
+          ${isWished ? "fill-[#007A33] text-[#007A33]" : "text-[#1f2b40]"}
         `}
       />
       <span className="sr-only">{label}</span>

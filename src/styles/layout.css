@@ -48,9 +48,9 @@
 }
 
 .main-background {
-  @apply bg-linear-to-r from-[#660afb] via-[#b633ff] to-[#660afb];
+  @apply bg-linear-to-r from-[#00C950] via-[#007A33] to-[#00C950];
 }
 
 .gradient-background {
-  @apply bg-linear-to-r from-[#660afb] to-[#b633ff];
+  @apply bg-linear-to-r from-[#00C950] to-[#007A33];
 }

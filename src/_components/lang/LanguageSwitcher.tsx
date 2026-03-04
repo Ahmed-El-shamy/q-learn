@@ -32,7 +32,7 @@ const LanguageSwitcher = ({ className }: { className?: string }) => {
       {isLoginPages ? (
         <button
           onClick={switchLanguage}
-          className={`fixed bottom-18 right-6 z-50 flex-center gap-2 p-2 rounded-md bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-white shadow-md border border-gray-200 transition-all `}
+          className={`fixed bottom-18 right-6 z-50 flex-center gap-2 p-2 rounded-md bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-white shadow-md border border-green-200 transition-all `}
         >
           <Image
             alt="language-flag"
@@ -45,7 +45,7 @@ const LanguageSwitcher = ({ className }: { className?: string }) => {
         <MainBtn
           onClick={switchLanguage}
           containerClassName={twMerge(
-            "fixed cursor-pointer rounded-full main-background bottom-24 lg:bottom-6 start-6 z-50 flex-center gap-2 p-2 shadow-md border border-purple-600 transition-all",
+            "fixed cursor-pointer rounded-full main-background bottom-24 lg:bottom-6 start-6 z-50 flex-center gap-2 p-2 shadow-md border border-green-600 transition-all",
             className
           )}
         >

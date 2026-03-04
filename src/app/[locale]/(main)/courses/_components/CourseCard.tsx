@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
-import { ShieldUser, ShoppingCart, Star, Trash2 } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ShieldUser, ShoppingCart, Star, Trash2, ImageIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/store/CartProvider";
 import { useTranslations } from "next-intl";
@@ -15,15 +15,23 @@ const CourseCard: React.FC<Course> = ({
   price,
   discount_price_sar,
   level,
-  total_ratings,
   title,
   description,
   image,
   total_enrollments,
   is_enrolled = false,
+  average_rating,
+  is_free = false,
 }) => {
   const { addToCart, removeFromCart, isInCart, items } = useCart();
   const t = useTranslations("courseCard");
+  const tCommon = useTranslations();
+  const [isImageError, setIsImageError] = useState(false);
+
+  // Reset image error state when image changes
+  useEffect(() => {
+    setIsImageError(false);
+  }, [image]);
 
   const isAlreadyInCart = isInCart(id!);
 
@@ -52,17 +60,24 @@ const CourseCard: React.FC<Course> = ({
     <div className="border border-[#d1d1d1] h-[540px] group overflow-hidden">
       <div className="w-full h-[45%] relative overflow-hidden">
         <Link href={`/courses/${id}`} className="block w-full h-full">
-          <p className="bg-[#963ed0]/60 text-white py-1 px-5 absolute top-5 start-5 z-10">
+          <p className="bg-[#00C950]/70 text-white py-1 px-5 absolute top-5 start-5 z-10">
             {level}
           </p>
 
-          <Image
-            src={image || "/images/courses/10.jpg"}
-            alt={title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
-          />
+          {isImageError || !image ? (
+            <div className="w-full h-full flex items-center justify-center bg-green-100">
+              <ImageIcon className="text-green-600 w-12 h-12" />
+            </div>
+          ) : (
+            <Image
+              src={image}
+              alt={title}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              onError={() => setIsImageError(true)}
+            />
+          )}
         </Link>
 
         <CourseWishlistButton courseId={id} />
@@ -71,16 +86,16 @@ const CourseCard: React.FC<Course> = ({
       <div className="p-5">
         <div className="data">
           <Link href={`/courses/${id}`}>
-            <h3 className="h-15 line-clamp-2 leading-7 text-[#1f2b40] font-semibold transition-colors ease-linear duration-500 hover:text-[#660afb]">
+            <h3 className="h-15 line-clamp-2 leading-7 text-[#1f2b40] font-semibold transition-colors ease-linear duration-500 hover:text-[#007A33]">
               {title}
             </h3>
           </Link>
 
           <div className="flex items-center justify-between mt-1 mb-8">
             <div className="flex items-center gap-1">
-              <Star size={18} className="fill-purple-500 stroke-purple-500" />
+              <Star size={18} className="fill-green-600 stroke-green-600" />
               <span className="text-[#1f2b40] text-sm">
-                {total_ratings} {t("rating")}
+                {average_rating} {t("rating")}
               </span>
             </div>
             <div className="flex items-center gap-1">
@@ -97,18 +112,22 @@ const CourseCard: React.FC<Course> = ({
 
         <div className="flex justify-between items-center border-t border-t-[#d1d1d1] mt-8 py-4">
           <div className="flex items-center justify-center gap-1 flex-wrap">
-            {discount_price_sar != null && discount_price_sar !== "" && price?.sar && parseInt(discount_price_sar) > 0 ? (
+            {is_free ? (
+              <h4 className="font-bold text-xl gradient-background bg-clip-text text-transparent">
+                {t("is_free")}
+              </h4>
+            ) : discount_price_sar != null && discount_price_sar !== "" && price?.sar && parseInt(discount_price_sar) > 0 ? (
               <>
                 <span className="font-bold text-base text-gray-500 line-through">
-                  {price.sar} {t("currency")}
+                  {price.sar} {tCommon("currency.SAR")}
                 </span>
                 <h4 className="font-bold text-xl gradient-background bg-clip-text text-transparent">
-                  {discount_price_sar} {t("currency")}
+                  {discount_price_sar} {tCommon("currency.SAR")}
                 </h4>
               </>
             ) : (
               <h4 className="font-bold text-xl gradient-background bg-clip-text text-transparent">
-                {price?.sar} {t("currency")}
+                {price?.sar} {tCommon("currency.SAR")}
               </h4>
             )}
           </div>

@@ -1,4 +1,5 @@
 import { Course } from "@/app/[locale]/(main)/courses/_types/courses.types";
+import { UseQueryResult } from "@tanstack/react-query";
 
 export interface LocalizedString {
   en: string;
@@ -46,4 +47,5 @@ export interface CartContextProps {
   removeFromCart: (itemId: number) => void;
   clearCart: () => void;
   isInCart: (course_id: number) => boolean;
+  cartQuery: UseQueryResult<CartResponse, Error>
 }

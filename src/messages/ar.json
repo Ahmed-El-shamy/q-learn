@@ -190,6 +190,7 @@
     "toggle-all-chapters": "تبديل كل الفصول",
     "preview": "معاينة",
     "no-reviews": "لا توجد مراجعات حالياً",
+    "no-content-available": "لا يوجد محتوى متاح",
     "login-to-leave-review": "يرجى <login>تسجيل الدخول</login> لتتمكن من إضافة تقييمك",
     "course-full-rating": "تقييم الدورة",
     "course-rating": "التقييم",
@@ -427,7 +428,8 @@
     "wishlistRemoved": "تمت الإزالة من المفضلة",
     "wishlistFailed": "حصلت مشكلة أثناء تحديث المفضلة",
     "addToWishlist": "إضافة للمفضلة",
-    "removeFromWishlist": "إزالة من المفضلة"
+    "removeFromWishlist": "إزالة من المفضلة",
+    "is_free": "مجاني"
   },
   "filters": {
     "category": "الأقسام",
@@ -530,6 +532,7 @@
     "your order": "طلبك",
     "course image": "صورة الكورس",
     "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
     "payable amount": "المبلغ المستحق",
     "place an order": "تنفيذ الطلب",
     "currency": "ر.س",

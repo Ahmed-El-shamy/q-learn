@@ -78,6 +78,7 @@ const socialMediaLinksConfig = [
 const CourseStickyContent = () => {
   const t = useTranslations("courses");
   const tCart = useTranslations("cart");
+  const tCommon = useTranslations();
   const { addToCart, removeFromCart, isInCart, items, isLoading } = useCart();
   const router = useRouter();
   const imageContainer = useRef<HTMLDivElement>(null);
@@ -249,8 +250,8 @@ const CourseStickyContent = () => {
       <div className="max-h-[1000px] overflow-hidden" ref={imageContainer}>
         <div className="h-[300px] w-full md:h-[500px] lg:h-[200px] min-w-[280px] xl:min-w-none xl:h-[270px] xl:w-[380px] relative overflow-hidden bg-gray-300">
           {isImageError || !course?.image ? (
-            <div className="w-full h-full flex items-center justify-center bg-gray-300">
-              <ImageIcon className="text-gray-600 w-16 h-16" />
+            <div className="w-full h-full flex items-center justify-center bg-green-100">
+              <ImageIcon className="text-green-600 w-16 h-16" />
             </div>
           ) : (
             <Image
@@ -265,7 +266,7 @@ const CourseStickyContent = () => {
             <VideoDialog videoUrl={course.video}>
               <MainBtn containerClassName="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-16 h-16 md:w-20 md:h-20 p-0 flex items-center justify-center bg-white/90 hover:bg-white border-none shadow-lg">
                 <Play
-                  className="w-8 h-8 md:w-10 md:h-10 text-white ml-1"
+                  className="w-8 h-8 md:w-10 md:h-10 text-green-600 ml-1"
                   fill="currentColor"
                 />
               </MainBtn>
@@ -286,11 +287,11 @@ const CourseStickyContent = () => {
                 {!!course.discount_price_sar && parseInt(course.discount_price_sar) > 0 ? (
                   <>
                     <p className="text-xl sm:text-2xl md:text-3xl font-bold">
-                      {course.discount_price_sar} SAR
+                      {course.discount_price_sar} {tCommon("currency.SAR")}
                     </p>
                     {course.price?.sar && (
                       <p className="text-base sm:text-lg md:text-xl font-bold text-gray-500 line-through">
-                        {course.price.sar} SAR
+                        {course.price.sar} {tCommon("currency.SAR")}
                       </p>
                     )}
                   </>
@@ -302,7 +303,7 @@ const CourseStickyContent = () => {
                         course.original_price.egp) && (
                       <p className="text-base sm:text-lg md:text-xl font-bold text-gray-500 line-through">
                         {course.original_price.sar
-                          ? `${course.original_price.sar} SAR`
+                          ? `${course.original_price.sar} ${tCommon("currency.SAR")}`
                           : course.original_price.usd
                             ? `$${course.original_price.usd}`
                             : course.original_price.egp
@@ -312,7 +313,7 @@ const CourseStickyContent = () => {
                     )}
                     <p className="text-xl sm:text-2xl md:text-3xl font-bold">
                       {course.price?.sar
-                        ? `${course.price.sar} SAR`
+                        ? `${course.price.sar} ${tCommon("currency.SAR")}`
                         : course.price?.usd
                           ? `$${course.price.usd}`
                           : course.price?.egp
@@ -348,7 +349,7 @@ const CourseStickyContent = () => {
           {courseProperties.map((item) => (
             <div key={item.label} className="flex items-center gap-2 sm:gap-3">
               <item.icon
-                className="text-purple-500 w-4 h-4 sm:w-5 sm:h-5"
+                className="text-green-600 w-4 h-4 sm:w-5 sm:h-5"
                 aria-hidden
               />
               <span className="text-gray-800 text-xs sm:text-sm md:text-base">
@@ -375,7 +376,7 @@ const CourseStickyContent = () => {
                     : undefined
                 }
                 aria-label={label}
-                className="p-1.5 sm:p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-purple-500 transition-colors duration-200"
+                className="p-1.5 sm:p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-green-600 transition-colors duration-200"
                 target={onClickHandler ? undefined : "_blank"}
                 rel={onClickHandler ? undefined : "noopener noreferrer"}
               >

@@ -21,7 +21,7 @@
 }
 
 .slider__range {
-  @apply bg-linear-to-r from-[#660afb] to-[#b633ff];
+  @apply bg-linear-to-r from-[#00C950] to-[#007A33];
   width: 100%;
   z-index: 2;
 }
@@ -61,7 +61,7 @@
   pointer-events: all;
   position: relative;
   border: 3px solid;
-  @apply border-[#b633ff];
+  @apply border-[#00C950];
 }
 
 /* For Firefox browsers */

@@ -188,6 +188,7 @@
     "toggle-all-chapters": "Toggle all chapters",
     "preview": "Preview",
     "no-reviews": "There are currently no reviews",
+    "no-content-available": "No content available",
     "login-to-leave-review": "Please <login>log in</login> to add your review",
     "overview": "overview",
     "content": "content",
@@ -429,7 +430,8 @@
     "wishlistRemoved": "Removed from wishlist",
     "wishlistFailed": "Could not update wishlist",
     "addToWishlist": "Add to wishlist",
-    "removeFromWishlist": "Remove from wishlist"
+    "removeFromWishlist": "Remove from wishlist",
+    "is_free": "Free"
   },
   "filters": {
     "category": "Category",
@@ -531,6 +533,7 @@
     "your order": "Your Order",
     "course image": "Course Image",
     "subtotal": "Subtotal",
+    "discount": "Discount",
     "payable amount": "Payable Amount",
     "place an order": "Place An Order",
     "currency": "SAR",

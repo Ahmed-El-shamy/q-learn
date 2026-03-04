@@ -29,16 +29,16 @@ const ContactInput = ({
 
       <label
         className="
-          absolute px-2 start-6 top-4 text-lg text-[#373737] bg-[#faf5ff]
+          absolute px-2 start-6 top-4 text-lg text-[#373737] bg-green-50
           transition-all duration-150
 
           peer-focus:-top-2
           peer-focus:text-sm
-          peer-focus:text-[#660afb]
+          peer-focus:text-[#00C950]
 
           peer-not-placeholder-shown:-top-2
           peer-not-placeholder-shown:text-sm
-          peer-not-placeholder-shown:text-[#660afb]
+          peer-not-placeholder-shown:text-[#00C950]
         "
       >
         {label}

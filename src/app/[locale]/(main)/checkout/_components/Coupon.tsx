@@ -2,30 +2,26 @@
 import MainBtn from "@/_components/common/buttons/MainBtn";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { useApplyCoupon } from "../_hooks/useApplyCoupon";
+import { useApplyCopoun } from "../_hooks/useApplyCoupon";
 import { toast } from "sonner";
 
 const Coupon = () => {
-  const [coupon, setCoupon] = useState("");
   const [isApplied, setIsApplied] = useState(false);
   const t = useTranslations("checkout.coupon");
 
-  const { mutate, isPending } = useApplyCoupon();
-  const handleApplyCoupon = () => {
-    mutate(
-      { code: coupon },
-      {
-        onSuccess: () => {
-          setIsApplied(true);
-          toast.success(t("coupon applied successfully"));
-        },
-        onError: (error: any) => {
-          setIsApplied(false);
-          toast.error(t("invalid coupon"));
-          console.log(error);
-        },
-      }
-    );
+  const { submit, methods, applyCouponMutation: {isPending} } = useApplyCopoun();
+  const { watch, setValue } = methods;
+  const coupon = watch("coupon_code");
+
+  const handleApplyCoupon = async () => {
+    try {
+      await submit();
+      setIsApplied(true);
+      toast.success(t("coupon applied successfully"));
+    } catch (error: any) {
+      setIsApplied(false);
+      console.log(error);
+    }
   };
 
   return (
@@ -34,7 +30,7 @@ const Coupon = () => {
         type="text"
         value={coupon}
         onChange={(e) => {
-          setCoupon(e.target.value);
+          setValue("coupon_code", e.target.value);
           setIsApplied(false);
         }}
         placeholder={t("enter coupon code")}

@@ -242,6 +242,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       removeFromCart,
       clearCart,
       isInCart,
+      cartQuery
     }),
     [
       items,
@@ -257,6 +258,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       removeFromCart,
       clearCart,
       isInCart,
+      cartQuery
     ]
   );
 

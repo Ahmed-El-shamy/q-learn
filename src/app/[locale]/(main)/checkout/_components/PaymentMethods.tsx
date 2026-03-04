@@ -14,7 +14,7 @@ const PaymentMethods = () => {
       <div className="flex gap-4">
         <button
           type="button"
-          className="flex-1 border rounded-lg p-4 flex items-center gap-3 transition border-[#635BFF] bg-[#F4F3FF]"
+          className="flex-1 border rounded-lg p-4 flex items-center gap-3 transition border-[#00C950] bg-[#ECFDF3]"
         >
           <CreditCard />
           <div>

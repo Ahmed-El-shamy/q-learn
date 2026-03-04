@@ -48,7 +48,7 @@ const ContactDetails = () => {
                 size={45}
                 stroke="url(#icon-gradient)"
                 strokeWidth={1}
-                fill="#d7e0ff"
+                fill="var(--color-green-50)"
                 fillOpacity={0.6}
               />
               <h2 className="text-2xl text-[#202e3b]">{t("phone")}</h2>
@@ -67,7 +67,7 @@ const ContactDetails = () => {
                 size={45}
                 stroke="url(#icon-gradient)"
                 strokeWidth={1}
-                fill="#d7e0ff"
+                fill="var(--color-green-50)"
                 fillOpacity={0.6}
               />
               <h2 className="text-2xl text-[#202e3b]">{t("email")}</h2>
@@ -85,7 +85,7 @@ const ContactDetails = () => {
                 size={45}
                 stroke="url(#icon-gradient)"
                 strokeWidth={1}
-                fill="#d7e0ff"
+                fill="var(--color-green-50)"
                 fillOpacity={0.6}
               />
               <h2 className="text-2xl text-[#202e3b]">{t("address")}</h2>

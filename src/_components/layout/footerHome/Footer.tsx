@@ -30,7 +30,7 @@ const Footer: React.FC<FooterProps> = ({
 }) => {
   const pathname = usePathname();
   return (
-    <footer className="bg-[#1e2147] text-white pb-16">
+    <footer className="bg-[#0A2516] text-white pb-16">
       {pathname === "/" && <RewardWidget />}
 
       <FooterLinks websiteTitle={websiteTitle} slogan={slogan} />

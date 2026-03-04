@@ -19,11 +19,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        main: "main-background text-white border-purple-500 bg-[length:200%_100%] bg-left hover:bg-right",
+        main: "main-background text-white border-green-600 bg-[length:200%_100%] bg-left hover:bg-right",
         secondary:
-          "bg-gray-100 text-gray-800 border-gray-200 hover:bg-white hover:border-purple-500",
+          "bg-gray-100 text-gray-800 border-gray-200 hover:bg-white hover:border-green-600",
         outlined:
-          "bg-transparent border border border-purple-500 text-purple-500",
+          "bg-transparent border border border-green-600 text-green-700",
       },
       size: {
         small: "py-1 px-3 text-sm",

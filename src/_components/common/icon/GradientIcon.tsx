@@ -17,8 +17,8 @@ const GradientIcon: React.FC<GradientIconProps> = ({
   onClick,
   Icon,
   size = 18,
-  gradientFrom = "#660afb",
-  gradientTo = "#b633ff",
+  gradientFrom = "#00C950",
+  gradientTo = "#007A33",
   className = "",
   stroke,
   fill,
@@ -26,7 +26,7 @@ const GradientIcon: React.FC<GradientIconProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center justify-center p-2 hover:bg-purple-50 rounded-full cursor-pointer transition-colors ${className}`}
+      className={`flex items-center justify-center p-2 hover:bg-green-50 rounded-full cursor-pointer transition-colors ${className}`}
     >
       <svg width={size * 2} height={size * 2} viewBox="0 0 24 24">
         <defs>

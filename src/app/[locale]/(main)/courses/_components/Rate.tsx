@@ -20,16 +20,16 @@ const Rate = ({ rate, size = 20 }: Props) => {
           >
             <Star
               size={size}
-              fill="var(--color-purple-200)"
-              className="absolute inset-0 text-purple-300"
+              fill="var(--color-green-200)"
+              className="absolute inset-0 text-green-300"
             />
             <span
               className="absolute inset-0 overflow-hidden"
               style={{ width: `${fillAmount * 100}%` }}
             >
               <Star
-                className="text-purple-500"
-                fill="var(--color-purple-500)"
+                className="text-green-600"
+                fill="var(--color-green-600)"
                 size={size}
               />
             </span>

@@ -19,7 +19,7 @@ const HomePage = () => {
     <>
       {/* Hero Section */}
       <Suspense fallback={<HeroSkeleton />}>
-        <section className="py-10 md:py-32 lg:py-48 bg-[#cee8ff] relative">
+        <section className="py-10 md:py-32 lg:py-48 bg-[#E8F8EE] relative">
           <Container>
             <HeroSection />
           </Container>
@@ -31,21 +31,21 @@ const HomePage = () => {
         <StatisticsSection />
       </Suspense>
       <Suspense fallback={<TopCategoriesSkeleton />}>
-        <section className="bg-[#D7ECFF] py-16 md:py-20">
+        <section className="bg-[#DCF5E5] py-16 md:py-20">
           <div className="containerr">
             <TopCategoriesSection />
           </div>
         </section>
       </Suspense>
       <Suspense fallback={<TopCategoriesSkeleton />}>
-        <section className="bg-[#D7ECFF] py-16 md:py-20">
+        <section className="bg-[#DCF5E5] py-16 md:py-20">
           <div className="containerr">
             <TrendedCoursesSection />
           </div>
         </section>
       </Suspense>
       <Suspense fallback={<BlogSkelton />}>
-        <section className="bg-[#FFFFF] py-16 md:py-20">
+        <section className="bg-[#FFFFFF] py-16 md:py-20">
           <div className="containerr">
             <TestimonialsSection />
           </div>
@@ -53,7 +53,7 @@ const HomePage = () => {
       </Suspense>
 
       <Suspense fallback={<BrandsCardSkeleton />}>
-        <section className="bg-[#FFFFF] py-16 md:py-20">
+        <section className="bg-[#FFFFFF] py-16 md:py-20">
           <div className="containerr">
             <TeachersSection />
           </div>
@@ -62,7 +62,7 @@ const HomePage = () => {
 
       {/* About Us Section */}
       <Suspense fallback={<AboutSklelton />}>
-        <section className="bg-[#cee8ff] py-15 md:py-28">
+        <section className="bg-[#E8F8EE] py-15 md:py-28">
           <Container>
             <AboutUsSection />
           </Container>
@@ -71,7 +71,7 @@ const HomePage = () => {
 
       {/* Blogs Section */}
       <Suspense fallback={<BlogSkelton />}>
-        <section className="bg-[#cee8ff] py-15 md:py-28 md:pb-96 pb-96">
+        <section className="bg-[#E8F8EE] py-15 md:py-28 md:pb-96 pb-96">
           <Container>
             <BlogsSection />
           </Container>

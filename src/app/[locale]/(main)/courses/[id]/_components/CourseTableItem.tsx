@@ -48,8 +48,8 @@ const CourseTableItem = ({ course }: CourseTableItemProps) => {
     >
       <div className="flex gap-2 p-2 w-full sm:w-[60%] sm:border-e sm:border-e-gray-200">
         {imgError ? (
-          <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-[70px] md:h-[70px] shrink-0 bg-gray-200 flex items-center justify-center rounded">
-            <ImageIcon size={24} className="text-gray-400" />
+          <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-[70px] md:h-[70px] shrink-0 bg-green-100 flex items-center justify-center rounded">
+            <ImageIcon size={24} className="text-green-600" />
           </div>
         ) : (
           <Image
@@ -64,7 +64,7 @@ const CourseTableItem = ({ course }: CourseTableItemProps) => {
         <div className="text-xs sm:text-sm flex-1 min-w-0">
           <Link 
             href={`/courses/${course.id}`}
-            className="line-clamp-2 sm:line-clamp-1 font-semibold hover:text-purple-600 transition-colors block"
+            className="line-clamp-2 sm:line-clamp-1 font-semibold hover:text-green-600 transition-colors block"
           >
             {course.title}
           </Link>
@@ -85,8 +85,8 @@ const CourseTableItem = ({ course }: CourseTableItemProps) => {
           <div className="flex items-center gap-1 text-xs sm:text-sm">
             <Star
               size={12}
-              className="sm:w-4 sm:h-4 text-purple-500"
-              fill="rgba(182,51,255, 0.4)"
+              className="sm:w-4 sm:h-4 text-green-600"
+              fill="rgba(0,201,80, 0.4)"
             />{" "}
             {course.average_rating} <p>{t("ratings")}</p>
           </div>
@@ -95,8 +95,8 @@ const CourseTableItem = ({ course }: CourseTableItemProps) => {
           <div className="flex items-center gap-1 text-xs sm:text-sm">
             <User
               size={12}
-              className="sm:w-4 sm:h-4 text-purple-500"
-              fill="rgba(182,51,255, 0.4)"
+              className="sm:w-4 sm:h-4 text-green-600"
+              fill="rgba(0,201,80, 0.4)"
             />{" "}
             {course.total_enrollments} <p>{t("students")}</p>
           </div>
@@ -131,13 +131,13 @@ const CourseTableItem = ({ course }: CourseTableItemProps) => {
           {isAlreadyInCart ? (
             <Trash2
               size={20}
-              className="sm:w-6 sm:h-6 text-purple-500"
+              className="sm:w-6 sm:h-6 text-green-600"
             />
           ) : (
             <ShoppingCart
               size={20}
-              className="sm:w-6 sm:h-6 text-purple-500"
-              fill="var(--color-purple-500)"
+              className="sm:w-6 sm:h-6 text-green-600"
+              fill="#00C950"
             />
           )}
         </button>

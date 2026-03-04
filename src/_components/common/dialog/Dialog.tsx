@@ -88,12 +88,12 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
                     className="max-w-xl w-[80%] rounded z-70 outline-none scale-100 fixed top-1/2 left-1/2 bg-white content"
                 >
                     <div className={clsx("w-full  py-2 relative", {
-                        "border-b border-b-purple-500": title || description
+                        "border-b border-b-green-600": title || description
                     })}>
                         {
                             (title || description) && (
                             <div className="px-4 text-start">
-                                <DialogTitle className="text-purple-800 font-bold text-lg">
+                                <DialogTitle className="text-green-800 font-bold text-lg">
                                     {t(title || "")}
                                 </DialogTitle>
                                 <DialogDescription className="text-gray-700">
@@ -103,7 +103,7 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
                             )
                         }
                         <DialogClose asChild>
-                            <X className="text-purple-500/50 cursor-pointer duration-100 hover:text-purple-500 top-2 end-4 absolute" />
+                            <X className="text-green-500/50 cursor-pointer duration-100 hover:text-green-600 top-2 end-4 absolute" />
                         </DialogClose>
                     </div>
                     <div className="px-4 py-2 min-h-[100px] max-h-[500px] overflow-y-auto">

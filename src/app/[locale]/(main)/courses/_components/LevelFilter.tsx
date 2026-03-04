@@ -45,7 +45,7 @@ const LevelFilter = () => {
 
             <span
               className="text-[#202e3b] transition-all duration-300
-                group-hover:bg-linear-to-r group-hover:from-[#660afb] group-hover:to-[#b633ff] group-hover:bg-clip-text group-hover:text-transparent"
+                group-hover:bg-linear-to-r group-hover:from-[#00C950] group-hover:to-[#007A33] group-hover:bg-clip-text group-hover:text-transparent"
             >
               {tLevel(option.labelKey)}
             </span>

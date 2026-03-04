@@ -60,8 +60,8 @@ const SortDropdown = () => {
           {options.map((opt) => (
             <li
               key={opt}
-              className={`p-2 capitalize cursor-pointer hover:bg-purple-100 ${
-                sortBy === opt ? "bg-purple-200 font-semibold" : ""
+              className={`p-2 capitalize cursor-pointer hover:bg-green-100 ${
+                sortBy === opt ? "bg-green-200 font-semibold" : ""
               }`}
               onClick={() => {
                 setSortBy(opt);

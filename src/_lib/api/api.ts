@@ -67,6 +67,7 @@ export class Api {
       cart: "/site/cartItems",
       list: "/site",
       coupon: "/site/coupons/validate",
+      cartItemsSummary: "/site/cartItems/summary",
       enrollments: "/site/enrollments",
       quizzes: "/site/quizzes",
       quizAttempts: "/site/quiz-attempts",
