@@ -86,7 +86,7 @@ const MainTextArea = React.forwardRef<HTMLTextAreaElement, MainTextAreaProps>(
       <div className={`w-full ${className || ""}`}>
         {label && (
           <label htmlFor={inputId} className="flex font-medium mb-1">
-            {label}{" "}
+            {t(label)}{" "}
             {required && (
               <span>
                 <Asterisk className="text-red-500 ml-1" size={12} />

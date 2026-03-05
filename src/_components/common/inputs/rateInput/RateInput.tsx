@@ -34,10 +34,10 @@ const RateInput = ({ value, onChange, size = 17, className }: RateInputProps) =>
                     >
                         <Star
                             size={size}
-                            fill={isFilled ? "#00C950" : "#d4f5e0"}
+                            fill={isFilled ? "#00C950" : "var(--color-green-200)"}
                             className={clsx("duration-100 cursor-pointer", {
                                 "text-green-600": isFilled,
-                                "text-green-100": !isFilled,
+                                "text-green-300": !isFilled,
                                 "opacity-60": star > hoveredRate && star <= value && hoveredRate != 0
                             })}
                         />

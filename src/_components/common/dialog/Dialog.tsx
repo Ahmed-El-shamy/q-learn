@@ -26,7 +26,7 @@ interface Props {
     action?: ActionType;
     cancel?: ActionType;
     content: React.ReactNode;
-    onSuccess?: () => void;
+    onSuccess?: () => void | Promise<void>;
     asChild?: boolean;
 }
 
@@ -63,7 +63,7 @@ const DialogComponent = forwardRef<DialogRefType, Props>(({
         try {
             setIsLoading(true); 
             await action?.action();
-            onSuccess?.();
+            await onSuccess?.();
             setIsLoading(false);
             setOpen(false);
         } catch {

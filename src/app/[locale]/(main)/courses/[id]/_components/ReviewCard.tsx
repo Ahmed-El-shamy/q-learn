@@ -1,6 +1,7 @@
 import { useLocale } from "next-intl";
 import Rate from "../../_components/Rate";
 import Avatar from "@/_components/common/avatar/Avatar";
+import ReviewDeleteButton from "./review-delete-button";
 
 interface ReviewCardProps {
     review: {
@@ -17,6 +18,7 @@ interface ReviewCardProps {
 
 const ReviewCard = ({ review }: ReviewCardProps) => {
     const locale = useLocale();
+
     const createdAt = new Date(review.created_at).toLocaleDateString(locale === "en" ? "en-GB" : "ar", {
         year: "numeric",
         month: "2-digit",
@@ -38,9 +40,12 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
                             {review.user.name}
                         </p>
                     </div>
-                    <p className="text-xs sm:text-sm text-gray-500">
-                        {createdAt}
-                    </p>
+                    <div className="flex items-center gap-2">
+                        <p className="text-xs sm:text-sm text-gray-500">
+                            {createdAt}
+                        </p>
+                        <ReviewDeleteButton id={review.id} author={review.user.id} />
+                    </div>
                 </div>
                 <Rate rate={review.rating} size={16} />
                 <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">

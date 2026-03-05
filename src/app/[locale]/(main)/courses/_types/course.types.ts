@@ -83,6 +83,7 @@ export type Review = {
   is_active: number;
   user: ReviewUser;
   status: string;
+  created_at: string;
 };
 
 export type CourseReference = {

@@ -195,7 +195,7 @@
     "login-to-leave-review": "يرجى <login>تسجيل الدخول</login> لتتمكن من إضافة تقييمك",
     "course-full-rating": "تقييم الدورة",
     "course-rating": "التقييم",
-    "reviews": "المراجعات",
+    "review": "المراجعات",
     "courses": "الدورات",
     "as-a-student": "كطالب",
     "to-leave-a-review": "لترك مراجعة",
@@ -604,5 +604,10 @@
   },
   "currency": {
     "SAR": "ر.س"
-  }
+  },
+  "review-deleted-success": "تم حذف التقييم بنجاح",
+  "are-you-sure-delete": "هل أنت متأكد أنك تريد حذف هذا التقييم؟",
+  "this-action-cannot-be-undone": "لا يمكن التراجع عن هذا الإجراء.",
+  "review": "المراجعة",
+  "yes-delete": "نعم، احذف"
 }

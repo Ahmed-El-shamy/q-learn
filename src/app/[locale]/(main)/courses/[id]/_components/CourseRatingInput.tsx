@@ -7,7 +7,6 @@ import { Controller } from "react-hook-form";
 import MainTextArea from "@/_components/common/inputs/mainInput/MainTextArea";
 import RateInput from "@/_components/common/inputs/rateInput/RateInput";
 import { useTranslations } from "next-intl";
-import { flushSync } from "react-dom";
 
 const CourseRatingInput = () => {
     const t = useTranslations();
@@ -48,7 +47,7 @@ const CourseRatingInput = () => {
                         />
                         <MainTextArea
                             {...register("review")}
-                            label="Review"
+                            label="review"
                             placeholder={t("courses.rate-dialog-review-placeholder")}
                             error={errors.review?.message}
                             rows={6}
@@ -68,7 +67,10 @@ const CourseRatingInput = () => {
                     return submit();
                 }
             }}
-            onSuccess={handleCancel}
+            onSuccess={() => {
+                handleCancel();
+                setValue("rating", 0);
+            }}
         >
             <Controller
                 name="rating"
