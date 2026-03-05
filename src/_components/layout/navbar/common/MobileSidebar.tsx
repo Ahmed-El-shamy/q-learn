@@ -4,17 +4,30 @@ import { useNavbar } from "../hooks/useNavbar";
 import { NavLinks } from "../data/navbarLinks";
 import { useEffect, type FC } from "react";
 import type { NavbarProps } from "../types/navbar";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import MainBtn from "@/_components/common/buttons/MainBtn";
+import { useQuery } from "@tanstack/react-query";
+import { settingsOptions } from "@/app/[locale]/auth/_queries/settingsOptions";
+import Image from "next/image";
 
 const MobileSidebar: FC<Omit<NavbarProps, "logoImg">> = ({
   links = [],
   logoText,
 }) => {
   const { isOpen, toggleMenu } = useNavbar();
+  const t = useTranslations("auth");
+  const tNavbar = useTranslations("navbar");
+  const { data } = useQuery({
+    ...settingsOptions(),
+    refetchOnMount: false
+  });
 
   function handleDisableScroll() {
     if (isOpen && window.innerWidth < 768) {
-      console.log("hello there");
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
     }
   }
 
@@ -37,12 +50,19 @@ const MobileSidebar: FC<Omit<NavbarProps, "logoImg">> = ({
         <Menu />
       </button>
       <aside
-        className={`z-10 bg-white border-l-primary w-2/3 py-4 flex flex-col max-w-lg h-screen overflow-y-auto fixed top-0 left-0 duration-300 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`z-10 bg-white border-l-primary w-2/3 py-4 flex flex-col max-w-lg h-screen overflow-y-auto fixed top-0 left-0 duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="flex justify-between items-center border-b border-b-primary px-6 pb-2">
-          <p className="text-xl">{logoText}</p>
+          <Link href="/" onClick={() => toggleMenu()}>
+            <Image
+              src={data?.site_logo || ""}
+              alt="logo"
+              height={20}
+              width={20}
+              className="size-[20px]"
+            />
+          </Link>
           <button
             onClick={toggleMenu}
             className="cursor-pointer p-1 hover:bg-gray-100 duration-100 rounded"
@@ -58,17 +78,17 @@ const MobileSidebar: FC<Omit<NavbarProps, "logoImg">> = ({
               className="py-4 px-2 hover:bg-gray-100 capitalize rounded-lg duration-100 cursor-pointer"
               prefetch={false}
             >
-              {link.label}
+              {tNavbar(`links.${link.label}`)}
             </Link>
           ))}
         </div>
-        <div className="flex flex-col gap-2 items-center mt-auto py-4 px-10 [&>button]:cursor-pointer">
-          <button className="bg-primary text-white font-bold w-full rounded-lg py-2 duration-100 hover:bg-primary/90">
-            Log in
-          </button>
-          <button className="bg-white/40 text-black backdrop-blur-lg border border-primary hover:bg-gray-100 duration-100 font-bold w-full rounded-lg py-2">
-            Create an account
-          </button>
+        <div className="flex flex-col w-full gap-2 mt-auto py-4 px-10 [&>button]:cursor-pointer">
+          <Link href="/auth/login">
+            <MainBtn containerClassName="w-full">{t("login.button")}</MainBtn>
+          </Link>
+          <Link href="/auth/register">
+            <MainBtn containerClassName="w-full" variant="outlined">{t("signup")}</MainBtn>
+          </Link>
         </div>
       </aside>
       {isOpen && (

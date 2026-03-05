@@ -9,7 +9,7 @@ export const NavLinks = [
   },
   {
     href: "/about-us",
-    label: "about us",
+    label: "aboutUs",
   },
   {
     href: "/blogs",
