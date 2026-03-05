@@ -165,6 +165,7 @@
     }
   },
   "courses": {
+    "content_count": "{count} chapters",
     "students": "students",
     "panels": {
       "overview": "Overview",

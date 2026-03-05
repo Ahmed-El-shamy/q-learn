@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { ShieldUser, ShoppingCart, Star, Trash2, ImageIcon } from "lucide-react";
+import { ShieldUser, ShoppingCart, Star, Trash2, ImageIcon, Laptop, User, Clock3, Presentation } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/store/CartProvider";
 import { useTranslations } from "next-intl";
@@ -9,6 +9,7 @@ import { CourseWishlistButton } from "./CourseWishlistButton";
 import GradientIcon from "@/_components/common/icon/GradientIcon";
 import { Course } from "../_types/course.types";
 import HtmlContent from "@/_components/common/HtmlContent";
+import Avatar from "@/_components/common/avatar/Avatar";
 
 const CourseCard: React.FC<Course> = ({
   id,
@@ -22,6 +23,10 @@ const CourseCard: React.FC<Course> = ({
   is_enrolled = false,
   average_rating,
   is_free = false,
+  mode,
+  instructor,
+  total_hours,
+  content,
 }) => {
   const { addToCart, removeFromCart, isInCart, items } = useCart();
   const t = useTranslations("courseCard");
@@ -57,8 +62,8 @@ const CourseCard: React.FC<Course> = ({
   };
 
   return (
-    <div className="border border-[#d1d1d1] h-[540px] group overflow-hidden">
-      <div className="w-full h-[45%] relative overflow-hidden">
+    <div className="border border-[#d1d1d1] overflow-hidden group">
+      <div className="w-full h-[250px] relative overflow-hidden">
         <Link href={`/courses/${id}`} className="block w-full h-full">
           <p className="bg-[#00C950]/70 text-white py-1 px-5 absolute top-5 start-5 z-10">
             {level}
@@ -83,15 +88,30 @@ const CourseCard: React.FC<Course> = ({
         <CourseWishlistButton courseId={id} />
       </div>
 
-      <div className="p-5">
+      <div className="py-2 px-5">
         <div className="data">
           <Link href={`/courses/${id}`}>
             <h3 className="h-15 line-clamp-2 leading-7 text-[#1f2b40] font-semibold transition-colors ease-linear duration-500 hover:text-[#007A33]">
               {title}
             </h3>
           </Link>
+          <div className="flex items-center mb-2 gap-2">
+            <div className="flex justify-center items-center rounded-full bg-gray-100 p-0.5 overflow-hidden shrink-0 w-8 h-8 sm:w-9 sm:h-9">
+              {instructor.avatar ? (
+                <Avatar
+                  src={instructor.avatar}
+                  alt={instructor.user.name || "Instructor"}
+                  size={32}
+                  className="w-8 h-8 sm:w-9 sm:h-9"
+                />
+              ) : (
+                <User className="text-gray-700" size={16} />
+              )}
+            </div>
+            <p className="text-xs sm:text-sm md:text-base">{instructor.user.name}</p>
+          </div>
 
-          <div className="flex items-center justify-between mt-1 mb-8">
+          <div className="flex items-center justify-between flex-wrap mt-1 mb-8">
             <div className="flex items-center gap-1">
               <Star size={18} className="fill-green-600 stroke-green-600" />
               <span className="text-[#1f2b40] text-sm">
@@ -99,7 +119,25 @@ const CourseCard: React.FC<Course> = ({
               </span>
             </div>
             <div className="flex items-center gap-1">
-              <ShieldUser size={18} />
+              <Laptop size={18} className="text-green-600" />
+              <span className="text-[#1f2b40] text-sm">
+                {tCommon(`mode.${mode}`)}
+              </span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Clock3 size={18} className="text-green-600" />
+              <p className="text-xs sm:text-sm md:text-base">
+                {tCommon("courses.duration.h", { hours: total_hours})}
+              </p>
+            </div>
+            <div className="flex items-center gap-1">
+              <Presentation size={18} className="text-green-600" />
+              <p className="text-xs sm:text-sm md:text-base">
+                {tCommon("courses.content_count", { count: content?.total_chapters || 0 })}
+              </p>
+            </div>
+            <div className="flex items-center gap-1">
+              <ShieldUser size={18} className="text-green-600 stoke-green-600" />
               <span className="text-[#1f2b40] text-sm">
                 {total_enrollments} {t("students")}
               </span>
@@ -110,7 +148,7 @@ const CourseCard: React.FC<Course> = ({
           </div>
         </div>
 
-        <div className="flex justify-between items-center border-t border-t-[#d1d1d1] mt-8 py-4">
+        <div className="flex justify-between items-center border-t border-t-[#d1d1d1] mt-8 py-2">
           <div className="flex items-center justify-center gap-1 flex-wrap">
             {is_free ? (
               <h4 className="font-bold text-xl gradient-background bg-clip-text text-transparent">

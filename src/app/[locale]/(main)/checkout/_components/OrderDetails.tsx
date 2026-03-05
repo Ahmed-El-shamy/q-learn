@@ -6,6 +6,7 @@ import MainBtn from "@/_components/common/buttons/MainBtn";
 import OrderSkelton from "./OrderSkelton";
 import Coupon from "./Coupon";
 import useCheckout from "../_quires/useCheckout";
+import { Link } from "@/i18n/navigation";
 
 const OrderDetails = () => {
   const { items, subtotal, total, isLoading, cartQuery } = useCart();
@@ -47,7 +48,7 @@ const OrderDetails = () => {
                   height={100}
                   className="rounded-lg h-16 w-20 object-cover"
                 />
-                <h3 className="text-[#515051] line-clamp-1 w-3/4">{i.title}</h3>
+                <Link href={`courses/${i.course?.id}`} className="text-green-800 hover:underline line-clamp-1 w-3/4">{i.title}</Link>
               </div>
               <p className="text-[#373737] text-sm w-28">
                 {i.price} {t("currency")}

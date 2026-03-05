@@ -106,7 +106,7 @@ const CartIcon = () => {
                     <div className="flex flex-col text-[#1f2b40] text-sm">
                       <Link
                         href={`/courses/${item.item_id}`}
-                        className="font-semibold line-clamp-2 hover:text-[#660afb]"
+                        className="font-semibold line-clamp-2 hover:text-green-800 hover:underline"
                         onClick={() => setCartOpen(false)}
                       >
                         {item.title}

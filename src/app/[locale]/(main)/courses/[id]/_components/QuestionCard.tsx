@@ -1,12 +1,14 @@
 import Avatar from "@/_components/common/avatar/Avatar";
 import { CourseQA } from "../course-details.types";
 import AnswerCard from "./AnswerCard";
+import { useLocale } from "next-intl";
 
 interface QuestionCardProps {
   question: CourseQA;
 }
 
 const QuestionCard = ({ question }: QuestionCardProps) => {
+  const locale = useLocale();
   return (
     <div className="py-4 bg-white">
       <div className="flex flex-col gap-3 sm:gap-4">
@@ -23,7 +25,11 @@ const QuestionCard = ({ question }: QuestionCardProps) => {
               {question.user.name}
             </p>
             <p className="text-xs sm:text-sm text-gray-500">
-              {new Date(question.created_at).toLocaleDateString()}
+              {new Date(question.created_at).toLocaleDateString(locale === "en" ? "en-GB" : "ar", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              })}
             </p>
           </div>
         </div>

@@ -18,7 +18,7 @@ export const infoLinks: FooterLink[] = [
 
 export const serviceLinks: FooterLink[] = [
   { labelKey: "linkCareers", link: "/static/careers" },
-  { labelKey: "linkBlog", link: "/static/blog" },
+  { labelKey: "linkBlog", link: "/blogs" },
   { labelKey: "linkHelpSupport", link: "/static/help" },
   { labelKey: "linkTerms", link: "/static/terms" },
   { labelKey: "linkCertificateVerification", link: "/static/certificate" },
