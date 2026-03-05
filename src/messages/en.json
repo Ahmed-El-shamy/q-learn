@@ -152,7 +152,8 @@
   },
   "Icons": {
     "home": "home",
-    "my account": "my account"
+    "my account": "my account",
+    "cart": "cart"
   },
   "navbar": {
     "logoImageAlt": "Logo Image",
@@ -469,6 +470,10 @@
   "cart": {
     "courseName": "Course Name",
     "price": "0",
+    "shoppingCart": "Shopping Cart",
+    "closeCart": "Close cart",
+    "courseType": "Course",
+    "learningPathType": "Learning Path",
     "addToCart": "Add to Cart",
     "removeFromCart": "Remove from cart",
     "buyNow": "Buy now",

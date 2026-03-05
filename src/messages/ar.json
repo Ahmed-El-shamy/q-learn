@@ -152,7 +152,8 @@
   },
   "Icons": {
     "home": "الرئيسية",
-    "my account": "حسابي"
+    "my account": "حسابي",
+    "cart": "السلة"
   },
   "navbar": {
     "logoImageAlt": "صورة الشعار",
@@ -469,6 +470,10 @@
   "cart": {
     "courseName": "اسم الكورس",
     "price": "0",
+    "shoppingCart": "سلة التسوق",
+    "closeCart": "إغلاق السلة",
+    "courseType": "دورة",
+    "learningPathType": "مسار تعليمي",
     "addToCart": "إضافة إلى السلة",
     "removeFromCart": "إزالة من السلة",
     "buyNow": "اشتري الآن",
