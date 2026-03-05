@@ -1,32 +1,21 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
-import { IoHomeOutline, IoCartOutline, IoHeartOutline } from "react-icons/io5";
-import { TbCategoryPlus } from "react-icons/tb";
+import { useCallback, useMemo } from "react";
+import { IoHomeOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
 import IconBadge from "../icon/IconBadge";
 import { useRouter } from "@/i18n/navigation";
+import { useSession } from "next-auth/react";
+
 const MobileWidget = () => {
   const router = useRouter();
-  const [showCategoriesSidebar, setShowCategoriesSidebar] = useState(false);
-  const [showCartSidebar, setShowCartSidebar] = useState(false);
-  const user = false;
-  // ✅ memoize handlers
-  const openCategoriesSidebar = useCallback(
-    () => setShowCategoriesSidebar(true),
-    []
-  );
-  const closeCategoriesSidebar = useCallback(
-    () => setShowCategoriesSidebar(false),
-    []
-  );
-  const openCartSidebar = useCallback(() => setShowCartSidebar(true), []);
-  const closeCartSidebar = useCallback(() => setShowCartSidebar(false), []);
+  const session = useSession();
+  const isAuthenticated = session.status === "authenticated";
 
   const homeAction = useCallback(() => router.push("/"), []);
 
   const accountAction = useCallback(
-    () => router.push(user ? "/my-profile" : "/auth/login"),
-    [user]
+    () => router.push(isAuthenticated ? "/user/profile" : "/auth/login"),
+    [isAuthenticated]
   );
 
   // ✅ define icons config to avoid repetition
@@ -36,7 +25,7 @@ const MobileWidget = () => {
 
       { Icon: FaRegUser, title: "my account", onClick: accountAction },
     ],
-    [homeAction, openCategoriesSidebar, openCartSidebar, accountAction]
+    [homeAction, accountAction]
   );
 
   return (

@@ -10,6 +10,7 @@ import MainBtn from "@/_components/common/buttons/MainBtn";
 import { useQuery } from "@tanstack/react-query";
 import { settingsOptions } from "@/app/[locale]/auth/_queries/settingsOptions";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const MobileSidebar: FC<Omit<NavbarProps, "logoImg">> = ({
   links = [],
@@ -18,6 +19,8 @@ const MobileSidebar: FC<Omit<NavbarProps, "logoImg">> = ({
   const { isOpen, toggleMenu } = useNavbar();
   const t = useTranslations("auth");
   const tNavbar = useTranslations("navbar");
+  const session = useSession();
+  const isAuthenticated = session.status === "authenticated";
   const { data } = useQuery({
     ...settingsOptions(),
     refetchOnMount: false
@@ -82,14 +85,18 @@ const MobileSidebar: FC<Omit<NavbarProps, "logoImg">> = ({
             </Link>
           ))}
         </div>
-        <div className="flex flex-col w-full gap-2 mt-auto py-4 px-10 [&>button]:cursor-pointer">
-          <Link href="/auth/login">
-            <MainBtn containerClassName="w-full">{t("login.button")}</MainBtn>
-          </Link>
-          <Link href="/auth/register">
-            <MainBtn containerClassName="w-full" variant="outlined">{t("signup")}</MainBtn>
-          </Link>
-        </div>
+        {
+          !isAuthenticated && (
+            <div className="flex flex-col w-full gap-2 mt-auto py-4 px-10 [&>button]:cursor-pointer">
+              <Link href="/auth/login">
+                <MainBtn containerClassName="w-full">{t("login.button")}</MainBtn>
+              </Link>
+              <Link href="/auth/register">
+                <MainBtn containerClassName="w-full" variant="outlined">{t("signup")}</MainBtn>
+              </Link>
+            </div>
+          )
+        }
       </aside>
       {isOpen && (
         <>

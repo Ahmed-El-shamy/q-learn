@@ -25,7 +25,7 @@ async function Navbar({
           <div className="flex justify-center items-center gap-8">
             <div className="flex items-center gap-3">
               {logoImg ? (
-                <div className="w-16 h-16 rounded-full overflow-hidden">
+                <div className="size-8 md:size-16 rounded-full overflow-hidden">
                   <img
                     src={logoImg}
                     alt={tNavbar("logoImageAlt")}
