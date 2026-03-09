@@ -91,7 +91,7 @@ const CourseCard: React.FC<Course> = ({
       <div className="py-2 px-5">
         <div className="data">
           <Link href={`/courses/${id}`}>
-            <h3 className="h-15 line-clamp-2 leading-7 text-[#1f2b40] font-semibold transition-colors ease-linear duration-500 hover:text-[#007A33]">
+            <h3 className="h-15 line-clamp-2 text-start leading-7 text-[#1f2b40] font-semibold transition-colors ease-linear duration-500 hover:text-[#007A33]">
               {title}
             </h3>
           </Link>
