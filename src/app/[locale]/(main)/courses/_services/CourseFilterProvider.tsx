@@ -45,6 +45,7 @@ export const CourseFilterProvider: FC<PropsWithChildren> = ({ children }) => {
       category_id: parseCustomArray("category_id").map(Number),
       level: parseCustomArray("level"),
       mode: parseCustomArray("mode"),
+      languages: searchParams.get("languages"),
       instructor: parseCustomArray("instructor"),
       is_free: parseCustomArray("is_free"),
       rating: parseCustomArray("rating").map(Number),

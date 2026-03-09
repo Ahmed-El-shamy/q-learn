@@ -11,16 +11,17 @@ import { useQuery } from "@tanstack/react-query";
 import { settingsOptions } from "@/app/[locale]/auth/_queries/settingsOptions";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import useSignout from "@/app/[locale]/auth/_hooks/useSignout";
 
 const MobileSidebar: FC<Omit<NavbarProps, "logoImg">> = ({
   links = [],
-  logoText,
 }) => {
   const { isOpen, toggleMenu } = useNavbar();
   const t = useTranslations("auth");
   const tNavbar = useTranslations("navbar");
   const session = useSession();
   const isAuthenticated = session.status === "authenticated";
+  const signOut = useSignout();
   const { data } = useQuery({
     ...settingsOptions(),
     refetchOnMount: false
@@ -34,8 +35,13 @@ const MobileSidebar: FC<Omit<NavbarProps, "logoImg">> = ({
     }
   }
 
+
   useEffect(() => {
     handleDisableScroll();
+
+    return () => {
+      document.body.style.overflow = "";
+    }
   }, [isOpen]);
 
   useEffect(() => {
@@ -86,7 +92,7 @@ const MobileSidebar: FC<Omit<NavbarProps, "logoImg">> = ({
           ))}
         </div>
         {
-          !isAuthenticated && (
+          !isAuthenticated ? (
             <div className="flex flex-col w-full gap-2 mt-auto py-4 px-10 [&>button]:cursor-pointer">
               <Link href="/auth/login">
                 <MainBtn containerClassName="w-full">{t("login.button")}</MainBtn>
@@ -95,7 +101,10 @@ const MobileSidebar: FC<Omit<NavbarProps, "logoImg">> = ({
                 <MainBtn containerClassName="w-full" variant="outlined">{t("signup")}</MainBtn>
               </Link>
             </div>
-          )
+          ) :
+            <div className="px-10 mt-auto flex justify-center items-center">
+              <MainBtn containerClassName="mt-auto w-full" onClick={() => signOut.mutate()} isLoading={signOut.isPending}>{t("logout")}</MainBtn>
+            </div>
         }
       </aside>
       {isOpen && (

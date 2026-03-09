@@ -12,6 +12,7 @@ type UseCourseQueryProps = {
 
 export const useCourseQuery = ({ filters, sort }: UseCourseQueryProps) => {
   const locale = useLocale();
+  console.log(filters);
   return useQuery({
     queryKey: [Api.routes.site.courses, locale, { filters, sort }],
     queryFn: () => {

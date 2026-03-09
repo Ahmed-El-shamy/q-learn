@@ -614,5 +614,10 @@
   "are-you-sure-delete": "هل أنت متأكد أنك تريد حذف هذا التقييم؟",
   "this-action-cannot-be-undone": "لا يمكن التراجع عن هذا الإجراء.",
   "review": "المراجعة",
-  "yes-delete": "نعم، احذف"
+  "yes-delete": "نعم، احذف",
+  "language": {
+    "language": "اللغة",
+    "en": "الإنجليزية",
+    "ar": "العربية"
+  }
 }
