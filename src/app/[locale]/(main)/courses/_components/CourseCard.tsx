@@ -95,29 +95,31 @@ const CourseCard: React.FC<Course> = ({
               {title}
             </h3>
           </Link>
-          <div className="flex items-center mb-2 gap-2">
-            <div className="flex justify-center items-center rounded-full bg-gray-100 p-0.5 overflow-hidden shrink-0 w-8 h-8 sm:w-9 sm:h-9">
-              {instructor.avatar ? (
-                <Avatar
-                  src={instructor.avatar}
-                  alt={instructor.user.name || "Instructor"}
-                  size={32}
-                  className="w-8 h-8 sm:w-9 sm:h-9"
-                />
-              ) : (
-                <User className="text-gray-700" size={16} />
-              )}
+          <div className="justify-between mb-4 2 items-center flex">
+            <div className="flex items-center gap-2">
+              <div className="flex justify-center items-center rounded-full bg-gray-100 p-0.5 overflow-hidden shrink-0 w-8 h-8 sm:w-9 sm:h-9">
+                {instructor.avatar ? (
+                  <Avatar
+                    src={instructor.avatar}
+                    alt={instructor.user.name || "Instructor"}
+                    size={32}
+                    className="w-8 h-8 sm:w-9 sm:h-9"
+                  />
+                ) : (
+                  <User className="text-gray-700" size={16} />
+                )}
+              </div>
+              <p className="text-xs sm:text-sm md:text-base">{instructor.user.name}</p>
             </div>
-            <p className="text-xs sm:text-sm md:text-base">{instructor.user.name}</p>
-          </div>
-
-          <div className="flex items-center justify-between flex-wrap mt-1 mb-8">
             <div className="flex items-center gap-1">
               <Star size={18} className="fill-green-600 stroke-green-600" />
               <span className="text-[#1f2b40] text-sm">
                 {average_rating} {t("rating")}
               </span>
             </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 mt-1 mb-4">
             <div className="flex items-center gap-1">
               <Laptop size={18} className="text-green-600" />
               <span className="text-[#1f2b40] text-sm">
@@ -127,7 +129,7 @@ const CourseCard: React.FC<Course> = ({
             <div className="flex items-center gap-1">
               <Clock3 size={18} className="text-green-600" />
               <p className="text-xs sm:text-sm md:text-base">
-                {tCommon("courses.duration.h", { hours: total_hours})}
+                {tCommon("courses.duration.h", { hours: total_hours })}
               </p>
             </div>
             <div className="flex items-center gap-1">

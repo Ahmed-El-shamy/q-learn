@@ -1,5 +1,6 @@
 import { Response } from "@/types/response.types";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { getSession, signOut } from "next-auth/react";
 import { getLocale } from "next-intl/server";
 
 // Request interceptor type: receives and returns request config
@@ -12,21 +13,37 @@ type GetOptions = Omit<Parameters<typeof fetch>[1], "body"> & {
 };
 
 class Interceptor<T> {
-  interceptors: ((value: T) => T | Promise<T>)[];
+  interceptors: {
+    fulfill: (val: T) => T | Promise<T>;
+    error?: (err: T) => T | Promise<T>;
+  }[];
 
   constructor() {
     this.interceptors = [];
   }
 
-  use(callback: (value: T) => T | Promise<T>) {
-    this.interceptors.push(callback);
+  use(callback: (value: T) => T | Promise<T>, error?: (val: T) => T | Promise<T>) {
+    this.interceptors.push({
+      fulfill: callback,
+      error: error
+    });
   }
 
-  async run(value: T): Promise<T> {
-    let result: T = value;
+  async run(value: T | Promise<T>): Promise<T> {
+    let result: T = typeof value === "function" ? await value() : value;
+    let error: unknown;
+    let isError = false;
     // Run interceptors sequentially (like axios)
     for (const interceptor of this.interceptors) {
-      result = await interceptor(result);
+      try {
+        result = await interceptor.fulfill(result);
+      } catch (e: unknown) {
+        error = await interceptor.error?.(e as T);
+        break;
+      }
+    }
+    if (isError) {
+      throw error;
     }
     return result;
   }
@@ -35,13 +52,13 @@ class Interceptor<T> {
 export class Api {
   baseRoute: string;
   requestInterceptor: Interceptor<RequestConfig>;
-  responseInterceptor: Interceptor<ResponseData<any>>;
+  responseInterceptor: Interceptor<globalThis.Response>;
 
   constructor() {
     this.baseRoute = "https://dash-learn.dev.qutell.net/api";
 
     this.requestInterceptor = new Interceptor<RequestConfig>();
-    this.responseInterceptor = new Interceptor<ResponseData<any>>();
+    this.responseInterceptor = new Interceptor<globalThis.Response>();
   }
 
   static routes = {
@@ -92,144 +109,101 @@ export class Api {
     route: string,
     options?: Parameters<typeof fetch>["1"]
   ): Promise<ResponseData<T>> {
+    const normalizedRoute = route.startsWith("/") ? route : `/${route}`;
+    const url = this.baseRoute.concat(normalizedRoute);
+
+    // Build initial request config
+    let requestConfig: RequestConfig = {
+      ...options,
+      url,
+    };
+
+    // Run request interceptors
+    requestConfig = await this.requestInterceptor.run(requestConfig);
+
+    // Extract url from config (interceptors might have modified it)
+    const { url: finalUrl, ...fetchOptions } = requestConfig;
+    const headers = new Headers(fetchOptions.headers);
+    headers.append("Accept", "application/json, text/*, */*");
+    const finalFetchUrl = finalUrl || url;
+
+    // Make the actual request
+    let response = fetch(finalFetchUrl, {
+      ...fetchOptions,
+      headers: headers,
+    });
+
+    const callBack = response.then(res => {
+      if (res.ok) return res;
+      else return Promise.reject(res);
+    });
+
+    // Parse response
+    let responseData: ResponseData<T>;
+
+    // will return the response only if response is healthy, otherwise would just do Promise.reject(response) that would be caught by the catch block.
     try {
-      const normalizedRoute = route.startsWith("/") ? route : `/${route}`;
-      const url = this.baseRoute.concat(normalizedRoute);
+      const finalResponse = await this.responseInterceptor.run(callBack);
+      const jsonData = (await finalResponse.json()) as Response<T>;
+      responseData = jsonData;
 
-      // Build initial request config
-      let requestConfig: RequestConfig = {
-        ...options,
-        url,
-      };
+      // run the response interceptors in both ways, success and fail
+      return responseData;
+    } catch(e) {
+      // check to see if e is of type global.response
+      if (e instanceof globalThis.Response) {
+        // construct en ErrorResponse of the error
+        const errorResponse = await e.json() as ResponseData<T>;
+        return Promise.reject(errorResponse);
+      }
+      return Promise.reject(e);
+    }
+  }
 
-      // Run request interceptors
-      requestConfig = await this.requestInterceptor.run(requestConfig);
+  async get<T>(route: string, options ?: GetOptions) {
+  let url = route;
+  if (options?.params) {
+    const searchParams = new URLSearchParams();
 
-      try {
-        const normalizedRoute = route.startsWith("/") ? route : `/${route}`;
-        const url = this.baseRoute.concat(normalizedRoute);
+    Object.entries(options.params).forEach(([key, value]) => {
+      if (value) {
+        let finalValue = value;
 
-        // Build initial request config
-        let requestConfig: RequestConfig = {
-          ...options,
-          url,
-        };
-
-        // Run request interceptors
-        requestConfig = await this.requestInterceptor.run(requestConfig);
-
-        // Extract url from config (interceptors might have modified it)
-        const { url: finalUrl, ...fetchOptions } = requestConfig;
-        const headers = new Headers(fetchOptions.headers);
-        headers.append("Accept", "application/json, text/*, */*");
-        const finalFetchUrl = finalUrl || url;
-
-        // Make the actual request
-        const response = await fetch(finalFetchUrl, {
-          ...fetchOptions,
-          headers: headers,
-        });
-
-        // Parse response
-        let responseData: ResponseData<T>;
-        if (response.ok) {
-          const jsonData = (await response.json()) as Response<T>;
-          responseData = jsonData;
-        } else {
-          // Handle error responses
-          let errorData: Response<T>;
-          try {
-            errorData = (await response.json()) as Response<T>;
-          } catch {
-            errorData = {
-              data: {} as T,
-              errors: { message: response.statusText },
-              message: `Request failed with status ${response.status}`,
-              status: false,
-            };
-          }
-          responseData = errorData;
-        }
-
-        // run the response interceptors in both ways, success and fail
-        responseData = await this.responseInterceptor.run(responseData);
-        if (!response.ok)
-          throw {
-            response: responseData,
-          };
-
-        return responseData;
-      } catch (error) {
-        console.log(error);
         if (
-          error &&
-          typeof error === "object" &&
-          "response" in error &&
-          error.response
-        )
-          throw error;
-        // Handle network errors or interceptor errors
-        const errorResponse: ResponseData<T> = {
-          data: {} as T,
-          errors: error,
-          message:
-            error instanceof Error ? error.message : "Network error occurred",
-          status: false,
-        };
-
-        // Run response interceptors even for errors
-        const finalError = await this.responseInterceptor.run(errorResponse);
-        throw finalError;
-      }
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async get<T>(route: string, options?: GetOptions) {
-    let url = route;
-    if (options?.params) {
-      const searchParams = new URLSearchParams();
-
-      Object.entries(options.params).forEach(([key, value]) => {
-        if (value) {
-          let finalValue = value;
-
-          if (
-            typeof value === "string" &&
-            value.startsWith("[") &&
-            value.endsWith("]")
-          ) {
-            try {
-              finalValue = JSON.parse(value);
-            } catch (e) {
-              finalValue = value;
-            }
-          }
-
-          if (Array.isArray(finalValue)) {
-            finalValue.forEach((v) => {
-              if (v !== "" && v !== undefined && v !== null) {
-                searchParams.append(key, String(v));
-              }
-            });
-          } else {
-            if (finalValue !== "") {
-              searchParams.append(key, String(finalValue));
-            }
+          typeof value === "string" &&
+          value.startsWith("[") &&
+          value.endsWith("]")
+        ) {
+          try {
+            finalValue = JSON.parse(value);
+          } catch (e) {
+            finalValue = value;
           }
         }
-      });
 
-      const queryString = searchParams.toString();
-      if (queryString) {
-        url += url.includes("?") ? "&" + queryString : "?" + queryString;
+        if (Array.isArray(finalValue)) {
+          finalValue.forEach((v) => {
+            if (v !== "" && v !== undefined && v !== null) {
+              searchParams.append(key, String(v));
+            }
+          });
+        } else {
+          if (finalValue !== "") {
+            searchParams.append(key, String(finalValue));
+          }
+        }
       }
-    }
+    });
 
-    const { params, ...fetchOptions } = options || {};
-    return this.request<T>(url, { ...fetchOptions, method: "GET" });
+    const queryString = searchParams.toString();
+    if (queryString) {
+      url += url.includes("?") ? "&" + queryString : "?" + queryString;
+    }
   }
+
+  const { params, ...fetchOptions } = options || {};
+  return this.request<T>(url, { ...fetchOptions, method: "GET" });
+}
 
   // async post<T>(
   //   route: string,
@@ -268,101 +242,101 @@ export class Api {
   // }
   // داخل Api.post
   async post<T>(
-    route: string,
-    body: Record<string, any> = {},
-    options?: Parameters<typeof fetch>["1"]
-  ) {
-    const headers = new Headers(options?.headers);
+  route: string,
+  body: Record<string, any> = {},
+  options ?: Parameters < typeof fetch > ["1"]
+) {
+  const headers = new Headers(options?.headers);
 
-    // ✅ لو عايز تبعت FormData: استخدم header "multipart/form-data" كـ signal بس
-    if (headers.get("Content-Type") === "multipart/form-data") {
-      const formData = new FormData();
+  // ✅ لو عايز تبعت FormData: استخدم header "multipart/form-data" كـ signal بس
+  if (headers.get("Content-Type") === "multipart/form-data") {
+    const formData = new FormData();
 
-      Object.entries(body ?? {}).forEach(([key, value]) => {
-        if (value === undefined || value === null) return;
-        formData.append(key, String(value));
-      });
+    Object.entries(body ?? {}).forEach(([key, value]) => {
+      if (value === undefined || value === null) return;
+      formData.append(key, String(value));
+    });
 
-      // ✅ مهم: نشيل Content-Type عشان المتصفح يضيف boundary
-      headers.delete("Content-Type");
-
-      return this.request<T>(route, {
-        ...options,
-        method: "POST",
-        body: formData,
-        headers,
-      });
-    }
+    // ✅ مهم: نشيل Content-Type عشان المتصفح يضيف boundary
+    headers.delete("Content-Type");
 
     return this.request<T>(route, {
       ...options,
       method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-        ...(options?.headers || {}),
-      },
+      body: formData,
+      headers,
     });
   }
 
-  async delete<T>(route: string, options?: Parameters<typeof fetch>["1"]) {
-    return this.request<T>(route, { ...options, method: "DELETE" });
-  }
+  return this.request<T>(route, {
+    ...options,
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json",
+      ...(options?.headers || {}),
+    },
+  });
+}
+
+  async delete <T>(route: string, options ?: Parameters < typeof fetch > ["1"]) {
+  return this.request<T>(route, { ...options, method: "DELETE" });
+}
   async put<T>(
-    route: string,
-    body: any = {},
-    options?: Parameters<typeof fetch>["1"]
-  ) {
-    const headers = new Headers(options?.headers);
+  route: string,
+  body: any = {},
+  options ?: Parameters < typeof fetch > ["1"]
+) {
+  const headers = new Headers(options?.headers);
 
-    if (body instanceof FormData) {
-      headers.delete("Content-Type");
-
-      return this.request<T>(route, {
-        ...options,
-        method: "PUT",
-        body,
-        headers,
-      });
-    }
-
-    if (headers.get("Content-Type") === "multipart/form-data") {
-      const formData = new FormData();
-
-      Object.entries(body ?? {}).forEach(([key, value]) => {
-        if (value === undefined || value === null) return;
-
-        // arrays
-        if (Array.isArray(value)) {
-          value.forEach((v) => {
-            if (v === undefined || v === null) return;
-            formData.append(`${key}[]`, v as any);
-          });
-          return;
-        }
-
-        formData.append(key, value as any);
-      });
-
-      headers.delete("Content-Type");
-
-      return this.request<T>(route, {
-        ...options,
-        method: "PUT",
-        body: formData,
-        headers,
-      });
-    }
-
-    headers.set("Content-Type", "application/json");
+  if (body instanceof FormData) {
+    headers.delete("Content-Type");
 
     return this.request<T>(route, {
       ...options,
       method: "PUT",
-      body: JSON.stringify(body),
+      body,
       headers,
     });
   }
+
+  if (headers.get("Content-Type") === "multipart/form-data") {
+    const formData = new FormData();
+
+    Object.entries(body ?? {}).forEach(([key, value]) => {
+      if (value === undefined || value === null) return;
+
+      // arrays
+      if (Array.isArray(value)) {
+        value.forEach((v) => {
+          if (v === undefined || v === null) return;
+          formData.append(`${key}[]`, v as any);
+        });
+        return;
+      }
+
+      formData.append(key, value as any);
+    });
+
+    headers.delete("Content-Type");
+
+    return this.request<T>(route, {
+      ...options,
+      method: "PUT",
+      body: formData,
+      headers,
+    });
+  }
+
+  headers.set("Content-Type", "application/json");
+
+  return this.request<T>(route, {
+    ...options,
+    method: "PUT",
+    body: JSON.stringify(body),
+    headers,
+  });
+}
 }
 
 const api = new Api();
@@ -406,6 +380,14 @@ api.requestInterceptor.use(async (requestOptions) => {
     }
   }
   return requestOptions;
+});
+
+api.responseInterceptor.use((response) => response, async (val) => {
+  if(val.status === 401) {
+    // sign the user out.
+    await signOut({ redirect: false });
+  }
+  return Promise.reject(val);
 });
 
 export default api;

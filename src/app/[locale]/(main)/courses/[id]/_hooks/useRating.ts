@@ -8,6 +8,7 @@ import api, { Api } from "@/_lib/api/api";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
+import toastErrorMessage from "@/_lib/api/toastErrorMessage";
 
 const useRating = () => {
     const { id } = useParams();
@@ -35,8 +36,8 @@ const useRating = () => {
         onSuccess: () => {
             toast.success(t("reviewSubmissionSuccess"));
         },
-        onError: () => {
-            toast.error(t("reviewSubmissionError"));
+        onError: (err) => {
+            toastErrorMessage(err, t("reviewSubmissionError"));
         },
     });
 

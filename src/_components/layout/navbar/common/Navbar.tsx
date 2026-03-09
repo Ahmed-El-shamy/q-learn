@@ -43,7 +43,7 @@ async function Navbar({
                 const labelToKey: Record<string, string> = {
                   "home": "home",
                   "courses": "courses",
-                  "about us": "aboutUs",
+                  "aboutus": "aboutUs",
                   "blogs": "blogs",
                   "contact": "contact"
                 };

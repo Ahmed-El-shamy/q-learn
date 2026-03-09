@@ -166,7 +166,7 @@
     }
   },
   "courses": {
-    "content_count": "{count} أقسام",
+    "content_count": "{count} فصول",
     "students": "طلاب",
     "panels": {
       "overview": "نظرة عامة",

@@ -3,6 +3,7 @@ import { CourseFilters, SortBy } from "../../_types/courses.types";
 import type { Course } from "../../_types/course.types";
 import { getCourseById, getCourses } from "../../_quires/course.api";
 import { Api } from "@/_lib/api/api";
+import { useLocale } from "next-intl";
 
 type UseCourseQueryProps = {
   filters?: CourseFilters;
@@ -10,8 +11,9 @@ type UseCourseQueryProps = {
 };
 
 export const useCourseQuery = ({ filters, sort }: UseCourseQueryProps) => {
+  const locale = useLocale();
   return useQuery({
-    queryKey: [Api.routes.site.courses, { filters, sort }],
+    queryKey: [Api.routes.site.courses, locale, { filters, sort }],
     queryFn: () => {
       const formattedFilters: any = { ...filters };
       Object.keys(formattedFilters).forEach((key) => {

@@ -27,7 +27,7 @@ const CourseQAInput = () => {
     >
       <MainTextArea
         {...register("body")}
-        label={t("courses.qa-dialog-label")}
+        label={"courses.qa-dialog-label"}
         placeholder={t("courses.qa-dialog-placeholder")}
         error={errors.body?.message}
         rows={4}

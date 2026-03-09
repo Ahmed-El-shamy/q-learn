@@ -12,10 +12,11 @@ import { Link, useRouter } from "@/i18n/navigation";
 
 const CartIcon = () => {
   const [cartOpen, setCartOpen] = useState(false);
-  const { items, total, couponCode, removeFromCart, clearCart } = useCart();
+  const { items, total, removeFromCart, clearCart } = useCart();
   const { status } = useSession();
   const router = useRouter();
   const t = useTranslations("cart");
+  const tCommon = useTranslations();
 
   const handleCartEnter = useCallback(() => {
     setCartOpen(true);
@@ -112,10 +113,10 @@ const CartIcon = () => {
                         {item.title}
                       </Link>
                       <p className="text-[#737887]">
+                      </p>
                         {item.course?.instructor?.user?.name ||
                           item.course?.category?.name ||
-                          item.course?.level}
-                      </p>
+                          tCommon(`levels.${item.course?.level}` || "")}
                       <p className="font-semibold">
                         {item.price} {t("currency")}
                       </p>

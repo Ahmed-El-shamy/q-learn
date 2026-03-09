@@ -1,7 +1,7 @@
 "use client";
 
 import Container from "@/_components/common/container/Container";
-import { Headset } from "lucide-react";
+import { Headset, Instagram } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { paymentMethods } from "./data";
 
@@ -127,12 +127,7 @@ const FooterContact: React.FC<FooterContactProps> = ({
                       href={instagram}
                       className="bg-white/10 w-8 xl:w-10 h-8 xl:h-10 rounded-full inline-flex items-center justify-center duration-500 hover:bg-[#0B2F1B]"
                     >
-                      <img
-                        src="/images/instagram.png"
-                        alt={socialAlt}
-                        loading="lazy"
-                        className="w-4 h-4"
-                      />
+                      <Instagram className="text-white" size={20} />
                     </a>
                   </li>
                 )}

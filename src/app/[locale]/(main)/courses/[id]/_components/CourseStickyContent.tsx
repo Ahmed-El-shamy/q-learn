@@ -63,7 +63,7 @@ const socialMediaLinksConfig = [
   {
     Icon: Share2,
     label: "Copy link",
-    getHref: () => "#",
+    getHref: () => "",
     onClick: (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
       e.preventDefault();
       if (typeof window !== "undefined" && navigator.clipboard) {
@@ -124,10 +124,6 @@ const CourseStickyContent = () => {
   };
 
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-  const socialMediaLinks = socialMediaLinksConfig.map((link) => ({
-    ...link,
-    href: link.getHref(currentUrl),
-  }));
 
   // Reset image error state when course changes
   useEffect(() => {
@@ -301,16 +297,16 @@ const CourseStickyContent = () => {
                       (course.original_price.sar ||
                         course.original_price.usd ||
                         course.original_price.egp) && (
-                      <p className="text-base sm:text-lg md:text-xl font-bold text-gray-500 line-through">
-                        {course.original_price.sar
-                          ? `${course.original_price.sar} ${tCommon("currency.SAR")}`
-                          : course.original_price.usd
-                            ? `$${course.original_price.usd}`
-                            : course.original_price.egp
-                              ? `${course.original_price.egp} EGP`
-                              : ""}
-                      </p>
-                    )}
+                        <p className="text-base sm:text-lg md:text-xl font-bold text-gray-500 line-through">
+                          {course.original_price.sar
+                            ? `${course.original_price.sar} ${tCommon("currency.SAR")}`
+                            : course.original_price.usd
+                              ? `$${course.original_price.usd}`
+                              : course.original_price.egp
+                                ? `${course.original_price.egp} EGP`
+                                : ""}
+                        </p>
+                      )}
                     <p className="text-xl sm:text-2xl md:text-3xl font-bold">
                       {course.price?.sar
                         ? `${course.price.sar} ${tCommon("currency.SAR")}`
@@ -362,21 +358,23 @@ const CourseStickyContent = () => {
           {t("share")}
         </p>
         <div className="flex items-center gap-2 py-4">
-          {socialMediaLinks.map(
-            ({ Icon, href, label, onClick: onClickHandler }) => (
+          {socialMediaLinksConfig.map(
+            ({ Icon, label, onClick: onClickHandler, getHref }) => (
               <a
                 key={label}
-                href={href}
-                onClick={
-                  onClickHandler
-                    ? (e) => {
-                        onClickHandler(e, currentUrl);
-                        toast.success(t("linkCopiedSuccess"));
-                      }
-                    : undefined
-                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  const targetURL = getHref(currentUrl);
+                  if(targetURL) {
+                    window.open(targetURL, "_blank", "noopener,noreferrer");
+                  }
+                  if (onClickHandler) {
+                    onClickHandler?.(e, currentUrl);
+                    toast.success(t("linkCopiedSuccess"));
+                  }
+                }}
                 aria-label={label}
-                className="p-1.5 sm:p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-green-600 transition-colors duration-200"
+                className="p-1.5 sm:p-2 cursor-pointer rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-green-600 transition-colors duration-200"
                 target={onClickHandler ? undefined : "_blank"}
                 rel={onClickHandler ? undefined : "noopener noreferrer"}
               >
