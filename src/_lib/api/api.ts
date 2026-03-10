@@ -1,7 +1,9 @@
+import { redirect } from "@/i18n/navigation";
 import { Response } from "@/types/response.types";
 import { getServerSession } from "next-auth";
 import { getSession, signOut } from "next-auth/react";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { toast } from "sonner";
 
 // Request interceptor type: receives and returns request config
 type RequestConfig = Parameters<typeof fetch>["1"] & { url?: string };
@@ -378,14 +380,27 @@ api.requestInterceptor.use(async (requestOptions) => {
       headers.append("Authorization", `Bearer ${session.user.token}`);
       requestOptions.headers = headers;
     }
+  } else {
+    const session = await getServerSession();
+    if(session) {
+      const headers = new Headers(requestOptions.headers);
+      headers.append("Authorization", `Bearer ${session.user.token}`);
+      requestOptions.headers = headers;
+    }
   }
   return requestOptions;
 });
 
 api.responseInterceptor.use((response) => response, async (val) => {
+  const t = await getTranslations();
   if(val.status === 401) {
     // sign the user out.
-    await signOut({ redirect: false });
+    const session = typeof window !== "undefined" ? await getSession() : await getServerSession();
+    if(session) {
+      await signOut({ redirect: true, callbackUrl: "/" });
+      const locale = await getLocale();
+      toast.error(t("session_expired"), { action: { label: t("login_again"), onClick: () => redirect({ href: "/auth/login", locale }) } });
+    }
   }
   return Promise.reject(val);
 });

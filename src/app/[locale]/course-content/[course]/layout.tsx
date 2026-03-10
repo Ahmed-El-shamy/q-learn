@@ -4,6 +4,7 @@ import ContentNavbar from "./_components/contentNavbar";
 import CourseSidebar from "./_components/CourseSidebar";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import CourseDetailsQuery from "../../(main)/courses/[id]/_data/CourseDetailsQuery";
+import LanguageSwitcher from "@/_components/lang/LanguageSwitcher";
 
 const Layout = async ({
     children,
@@ -45,6 +46,7 @@ const Layout = async ({
                         <CourseSidebar />
                     </Suspense>
                 </div>
+                <LanguageSwitcher />
             </div>
         </HydrationBoundary>
     );

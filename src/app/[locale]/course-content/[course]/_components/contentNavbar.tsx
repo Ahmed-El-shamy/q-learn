@@ -33,7 +33,7 @@ const ContentNavbar = async ({
                             src={settingsResponse?.site_logo || "/logo-placeholder.jpg"}
                             alt="site-image"
                             height={30}
-                            width={80}
+                            width={40}
                         />
                     </Link>
                     <p className="line-clamp-1 text-xl hidden lg:block font-normal text-gray-800">
@@ -69,13 +69,13 @@ const ContentNavbar = async ({
                                 cx={22.5}
                                 cy={22.5}
                                 fill="none"
-                                stroke="var(--color-purple-500)"
+                                stroke="var(--color-green-500)"
                                 strokeDasharray="114, 10000"
-                                strokeDashoffset="40"
+                                strokeDashoffset="100"
                                 strokeWidth={4}
                             />
                         </svg>
-                        <p className="absolute top-1/2 start-1/2 text-xs pt-px -translate-1/2">
+                        <p className="absolute top-1/2 left-1/2 text-xs pt-px -translate-1/2">
                             65%
                         </p>
                     </div>

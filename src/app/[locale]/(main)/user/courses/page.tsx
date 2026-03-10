@@ -6,51 +6,25 @@ import EmptyState from "../../user/_components/EmptyState";
 import FetchHandler from "@/_components/common/fetchHandler/FetchHandler";
 import useGetMyCourses from "./_services/useGetMyCourses";
 import { Link } from "@/i18n/navigation";
-// type Course = {
-//   id: string;
-//   title: string;
-//   category: string;
-//   progress: number;
-//   lessonsCount: number;
-// };
-
-// async function getMyCourses() {
-//   // TODO: replace with real fetch
-//   const courses: Course[] = [
-//     {
-//       id: "react-101",
-//       title: "React Fundamentals",
-//       category: "Frontend",
-//       progress: 42,
-//       lessonsCount: 24,
-//     },
-//     {
-//       id: "ts-bootcamp",
-//       title: "TypeScript Bootcamp",
-//       category: "Programming",
-//       progress: 18,
-//       lessonsCount: 30,
-//     },
-//   ];
-//   return courses;
-// }
+import { useTranslations } from "next-intl";
 
 export default function CoursesPage() {
-  // const courses = getMyCourses();
   const queryResult = useGetMyCourses();
+  const tMyCourses = useTranslations("my-courses");
+  const t = useTranslations();
 
   return (
     <FetchHandler queryResult={queryResult} skeletonType="blog">
       <div className="space-y-6">
         <SectionHeader
-          title="My courses"
-          subtitle="All enrolled courses and your current progress."
+          title="my-courses.title"
+          subtitle="my-courses.description"
           right={
             <Link
-              href="/courses" // لو عندك Public catalog
+              href="/courses"
               className="rounded-xl main-background text-white px-4 py-2"
             >
-              Browse catalog
+              {tMyCourses("browse_catalog")}              
             </Link>
           }
         />
@@ -60,24 +34,24 @@ export default function CoursesPage() {
               {queryResult?.data.map((c) => (
                 <Card
                   key={c.id}
-                  title={c.title}
-                  description={`${c.category} • 12 lessons`}
-                  action={<Link href={`/courses/${c?.id}`}>Open</Link>}
+                  title={t(c.title)}
+                  description={`${c.category.name} • ${`${c.level}`}`}
                 >
-                  <ProgressBar value={10} />
+                  <ProgressBar value={Math.floor(Math.random() * 100)} />
                   <div className="mt-4 flex gap-2">
                     <Link
                       href={`/course-content/${c.id}`}
                       className="inline-flex items-center justify-center rounded-xl main-background px-4 py-2 text-sm font-medium text-white "
                     >
-                      Continue
+                      {tMyCourses("continue")}
                     </Link>
-                    <button
+                    <Link
+                      href={`/courses/${c.id}`}
                       type="button"
                       className="inline-flex items-center justify-center rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50"
                     >
-                      View syllabus
-                    </button>
+                      {tMyCourses("view_details")}
+                    </Link>
                   </div>
                 </Card>
               ))}
@@ -90,14 +64,6 @@ export default function CoursesPage() {
             />
           )
         ) : null}
-
-        {/* {courses?.length ? (
-          <div className="grid gap-4 lg:grid-cols-2">
-            
-          </div>
-        ) : (
-         
-        )} */}
       </div>
     </FetchHandler>
   );
