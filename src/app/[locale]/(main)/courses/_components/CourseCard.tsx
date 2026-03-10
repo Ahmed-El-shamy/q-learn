@@ -56,7 +56,7 @@ const CourseCard: React.FC<Course> = ({
       id: id,
       item_id: id!,
       title,
-      price: (discount_price_sar != null && discount_price_sar !== "" ? discount_price_sar : price?.sar)?.toString(),
+      price: (discount_price_sar != null && discount_price_sar !== "" && parseFloat(discount_price_sar) > 0 ? discount_price_sar : price?.sar)?.toString(),
       course: { image },
     });
   };

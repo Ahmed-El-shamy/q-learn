@@ -1,15 +1,17 @@
 "use client";
 
 import { Facebook, Linkedin, Twitter } from "lucide-react";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 const BlogSocial = () => {
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
   const encodedUrl = encodeURIComponent(currentUrl);
+  const t = useTranslations("blogs");
 
   return (
     <div className="space-y-5">
-      <h3 className="text-2xl text-[#202e3b]">Share This Article</h3>
+      <h3 className="text-2xl text-[#202e3b]">{t("share-this-article")}</h3>
       <div className="flex-between">
         <ul className="flex flex-wrap gap-3">
           <li>

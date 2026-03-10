@@ -99,7 +99,7 @@ export class Api {
       resetPassword: "/reset_password",
     },
     user: {
-      me: "me",
+      me: "profile",
       update: "update_profile",
       changePassword: "change_password",
     },

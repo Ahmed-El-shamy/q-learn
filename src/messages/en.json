@@ -462,7 +462,8 @@
     "title": "Articles & News",
     "description": "Stay updated with tips, insights, and news from our blog. New articles published regularly.",
     "read-more": "Read More",
-    "minutes-to-read": "{minutes} minutes to read"
+    "minutes-to-read": "{minutes} minutes to read",
+    "share-this-article": "Share This Article"
   },
   "loginRequiredForWishlist": "Please log in to use wishlist",
   "wishlistAdded": "Added to wishlist",

@@ -116,7 +116,8 @@ const CartIcon = () => {
                       </p>
                         {item.course?.instructor?.user?.name ||
                           item.course?.category?.name ||
-                          tCommon(`levels.${item.course?.level || ""}` || "")}
+                          item?.course?.level ?
+                          tCommon(`levels.${item.course?.level || ""}` || "") : null } 
                       <p className="font-semibold">
                         {item.price} {t("currency")}
                       </p>

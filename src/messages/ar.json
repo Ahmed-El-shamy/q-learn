@@ -461,7 +461,8 @@
     "title": "مقالات وأخبار",
     "description": "ابقَ على اطلاع بنصائح ورؤى وأخبار من مدونتنا. مقالات جديدة تنشر بانتظام.",
     "read-more": "اقرأ المزيد",
-    "minutes-to-read": "{minutes} دقيقة للقراءة"
+    "minutes-to-read": "{minutes} دقيقة للقراءة",
+    "share-this-article": "شارك هذا المقال"
   },
 
   "loginRequiredForWishlist": "لازم تسجل دخول عشان تستخدم المفضلة",

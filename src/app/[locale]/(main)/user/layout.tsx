@@ -113,10 +113,11 @@ export default function ProfileLayout({ children }: { children: ReactNode }) {
                             px-3 py-2 rounded-xl
                             text-sm font-medium
                             transition
+                            duration-100
                             ${
                               active
                                 ? "main-background text-white"
-                                : "hover:bg-linear-to-r from-[#660afb] via-[#b633ff] to-[#660afb] hover:text-white"
+                                : "hover:bg-green-100"
                             }
                           `}
                         >
