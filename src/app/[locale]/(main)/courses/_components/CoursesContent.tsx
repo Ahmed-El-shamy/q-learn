@@ -20,6 +20,7 @@ import MainBtn from "@/_components/common/buttons/MainBtn";
 import { useTranslations, useLocale } from "next-intl";
 import { Filter, X } from "lucide-react";
 import LanguageFilter from "./LanguageFilters";
+import BooleanFilters from "./BooleanFilters";
 
 const CoursesContent = () => {
   const { serverFilters, sortBy, resetFilters } = useCoursesFilters();
@@ -51,7 +52,8 @@ const CoursesContent = () => {
           <PriceFilter key="price" />,
           <InstructorsFilter key="instructor" />,
           <RatingFilter key="rating" />,
-          <LanguageFilter key="language" />
+          <LanguageFilter key="language" />,
+          <BooleanFilters key="boolean" />,
         ];
 
   return (

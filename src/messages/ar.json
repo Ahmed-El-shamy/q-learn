@@ -442,7 +442,10 @@
     "instructor": "المحاضرين",
     "rating": "التقييم",
     "search": "بحث",
-    "currency": "ر.س"
+    "currency": "ر.س",
+    "offers": "العروض",
+    "is_featured": "مميز",
+    "is_trending": "تريند"
   },
   "sort": {
     "label": "ترتيب حسب",

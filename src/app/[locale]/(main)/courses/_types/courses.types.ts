@@ -82,6 +82,8 @@ export interface CourseFilters {
   price_to?: string;
   search?: string;
   languages?: string;
+  is_featured?: boolean;
+  is_trending?: boolean;
 }
 
 export type SortBy =

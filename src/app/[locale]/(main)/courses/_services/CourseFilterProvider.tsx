@@ -52,6 +52,8 @@ export const CourseFilterProvider: FC<PropsWithChildren> = ({ children }) => {
       price_from: searchParams.get("price_from") || undefined,
       price_to: searchParams.get("price_to") || undefined,
       search: searchParams.get("search") || undefined,
+      is_featured: !!searchParams.get("is_featured"),
+      is_trending: !!searchParams.get("is_trending"),
     } as CourseFilters;
   }, [searchParams]);
 

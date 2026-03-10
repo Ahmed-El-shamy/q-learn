@@ -14,6 +14,8 @@ const LanguageFilter = () => {
     const currentSelected = filters.languages;
     if (value && currentSelected !== value) {
       handleChangeFilters("languages", value, true);
+    } else {
+      handleChangeFilters("languages", undefined, true)
     }
   };
 

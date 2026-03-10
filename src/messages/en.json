@@ -443,7 +443,10 @@
     "instructor": "Instructor",
     "rating": "Rating",
     "search": "Search",
-    "currency": "SAR"
+    "currency": "SAR",
+    "offers": "Offers",
+    "is_featured": "Featured",
+    "is_trending": "Trending"
   },
   "sort": {
     "label": "Sort By",
