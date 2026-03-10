@@ -361,7 +361,16 @@
   "label": {
     "email": "Email",
     "password": "Password",
-    "birth-date": "Birth Date"
+    "birth-date": "Birth Date",
+    "first-name": "First Name",
+    "last-name": "Last Name",
+    "user-type": "User Type",
+    "role": "Role",
+    "phone": "Phone",
+    "save": "Save",
+    "current-password": "Current Password",
+    "new-password": "New Password",
+    "password-confirmation": "Password Confirmation"
   },
   "countries": {
     "egypt": "Egypt",
@@ -504,7 +513,7 @@
     "beginner": "Beginner",
     "intermediate": "Intermediate",
     "advanced": "Advanced",
-    "professional": "Professional"
+    "pro": "Professional"
   },
   "priceType": {
     "paid": "Paid",
@@ -623,5 +632,24 @@
     "language": "Language",
     "en": "English",
     "ar": "Arabic"
+  },
+  "user": {
+    "dashboard": "Dashboard",
+    "courses": "Courses",
+    "reviews": "Reviews",
+    "profile": "Profile",
+    "assignments": "Assignments",
+    "certificates": "Certificates",
+    "favorites": "Favorites",
+    "payment-methods": "Payment Methods",
+    "logout": "Logout"
+  },
+  "profile": {
+    "title": "Profile",
+    "description": "Update your personal information, manage your preferences, and check your learning progress. Everything you need to manage your learning experience in one place.",
+    "change-password": {
+      "title": "Change Password",
+      "description": "change your account password regularly to keep your information secure. Make sure to choose a strong password that you haven't used before."
+    }
   }
 }

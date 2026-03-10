@@ -8,7 +8,10 @@ const useGetMyWhishlist = () => {
   return useQuery({
     queryKey: [Api?.routes?.site?.myWishlists],
     queryFn: async () => {
-      const response = await api?.get<Course[]>(Api?.routes?.site?.myWishlists);
+      const response = await api?.get<{
+        course: Course;
+        id: number;
+      }[]>(Api?.routes?.site?.myWishlists);
       return response?.data;
     },
     enabled: !!session?.data?.user?.token,

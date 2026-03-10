@@ -10,12 +10,12 @@ const Page = () => {
   return (
     <FetchHandler queryResult={query} skeletonType="blog">
       <div className="space-y-6">
-        <SectionHeader title="My favourites" />
+        <SectionHeader title="user.favorites" />
         {query?.data ? (
           query?.data?.length > 0 ? (
             <div className="grid gap-4  lg:grid-cols-2 xl:grid-cols-3">
               {query?.data.map((c) => (
-                <CourseCard key={c?.id} {...c} />
+                <CourseCard key={c?.id} {...c.course} />
               ))}
             </div>
           ) : (

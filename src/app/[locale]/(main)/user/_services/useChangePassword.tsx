@@ -19,7 +19,7 @@ const useChangePasswordApi = () => {
         Api.routes.user.changePassword,
         body
       );
-      if (res) return res.data;
+      return res;
     },
   });
 };

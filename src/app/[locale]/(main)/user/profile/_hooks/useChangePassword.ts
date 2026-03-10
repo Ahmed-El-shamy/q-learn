@@ -9,6 +9,7 @@ import {
 } from "../_schema/ProfilePasswordSchema";
 import { toast } from "sonner";
 import useChangePasswordApi from "../../_services/useChangePassword";
+import toastErrorMessage from "@/_lib/api/toastErrorMessage";
 
 function buildChangePasswordFormData(payload: ChangeUserPassword) {
   const fd = new FormData();
@@ -49,8 +50,6 @@ const useChangePassword = () => {
         new_password_confirmation: payload.confirmPassword,
       };
 
-      console.log("body being sent:", body); // ✅
-
       const data = await mutateAsync(body);
 
       toast.success(data?.message ?? "Password changed successfully");
@@ -61,11 +60,7 @@ const useChangePassword = () => {
         confirmPassword: "",
       });
     } catch (err: any) {
-      const msg =
-        err?.response?.data?.message ||
-        err?.message ||
-        "Failed to change password";
-      toast.error(msg);
+      toastErrorMessage(err);
     }
   };
 

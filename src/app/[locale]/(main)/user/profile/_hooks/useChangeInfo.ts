@@ -21,33 +21,6 @@ function splitName(fullName?: string) {
   };
 }
 
-function buildFormData(payload: ChangeUserInfo) {
-  const fd = new FormData();
-
-  // ✅ لو الـ API عندك محتاج name واحد بدل first/last
-  const name = `${payload.firstName ?? ""} ${payload.lastName ?? ""}`.trim();
-
-  // ✅ ابعت بس اللي ليه قيمة
-  const safeAppend = (key: string, value?: unknown) => {
-    if (value === undefined || value === null) return;
-    const v = String(value).trim();
-    if (!v) return;
-    fd.append(key, v);
-  };
-
-  safeAppend("name", name);
-
-  // لو الـ backend بيتعامل مع email/phone منفصلين:
-  safeAppend("email", payload.email);
-  safeAppend("phone", payload.phone);
-
-  // لو الـ backend بتاعك عايز firstName/lastName بدل name:
-  // safeAppend("first_name", payload.firstName);
-  // safeAppend("last_name", payload.lastName);
-
-  return fd;
-}
-
 const useChangeInfo = () => {
   const editProfile = useEditProfile();
   const { mutateAsync, isPending } = editProfile;
@@ -85,17 +58,7 @@ const useChangeInfo = () => {
 
   async function onSubmit(payload: ChangeUserInfo) {
     try {
-      // ✅ بناء FormData
-      const formData = buildFormData(payload);
-
-      // (اختياري) لو formData فاضي — متبعتش
-      if ([...formData.keys()].length === 0) {
-        toast?.error?.("No changes to update");
-        return;
-      }
-
-      // ✅ نفذ الايديت
-      const data = await mutateAsync(formData);
+      const data = await mutateAsync(payload);
 
       toast?.success?.(data?.message ?? "Profile updated successfully");
 

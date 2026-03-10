@@ -99,9 +99,9 @@ export class Api {
       resetPassword: "/reset_password",
     },
     user: {
-      me: "profile",
-      update: "update_profile",
-      changePassword: "change_password",
+      me: "/site/profile",
+      update: "/site/update_profile",
+      changePassword: "/site/change_password",
     },
   };
 

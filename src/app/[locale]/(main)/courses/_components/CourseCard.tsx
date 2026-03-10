@@ -98,10 +98,10 @@ const CourseCard: React.FC<Course> = ({
           <div className="justify-between mb-4 2 items-center flex">
             <div className="flex items-center gap-2">
               <div className="flex justify-center items-center rounded-full bg-gray-100 p-0.5 overflow-hidden shrink-0 w-8 h-8 sm:w-9 sm:h-9">
-                {instructor.avatar ? (
+                {instructor?.avatar ? (
                   <Avatar
-                    src={instructor.avatar}
-                    alt={instructor.user.name || "Instructor"}
+                    src={instructor?.avatar}
+                    alt={instructor?.user?.name || "Instructor"}
                     size={32}
                     className="w-8 h-8 sm:w-9 sm:h-9"
                   />
@@ -109,7 +109,7 @@ const CourseCard: React.FC<Course> = ({
                   <User className="text-gray-700" size={16} />
                 )}
               </div>
-              <p className="text-xs sm:text-sm md:text-base">{instructor.user.name}</p>
+              <p className="text-xs sm:text-sm md:text-base">{instructor?.user?.name}</p>
             </div>
             <div className="flex items-center gap-1">
               <Star size={18} className="fill-green-600 stroke-green-600" />

@@ -1,5 +1,5 @@
 "use client";
-import { Asterisk, Eye, EyeOff } from "lucide-react";
+import { Asterisk, Eye, EyeClosed } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useId, useState } from "react";
 
@@ -145,7 +145,7 @@ const MainInput = React.forwardRef<HTMLInputElement, MainInputProps>(
               className="absolute end-2 cursor-pointer"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              {showPassword ? <EyeClosed size={20} /> : <Eye size={20} />}
             </span>
           )}
         </div>

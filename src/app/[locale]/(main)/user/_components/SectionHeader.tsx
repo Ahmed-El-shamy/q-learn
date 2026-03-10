@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 type Props = {
   title: string;
   subtitle?: string;
@@ -5,15 +7,16 @@ type Props = {
 };
 
 export default function SectionHeader({ title, subtitle, right }: Props) {
+  const t = useTranslations();
   return (
     <div className="flex items-start justify-between gap-3">
       <div>
         <h1 className="text-xl md:text-2xl font-semibold text-neutral-900">
-          {title}
+          {t(title)}
         </h1>
         {subtitle && (
           <p className="mt-1 text-sm md:text-base text-neutral-600">
-            {subtitle}
+            {t(subtitle)}
           </p>
         )}
       </div>

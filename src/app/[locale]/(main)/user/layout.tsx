@@ -14,23 +14,24 @@ import {
   LayoutDashboard,
   type LucideIcon,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type Tab = { title: string; link: string; icon: LucideIcon };
 
 const tabsData: Tab[] = [
-  { title: "Dashboard", link: "user", icon: LayoutDashboard },
-  { title: "Profile", link: "user/profile", icon: UserRoundPen },
-  { title: "Courses", link: "user/courses", icon: BookOpenText },
-  { title: "Assignments", link: "user/assignments", icon: BookCheck },
-  { title: "Certificates", link: "user/certificates", icon: ShieldCheck },
-  { title: "Favourite", link: "user/favourite", icon: Heart },
-  { title: "Reviews", link: "user/reviews", icon: Star },
+  { title: "dashboard", link: "user", icon: LayoutDashboard },
+  { title: "profile", link: "user/profile", icon: UserRoundPen },
+  { title: "courses", link: "user/courses", icon: BookOpenText },
+  { title: "assignments", link: "user/assignments", icon: BookCheck },
+  { title: "certificates", link: "user/certificates", icon: ShieldCheck },
+  { title: "favorites", link: "user/favourite", icon: Heart },
+  { title: "reviews", link: "user/reviews", icon: Star },
   {
-    title: "Payment Methods",
+    title: "payment-methods",
     link: "user/payment-methods",
     icon: BadgeDollarSign,
   },
-  { title: "Logout", link: "logout", icon: LogOut },
+  { title: "logout", link: "logout", icon: LogOut },
 ];
 
 const normalize = (s: string) => (s === "/" ? "/" : s.replace(/\/$/, ""));
@@ -48,6 +49,7 @@ const isActiveTab = (pathname: string, link: string) => {
 
 export default function ProfileLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  const tUser = useTranslations("user");
 
   return (
     <div className="containerr py-4 sm:py-6 md:py-10 text-[#373737]">
@@ -122,7 +124,7 @@ export default function ProfileLayout({ children }: { children: ReactNode }) {
                           `}
                         >
                           <Icon size={18} />
-                          <span>{tab.title}</span>
+                          <span>{tUser(tab.title)}</span>
                         </Link>
                       </li>
                     );
